@@ -1,15 +1,22 @@
 \contentsline {chapter}{\numberline {1}Introduction}{1}% 
-\contentsline {chapter}{\numberline {2}Background theory}{2}% 
-\contentsline {section}{\numberline {2.1}The easy bits}{2}% 
-\contentsline {section}{\numberline {2.2}The more difficult bits}{2}% 
+\contentsline {chapter}{\numberline {2}Background}{2}% 
+\contentsline {section}{\numberline {2.1}Zebrafish spinal cord regeneration}{2}% 
+\contentsline {section}{\numberline {2.2}Mathematical modelling}{2}% 
 \contentsline {subsection}{\numberline {2.2.1}Hard bits}{3}% 
 \contentsline {subsection}{\numberline {2.2.2}Even harder bits}{3}% 
 \contentsline {subsubsection}{Numbering}{4}% 
 \contentsline {paragraph}{More on numbering:}{4}% 
-\contentsline {chapter}{\numberline {3}Experimental design}{5}% 
-\contentsline {chapter}{\numberline {4}Results and Analysis}{6}% 
-\contentsline {section}{\numberline {4.1}Some results}{6}% 
-\contentsline {subsection}{\numberline {4.1.1}More results}{6}% 
-\contentsline {chapter}{\numberline {5}Conclusions}{8}% 
-\contentsline {chapter}{\numberline {A}Stuff which is too detailed}{9}% 
-\contentsline {chapter}{\numberline {B}Stuff which no-one will read}{10}% 
+\contentsline {section}{\numberline {2.3}Bayesian inference}{4}% 
+\contentsline {chapter}{\numberline {3}Mathematical modelling}{5}% 
+\contentsline {chapter}{\numberline {4}Implementations and Experiments}{6}% 
+\contentsline {section}{\numberline {4.1}Parameter estimation}{6}% 
+\contentsline {section}{\numberline {4.2}Model comparison}{6}% 
+\contentsline {section}{\numberline {4.3}Performance experiments}{6}% 
+\contentsline {chapter}{\numberline {5}Results Analysis}{7}% 
+\contentsline {section}{\numberline {5.1}ABC SMC results}{7}% 
+\contentsline {section}{\numberline {5.2}Performance experiments}{7}% 
+\contentsline {section}{\numberline {5.3}Discussions}{7}% 
+\contentsline {chapter}{\numberline {6}Future works}{8}% 
+\contentsline {chapter}{\numberline {7}Conclusions}{9}% 
+\contentsline {chapter}{\numberline {A}Stuff which is too detailed}{10}% 
+\contentsline {chapter}{\numberline {B}Stuff which no-one will read}{11}% 

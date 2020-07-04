@@ -70,15 +70,15 @@
 
 \pagenumbering{roman}
 
-\title{Title of Dissertation}
-\author{Author's Name}
+\title{Bayesian Inference Using Sequential Monte-Carlo Algorithm for Dynamic System Models}
+\author{Chaolin Han}
 \date{\today}
 
 \makeEPCCtitle
 
 \thispagestyle{empty}
 
-\vspace{12cm}
+\vspace{11cm}
 
 \begin{center}
 
@@ -86,7 +86,7 @@
 
 \large{The University of Edinburgh}
 
-\large{Year of Presentation: 2007}
+\large{Year of Presentation: 2020}
 
 \end{center}
 
@@ -142,9 +142,9 @@ checkers will not find errors which are, in fact, valid words such as
 sometimes occur if your concentration is broken when typing. {\bf There
 is no substitute for thorough proof reading!}
 
-\chapter{Background theory}
+\chapter{Background}
 
-\section{The easy bits}
+\section{Zebrafish spinal cord regeneration}
 This is just to show how to break things into sections.
 
 Some paragraphs in this demonstration document are here to provide some
@@ -166,7 +166,7 @@ rhubarb.  Yet more rhubarb.   Rhubarb.  More rhubarb.  Yet more
 rhubarb.  Rhubarb.  More rhubarb.  Yet more rhubarb.    Rhubarb.  More
 rhubarb.  Yet more rhubarb.  Rhubarb.  More rhubarb.  Yet more rhubarb. 
 
-\section{The more difficult bits}
+\section{Mathematical modelling}
 Some bits are hard.
 
 Here is a padding paragraph.  Rhubarb.  More rhubarb.  Yet more rhubarb. 
@@ -240,7 +240,9 @@ the ``title'' of the paragraph is not on a separate line.
 If you want to increase the depth to which sections are numbered you
 should see the section on setting the secnumdepth counter in the manual. 
 
-\chapter{Experimental design}
+\section{Bayesian inference}
+
+\chapter{Mathematical modelling}
 
 You might sometimes want to include equations without numbering them.
 
@@ -289,180 +291,40 @@ crest is in \ref{fig:eucrest}. Note that you should not use phrases like
 ``the figure above'' or ``the following figure'' since Latex may move
 the figure relative to the text if it cannot be fitted onto the current page.
 
-\chapter{Results and Analysis}
+\chapter{Implementations and Experiments}
 
-\section{Some results}
+\section{Parameter estimation}
 Here are some results.
 
-\subsection{More results}
-When showing results you are likely to use tables and graphs. You can
-create tables easily in Latex.
+\section{Model comparison}
+Here are some results.
 
-\begin{table}[h]
-\begin{center}
-\begin{tabular}{||l|c|l||}
-\hline
-{\bf File names} & {\bf Satellite} & {\bf Resolution}\\
-\hline
-  worldr         &  Meteosat     &   5km\\
-  worldg         &  Meteosat     &   5km\\
-  worldb         &  Meteosat     &   5km\\
-\hline
-\end{tabular}
-\end{center}
-\caption{This is a simple table. More complicated tables can have
-headings which pass over more than one column}
-\label{simple_table}
-\end{table}
+\section{Performance experiments}
 
-If you want to produce fancier tables than shown in Table \ref{simple_table}
-refer to the manual.
+The performance experiments are designed to explore the parallel performance of ABC SMC implementations. Usually ABC SMC is a time-consuming and computation intensive task and usually is executed on large clusters. The scheduling strategy, implementation details and many other factors can affect the parallel efficiency.
 
-
-One of the simplest ways to produce simple graphs is to use gnuplot
-which produces Latex output. Graph \ref{fig:gnu} was produced using
-gnuplot with output designated as Latex so that a Latex output file is
-produced which you can include directly or keep separate and refer to
-using the {\em include} command.
-
-Another approach is to draw simple figures using {\em xfig} which allows
-you to export diagrams in Latex picture format so that the diagram can
-be included directly.
-
-Perhaps the most robust way to include graphs is to convert them to
-PostScript or PDF and include them in the same was as was done in
-Figure~\ref{fig:eucrest} for the University Crest. You can usually do
-this with most packages, including Microsoft ones; one trick for
-producing PostScript is to print to a dummy PostScript printer.
+First experiments are designed to illustrate the scaling-up performance. The program used here is a 
 
 % in practice you would probably keep this in a separate file and use
 % the \include{filename} command to insert it here.
 
-\begin{figure}
-% GNUPLOT: LaTeX picture
-\setlength{\unitlength}{0.240900pt}
-\ifx\plotpoint\undefined\newsavebox{\plotpoint}\fi
-\sbox{\plotpoint}{\rule[-0.200pt]{0.400pt}{0.400pt}}%
-\begin{picture}(1500,1200)(0,0)
-\font\gnuplot=cmr10 at 10pt
-\gnuplot
-\sbox{\plotpoint}{\rule[-0.200pt]{0.400pt}{0.400pt}}%
-\put(220.0,113.0){\rule[-0.200pt]{292.934pt}{0.400pt}}
-\put(220.0,113.0){\rule[-0.200pt]{0.400pt}{245.477pt}}
-\put(220.0,113.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
-\put(198,113){\makebox(0,0)[r]{$0$}}
-\put(1416.0,113.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
-\put(220.0,317.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
-\put(198,317){\makebox(0,0)[r]{$0.2$}}
-\put(1416.0,317.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
-\put(220.0,521.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
-\put(198,521){\makebox(0,0)[r]{$0.4$}}
-\put(1416.0,521.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
-\put(220.0,724.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
-\put(198,724){\makebox(0,0)[r]{$0.6$}}
-\put(1416.0,724.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
-\put(220.0,928.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
-\put(198,928){\makebox(0,0)[r]{$0.8$}}
-\put(1416.0,928.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
-\put(220.0,1132.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
-\put(198,1132){\makebox(0,0)[r]{$1$}}
-\put(1416.0,1132.0){\rule[-0.200pt]{4.818pt}{0.400pt}}
-\put(220.0,113.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
-\put(220,68){\makebox(0,0){$0$}}
-\put(220.0,1112.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
-\put(414.0,113.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
-\put(414,68){\makebox(0,0){$1$}}
-\put(414.0,1112.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
-\put(607.0,113.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
-\put(607,68){\makebox(0,0){$2$}}
-\put(607.0,1112.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
-\put(801.0,113.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
-\put(801,68){\makebox(0,0){$3$}}
-\put(801.0,1112.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
-\put(995.0,113.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
-\put(995,68){\makebox(0,0){$4$}}
-\put(995.0,1112.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
-\put(1188.0,113.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
-\put(1188,68){\makebox(0,0){$5$}}
-\put(1188.0,1112.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
-\put(1382.0,113.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
-\put(1382,68){\makebox(0,0){$6$}}
-\put(1382.0,1112.0){\rule[-0.200pt]{0.400pt}{4.818pt}}
-\put(220.0,113.0){\rule[-0.200pt]{292.934pt}{0.400pt}}
-\put(1436.0,113.0){\rule[-0.200pt]{0.400pt}{245.477pt}}
-\put(220.0,1132.0){\rule[-0.200pt]{292.934pt}{0.400pt}}
-\put(45,622){\makebox(0,0){\shortstack{This is\\the\\$y$ axis}}}
-\put(828,23){\makebox(0,0){This is the $x$ axis}}
-\put(828,1177){\makebox(0,0){This is a plot of $y=sin(x)$}}
-\put(220.0,113.0){\rule[-0.200pt]{0.400pt}{245.477pt}}
-\sbox{\plotpoint}{\rule[-0.500pt]{1.000pt}{1.000pt}}%
-\put(1306,1067){\makebox(0,0)[r]{sin(x)}}
-\multiput(1328,1067)(20.756,0.000){4}{\usebox{\plotpoint}}
-\put(1394,1067){\usebox{\plotpoint}}
-\put(220,113){\usebox{\plotpoint}}
-\multiput(220,113)(3.768,20.411){4}{\usebox{\plotpoint}}
-\multiput(232,178)(4.132,20.340){3}{\usebox{\plotpoint}}
-\multiput(245,242)(3.825,20.400){3}{\usebox{\plotpoint}}
-\multiput(257,306)(3.884,20.389){3}{\usebox{\plotpoint}}
-\multiput(269,369)(3.944,20.377){3}{\usebox{\plotpoint}}
-\multiput(281,431)(4.326,20.300){3}{\usebox{\plotpoint}}
-\multiput(294,492)(4.137,20.339){3}{\usebox{\plotpoint}}
-\multiput(306,551)(4.276,20.310){3}{\usebox{\plotpoint}}
-\multiput(318,608)(4.693,20.218){3}{\usebox{\plotpoint}}
-\multiput(331,664)(4.583,20.243){2}{\usebox{\plotpoint}}
-\multiput(343,717)(4.754,20.204){3}{\usebox{\plotpoint}}
-\multiput(355,768)(5.034,20.136){2}{\usebox{\plotpoint}}
-\multiput(367,816)(5.760,19.940){2}{\usebox{\plotpoint}}
-\multiput(380,861)(5.579,19.992){3}{\usebox{\plotpoint}}
-\put(398.00,923.50){\usebox{\plotpoint}}
-\multiput(404,943)(7.049,19.522){2}{\usebox{\plotpoint}}
-\multiput(417,979)(7.288,19.434){2}{\usebox{\plotpoint}}
-\put(433.18,1021.10){\usebox{\plotpoint}}
-\multiput(441,1040)(8.982,18.712){2}{\usebox{\plotpoint}}
-\put(460.41,1076.97){\usebox{\plotpoint}}
-\put(471.84,1094.28){\usebox{\plotpoint}}
-\put(484.84,1110.41){\usebox{\plotpoint}}
-\put(500.42,1124.01){\usebox{\plotpoint}}
-\multiput(503,1126)(19.159,7.983){0}{\usebox{\plotpoint}}
-\put(519.48,1131.37){\usebox{\plotpoint}}
-\multiput(527,1132)(20.136,-5.034){0}{\usebox{\plotpoint}}
-\put(539.74,1128.60){\usebox{\plotpoint}}
-\put(557.04,1117.38){\usebox{\plotpoint}}
-\put(570.79,1101.95){\usebox{\plotpoint}}
-\put(582.44,1084.80){\usebox{\plotpoint}}
-\put(593.09,1066.99){\usebox{\plotpoint}}
-\multiput(601,1053)(8.430,-18.967){2}{\usebox{\plotpoint}}
-\put(619.18,1010.54){\usebox{\plotpoint}}
-\multiput(625,996)(7.413,-19.387){2}{\usebox{\plotpoint}}
-\multiput(638,962)(6.403,-19.743){2}{\usebox{\plotpoint}}
-\multiput(650,925)(5.830,-19.920){2}{\usebox{\plotpoint}}
-\multiput(662,884)(5.461,-20.024){2}{\usebox{\plotpoint}}
-\multiput(674,840)(5.533,-20.004){2}{\usebox{\plotpoint}}
-\multiput(687,793)(4.937,-20.160){3}{\usebox{\plotpoint}}
-\multiput(699,744)(4.667,-20.224){2}{\usebox{\plotpoint}}
-\multiput(711,692)(4.858,-20.179){3}{\usebox{\plotpoint}}
-\multiput(724,638)(4.276,-20.310){3}{\usebox{\plotpoint}}
-\multiput(736,581)(4.205,-20.325){3}{\usebox{\plotpoint}}
-\multiput(748,523)(4.070,-20.352){3}{\usebox{\plotpoint}}
-\multiput(760,463)(4.326,-20.300){3}{\usebox{\plotpoint}}
-\multiput(773,402)(3.884,-20.389){3}{\usebox{\plotpoint}}
-\multiput(785,339)(3.884,-20.389){3}{\usebox{\plotpoint}}
-\multiput(797,276)(4.070,-20.352){3}{\usebox{\plotpoint}}
-\multiput(810,211)(3.825,-20.400){3}{\usebox{\plotpoint}}
-\multiput(822,147)(3.607,-20.440){2}{\usebox{\plotpoint}}
-\put(828,113){\usebox{\plotpoint}}
-\end{picture}
-\caption{Simple Gnuplot example}
-\label{fig:gnu}
-\end{figure}
 
 
-\chapter{Conclusions}
+\chapter{Results Analysis}
 
+\section{ABC SMC results}
+
+\section{Performance experiments}
+
+\section{Discussions}
 This is the place to put your conclusions about your work. You can
 split it into different sections if appropriate. You may want to include
 a section of future work which could be carried out to continue your
 research.
+
+\chapter{Future works}
+
+\chapter{Conclusions}
 
 \appendix
 % the appendix command just changes heading styles for appendices.
