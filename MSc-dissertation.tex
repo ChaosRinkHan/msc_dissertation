@@ -190,32 +190,32 @@ Mathematical models can describe different kinds of dynamic system, and can be u
 
 Models for the regeneration process is in the form of ordinary differential equations, specifically the time differential form. Terms in the ODE are mostly explainable and corresponds interaction paths. 
 
-\paragraph{Observed data}
+\section{Observed data}
 
-Our models is built regarding the existing experiments data form Tsarouchas et al.\cite{ref:Tsarouchas}. The measurement includes the number of three kinds of cells (neutrophil $N$, macrophage $\Phi$ and microglia) and the relative concentration of four cytokines (il-1$\beta$, tnf-$\alpha$, tgf-$\beta$1a and tgf-$\beta$3). As proposed in \cite{ref:Tsarouchas}, neutrophil and macrophage play important roles in the promotion of spinal cord regeneration with il-1$\beta$ and tnf-$\alpha$ being the mediation. According to this, our current models focus on the changes of four variables $N$, $\Phi $, $\beta$ (il-1$\beta$) and $\alpha$ (tnf-$\alpha$). $N$ and $\Phi$ is of the unit 'number of cells', $\beta$ and $\alpha$ is of the unit 'relative concentration'.
+Our models is built regarding the existing experiments data form Tsarouchas et al.\cite{ref:Tsarouchas}. The measurement includes the number of three kinds of cells (neutrophil $N$, macrophage $\Phi$ and microglia) and the relative concentration of four cytokines (il-1$\beta$, tnf-$\alpha$, tgf-$\beta$1a and tgf-$\beta$3). As proposed in \cite{ref:Tsarouchas}, neutrophil and macrophage play important roles in the promotion of spinal cord regeneration with il-1$\beta$ and tnf-$\alpha$ being the mediation. According to this, our current models focus on the changes of four variables $N$, $\Phi $, $\beta$ (il-1$\beta$) and $\alpha$ (tnf-$\alpha$). $N$ and $\Phi$ is of the unit `number of cells', $\beta$ and $\alpha$ is of the unit `relative concentration'.
 
-It is noted that the variance of the measured data is relatively high. 
+It is noted that the variance of the measured data is relatively high. The summary statistic used for the parameter estimations is mean of measurement, assuming that measured data is Gaussian-like distributed. The distribution of the measured data points is plotted and examined to see if the measurement mean could represent the distribution. The result is that at most time points the measurement values are Gaussian-distributed, some distributions are skewed. One abnormal distribution is observed at time point 120 h post-lesion (hpl) for macrophage where there are two concentrations. Mean value can summarise most data measures and thus is still used as the target summarised observed data. 
 
-our hypothesis
+\section{Hypothesis and Models}
 
-\section{Basic model}
+\subsection{Basic model}
+
+\subsection{Alternative models}
+
+\subsection{Model evaluation and comparison}
 
 
 
-\section{Alternative models}
+% \begin{figure}
 
+% \begin{center}
+% \resizebox{0.30\hsize}{!}{\includegraphics{logos/crest_bw}}
+% \end{center}
 
+% \caption{The University Crest}
+% \label{fig:eucrest}
 
-\begin{figure}
-
-\begin{center}
-\resizebox{0.30\hsize}{!}{\includegraphics{logos/crest_bw}}
-\end{center}
-
-\caption{The University Crest}
-\label{fig:eucrest}
-
-\end{figure}
+% \end{figure}
 
 
 % see the man page for dvips for details of the special command which is
@@ -228,10 +228,10 @@ our hypothesis
 % note that labels do not need to include a description of the object
 % they are labelling but it can be helpful, eg \label{fig:figurename}.
 
-You can use a label on a figure to refer to it later. The university
-crest is in \ref{fig:eucrest}. Note that you should not use phrases like
-``the figure above'' or ``the following figure'' since Latex may move
-the figure relative to the text if it cannot be fitted onto the current page.
+% You can use a label on a figure to refer to it later. The university
+% crest is in \ref{fig:eucrest}. Note that you should not use phrases like
+% ``the figure above'' or ``the following figure'' since Latex may move
+% the figure relative to the text if it cannot be fitted onto the current page.
 
 \chapter{Implementations and Experiments}
 

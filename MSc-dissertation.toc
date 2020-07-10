@@ -9,9 +9,11 @@
 \contentsline {section}{\numberline {2.3}Bayesian inference}{3}% 
 \contentsline {section}{\numberline {2.4}Software tools}{3}% 
 \contentsline {chapter}{\numberline {3}Mathematical modelling}{4}% 
-\contentsline {paragraph}{Observed data}{4}% 
-\contentsline {section}{\numberline {3.1}Basic model}{4}% 
-\contentsline {section}{\numberline {3.2}Alternative models}{4}% 
+\contentsline {section}{\numberline {3.1}Observed data}{4}% 
+\contentsline {section}{\numberline {3.2}Hypothesis and Models}{5}% 
+\contentsline {subsection}{\numberline {3.2.1}Basic model}{5}% 
+\contentsline {subsection}{\numberline {3.2.2}Alternative models}{5}% 
+\contentsline {subsection}{\numberline {3.2.3}Model evaluation and comparison}{5}% 
 \contentsline {chapter}{\numberline {4}Implementations and Experiments}{6}% 
 \contentsline {section}{\numberline {4.1}Parameter estimation}{6}% 
 \contentsline {section}{\numberline {4.2}Model comparison}{6}% 
