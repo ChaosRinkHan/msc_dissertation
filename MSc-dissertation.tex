@@ -194,7 +194,18 @@ Models for the regeneration process is in the form of ordinary differential equa
 
 Our models is built regarding the existing experiments data form Tsarouchas et al.\cite{ref:Tsarouchas}. The measurement includes the number of three kinds of cells (neutrophil $N$, macrophage $\Phi$ and microglia) and the relative concentration of four cytokines (il-1$\beta$, tnf-$\alpha$, tgf-$\beta$1a and tgf-$\beta$3). As proposed in \cite{ref:Tsarouchas}, neutrophil and macrophage play important roles in the promotion of spinal cord regeneration with il-1$\beta$ and tnf-$\alpha$ being the mediation. According to this, our current models focus on the changes of four variables $N$, $\Phi $, $\beta$ (il-1$\beta$) and $\alpha$ (tnf-$\alpha$). $N$ and $\Phi$ is of the unit `number of cells', $\beta$ and $\alpha$ is of the unit `relative concentration'.
 
-It is noted that the variance of the measured data is relatively high. The summary statistic used for the parameter estimations is mean of measurement, assuming that measured data is Gaussian-like distributed. The distribution of the measured data points is plotted and examined to see if the measurement mean could represent the distribution. The result is that at most time points the measurement values are Gaussian-distributed, some distributions are skewed. One abnormal distribution is observed at time point 120 h post-lesion (hpl) for macrophage where there are two concentrations. Mean value can summarise most data measures and thus is still used as the target summarised observed data. 
+It is noted that the variance of the measured data is relatively high. The summary statistic used for the parameter estimations is mean of measurement, assuming that measured data is Gaussian-like distributed. The distribution of the measured data points is plotted and examined to see if the measurement mean could represent the distribution. The result is that at most time points the measurement values are Gaussian-distributed, some distributions are skewed. One abnormal distribution is observed at time point 120 h post-lesion (hpl) for macrophage where there are two concentrations. Mean value can summarise most data measures and thus is still used as the target summarised observed data. A plot of the mean of the four variables is shown in 
+
+\begin{figure}
+
+\begin{center}
+\resizebox{1.0\hsize}{!}{\includegraphics{fig/obs_curve.png}}
+\end{center}
+
+\caption{Mean of the observed data for neutrophil $N$, macrophage $\Phi$, il-1$\beta$ and tnf-$\alpha$, from experiment results of \cite{ref:Tsarouchas}}
+\label{fig:obs_data}
+
+\end{figure}
 
 \section{Hypothesis and Models}
 
