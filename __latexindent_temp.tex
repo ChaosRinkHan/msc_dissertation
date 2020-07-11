@@ -2,8 +2,7 @@
 
 \usepackage{epcc}
 \usepackage{graphics}
-% \usepackage{mathtools}
-\usepackage{amsmath}
+\usepackage{mathtools}
 
 % This example file shows how a thesis can be laid out using Latex. It
 % does not use any special local features so should be portable to other
@@ -199,6 +198,7 @@ Our models is built regarding the existing experiments data form Tsarouchas et a
 It is noted that the variance of the measured data is relatively high. The summary statistic used for the parameter estimations is mean of measurement, assuming that measured data is Gaussian-like distributed. The distribution of the measured data points is plotted and examined to see if the measurement mean could represent the distribution. The result is that at most time points the measurement values are Gaussian-distributed, some distributions are skewed. One abnormal distribution is observed at time point 120 h post-lesion (hpl) for macrophage where there are two concentrations. Mean value can summarise most data measures and thus is still used as the target summarised observed data. A plot of the mean of the four variables is shown in Figure \ref{fig:obs_data}
 
 \begin{figure}
+
 \begin{center}
 \resizebox{1.0\hsize}{!}{\includegraphics{fig/obs_curve.png}}
 \end{center}
@@ -216,44 +216,16 @@ All these models assumes the interactions is within two kinds of cells (neutroph
 
 \subsection{Basic model}
 
-A preliminary model is proposed according to \cite{ref:Tsarouchas} and used to build and test the code. A interaction map illustrate the model is shown in FIG. This model is a simplification a the process described in \cite{ref:Tsarouchas}.
+A preliminary model is proposed according to \cite{ref:Tsarouchas} and used to build and test the code.
 
-\begin{figure}
-    \begin{center}
-    \resizebox{0.4\hsize}{!}{\includegraphics{fig/model1.png}}
-    \end{center}
-    
-    \caption{Interactions modelled in basic model, based on \cite{ref:Tsarouchas}. Lines with  T-connectors} 
-    \label{fig:obs_data}
-    
-\end{figure}
-
-\begin{align}
-    \label{eq:pareto mle2}
-    \begin{split}
-        &\frac{\mathrm{d} N}{\mathrm{d} t}=\lambda_N+\kappa_{N\beta}\beta-\mu_NN-\nu_{N\Phi}N\Phi\\
-        &\frac{\mathrm{d} \Phi}{\mathrm{d} t}=\lambda_\Phi+\kappa_{\Phi\beta}\beta-\mu_\Phi\Phi\\
-        &\frac{\mathrm{d} \beta}{\mathrm{d} t}=\frac{s_{\beta N}N}{1+i_{\beta\Phi}\Phi}-\mu_\beta\beta\\
-        &\frac{\mathrm{d} \alpha}{\mathrm{d} t}=s_{\alpha\Phi}\Phi-\mu_\alpha\alpha
-    \end{split}
-\end{align}
-
-\begin{table}[h!]
-\centering
-\begin{tabular}{|c c c|} 
- \hline
- Parameter & Definition & Units\\ [0.5ex] 
- \hline\hline
- $\lambda_N$ & Self-increase rate of neutrophil & $cell\cdotp h^{-1}$  \\ 
- $\kappa_{N\beta}$ & Promoting effect by  il-1$\beta$ & fd\\
- 3 & 545  778 & 7507 \\
- 4 & 545  18744 & 7560 \\
- 5 & 88  788 & 6344 \\ [1ex] 
- \hline
-\end{tabular}
-\caption{Parameters introduced in the basic model (model 1)}
-\label{table:m1}
-\end{table}
+\begin{equation*}\label{eq:pareto mle2}
+    \begin{multlined}
+        \frac{\mathrm{d} N}{\mathrm{d} t}=\lambda_N+\kappa_{N\beta}\beta-\mu_NN-\nu_{N\Phi}N\Phi\\
+\frac{\mathrm{d} \Phi}{\mathrm{d} t}=\lambda_\Phi+\kappa_{\Phi\beta}\beta-\mu_\Phi\Phi\\
+\frac{\mathrm{d} \beta}{\mathrm{d} t}=\frac{s_{\beta N}N}{1+i_{\beta\Phi}\Phi}-\mu_\beta\beta\\
+\frac{\mathrm{d} \alpha}{\mathrm{d} t}=s_{\alpha\Phi}\Phi-\mu_\alpha\alpha
+   \end{multlined}
+  \end{equation*}
 
 \subsection{Alternative models}
 
