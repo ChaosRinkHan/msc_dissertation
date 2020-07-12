@@ -216,20 +216,22 @@ All these models assumes the interactions is within two kinds of cells (neutroph
 
 \subsection{Basic model}
 
-A preliminary model is proposed according to \cite{ref:Tsarouchas} and used to build and test the code. A interaction map illustrate the model is shown in FIG. This model is a simplification a the process described in \cite{ref:Tsarouchas}.
+A preliminary model is proposed according to \cite{ref:Tsarouchas} and used to build and test the code. A interaction map illustrate the model is shown in Figure \ref{fig:m1}. This model is a simplification a the process described in \cite{ref:Tsarouchas}. To describe the parameters' units, we denote the unit of $N$ and $\Phi$ i.e. number of cells as `cell', and denote the unit of $\beta$ and $\aleph$ i.e. relative mRNA expression as `unit' for simplicity.
 
 \begin{figure}
     \begin{center}
     \resizebox{0.4\hsize}{!}{\includegraphics{fig/model1.png}}
     \end{center}
     
-    \caption{Interactions modelled in basic model, based on \cite{ref:Tsarouchas}. Lines with  T-connectors} 
-    \label{fig:obs_data}
+    \caption{Interactions modelled in the basic model (model 1) based on Tsarouchas et al.\cite{ref:Tsarouchas}. Lines ended with arrow represent promoting effect, lines ended with T-connectors represent inhibition} 
+    \label{fig:m1}
     
 \end{figure}
 
+It is assumed that there are negative feedbacks for all the variables. MORE DESCRIBE.
+
 \begin{align}
-    \label{eq:pareto mle2}
+    \label{eq:model1}
     \begin{split}
         &\frac{\mathrm{d} N}{\mathrm{d} t}=\lambda_N+\kappa_{N\beta}\beta-\mu_NN-\nu_{N\Phi}N\Phi\\
         &\frac{\mathrm{d} \Phi}{\mathrm{d} t}=\lambda_\Phi+\kappa_{\Phi\beta}\beta-\mu_\Phi\Phi\\
@@ -244,11 +246,22 @@ A preliminary model is proposed according to \cite{ref:Tsarouchas} and used to b
  \hline
  Parameter & Definition & Units\\ [0.5ex] 
  \hline\hline
- $\lambda_N$ & Self-increase rate of neutrophil & $cell\cdotp h^{-1}$  \\ 
- $\kappa_{N\beta}$ & Promoting effect by  il-1$\beta$ & fd\\
- 3 & 545  778 & 7507 \\
- 4 & 545  18744 & 7560 \\
- 5 & 88  788 & 6344 \\ [1ex] 
+ $\lambda_N$ & Self-increase rate of neutrophil & $cell/h$  \\ 
+ $\kappa_{N\beta}$ & Promoting effect coefficient by il-1$\beta$ & $cell/(unit\cdotp h)$\\
+ $\mu_N$ & Coefficient of negative feedback of $N$ & $h^{-1}$ \\
+ $\nu_{N\Phi}$ & Coefficient of inhibition of both $N$ and $\Phi$& $cell^{-1}\cdotp h^{-1}$ \\
+ \hline
+ $\lambda_\Phi$ & Self-increase rate of macrophage & $cell/h$ \\
+ $\kappa_{\Phi\beta}$ & Promoting effect coefficient by il-1$\beta$ & $cell/(unit\cdotp h)$ \\
+ $\mu_\Phi$ &  Coefficient of negative feedback of $\Phi$ & $h^{-1}$ \\
+ \hline
+ $s_{\beta N}$ & Production rate from $N$ & $unit/(cell\cdotp h)$ \\
+ $i_{\beta\Phi}$ & Coefficient of inhibition to the production & $cell^{-1}$ \\
+ $\mu_\beta$ & Coefficient of negative feedback of $\beta$ & $h^{-1}$ \\
+ \hline
+ $s_{\alpha\Phi}$ & Production rate from $\Phi$ & $unit/(cell\cdotp h)$ \\
+ $\mu_\alpha$ & Coefficient of negative feedback of $\alpha$ & $h^{-1}$ \\
+[1ex] 
  \hline
 \end{tabular}
 \caption{Parameters introduced in the basic model (model 1)}
@@ -256,6 +269,76 @@ A preliminary model is proposed according to \cite{ref:Tsarouchas} and used to b
 \end{table}
 
 \subsection{Alternative models}
+
+\paragraph{Model 2 and model 3}
+
+As the observed data indicates, this dynamic system has a steady state where the  inflammation is resolved and immune cells should not be present at the injury site. Regarding this, the self-increase term $\lambda$ cannot be constant, thus a exponentially decay $\lambda$ term is introduced and model 2 is proposed as Eqn. \ref{eq:model2}. The inhibition of il-1$\beta$ being produced by neutrophil, i.e. $i_{\beta\Phi}$ is considered to be ignored, in which case the relative expression of il-1$\beta$ is only affected by the number of neutrophil and the negative feedback from itself. This case corresponds to model 3, written as Eqn. \ref{eq:model3}.
+
+Model 2 and model 3 has one extra parameter $a$ which is a coefficient in the exponentially decay determining the decay speed, with the unit $h^{-1}$.
+
+\begin{align}
+    \label{eq:model2}
+    \begin{split}
+        &\frac{\mathrm{d} N}{\mathrm{d} t}=\lambda_Ne^{-at}+\kappa_{N\beta}\beta-\mu_NN-\nu_{N\Phi}N\Phi\\
+        &\frac{\mathrm{d} \Phi}{\mathrm{d} t}=\kappa_{\Phi\beta}\beta-\mu_\Phi\Phi\\
+        &\frac{\mathrm{d} \beta}{\mathrm{d} t}=\frac{s_{\beta N}N}{1+i_{\beta\Phi}\Phi}-\mu_\beta\beta\\
+        &\frac{\mathrm{d} \alpha}{\mathrm{d} t}=s_{\alpha\Phi}\Phi-\mu_\alpha\alpha
+    \end{split}
+\end{align}
+
+\begin{align}
+    \label{eq:model3}
+    \begin{split}
+        &\frac{\mathrm{d} N}{\mathrm{d} t}=\lambda_Ne^{-at}+\kappa_{N\beta}\beta-\mu_NN-\nu_{N\Phi}N\Phi\\
+        &\frac{\mathrm{d} \Phi}{\mathrm{d} t}=\kappa_{\Phi\beta}\beta-\mu_\Phi\Phi\\
+        &\frac{\mathrm{d} \beta}{\mathrm{d} t}=s_{\beta N}N-\mu_\beta\beta\\
+        &\frac{\mathrm{d} \alpha}{\mathrm{d} t}=s_{\alpha\Phi}\Phi-\mu_\alpha\alpha
+    \end{split}
+\end{align}
+
+Model 3 can be regarded as a simplification of model 2, as it can be regarded as model 2 with parameter $i_{\beta\Phi}=0$. For these three models, model 1 is a naive one that is proposed at very first time and used as a `template' to build and test parameter inference framework. As the implementation is successful, model 2 and 3 is proposed. After fitting model 2 is supposed to be better than model 1 as it corrects the problem that appears at the final time points which are close to steady states for neutrophil and macrophage. model 3 is a small simplification of model 2 and theoretically less general than model 2.
+
+\paragraph{Model 4 and model 5}
+
+After the first model selection experiment, it is found that some significant features presented in the observed data is not recovered by any of the model. According to that, attempts are tried to introduce more interactions within the dynamic system considering the both biological and  mathematical context. Extra promoting effect to the expression of tnf-$\alpha$ is considered, by either add a phenomenological term (which means the same effect as directly promoting but the underlying mechanism is unclean) or add a term that represents a promoting effect to the production process of tnf-$\alpha$, namely model 4 (Eqn. \ref{eq:model4}) and model 5 (Eqn. \ref{eq:model5}).
+
+\begin{align}
+    \label{eq:model4}
+    \begin{split}
+        &\frac{\mathrm{d} N}{\mathrm{d} t}=\lambda_Ne^{-at}+\kappa_{N\beta}\beta-\mu_NN-\nu_{N\Phi}N\Phi\\
+        &\frac{\mathrm{d} \Phi}{\mathrm{d} t}=\kappa_{\Phi\beta}\beta-\mu_\Phi\Phi\\
+        &\frac{\mathrm{d} \beta}{\mathrm{d} t}=s_{\beta N}N-\mu_\beta\beta\\
+        &\frac{\mathrm{d} \alpha}{\mathrm{d} t}=s_{\alpha\Phi}\Phi-\mu_\alpha\alpha+d_{\beta\alpha}\beta
+    \end{split}
+\end{align}
+
+\begin{align}
+    \label{eq:model5}
+    \begin{split}
+        &\frac{\mathrm{d} N}{\mathrm{d} t}=\lambda_Ne^{-at}+\kappa_{N\beta}\beta-\mu_NN-\nu_{N\Phi}N\Phi\\
+        &\frac{\mathrm{d} \Phi}{\mathrm{d} t}=\kappa_{\Phi\beta}\beta-\mu_\Phi\Phi\\
+        &\frac{\mathrm{d} \beta}{\mathrm{d} t}=s_{\beta N}N-\mu_\beta\beta\\
+        &\frac{\mathrm{d} \alpha}{\mathrm{d} t}=(s_{\alpha\Phi}+f_{\beta\alpha}\beta)\Phi-\mu_\alpha\alpha
+    \end{split}
+\end{align}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c c c|} 
+     \hline
+     Parameter & Definition & Units\\ [0.5ex] 
+     \hline\hline
+     $d_{\beta\alpha}$ & Coefficient of promoting effect from $\beta$ & $h^{-1}$  \\ 
+     \hline
+     $f_{\beta\alpha}$ & Coefficient of promoting the production of $\alpha$ by $\beta$ & $cell^{-1}\cdotp h^{-1}$  \\ 
+    [1ex] 
+     \hline
+    \end{tabular}
+    \caption{Parameters introduced in model 4 and 5}
+    \label{table:m45}
+\end{table}
+
+
 
 \subsection{Model evaluation and comparison}
 
