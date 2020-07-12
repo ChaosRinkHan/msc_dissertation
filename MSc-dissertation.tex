@@ -375,11 +375,18 @@ After the first model selection experiment, it is found that some significant fe
 
 \chapter{Implementations and Experiments}
 
+This chapter focuses on the implementation of the ABC SMC on the proposed models. Estimation of  parameters in the proposed models is the main task of this section. ABC SMC-based models selection is another task that can be easily implemented with the parameter estimation framework.
+
+The build and test is under \verb|Python| environment with \verb|pyABC|\cite{ref:pyabc}. Some other code e.g. shell script and \verb|R| code are also used to perform the experiments and analyse the results. Tested software and system environment can be found at Appendix A. The build and test is performed on local computers and HPC clusters available within EPCC.
+
 \section{Parameter estimation}
-Here are some results.
+
+\subsection{ABC SMC and model hyperparameters}
+
+\subsection{Implementations on models}
 
 \section{Model comparison}
-Here are some results.
+
 
 \section{Performance experiments}
 
@@ -414,17 +421,14 @@ In this case, profile tools \verb|cProfile| and \verb|yappi| is used in PyCharm 
 
 
 
-\chapter{Results Analysis}
+\chapter{Results and Discussions}
 
 \section{ABC SMC results}
 
 \section{Performance experiments}
 
 \section{Discussions}
-This is the place to put your conclusions about your work. You can
-split it into different sections if appropriate. You may want to include
-a section of future work which could be carried out to continue your
-research.
+
 
 \chapter{Future works}
 
@@ -433,11 +437,11 @@ research.
 \appendix
 % the appendix command just changes heading styles for appendices.
 
-\chapter{Stuff which is too detailed}
+\chapter{System and software environment}
 
-Appendices should contain all the material which is considered too
-detailed to be included in the main bod but which is, nevertheless,
-important enough to be included in the thesis.
+\section{ABC SMC implementation}
+
+\section{Data analysis}
 
 \chapter{Stuff which no-one will read}
 
@@ -454,7 +458,9 @@ and Reference Manual.} Addison Wesley. pp242.
 \bibitem{ref:bloggs} F.Bloggs. {\em 1993 Latex Users do it
 in Environments} Int. Journal of Silly Findings. pp 23-29.
 
-\bibitem{ref:Tsarouchas} Tsarouchas, T.M., Wehner, D., Cavone, L., Munir, T., Keatinge, M., Lambertus, M., Underhill, A., Barrett, T., Kassapis, E., Ogryzko, N. and Feng, Y., 2018. Dynamic control of proinflam- matory cytokines Il-1$\beta$ and Tnf-$\alpha$ by macrophages in zebrafish spinal cord regeneration. Nature communications, 9(1), pp.1-17.
+\bibitem{ref:Tsarouchas} Tsarouchas, T.M., Wehner, D., Cavone, L., Munir, T., Keatinge, M., Lambertus, M., Underhill, A., Barrett, T., Kassapis, E., Ogryzko, N. and Feng, Y., 2018. Dynamic control of proinflammatory cytokines Il-1$\beta$ and Tnf-$\alpha$ by macrophages in zebrafish spinal cord regeneration. Nature communications, 9(1), pp.1-17.
+
+\bibitem{ref:pyabc} Klinger, E., Rickert, D. and Hasenauer, J., 2018. pyABC: distributed, likelihood-free inference. Bioinformatics, 34(20), pp.3591-3593.
 
 \end{thebibliography}
 
