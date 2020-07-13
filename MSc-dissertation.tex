@@ -144,47 +144,39 @@ checkers will not find errors which are, in fact, valid words such as
 sometimes occur if your concentration is broken when typing. {\bf There
 is no substitute for thorough proof reading!}
 
+
+[background and motivation]
+
+[what is done]
+
 \chapter{Background}
 
 \section{Zebrafish spinal cord regeneration}
 
+[describe the process and how cells and cytokines are involved]
 
 \section{Mathematical modelling}
 
+[how this can be modelled as dynamic systems]
 
-\subsection{Hard bits}
-You might want to include an equation here:
-
-\begin{equation} \delta N_{\nu} = (\delta N_{\nu})_{ex} + (\delta N_{\nu})_{au} 
-\label{equation:delsplit}
-% note that the label is optional but allows you to refer to this
-% equation later.
-\end{equation}
-
-
-\subsection{Even harder bits}
-This might be one of the places where you might want to refer to
-equation \ref{equation:delsplit}. You will usually need to use the
-Latex command twice to make cross-references like this work properly.
-The cross-reference information is stored in the {\em .aux} file so don't
-delete it.
-
-\subsubsection{Numbering}
-You can keep subdividing but eventually you get to a level where
-numbering stops. This text is in a subsubsection which is not numbered
-by default.
-
-
-\paragraph{More on numbering:}
-
-This text is in a paragraph which is also not numbered by default and
-the ``title'' of the paragraph is not on a separate line.
-If you want to increase the depth to which sections are numbered you
-should see the section on setting the secnumdepth counter in the manual. 
+[general topics of mathematical models: how to build model according to interactions; how to calibrate/ parameterise the model; how to solve the model; dynamics; how to evaluate the model]
+ 
 
 \section{Bayesian inference}
 
+[how to parameterise the model]
+
+[how the infer the parameter given data]
+
+[likelihood-free inference and information about ABC SMC]
+
+[model comparison, ABC SMC for model comparison]
+
 \section{Software tools}
+
+[existing tools and software for this task]
+
+[workflow and developing]
 
 \chapter{Mathematical modelling}
 
@@ -342,9 +334,17 @@ After the first model selection experiment, it is found that some significant fe
 
 \subsection{Model evaluation and comparison}
 
+[feasible or not; goodness of fit; features of these models]
+
+[bayes factor for model selection]
+
 \subsection{Limitations}
 
+[hypothesis]
 
+[available data]
+
+[model misspecification]
 
 % \begin{figure}
 
@@ -381,16 +381,31 @@ The build and test is under \verb|Python| environment with \verb|pyABC|\cite{ref
 
 \section{Parameter estimation}
 
+[implementation details and options/ settings that are affecting the ABC]
+
 \subsection{ABC SMC and model hyperparameters}
+
+[including the options that are tested/ tried/ not adopted]
+
+[how do these options correspond to biological model and how to set them accordingly for proposed model]
+
+[experiments plan]
 
 \subsection{Implementations on models}
 
+[ABC implementations details, e.g. distance, population, ODE related functions]
+
 \section{Model comparison}
 
+[comparison of model 1, 2 and 3]
+
+[further comparison of model 3, 4 and 5]
 
 \section{Performance experiments}
 
 The performance experiments are designed to explore the parallel performance of ABC SMC implementations. Usually ABC SMC is a time-consuming and computation intensive task and usually is executed on large clusters. The scheduling strategy, implementation details and many other factors can affect the parallel efficiency.
+
+[MORE meanings of the performance study]
 
 \subsection{Scaling-up}
 
@@ -403,11 +418,11 @@ First experiments are designed to illustrate the scaling-up performance. The pro
     \item Population size is 2000, with 20 generations
 \end{itemize}
 
-HOW PYABC parallelise the sampling
+[HOW PYABC parallelise the sampling]
 
 For HPC systems like Cirrus, \verb|pyabc| uses \verb|multiprocessing| for multi-core parallel sampling. By default if the number of cores is not specified, it will automatically read the number of available cores and use them all. Cirrus has a 36-core CPU which support hyperthreading, such that the maximal number of cores available to \verb|multiprocessing| is 72.
 
-The program is executed on Cirrus, using 8, 12, 16, 24, 36, 54, 72 cores respectively. Each run is repeated 5 times. The average execution time, required sampling numbers are recorded. Hyperthreading is enabled when using 54 and 72 cores. The access to the node that contains computation cores is exclusive, such that the execution would not be affected by other programs of operations.
+The program is executed on Cirrus, using 8, 12, 16, 24, 36, 54 and 72 cores respectively. Each run is repeated 5 times. The average execution time, required sampling numbers are recorded. Hyperthreading is enabled when using 54 and 72 cores. The access to the node that contains computation cores is exclusive, such that the execution would not be affected by other programs of operations.
 
 The implementation of ABC SMC in \verb|pyabc| enables the parallelisation of sampling, which is the must time-consuming part. The rest part of the program is mostly not parallelised, e.g. database I/O and reductions operations. The sampling process involves sampling, perturbation and test of the acceptance criteria, all of which are computation-intensive. 
 
@@ -423,16 +438,49 @@ In this case, profile tools \verb|cProfile| and \verb|yappi| is used in PyCharm 
 
 \chapter{Results and Discussions}
 
+[WHAT results is outputted and WHAT topics are discussed]
+
 \section{ABC SMC results}
+
+[inferred parameters: joint distribution, estimated values and simulated trajectory for each models; sensitivity; features of the inferred model]
+
+[model selections result; bayes factor]
 
 \section{Performance experiments}
 
+[scaling-up performance: speed-up and efficiency]
+
+[profiling results: hot-spot and possible improvements]
+
 \section{Discussions}
 
+[goodness of fit (evaluation); preferred models and effects of modification to basic model]
+
+[efficiency and trade-offs in scaling-up]
+
+[POSSIBLE: compare to exact inference; compared to other implementations]
+
+[limitations]
 
 \chapter{Future works}
 
+[something not done as scheduled]
+
+[interesting topics to look inside]
+
+[moving to generalisations]
+
 \chapter{Conclusions}
+
+[what is studied]
+
+[to what extend]
+
+[how good is the result]
+
+[summary of the findings and advise]
+
+[thanks]
 
 \appendix
 % the appendix command just changes heading styles for appendices.
