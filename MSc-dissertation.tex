@@ -389,15 +389,17 @@ In the first part, synthetic data is used with known true parameter values. The 
 
 Then according to findings in the first part, several options with good performance are tried in the inference using experimental observed data (Figure \ref{fig:obs_data}). To obtain a more accurate and general results, these experiments are repeated for 3 or more times.
 
-\subsection{ABC SMC and model hyperparameters}
+\subsection{ABC SMC and model hyperparameters experiments}
 
 [including the options that are tested/ tried/ not adopted]
+
+[including experiments results and discussions]
 
 [how do these options correspond to biological model and how to set them accordingly for proposed model]
 
 The ABC SMC inference can have largely different performance when using different hyperparameters and implementation options. Among them the following is studied using synthetic data:
 
-\paragraph{Perturbation kernels}
+\subsubsection{Perturbation kernels}
 
 Perturbation kernels work in the sampling process. In each generation $t$, samples are firstly taken from the previous population $\{\theta_{t-1}\}$ with weights $\{w_{t-1}\}$, then perturbed using the perturbation kernel $K(\theta|\theta^*)$. We keep sampling until $N$ particles are accepted, where $N$ is the pre-set population size. After that the new weights are calculated and normalised. 
 
@@ -413,7 +415,19 @@ Perturbation kernels work in the sampling process. In each generation $t$, sampl
 
 The perturbation kernel is called in the sampling of every particles and determines how the new perturbed particle is chosen, thus it is influential to both computation complexity and the resultant posterior distribution. Generally, a local perturbation kernel may face the risk of being stuck in local modes (e,g., local optimal), but it may need less computational operations, or could generate a population with a higher acceptance rate if the successive epsilon values are close; A kernel with wide variance, or spreading out in a large space could help in resolving the local optimal problem by a more thoroughly exploration of the parameter space, however it can be more computation-intensive and result in a lower acceptance rate. A desired optimal kernel should balance the trade-offs; their property and criteria is discussed in \cite{ref:kernel}.
 
-There are several common choice of perturbation kernels. Among them multivariate normal kernel and local M-nearest neighbour model is preferred to be applied on our models.
+There are several common choice of perturbation kernels. Among them multivariate normal kernel and local M-nearest neighbour model is preferred to be applied on our models. A covariance matrix $\Sigma_t$ of accepted particles is calculated form previous generation and used in multivariate normal kernel: $K(\theta|\theta_{t-1})\sim\mathcal{N}(\theta_{t-1}, \Sigma_t)$. It is illustrated to be more efficient than uniform kernel and component-wise normal kernel in relecting the true posterior structure \cite{ref:kernel}. It has been proved to perform well in several dynamic system models \cite{ref:abcsysbio, ref:compare, ref:disease} for the parameter estimation and model selection tasks. The $scaling\in(0,1]$ parameter in \verb|pyABC| will be multiplied to the covariance to produce a `narrower distributed' perturbation result.
+
+Local M-NN kernel provided by \verb|pyABC| is also tried to provide a comparison. A local kernel density estimation (KDE) fit is used with M nearest neighbours considered.
+
+The kernel experiments is designed to explore the efficiency of SMC on our dynamical systems. Given the same fixed threshold schedule, kernels that need less total samples and have higher acceptance rate would be our preference. The experiments compared multivariate normal kernel with local MNN kernels with different parameters, using synthetic data to infer back the parameters. The acceptance rate among each time point and total required samples are compared after the experiment to give suggestions on the kernel selection in the real data inference. As the threshold schedule is fixed, the final population should have similar discrepancy to the target data thus here the goodness of fit i.e. recover of target data trends/features and errors of the inferred parameters compared to true values is not discussed.
+
+\subsubsection{Kernel experiment results}
+
+The true value of parameters that are used to generate synthetic data is listed in Appendix B.1. These true values are firstly obtained by fitting a least square fit of model 1 onto the experimental data. The target data [FIGURE HERE] (synthetic data) is then generated using these parameter values via ODE solver in \verb|Python|.
+
+\paragraph{Adaptive functiosn and factors}
+
+\paragraph{Data size, prior range, population size and generations} 1
 
 [experiments plan]
 
@@ -519,7 +533,9 @@ In this case, profile tools \verb|cProfile| and \verb|yappi| is used in PyCharm 
 
 \section{Data analysis}
 
-\chapter{Stuff which no-one will read}
+\chapter{Data and settings}
+
+\section{Infer-back experiments}
 
 Some people include in their thesis a lot of detail, particularly
 computer code, which no-one will ever read. You should be careful that
@@ -538,7 +554,13 @@ in Environments} Int. Journal of Silly Findings. pp 23-29.
 
 \bibitem{ref:pyabc} Klinger, E., Rickert, D. and Hasenauer, J., 2018. pyABC: distributed, likelihood-free inference. Bioinformatics, 34(20), pp.3591-3593.
 
-\bibitem{ref:kernel} Filippi, S., Barnes, C. P., Cornebise, J., and Stumpf, M..H. (2013). On optimality of kernels for approximate Bayesian computation using sequential Monte Carlo. Statistical Applications in Genetics and Molecular Biology 12, 1, 87-107
+\bibitem{ref:kernel} Filippi, S., Barnes, C. P., Cornebise, J., and Stumpf, M..H. (2013). On optimality of kernels for approximate Bayesian computation using sequential Monte Carlo. Statistical Applications in Genetics and Molecular Biology 12, 1, 87-107.
+
+\bibitem{ref:abcsysbio} Liepe, J., Kirk, P., Filippi, S., Toni, T., Barnes, C.P., and Stumpf, M.P.H., 2014. A framework for parameter estimation and model selection from experimental data in systems biology using approximate Bayesian computation. Nature Protocols. 9 (2) pp. 439–456. 
+
+\bibitem{ref:compare} Daly AC, Cooper J, GavaghanDJ, Holmes C. 2017. Comparing two sequentialMonte Carlo samplers for exact andapproximate Bayesian inference on biologicalmodels.J. R. Soc. Interface14: 20170340.
+
+\bibitem{ref:disease} Minter, A. and Retkute, R., 2019. Approximate Bayesian Computation for infectious disease modelling. Epidemics, 29, p.100368.
 
 \end{thebibliography}
 
