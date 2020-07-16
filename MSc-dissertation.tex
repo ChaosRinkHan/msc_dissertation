@@ -397,7 +397,19 @@ Then according to findings in the first part, several options with good performa
 
 [how do these options correspond to biological model and how to set them accordingly for proposed model]
 
-The ABC SMC inference can have largely different performance when using different hyperparameters and implementation options. Among them the following is studied using synthetic data:
+The ABC SMC inference can have largely different performance when using different hyperparameters and implementation options. To firstly test the ability of inference and observe the results of different options, synthetic data with known true parameter values are used as target data. The true value of parameters that are used to generate synthetic data is listed in Appendix B.1. These true values are firstly obtained by fitting a least square fit of model 1 onto the experimental data (Figure \ref{fig:infer_back_data}), the target data is then generated using these parameter values via ODE solver in \verb|Python|.
+
+\begin{figure}
+    \begin{center}
+    \resizebox{1.0\hsize}{!}{\includegraphics{fig/LS.png}}
+    \end{center}
+    
+    \caption{Synthetic data generated with known parameter values (line plot), compared to experimental data (scatter plot)} 
+    \label{fig:infer_back_data}
+    
+\end{figure}
+
+Among them the following topics are studied using synthetic data.
 
 \subsubsection{Perturbation kernels}
 
@@ -423,7 +435,7 @@ The kernel experiments is designed to explore the efficiency of SMC on our dynam
 
 \subsubsection{Kernel experiment results}
 
-The true value of parameters that are used to generate synthetic data is listed in Appendix B.1. These true values are firstly obtained by fitting a least square fit of model 1 onto the experimental data. The target data [FIGURE HERE] (synthetic data) is then generated using these parameter values via ODE solver in \verb|Python|.
+
 
 \paragraph{Adaptive functiosn and factors}
 
@@ -537,10 +549,42 @@ In this case, profile tools \verb|cProfile| and \verb|yappi| is used in PyCharm 
 
 \section{Infer-back experiments}
 
-Some people include in their thesis a lot of detail, particularly
-computer code, which no-one will ever read. You should be careful that
-anything like this you include should contain some element of uniqueness
-which justifies its inclusion.
+\subsection{Parameter values used to generate synthetic data}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c c c|} 
+     \hline
+     Parameter & Value & Unit\\ [0.5ex] 
+     \hline\hline
+     $\lambda_N$ & 2.1989 & $cell/h$  \\ 
+     $\kappa_{N\beta}$ & 3.9627 & $cell/(unit\cdotp h)$\\
+     $\mu_N$ & 1.7219 & $h^{-1}$\\
+     $\nu_{N\Phi}$ & 0.2195 & $cell^{-1}\cdotp h^{-1}$ \\
+     \hline
+     $\lambda_\Phi$ & 1.3146 & $cell/h$ \\
+     $\kappa_{\Phi\beta}$ & 0.1235 & $cell/(unit\cdotp h)$ \\
+     $\mu_\Phi$ & 0.1454 & $h^{-1}$ \\
+     \hline
+     $s_{\beta N}$ & 6.5536 & $unit/(cell\cdotp h)$ \\
+     $i_{\beta\Phi}$ & 1.7062 & $cell^{-1}$ \\
+     $\mu_\beta$ & 0.5212 & $h^{-1}$ \\
+     \hline
+     $s_{\alpha\Phi}$ & 10.2416 & $unit/(cell\cdotp h)$ \\
+     $\mu_\alpha$ & 19.6642 & $h^{-1}$ \\
+    [1ex] 
+     \hline
+    \end{tabular}
+    \caption{Parameter values}
+    \label{table:m1}
+\end{table}
+
+
+
+
+
+
+
 
 \begin{thebibliography}{100}
 

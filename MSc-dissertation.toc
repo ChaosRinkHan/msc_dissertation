@@ -17,10 +17,10 @@
 \contentsline {section}{\numberline {4.1}Parameter estimation}{8}% 
 \contentsline {subsection}{\numberline {4.1.1}ABC SMC and model hyperparameters experiments}{8}% 
 \contentsline {subsubsection}{Perturbation kernels}{9}% 
-\contentsline {subsubsection}{Kernel experiment results}{10}% 
-\contentsline {paragraph}{Adaptive functiosn and factors}{10}% 
-\contentsline {paragraph}{Data size, prior range, population size and generations}{10}% 
-\contentsline {subsection}{\numberline {4.1.2}Implementations and code}{10}% 
+\contentsline {subsubsection}{Kernel experiment results}{11}% 
+\contentsline {paragraph}{Adaptive functiosn and factors}{11}% 
+\contentsline {paragraph}{Data size, prior range, population size and generations}{11}% 
+\contentsline {subsection}{\numberline {4.1.2}Implementations and code}{11}% 
 \contentsline {section}{\numberline {4.2}Model comparison}{11}% 
 \contentsline {section}{\numberline {4.3}Performance experiments}{11}% 
 \contentsline {subsection}{\numberline {4.3.1}Scaling-up}{11}% 
@@ -36,3 +36,4 @@
 \contentsline {section}{\numberline {A.2}Data analysis}{16}% 
 \contentsline {chapter}{\numberline {B}Data and settings}{17}% 
 \contentsline {section}{\numberline {B.1}Infer-back experiments}{17}% 
+\contentsline {subsection}{\numberline {B.1.1}Parameter values used to generate synthetic data}{17}% 
