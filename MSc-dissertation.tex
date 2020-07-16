@@ -438,7 +438,17 @@ The kernel experiments is designed to explore the efficiency of SMC on our dynam
 
 \subsubsection{Kernel experiment results}
 
-To compare kernels, a fixed schedule schedule is used with minimal epsilon i.e. $\epsilon_t$ set to 10.0. From the total required samples graph Figure \ref{fig:kernel1}, the efficiency can be compared
+To compare kernels, a fixed schedule schedule is used with minimal epsilon i.e. $\epsilon_t$ set to 10.0. From the total required samples graph Figure \ref{fig:kernel1}, the efficiency can be compared. Among the tested kernels, the local M-NN with M=50 has the best performance: it requires the least number of samples and 
+has higher acceptance rates among almost all generations. Local M-NN with M=750 is the slowest kernel.
+
+For local M-NN kernels, generally a greater M will lead to lower acceptance rate and 
+more required particles in each generation. As shown in Figure \ref{fig:acceptance1}, local M-NN with M=750 is the lowest curve. Consequently, if greater M is test, then it will have even lower acceptance rates; the maximum M=2000 (whole population is considered) will have the lowest acceptance rates.
+
+Multivariate normal kernel has a performance between local M-NN M=250 and M=100. It proves that rather than a trivial normal kernel, multivariate normal kernels is more efficient facing the concentrations of joint distributions among multiple parameters \cite{ref:kernel}. `Scaling' option can narrower the distribution calculated from the last population, thus making the kernel more `local' by sampling under a smaller variance. Similar to small M in local M-NN, small `scaling' is also more efficient in our experiment of the model 1. Besides the fixed threshold schedule, a median threshold schedule with the same final threshold $\epsilon_{20}=10.0$ is also tested and similar results are observed (Figure \ref{fig:kernel2} and \ref{fig:acceptance2}, Appendix B2).
+
+It seems that a more `local' kernel can give better performance by efficiently sampling around concentrations in parameters' distribution and approximate the posterior distribution. This holds in most cases under a given target final threshold value $\epsilon_t$, however may not produce the proper result want: a more local kernel, e.g. local M-NN with small M and multivariate normal with `scaling' is more likely to be stuck in local optimality, as the kernel is less likely to sample particles that are far from local concentrations, although these local optimal are still accepted under given threshold. In other words, using local kernels the epsilon may quickly converge to to local optimal; if a even smaller epsilon is desired, the local kernel can hardly generate enough particles to find another matched local modes. Also, the shapes of posterior distribution will affect the performance of local kernels \cite{ref:kernel}. One obvious example is presented in Figure \ref{fig:kernel1}, where local M-NN with M=50 suffered from a local optimal: the last generation takes much more samples to meet the required threshold.
+
+\paragraph{Conclusion} Local kernels can be fast bur unstable in some case; for a general parameter inference of our models, multivariate kernels are preferred, as a good fit is our prior target; some local kernels are also worth trying after the multivariate normal kernel, e.g. local M-NN with M$\leq 250$ (for population size of 2000, i.e. 12.5\% of the population) and multivariate normal with scaling. Also multivariate M-NN is worth trying, although it is not built in \verb|pyABC| and requires additional implementations.
 
 \begin{figure}
     \begin{center}
@@ -471,11 +481,31 @@ To compare kernels, a fixed schedule schedule is used with minimal epsilon i.e. 
 % \end{figure}
 
 
-\paragraph{Adaptive functiosn and factors}
+\subsubsection{Adaptive functiosn and factors}
 
-\paragraph{Data size, prior range, population size and generations} 1
+[how adaptive distance work]
+
+[what is factor]
+
+[what is adaptive distance]
+
+\subsubsection{Experiments results}
+
+\paragraph{Conclusion}
+
+
+
+\subsubsection{Data size, prior range, population size and generations}
 
 [experiments plan]
+
+\subsubsection{Experiments results}
+
+\paragraph{Conclusion}
+
+
+
+
 
 \subsection{Implementations and code}
 
@@ -581,6 +611,9 @@ In this case, profile tools \verb|cProfile| and \verb|yappi| is used in PyCharm 
 
 \chapter{Data and settings}
 
+
+
+
 \section{Infer-back experiments}
 
 \subsection{Parameter values used to generate synthetic data}
@@ -613,8 +646,25 @@ In this case, profile tools \verb|cProfile| and \verb|yappi| is used in PyCharm 
     \label{table:m1}
 \end{table}
 
+\section{Kernel experiment: median epsilon schedule}
 
+\begin{figure}
 
+    \begin{center}
+    \resizebox{1.0\hsize}{!}{\includegraphics{fig/kernel2.png}}
+    \end{center}
+    
+    \caption{Total sampling size} 
+    \label{fig:kernel2}
+
+    \begin{center}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/acceptance2.png}}
+        \end{center}
+        
+        \caption{Acceptance rates} 
+        \label{fig:acceptance2}
+    
+\end{figure}
 
 
 
