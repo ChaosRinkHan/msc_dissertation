@@ -195,7 +195,8 @@ It is noted that the variance of the measured data is relatively high. The summa
 \resizebox{1.0\hsize}{!}{\includegraphics{fig/obs_curve.png}}
 \end{center}
 
-\caption{Mean of the observed data for neutrophil $N$, macrophage $\Phi$, il-1$\beta$ and tnf-$\alpha$, from experiment results of \cite{ref:Tsarouchas}. Error bars indicate standard error of mean} 
+\caption[Mean of the observed data]%
+{Mean of the observed data for neutrophil $N$, macrophage $\Phi$, il-1$\beta$ and tnf-$\alpha$, from experiment results of \cite{ref:Tsarouchas}. Error bars indicate standard error of mean} 
 \label{fig:obs_data}
 
 \end{figure}
@@ -215,7 +216,8 @@ A preliminary model is proposed according to \cite{ref:Tsarouchas} and used to b
     \resizebox{0.4\hsize}{!}{\includegraphics{fig/model1.png}}
     \end{center}
     
-    \caption{Interactions modelled in the basic model (model 1) based on Tsarouchas et al.\cite{ref:Tsarouchas}. Lines ended with arrow represent promoting effect, lines ended with T-connectors represent inhibition} 
+    \caption[Interactions modelled in the basic model]%
+    {Interactions modelled in the basic model (model 1) based on Tsarouchas et al.\cite{ref:Tsarouchas}. Lines ended with arrow represent promoting effect, lines ended with T-connectors represent inhibition} 
     \label{fig:m1}
     
 \end{figure}
@@ -404,7 +406,8 @@ The ABC SMC inference can have largely different performance when using differen
     \resizebox{1.0\hsize}{!}{\includegraphics{fig/LS.png}}
     \end{center}
     
-    \caption{Synthetic data generated with known parameter values (line plot), compared to experimental data (scatter plot)} 
+    \caption[Synthetic data generated with known parameter values]%
+    {Synthetic data generated with known parameter values (line plot), compared to experimental data (scatter plot)} 
     \label{fig:infer_back_data}
     
 \end{figure}
@@ -435,6 +438,37 @@ The kernel experiments is designed to explore the efficiency of SMC on our dynam
 
 \subsubsection{Kernel experiment results}
 
+To compare kernels, a fixed schedule schedule is used with minimal epsilon i.e. $\epsilon_t$ set to 10.0. From the total required samples graph Figure \ref{fig:kernel1}, the efficiency can be compared
+
+\begin{figure}
+    \begin{center}
+    \resizebox{1.0\hsize}{!}{\includegraphics{fig/kernel1.png}}
+    \end{center}
+    
+    \caption[Total required samples of different kernels]%
+        {Total required samples of different kernels. Different color represents different generations (bottom to top: generation 1 to generation 20)}
+    \label{fig:kernel1}
+
+    \vspace*{\floatsep}
+
+    \begin{center}
+    \resizebox{1.0\hsize}{!}{\includegraphics{fig/acceptance1.png}}
+    \end{center}
+    
+    \caption{Acceptance rates of different kernels}
+    \label{fig:acceptance1}
+    
+\end{figure}
+
+% \begin{figure}
+%     \begin{center}
+%     \resizebox{1.0\hsize}{!}{\includegraphics{fig/acceptance1.png}}
+%     \end{center}
+    
+%     \caption{Acceptance rates of different kernels}
+%     \label{fig:acceptance1}
+    
+% \end{figure}
 
 
 \paragraph{Adaptive functiosn and factors}

@@ -24,16 +24,16 @@
 \contentsline {section}{\numberline {4.2}Model comparison}{11}% 
 \contentsline {section}{\numberline {4.3}Performance experiments}{11}% 
 \contentsline {subsection}{\numberline {4.3.1}Scaling-up}{11}% 
-\contentsline {subsection}{\numberline {4.3.2}Profiling}{12}% 
-\contentsline {chapter}{\numberline {5}Results and Discussions}{13}% 
-\contentsline {section}{\numberline {5.1}ABC SMC results}{13}% 
-\contentsline {section}{\numberline {5.2}Performance experiments}{13}% 
-\contentsline {section}{\numberline {5.3}Discussions}{13}% 
-\contentsline {chapter}{\numberline {6}Future works}{14}% 
-\contentsline {chapter}{\numberline {7}Conclusions}{15}% 
-\contentsline {chapter}{\numberline {A}System and software environment}{16}% 
-\contentsline {section}{\numberline {A.1}ABC SMC implementation}{16}% 
-\contentsline {section}{\numberline {A.2}Data analysis}{16}% 
-\contentsline {chapter}{\numberline {B}Data and settings}{17}% 
-\contentsline {section}{\numberline {B.1}Infer-back experiments}{17}% 
-\contentsline {subsection}{\numberline {B.1.1}Parameter values used to generate synthetic data}{17}% 
+\contentsline {subsection}{\numberline {4.3.2}Profiling}{13}% 
+\contentsline {chapter}{\numberline {5}Results and Discussions}{14}% 
+\contentsline {section}{\numberline {5.1}ABC SMC results}{14}% 
+\contentsline {section}{\numberline {5.2}Performance experiments}{14}% 
+\contentsline {section}{\numberline {5.3}Discussions}{14}% 
+\contentsline {chapter}{\numberline {6}Future works}{15}% 
+\contentsline {chapter}{\numberline {7}Conclusions}{16}% 
+\contentsline {chapter}{\numberline {A}System and software environment}{17}% 
+\contentsline {section}{\numberline {A.1}ABC SMC implementation}{17}% 
+\contentsline {section}{\numberline {A.2}Data analysis}{17}% 
+\contentsline {chapter}{\numberline {B}Data and settings}{18}% 
+\contentsline {section}{\numberline {B.1}Infer-back experiments}{18}% 
+\contentsline {subsection}{\numberline {B.1.1}Parameter values used to generate synthetic data}{18}% 
