@@ -124,25 +124,26 @@ further improvements.}
 \pagenumbering{arabic}
 
 \chapter{Introduction}
-This should contain a description of your project and the problem you
-are trying to solve. Where appropriate you should also include
-references to work which has already been done on your topic and
-anything else which lets you set your work in context.
 
-One of the things you will need to do is to ensure that you have a
-suitable list of references.  To do this you should see \cite{ref:lam}
-or some other suitable reference.  Note the format of the citation used
-here is the style favoured in this department.  Here is another
-reference \cite{ref:bloggs} for good measure.
+% This should contain a description of your project and the problem you
+% are trying to solve. Where appropriate you should also include
+% references to work which has already been done on your topic and
+% anything else which lets you set your work in context.
 
-You will also want to make sure you have no spelling or grammatical
-mistakes. To help idwentify spelling mistukes you caan use the commands
-{\em ispell} or {\em spell}. See the appropriate manual pages. Remember
-that spelling mistakes are not the only errors which can occur. Spelling
-checkers will not find errors which are, in fact, valid words such as
-{\em there} for {\em their}, nor will they find repeated words which
-sometimes occur if your concentration is broken when typing. {\bf There
-is no substitute for thorough proof reading!}
+% One of the things you will need to do is to ensure that you have a
+% suitable list of references.  To do this you should see \cite{ref:lam}
+% or some other suitable reference.  Note the format of the citation used
+% here is the style favoured in this department.  Here is another
+% reference \cite{ref:bloggs} for good measure.
+
+% You will also want to make sure you have no spelling or grammatical
+% mistakes. To help idwentify spelling mistukes you caan use the commands
+% {\em ispell} or {\em spell}. See the appropriate manual pages. Remember
+% that spelling mistakes are not the only errors which can occur. Spelling
+% checkers will not find errors which are, in fact, valid words such as
+% {\em there} for {\em their}, nor will they find repeated words which
+% sometimes occur if your concentration is broken when typing. {\bf There
+% is no substitute for thorough proof reading!}
 
 
 [background and motivation]
@@ -523,21 +524,47 @@ Adaptive population \cite{ref:adpt_pop} can adapt the population size of each ge
 
 \subsubsection{Experiments results}
 
-[picture here]
+[FIGURE here]
 
-[what is the result]
+Two types of factors and adaptive distance function are tested by running the same number of generations (20 generation, 2000 particles per generation). From FIGURE, by applying factors the total required samples are less, and the adaptive distance requires much less samples; their acceptance rates are also higher than the standard one. It seems that adaptive function and factors could help to converge more quickly.
 
-\paragraph{Conclusion}
+However considering the result after 20 generation (FIGURE), the resultant model gives the contrary preference. Applying factors and using adaptive distance can lead the resultant model less accurate (after the same generation iterations): they have wider inter-quantile range and may requires more generations to converge.
 
 
+\paragraph{Conclusion} We noticed the significant efficiency improvement of these adaptive options; they can largely improve the acceptance rate in some cases. However, as the factors and weights are directly multiplied to $\Delta x$ and thus the metrics for distance are changed, a direct compare of the efficiency under the same threshold schedule is unfeasible; after the same number of generations they can reach a small $\epsilon_t$ but still the approximated posterior is not as accurate as the standard implementation. AS a result, our implementation of the parameter inference will only consider standard distance function and factors are only tested for improvements (FIGURE).
 
-\subsubsection{Data size, prior range, population size and generations}
+
+\subsubsection{Data size, prior distribution range, population size and generations}
 
 [experiments plan]
 
+Some other hyperparameters, e.g. feed-in data size, prior range, number of generations and number of particles in each generation is also of our interest. Experiments are designed to explore how these options affect the goodness of fit and efficiency of the implementation.
+
+Regarding the present dynamic systems model, the SMC is implemented with two data size options, two prior distribution (standard and wider prior range). The iteration options i.e. population size and number of generaitions are also tried with different values. These experiments intends to give suggestions on the later SMC implementation on experimental data.
+
 \subsubsection{Experiments results}
 
-\paragraph{Conclusion}
+The results from data size and prior distribution range is shown in FIGURE. The standard implementation is fed with 120 data points (30 data points for each of the four variables), the `less data' is fed with 48 data points, which is the case of the real experimental measurement. Although much less (60\%) data is used, the total required sampling numbers is not much less (XX\%). Although the data size does not affect the sampling process much and the inferred model are all considered acceptable when compared to the synthetic data (FIGURE), cares should be taken when using less data point, or using other more summative statistics, e.g. mean, standard deviation, peak values, starting and ending values etc. As shown in \cite{ref:disease}, less data can lead to a model with more variance, under-fitting or missing some local features e.g. local peak.
+
+The prior range and distribution can largely affect the execution of SMC (FIGURE and FIGURE). Samples are taken from a high dimensional parameter space in each sampling process, wider prior distribution ranges will making each sampling explore more in the parameter vector space. It suggests that a narrower prior is preferred and we should make a more accurate and confident prior belief as possible for the efficiency concerns.
+
+[discuss uniform and log uniform when result ready]
+
+\begin{figure}
+    \begin{center}
+    \resizebox{1.0\hsize}{!}{\includegraphics{fig/size1.png}}
+    \end{center}
+    
+    \caption[Data size and prior distribution range experiment]%
+        {Data size and prior distribution range experiment. (a) Total required samples, (b) Epsilon values under median epsilon schedule}
+    \label{fig:size}
+    
+\end{figure}
+
+[FIGURE HERE]
+
+
+\paragraph{Summary} This subsection aims to preliminarily explore ABC SMC settings using synthetic data with known true parameter values, thus the efficiency and the goodness of the resultant model can be compared across these options. Conclusion can be drawn to choose efficient and proper options of ABC SMC to be applied on the target models with experimental data. It also provides reference for a general inference task using SMC with high dimensional parameter space.
 
 
 
@@ -678,11 +705,11 @@ In this case, profile tools \verb|cProfile| and \verb|yappi| is used in PyCharm 
     [1ex] 
      \hline
     \end{tabular}
-    \caption{Parameter values}
+    \caption{Parameter values used for model 1}
     \label{table:m1}
 \end{table}
 
-\section{Kernel experiment: median epsilon schedule}
+\subsection{Kernel experiment: median epsilon schedule}
 
 \begin{figure}
 
@@ -703,16 +730,14 @@ In this case, profile tools \verb|cProfile| and \verb|yappi| is used in PyCharm 
 \end{figure}
 
 
+\subsection{Other experiment details}
+
+
+
 
 
 
 \begin{thebibliography}{100}
-
-\bibitem{ref:lam} L.Lamport. {\em 1986 Latex User's Guide
-and Reference Manual.} Addison Wesley. pp242.
-
-\bibitem{ref:bloggs} F.Bloggs. {\em 1993 Latex Users do it
-in Environments} Int. Journal of Silly Findings. pp 23-29.
 
 \bibitem{ref:Tsarouchas} Tsarouchas, T.M., Wehner, D., Cavone, L., Munir, T., Keatinge, M., Lambertus, M., Underhill, A., Barrett, T., Kassapis, E., Ogryzko, N. and Feng, Y., 2018. Dynamic control of proinflammatory cytokines Il-1$\beta$ and Tnf-$\alpha$ by macrophages in zebrafish spinal cord regeneration. Nature communications, 9(1), pp.1-17.
 
