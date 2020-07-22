@@ -377,11 +377,24 @@ After the first model selection experiment, it is found that some significant fe
 % ``the figure above'' or ``the following figure'' since Latex may move
 % the figure relative to the text if it cannot be fitted onto the current page.
 
+
+
+
+
+
+
 \chapter{Parameter estimation and model comparison}
 
 This chapter focuses on the implementation of the ABC SMC on the proposed models. Estimation of  parameters in the proposed models is the main task of this section. ABC SMC-based models selection is another task that can be easily implemented with the parameter estimation framework.
 
 The build and test is under \verb|Python| environment with \verb|pyABC|\cite{ref:pyabc}. Some other code e.g. shell script and \verb|R| code are also used to perform the experiments and analyse the results. Tested software and system environment can be found at Appendix A. The build and test is performed on local computers and HPC clusters available within EPCC.
+
+
+
+
+
+
+
 
 \section{Implementations and code}
 
@@ -404,18 +417,23 @@ After several development iterations, the code files for ABC SMC implementation 
 [how the code is developed and built]
 
 
-\section{Parameter estimation}
+% \section{Parameter estimation}
 
-[implementation details and options/ settings that are affecting the ABC]
+% [implementation details and options/ settings that are affecting the ABC]
+
+
+
+
+
+
+
+\section{ABC SMC and model hyperparameters experiments}
 
 As the key focus of this project is on the parameter estimations of dynamical system, the ability of inference on the proposed model is firstly examined before actual inference using the experimental observed data.
 
 In the first part, synthetic data is used with known true parameter values. The algorithm implementation is evaluated by the efficiency and goodness of resultant model under different implementation options and ABC SMC hyperparameters.
 
 Then according to findings in the first part, several options with good performance are tried in the inference using experimental observed data (Figure \ref{fig:obs_data}). To obtain a more accurate and general results, these experiments are repeated for 3 or more times.
-
-
-\subsection{ABC SMC and model hyperparameters experiments}
 
 [including the options that are tested/ tried/ not adopted]
 
@@ -424,8 +442,6 @@ Then according to findings in the first part, several options with good performa
 [how do these options correspond to biological model and how to set them accordingly for proposed model]
 
 The ABC SMC inference can have largely different performance when using different hyperparameters and implementation options. To firstly test the ability of inference and observe the results of different options, synthetic data with known true parameter values are used as target data. The true value of parameters that are used to generate synthetic data is listed in Appendix B.1. These true values are firstly obtained by fitting a least square fit of model 1 onto the experimental data (Figure \ref{fig:infer_back_data}), the target data is then generated using these parameter values via ODE solver in \verb|Python|. 
-
-
 
 \begin{figure}[h!]
     \begin{center}
@@ -440,7 +456,7 @@ The ABC SMC inference can have largely different performance when using differen
 
 Among them the following topics are studied using synthetic data.
 
-\subsubsection{Perturbation kernels}
+\subsection{Perturbation kernels}
 
 Perturbation kernels work in the sampling process. In each generation $t$, samples are firstly taken from the previous population $\{\theta_{t-1}\}$ with weights $\{w_{t-1}\}$, then perturbed using the perturbation kernel $K(\theta|\theta^*)$. We keep sampling until $N$ particles are accepted, where $N$ is the pre-set population size. After that the new weights are calculated and normalised. 
 
@@ -494,7 +510,7 @@ Multivariate normal kernel has a performance between local M-NN M=250 and M=100.
 
 It seems that a more `local' kernel can give better performance by efficiently sampling around concentrations in parameters' distribution and approximate the posterior distribution. This holds in most cases under a given target final threshold value $\epsilon_t$, however may not produce the proper result want: a more local kernel, e.g. local M-NN with small M and multivariate normal with `scaling' is more likely to be stuck in local optimality, as the kernel is less likely to sample particles that are far from local concentrations, although these local optimal are still accepted under given threshold. In other words, using local kernels the epsilon may quickly converge to to local optimal; if a even smaller epsilon is desired, the local kernel can hardly generate enough particles to find another matched local modes. Also, the shapes of posterior distribution will affect the performance of local kernels \cite{ref:kernel}. One obvious example is presented in Figure \ref{fig:kernel1}, where local M-NN with M=50 suffered from a local optimal: the last generation takes much more samples to meet the required threshold.
 
-\paragraph{Conclusion} Local kernels can be fast bur unstable in some case; for a general parameter inference of our models, multivariate kernels are preferred, as a good fit is our prior target; some local kernels are also worth trying after the multivariate normal kernel, e.g. local M-NN with M$\leq 250$ (for population size of 2000, i.e. 12.5\% of the population) and multivariate normal with scaling. Also multivariate M-NN is worth trying, although it is not built in \verb|pyABC| and requires additional implementations.
+\subsubsection{Conclusion} Local kernels can be fast bur unstable in some case; for a general parameter inference of our models, multivariate kernels are preferred, as a good fit is our prior target; some local kernels are also worth trying after the multivariate normal kernel, e.g. local M-NN with M$\leq 250$ (for population size of 2000, i.e. 12.5\% of the population) and multivariate normal with scaling. Also multivariate M-NN is worth trying, although it is not built in \verb|pyABC| and requires additional implementations.
 
 
 % \begin{figure}
@@ -508,7 +524,7 @@ It seems that a more `local' kernel can give better performance by efficiently s
 % \end{figure}
 
 
-\subsubsection{Adaptive functions and factors}
+\subsection{Adaptive functions and factors}
 
 [how adaptive distance work]
 
@@ -556,10 +572,10 @@ Two types of factors and adaptive distance function are tested by running the sa
 However considering the result after 20 generation (FIGURE), the resultant model gives the contrary preference. Applying factors and using adaptive distance can lead the resultant model less accurate (after the same generation iterations): they have wider inter-quantile range and may requires more generations to converge.
 
 
-\paragraph{Conclusion} We noticed the significant efficiency improvement of these adaptive options; they can largely improve the acceptance rate in some cases. However, as the factors and weights are directly multiplied to $\Delta x$ and thus the metrics for distance are changed, a direct compare of the efficiency under the same threshold schedule is unfeasible; after the same number of generations they can reach a small $\epsilon_t$ but still the approximated posterior is not as accurate as the standard implementation. AS a result, our implementation of the parameter inference will only consider standard distance function and factors are only tested for improvements (FIGURE).
+\subsubsection{Conclusion} We noticed the significant efficiency improvement of these adaptive options; they can largely improve the acceptance rate in some cases. However, as the factors and weights are directly multiplied to $\Delta x$ and thus the metrics for distance are changed, a direct compare of the efficiency under the same threshold schedule is unfeasible; after the same number of generations they can reach a small $\epsilon_t$ but still the approximated posterior is not as accurate as the standard implementation. AS a result, our implementation of the parameter inference will only consider standard distance function and factors are only tested for improvements (FIGURE).
 
 
-\subsubsection{Data size, prior distribution range, population size and generations}
+\subsection{Data size, prior distribution range, population size and generations}
 
 [experiments plan]
 
@@ -589,23 +605,44 @@ The prior range and distribution can largely affect the execution of SMC (FIGURE
 [FIGURE HERE]
 
 
-\paragraph{Summary} This subsection aims to preliminarily explore ABC SMC settings using synthetic data with known true parameter values, thus the efficiency and the goodness of the resultant model can be compared across these options. Conclusion can be drawn to choose efficient and proper options of ABC SMC to be applied on the target models with experimental data. It also provides reference for a general inference task using SMC with high dimensional parameter space.
+\subsubsection{Summary} This subsection aims to preliminarily explore ABC SMC settings using synthetic data with known true parameter values, thus the efficiency and the goodness of the resultant model can be compared across these options. Conclusion can be drawn to choose efficient and proper options of ABC SMC to be applied on the target models with experimental data. It also provides reference for a general inference task using SMC with high dimensional parameter space.
 
 
 
-\section{Model comparison}
 
-[comparison of model 1, 2 and 3]
+
+
+
+
+\section{Parameter estimation and model comparison}
+
+[separated ABC run on model 1, 2 and 3]
+ 
+[model comparison among model 1, 2, 3]
+
+[features that derive model 4 and 5]
 
 [further comparison of model 3, 4 and 5]
 
-\section{Performance experiments}
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{Performance experiments}
 
 The performance experiments are designed to explore the parallel performance of ABC SMC implementations. Usually ABC SMC is a time-consuming and computation intensive task and usually is executed on large clusters. The scheduling strategy, implementation details and many other factors can affect the parallel efficiency.
 
 [MORE meanings of the performance study]
 
-\subsection{Scaling-up}
+\section{Scaling-up}
 
 First experiments are designed to illustrate the scaling-up performance. The program used here is an implementation of ABc SMC on model 5. The details of the ABC SMC settings is listed below
 
@@ -626,11 +663,26 @@ The implementation of ABC SMC in \verb|pyabc| enables the parallelisation of sam
 
 In practice, using ABC SMC to estimate the parameters of a given model could cost up to several hundred of hours if the computational resources is limited[REF]. The performance experiment result could provide a reference that illustrate that how the efficiency changes when scaling-up or the trade-offs in computational resources' cost and their benefit.
 
-\subsection{Profiling}
+\subsubsection{Results}
+
+[scaling-up performance: speed-up and efficiency]
+
+\section{Profiling}
 
 The performance could also be analysed given a profiling report. The second experiment profiles the program to reveal the detailed time consumption for each operation and the possible bottleneck, according to which we could find the hot-spot of program and given possible suggestions on improving the performance. 
 
 In this case, profile tools \verb|cProfile| and \verb|yappi| is used in PyCharm IDE.
+
+\subsubsection{Results} 
+
+[profiling results: hot-spot and possible improvements]
+
+
+
+
+
+
+
 
 
 
@@ -644,11 +696,7 @@ In this case, profile tools \verb|cProfile| and \verb|yappi| is used in PyCharm 
 
 [model selections result; bayes factor]
 
-\section{Performance experiments}
 
-[scaling-up performance: speed-up and efficiency]
-
-[profiling results: hot-spot and possible improvements]
 
 \section{Discussions}
 
@@ -660,6 +708,15 @@ In this case, profile tools \verb|cProfile| and \verb|yappi| is used in PyCharm 
 
 [limitations]
 
+
+
+
+
+
+
+
+
+
 \chapter{Future works}
 
 [something not done as scheduled]
@@ -667,6 +724,14 @@ In this case, profile tools \verb|cProfile| and \verb|yappi| is used in PyCharm 
 [interesting topics to look inside]
 
 [moving to generalisations]
+
+
+
+
+
+
+
+
 
 \chapter{Conclusions}
 
@@ -679,6 +744,13 @@ In this case, profile tools \verb|cProfile| and \verb|yappi| is used in PyCharm 
 [summary of the findings and advise]
 
 [thanks]
+
+
+
+
+
+
+
 
 \appendix
 % the appendix command just changes heading styles for appendices.
@@ -756,6 +828,8 @@ Local development machine is a Mac laptop, running on macOS 10.15.6. The environ
 
 
 
+
+
 \section{Infer-back experiments}
 
 \subsection{Parameter values used to generate synthetic data}
@@ -816,6 +890,7 @@ Local development machine is a Mac laptop, running on macOS 10.15.6. The environ
 
 
 
+
 \begin{thebibliography}{100}
 
 \bibitem{ref:Tsarouchas} Tsarouchas, T.M., Wehner, D., Cavone, L., Munir, T., Keatinge, M., Lambertus, M., Underhill, A., Barrett, T., Kassapis, E., Ogryzko, N. and Feng, Y., 2018. Dynamic control of proinflammatory cytokines Il-1$\beta$ and Tnf-$\alpha$ by macrophages in zebrafish spinal cord regeneration. Nature communications, 9(1), pp.1-17.
@@ -835,6 +910,10 @@ Local development machine is a Mac laptop, running on macOS 10.15.6. The environ
 \bibitem{ref:adpt_pop} Klinger, E. and Hasenauer, J., 2017, September. A scheme for adaptive selection of population sizes in approximate Bayesian computation-sequential Monte Carlo. In International Conference on Computational Methods in Systems Biology (pp. 128-144). Springer, Cham.
 
 \end{thebibliography}
+
+
+
+
 
 
 \end{document}

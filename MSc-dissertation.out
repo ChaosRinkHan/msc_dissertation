@@ -13,25 +13,26 @@
 \BOOKMARK [2][-]{subsection.3.2.4}{Limitations}{section.3.2}% 13
 \BOOKMARK [0][-]{chapter.4}{Parameter estimation and model comparison}{}% 14
 \BOOKMARK [1][-]{section.4.1}{Implementations and code}{chapter.4}% 15
-\BOOKMARK [1][-]{section.4.2}{Parameter estimation}{chapter.4}% 16
-\BOOKMARK [2][-]{subsection.4.2.1}{ABC SMC and model hyperparameters experiments}{section.4.2}% 17
-\BOOKMARK [1][-]{section.4.3}{Model comparison}{chapter.4}% 18
-\BOOKMARK [1][-]{section.4.4}{Performance experiments}{chapter.4}% 19
-\BOOKMARK [2][-]{subsection.4.4.1}{Scaling-up}{section.4.4}% 20
-\BOOKMARK [2][-]{subsection.4.4.2}{Profiling}{section.4.4}% 21
-\BOOKMARK [0][-]{chapter.5}{Results and Discussions}{}% 22
-\BOOKMARK [1][-]{section.5.1}{ABC SMC results}{chapter.5}% 23
-\BOOKMARK [1][-]{section.5.2}{Performance experiments}{chapter.5}% 24
-\BOOKMARK [1][-]{section.5.3}{Discussions}{chapter.5}% 25
-\BOOKMARK [0][-]{chapter.6}{Future works}{}% 26
-\BOOKMARK [0][-]{chapter.7}{Conclusions}{}% 27
-\BOOKMARK [0][-]{appendix.A}{System and software environment}{}% 28
-\BOOKMARK [1][-]{section.A.1}{ABC SMC implementation}{appendix.A}% 29
-\BOOKMARK [2][-]{subsection.A.1.1}{Local machine}{section.A.1}% 30
-\BOOKMARK [2][-]{subsection.A.1.2}{Remote machine}{section.A.1}% 31
-\BOOKMARK [1][-]{section.A.2}{Data analysis}{appendix.A}% 32
-\BOOKMARK [0][-]{appendix.B}{Data and settings}{}% 33
-\BOOKMARK [1][-]{section.B.1}{Infer-back experiments}{appendix.B}% 34
-\BOOKMARK [2][-]{subsection.B.1.1}{Parameter values used to generate synthetic data}{section.B.1}% 35
-\BOOKMARK [2][-]{subsection.B.1.2}{Kernel experiment: median epsilon schedule}{section.B.1}% 36
-\BOOKMARK [2][-]{subsection.B.1.3}{Other experiment details}{section.B.1}% 37
+\BOOKMARK [1][-]{section.4.2}{ABC SMC and model hyperparameters experiments}{chapter.4}% 16
+\BOOKMARK [2][-]{subsection.4.2.1}{Perturbation kernels}{section.4.2}% 17
+\BOOKMARK [2][-]{subsection.4.2.2}{Adaptive functions and factors}{section.4.2}% 18
+\BOOKMARK [2][-]{subsection.4.2.3}{Data size, prior distribution range, population size and generations}{section.4.2}% 19
+\BOOKMARK [1][-]{section.4.3}{Parameter estimation and model comparison}{chapter.4}% 20
+\BOOKMARK [0][-]{chapter.5}{Performance experiments}{}% 21
+\BOOKMARK [1][-]{section.5.1}{Scaling-up}{chapter.5}% 22
+\BOOKMARK [1][-]{section.5.2}{Profiling}{chapter.5}% 23
+\BOOKMARK [0][-]{chapter.6}{Results and Discussions}{}% 24
+\BOOKMARK [1][-]{section.6.1}{ABC SMC results}{chapter.6}% 25
+\BOOKMARK [1][-]{section.6.2}{Discussions}{chapter.6}% 26
+\BOOKMARK [0][-]{chapter.7}{Future works}{}% 27
+\BOOKMARK [0][-]{chapter.8}{Conclusions}{}% 28
+\BOOKMARK [0][-]{appendix.A}{System and software environment}{}% 29
+\BOOKMARK [1][-]{section.A.1}{ABC SMC implementation}{appendix.A}% 30
+\BOOKMARK [2][-]{subsection.A.1.1}{Local machine}{section.A.1}% 31
+\BOOKMARK [2][-]{subsection.A.1.2}{Remote machine}{section.A.1}% 32
+\BOOKMARK [1][-]{section.A.2}{Data analysis}{appendix.A}% 33
+\BOOKMARK [0][-]{appendix.B}{Data and settings}{}% 34
+\BOOKMARK [1][-]{section.B.1}{Infer-back experiments}{appendix.B}% 35
+\BOOKMARK [2][-]{subsection.B.1.1}{Parameter values used to generate synthetic data}{section.B.1}% 36
+\BOOKMARK [2][-]{subsection.B.1.2}{Kernel experiment: median epsilon schedule}{section.B.1}% 37
+\BOOKMARK [2][-]{subsection.B.1.3}{Other experiment details}{section.B.1}% 38
