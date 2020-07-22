@@ -2,6 +2,7 @@
 
 \usepackage{epcc}
 \usepackage{graphics}
+\usepackage{hyperref}
 % \usepackage{mathtools}
 \usepackage{amsmath}
 
@@ -376,11 +377,32 @@ After the first model selection experiment, it is found that some significant fe
 % ``the figure above'' or ``the following figure'' since Latex may move
 % the figure relative to the text if it cannot be fitted onto the current page.
 
-\chapter{Implementations and Experiments}
+\chapter{Parameter estimation and model comparison}
 
 This chapter focuses on the implementation of the ABC SMC on the proposed models. Estimation of  parameters in the proposed models is the main task of this section. ABC SMC-based models selection is another task that can be easily implemented with the parameter estimation framework.
 
 The build and test is under \verb|Python| environment with \verb|pyABC|\cite{ref:pyabc}. Some other code e.g. shell script and \verb|R| code are also used to perform the experiments and analyse the results. Tested software and system environment can be found at Appendix A. The build and test is performed on local computers and HPC clusters available within EPCC.
+
+\section{Implementations and code}
+
+[ABC implementations details, e.g. distance, population, ODE related functions]
+
+According to our preliminary studies, ABC SMC framework implemented using \verb|pyABC| in \verb|Python| is adopted in this project. \verb|pyABC| is a popular SMC software packages \cite{ref:pyabc} that has been used form many SMC studies and applications \cite{ref:adpt_pop}. \verb|pyABC| provides an open-source framework for likelihood-free inference, which is an implementation of ABC SMC algorithm and a tool-box for inference and analysis tasks. Besides, it supports multi-core execution implemented using \verb|multiprocessing| package for scaling-up, which is of our interests and suitable for the followed performance experiments.
+
+The code for the project is developed and tested in local environment (macOS 10.15.6, see Table \ref{table:local_macine}) at first, then the functional version is deployed on compute node of ARCHER and Cirrus for parameter inference experiments and model selection task. The scaling-up experiment is performed on Cirrus, the profiling and its analysis are performed on local machine. Some development and debug are on the remote machines to ensure experiments run correctly on compute node.
+
+The ODE model-related code and utilities are firstly developed to enable reusable functions, variables and data calls. It includes the code for the ODE models, ODE solver, data structures, data format transform functions etc. By doing this in the implementation code file we can set options and activate ABC SMC easily, without creating definition and deplicated code for the models and parameter priors.
+
+Some modifications are made to the source code of \verb|pyABC|. For example, the laboratorial measured data are not considered `complete' for modeling and analysis purpose: there are different measurement time points for cells and cytokines, e.g. cell numbers is not measured at 0.25 hpl and cytokines' expression is not measured at time point 120 hpl. These missing values are treated as `ignored' when calculating the distance between observed data and simulated data. To cope with this built-in distance function code is modified.
+
+Analysis code is also wrapped up into functions which can be easily called after an ABC SMC run is finished. They includes multiple visualisations and summary statistic of the results. For different tasks there are also separated analysis code file. Other analysis tools used in the project include built-in database visualisation tool, R code and Microsoft Excel.
+
+The project code is managed via \verb|git| version-control and available as a GitHub repository\footnote{\url{https://github.com/chaolinhan/MSc_Project}}; it also make the cross machine synchronisation of code versions convenient.
+
+After several development iterations, the code files for ABC SMC implementation now mainly has two types: code file for infer-back experiments (synthetic data), code for parameter inference (experimental data). We can just add more models in these code files for a model comparison task.
+
+[how the code is developed and built]
+
 
 \section{Parameter estimation}
 
@@ -392,6 +414,7 @@ In the first part, synthetic data is used with known true parameter values. The 
 
 Then according to findings in the first part, several options with good performance are tried in the inference using experimental observed data (Figure \ref{fig:obs_data}). To obtain a more accurate and general results, these experiments are repeated for 3 or more times.
 
+
 \subsection{ABC SMC and model hyperparameters experiments}
 
 [including the options that are tested/ tried/ not adopted]
@@ -400,9 +423,11 @@ Then according to findings in the first part, several options with good performa
 
 [how do these options correspond to biological model and how to set them accordingly for proposed model]
 
-The ABC SMC inference can have largely different performance when using different hyperparameters and implementation options. To firstly test the ability of inference and observe the results of different options, synthetic data with known true parameter values are used as target data. The true value of parameters that are used to generate synthetic data is listed in Appendix B.1. These true values are firstly obtained by fitting a least square fit of model 1 onto the experimental data (Figure \ref{fig:infer_back_data}), the target data is then generated using these parameter values via ODE solver in \verb|Python|.
+The ABC SMC inference can have largely different performance when using different hyperparameters and implementation options. To firstly test the ability of inference and observe the results of different options, synthetic data with known true parameter values are used as target data. The true value of parameters that are used to generate synthetic data is listed in Appendix B.1. These true values are firstly obtained by fitting a least square fit of model 1 onto the experimental data (Figure \ref{fig:infer_back_data}), the target data is then generated using these parameter values via ODE solver in \verb|Python|. 
 
-\begin{figure}
+
+
+\begin{figure}[h!]
     \begin{center}
     \resizebox{1.0\hsize}{!}{\includegraphics{fig/LS.png}}
     \end{center}
@@ -568,14 +593,6 @@ The prior range and distribution can largely affect the execution of SMC (FIGURE
 
 
 
-
-
-\subsection{Implementations and code}
-
-[ABC implementations details, e.g. distance, population, ODE related functions]
-
-[how the code is developed and built]
-
 \section{Model comparison}
 
 [comparison of model 1, 2 and 3]
@@ -669,6 +686,68 @@ In this case, profile tools \verb|cProfile| and \verb|yappi| is used in PyCharm 
 \chapter{System and software environment}
 
 \section{ABC SMC implementation}
+
+\subsection{Local machine}
+
+Local development machine is a Mac laptop, running on macOS 10.15.6. The environment of the development is listed in Table \ref{table:local_macine}.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c c|} 
+     \hline
+     Environment & Version \\ [0.5ex] 
+     \hline\hline
+     $\lambda_N$ & 2.1989  \\ 
+     $\kappa_{N\beta}$ & 3.9627  \\
+     $\mu_N$ & 1.7219 \\
+     $\nu_{N\Phi}$  0.2195 & $cell^{-1}\cdotp h^{-1}$ \\
+     \hline
+     $\lambda_\Phi$ & 1.3146  $cell/h$ \\
+     $\kappa_{\Phi\beta}$ 0.1235 & $cell/(unit\cdotp h)$ \\
+     $\mu_\Phi$  0.1454 & $h^{-1}$ \\
+     \hline
+     $s_{\beta N}$ &6.5536  $unit/(cell\cdotp h)$ \\
+     $i_{\beta\Phi}$  1.7062 & $cell^{-1}$ \\
+     $\mu_\beta$ &0.5212  $h^{-1}$ \\
+     \hline
+     $s_{\alpha\Phi}$  10.2416 & $unit/(cell\cdotp h)$ \\
+     $\mu_\alpha$ 19.6642 & $h^{-1}$ \\
+    [1ex] 
+     \hline
+    \end{tabular}
+    \caption{Environment on local machine}
+    \label{table:local_macine}
+\end{table}
+
+\subsection{Remote machine}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c c|} 
+     \hline
+     Environment & Version \\ [0.5ex] 
+     \hline\hline
+     $\lambda_N$ & 2.1989  \\ 
+     $\kappa_{N\beta}$ & 3.9627  \\
+     $\mu_N$ & 1.7219 \\
+     $\nu_{N\Phi}$  0.2195 & $cell^{-1}\cdotp h^{-1}$ \\
+     \hline
+     $\lambda_\Phi$ & 1.3146  $cell/h$ \\
+     $\kappa_{\Phi\beta}$ 0.1235 & $cell/(unit\cdotp h)$ \\
+     $\mu_\Phi$  0.1454 & $h^{-1}$ \\
+     \hline
+     $s_{\beta N}$ &6.5536  $unit/(cell\cdotp h)$ \\
+     $i_{\beta\Phi}$  1.7062 & $cell^{-1}$ \\
+     $\mu_\beta$ &0.5212  $h^{-1}$ \\
+     \hline
+     $s_{\alpha\Phi}$  10.2416 & $unit/(cell\cdotp h)$ \\
+     $\mu_\alpha$ 19.6642 & $h^{-1}$ \\
+    [1ex] 
+     \hline
+    \end{tabular}
+    \caption{Environment on remote machine}
+    \label{table:remote_macine}
+\end{table}
 
 \section{Data analysis}
 
