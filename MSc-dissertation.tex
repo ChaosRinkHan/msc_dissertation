@@ -617,6 +617,34 @@ The prior range and distribution can largely affect the execution of SMC (FIGURE
 \section{Parameter estimation and model comparison}
 
 [separated ABC run on model 1, 2 and 3]
+
+Using the suggested options in the previous section, the target data (Figure \ref{fig:obs_data}) is prepared as input for the SMC inference framework. Regarding the result, the population size and number of generations are adjusted several times to obtain an general informative posterior which should be stable across repeated runs and avoid local optimal as much as possible.
+
+Parameter estimation of model 1, 2 and 3 was tried with different prior distribution setting: distribution range [0, 25] and [0, 75], amd distribution type uniform and log-uniform. All these ABC SMC runs uses 2,000 particles per population and 30 generations. 
+
+Log-uniform-shaped prior seems to give a better fit of the model, and wider prior range [0, 75] does not give a more accurate result. Then distribution range [0, 25] was tried, in case some parameter have a true posterior laying between [25, 50]. 
+
+The results of prior distribution log-uniform [0, 50] is shown in Figure \ref{fig:result123}.
+
+\begin{figure}
+    \begin{center}
+    \resizebox{1.0\hsize}{!}{\includegraphics{fig/resultCurve123.png}}
+    \end{center}
+    
+    \caption{Simulated data from the last population of model 1, 2 and 3}
+    \label{fig:result123}
+    
+\end{figure}
+
+\begin{figure}
+    \begin{center}
+    \resizebox{0.8\hsize}{!}{\includegraphics{fig/eps_acc123.png}}
+    \end{center}
+    
+    \caption{Epsilon trends and acceptance rates of model 1, 2 and 3}
+    \label{fig:result123_2}
+    
+\end{figure}
  
 [model comparison among model 1, 2, 3]
 
