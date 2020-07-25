@@ -5,6 +5,7 @@
 \usepackage{hyperref}
 % \usepackage{mathtools}
 \usepackage{amsmath}
+\usepackage{float}
 
 % This example file shows how a thesis can be laid out using Latex. It
 % does not use any special local features so should be portable to other
@@ -551,7 +552,7 @@ where a weight $w_i$ is assigned to every data point. If data point $i$ have a h
 Adaptive distance is changing the weights of all data points after each generation iteration, trying to assign informative data points higher weights. Additionally, implementation of adaptive in \verb|pyABC| also introduces additional factors $f_i$ multiplied to weights \cite{ref:adpt_dis} 
 
 \begin{align}
-    \label{dis_w}
+    \label{dis_f}
     D=\sqrt{\sum_i f_iw_i \Delta x_i^2}
 \end{align}
 
@@ -616,6 +617,8 @@ The prior range and distribution can largely affect the execution of SMC (FIGURE
 
 \section{Parameter estimation and model comparison}
 
+\subsection{Model 1, 2 and 3}
+
 [separated ABC run on model 1, 2 and 3]
 
 Using the suggested options in the previous section, the target data (Figure \ref{fig:obs_data}) is prepared as input for the SMC inference framework. Regarding the result, the population size and number of generations are adjusted several times to obtain an general informative posterior which should be stable across repeated runs and avoid local optimal as much as possible.
@@ -628,15 +631,14 @@ The results of prior distribution log-uniform [0, 50] is shown in Figure \ref{fi
 
 Before applying model comparison methods, some features of the three model can still be compared. From simulated curves, It can be seen that all the inter-quartile ranges are tight around the mean value curve, which indicates the approximated posterior are concentrated to some degree; the peak-shaped posterior distributions (Figure \ref{fig:para1}) agrees with this. All epsilon values converges to a steady level, and model 3 has a lower final epsilon value and consequently the simulated trajectory is more close to the observed data (model 3, Figure \ref{fig:result123}).
 
-The acceptance rates is fluctuating and have a gradually increase trend for all the three models, as the acceptance rate becomes higher when the true posteriors are gradually approximated. Compared to model 1, model 2 gives a better fit of the decreasing trend at the second half of the observed data, by using a exponentially decaying
- self-increase rate $\lambda_N$ instead of a constant. The resultant simulated data from model 2 and 3 are in the similar trends and the most obvious difference is that for model 3, the simulated data of $\Phi$ and $\alpha$ are more `flat'. We expect model 3 to be the best model as it reaches a threshold value and intuitively gives a better fit, although the fit could not be considered generally a good representation of the biological process that we want to model, as the simulated data are significantly biased from the observed data for tnf-$\alpha$. A sharp peak at 4 hpl is observed from the measurement (Figure \ref{fig:obs_data}) but no similar features are represented by any of the three models.
+The acceptance rates is fluctuating and have a gradually increase trend for all the three models, as the acceptance rate becomes higher when the true posteriors are gradually approximated. Compared to model 1, model 2 gives a better fit of the decreasing trend at the second half of the observed data, by using a exponentially decaying self-increase rate $\lambda_N$ instead of a constant. The resultant simulated data from model 2 and 3 are in the similar trends and the most obvious difference is that for model 3, the simulated data of $\Phi$ and $\alpha$ are more `flat'. We expect model 3 to be the best model as it reaches a threshold value and intuitively gives a better fit, although the fit could not be considered generally a good representation of the biological process that we want to model, as the simulated data are significantly biased from the observed data for tnf-$\alpha$. A sharp peak at 4 hpl is observed from the measurement (Figure \ref{fig:obs_data}) but no similar features are represented by any of the three models.
 
 \begin{figure}
     \begin{center}
     \resizebox{1.0\hsize}{!}{\includegraphics{fig/resultCurve123.png}}
     \end{center}
     
-    \caption{Simulated data from the last population of model 1, 2 and 3}
+    \caption{Simulated trajectory from the last population of model 1, 2 and 3}
     \label{fig:result123}
 
 
@@ -659,6 +661,13 @@ The acceptance rates is fluctuating and have a gradually increase trend for all 
     
     \caption{Estimated posterior distribution of parameters in model 3}
     \label{fig:para1}
+
+    \begin{center}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/cmp1.png}}
+        \end{center}
+        
+        \caption{Model comparison of model 1, 2 and 3}
+        \label{fig:cmp1}
     
 \end{figure}
 
@@ -669,22 +678,73 @@ Next a model selection experiment with different prior was conducted, using the 
 Figure \ref{fig:cmp1} shows the model selection process, under log-uniform [0, 50] prior distribution. Model 3 gains total advantage over model 1 and 2 after 7th population. Together with conclusions above, model 3 is considered to be the the best model to represent the target data so far.
  
 
-\begin{figure}
-    \begin{center}
-    \resizebox{1.0\hsize}{!}{\includegraphics{fig/cmp1.png}}
-    \end{center}
-    
-    \caption{Model comparison of model 1, 2 and 3}
-    \label{fig:cmp1}
-    
-\end{figure}
+
+\begin{table}[t!]
+    \centering
+    \begin{tabular}{|c c c|} 
+     \hline
+     Parameter & Estimated mean  & Estimated mean  \\ 
+      & value (uniform) &value (log-uniform) \\[0.5ex] 
+     \hline\hline
+     $\lambda_N$ & 14.156 & 13.296  \\ 
+     $a$ & 9.670 & 0.017  \\ 
+     $\kappa_{N\beta}$ & 18.001 & 0.259 \\
+     $\mu_N$ & 13.196 & 0.018 \\
+     $\nu_{N\Phi}$ & 0.742 & 0.131 \\
+     \hline
+     $\kappa_{\Phi\beta}$ & 0.239 & 0.156 \\
+     $\mu_\Phi$ & 0.154 & 0.035 \\
+     \hline
+     $s_{\beta N}$ & 6.752 & 1.213 \\
+     $\mu_\beta$ & 6.378 & 1.315 \\
+     \hline
+     $s_{\alpha\Phi}$ & 16.997 & 5.826 \\
+     $\mu_\alpha$ & 11.859 & 2.434\\
+     \hline
+    \end{tabular}
+    \caption{Estimated parameter values of model 3}
+    \label{table:estimated1}
+\end{table}
+
+Compared to uniform distributed prior, we found that log-uniform distributed prior is more suitable in the inference. Log-uniform results in an obviously better fit and narrower inter-quantile interval (Figure \ref{fig:result123} and \ref{fig:resultCurve_uni}), and the final epsilon value is also smaller. Log-uniform tends to assign values that are close to the left boundary (i.e. zero in our case) higher density, i.e. they are more likely to be sampled in the first population. As a result, the estimated parameter posteriors are expected to have smaller mean and/or skewed to left of the x-axis. The estimated values proved this (see \ref{table:estimated1}; also observed in other models and prior interval experiments). It indicates that some of the true parameter tend to have small values that are close to zero, and using log-uniform distribution could results in a faster and more satisfying inference. Regarding this, further experiments all use log-uniform distribution only.
+
+
+\subsection{Model 4 and 5}
 
 [features that derive model 4 and 5]
 
+We observed that the existing models cannot well represent the trajectory of relative expression of tnf-$\alpha$: from experimental data, a rapid increase of tnf-$\alpha$ expression is observed in 0--4 hpl, followed by a rapid drop; all the models cannot well recover this feature and most test results see a less-rapid increase followed by a gradually decree and the observed peak value is not reached (e.g. Figure \ref{fig:result123}). Also in some other case e.g. Figure \ref{fig:resultCurve_uni}, tnf-$\alpha$ trajectories is well fitted at the cost of under-fitting $\Phi$. Hence efforts had been spent to propose more alternative models that can possibly solve this problem.
 
+The two proposed alternative models is based on model 3 and try to add extra term in the tnf-$\alpha$ equation $\mathrm{d} \alpha/\mathrm{d} t$. As macrophage is the main source of tnf-$\alpha$ production, and a similar sharp increase-and-drop trend is observed in the il-1$\beta$ trajectory, two hypothesis and corresponding terms are propose as follows.
+
+\paragraph{Model 4} It is assumed that the expression of il-1$\beta$ would have a promoting effect, representing by a phenomenological term $d_{\beta\alpha}\beta$ and $d_{\beta\alpha}$ is a new model parameter (positive constant). The promoting effect here is regarded to have the equivalent effect as directly promoting by il-1$\beta$, but the underlying mechanism is unclear so far. In mathematical view, this additional term can accelerate the expression of tnf-$\alpha$ in the first few time points and help to recover the peak-shaped trajectory. The proposed model is written as Equation \ref{eq:model4}.
+
+\paragraph{Model 5} Alternatively, we considered promotions to the tnf-$\alpha$ production, i.e. $s_{\alpha\Phi}\Phi$. It is assumed that il-$\beta$ could accelerate the production process. An additional term $f_{\beta\alpha}\beta$ is introduced to production rate, with $f_{\beta\alpha}$ being a new model parameter (positive constant). This model meets the biological context considering the source of tnf-$\alpha$. The proposed model is written as Equation \ref{eq:model5}.
 
 [further comparison of model 3, 4 and 5]
 
+Model 4 and 5 are base on model 3, so in this phase experiments of these three models are conducted for separately parameter inference and overall model comparison. Based on our experience in conducted experiments, we used the following setting for parameter inference:
+
+\begin{itemize}
+    \item population size: 2000 and 5000
+    \item number of populations: 30 generations
+    \item prior: [0, 50] log-uniform
+    \item perturbation kernel: multivariate normal kernel
+\end{itemize}
+
+Factors (Equation \ref{dis_f}) are also tried to find if we can force the inference framework to give more importance on the first few data points. All these runs are conducted on remote machines and the output database files are retrieved form analysis.
+
+Figure \ref{fig:resultCurve345} shows the simulated data from the inferred models, with population size 5000.
+
+\begin{figure}
+    \begin{center}
+    \resizebox{1.0\hsize}{!}{\includegraphics{fig/resultCurve345.png}}
+    \end{center}
+    
+    \caption{Simulated data from the last population of model 3, 4 and 5}
+    \label{fig:resultCurve345}
+    
+\end{figure}
 
 
 
@@ -925,7 +985,7 @@ Local development machine is a Mac laptop, running on macOS 10.15.6. The environ
 
 \subsection{Kernel experiment: median epsilon schedule}
 
-\begin{figure}
+\begin{figure}[h!]
 
     \begin{center}
     \resizebox{1.0\hsize}{!}{\includegraphics{fig/kernel2.png}}
@@ -944,7 +1004,24 @@ Local development machine is a Mac laptop, running on macOS 10.15.6. The environ
 \end{figure}
 
 
-\subsection{Other experiment details}
+\section{Parameter inference and model comparison results}
+
+\begin{figure}[H]
+
+    \begin{center}
+    \resizebox{1.0\hsize}{!}{\includegraphics{fig/resultCurve_uni.png}}
+    \end{center}
+    
+    \caption{Total sampling size} 
+    \label{fig:resultCurve_uni}
+
+    
+\end{figure}
+
+
+
+
+
 
 
 
