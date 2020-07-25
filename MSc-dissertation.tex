@@ -624,7 +624,12 @@ Parameter estimation of model 1, 2 and 3 was tried with different prior distribu
 
 Log-uniform-shaped prior seems to give a better fit of the model, and wider prior range [0, 75] does not give a more accurate result. Then distribution range [0, 25] was tried, in case some parameter have a true posterior laying between [25, 50]. 
 
-The results of prior distribution log-uniform [0, 50] is shown in Figure \ref{fig:result123}.
+The results of prior distribution log-uniform [0, 50] is shown in Figure \ref{fig:result123}. For model 3, the acceptance rates and epsilon path are presented in Figure \ref{fig:result123_2}. For model 3, the estimated parameters' posterior is shown in Figure \ref{fig:para1}. Figure \ref{fig:result123} plots the estimated curve of models, using the mean value of each parameter's approximated posterior; also 1000 particles (each particle is a parameter set) were sampled and used to generate simulated trajectories of the four variable, and the mean (blue) and 25th to 75th percentile range (grey) are calculated from the 1000 simulated data.
+
+Before applying model comparison methods, some features of the three model can still be compared. From simulated curves, It can be seen that all the inter-quartile ranges are tight around the mean value curve, which indicates the approximated posterior are concentrated to some degree; the peak-shaped posterior distributions (Figure \ref{fig:para1}) agrees with this. All epsilon values converges to a steady level, and model 3 has a lower final epsilon value and consequently the simulated trajectory is more close to the observed data (model 3, Figure \ref{fig:result123}).
+
+The acceptance rates is fluctuating and have a gradually increase trend for all the three models, as the acceptance rate becomes higher when the true posteriors are gradually approximated. Compared to model 1, model 2 gives a better fit of the decreasing trend at the second half of the observed data, by using a exponentially decaying
+ self-increase rate $\lambda_N$ instead of a constant. The resultant simulated data from model 2 and 3 are in the similar trends and the most obvious difference is that for model 3, the simulated data of $\Phi$ and $\alpha$ are more `flat'. We expect model 3 to be the best model as it reaches a threshold value and intuitively gives a better fit, although the fit could not be considered generally a good representation of the biological process that we want to model, as the simulated data are significantly biased from the observed data for tnf-$\alpha$. A sharp peak at 4 hpl is observed from the measurement (Figure \ref{fig:obs_data}) but no similar features are represented by any of the three models.
 
 \begin{figure}
     \begin{center}
@@ -656,10 +661,27 @@ The results of prior distribution log-uniform [0, 50] is shown in Figure \ref{fi
     \label{fig:para1}
     
 \end{figure}
- 
+
 [model comparison among model 1, 2, 3]
 
+Next a model selection experiment with different prior was conducted, using the same ABC-SMC framework. As in the parameter inference, two distributions (uniform and log-uniform) are tested with three different interval ([0, 25], [0, 50] and [0, 75]). The results show that model 3 wins with nearly 100\% model probability at most runs after 30 generations, except log-uniform [0, 75]. All the model probability results are of great discrepancy (e.g. 100\% model 3 and 0\% for model 1 and 2), so Bayesian factor is not calculated. 
+
+Figure \ref{fig:cmp1} shows the model selection process, under log-uniform [0, 50] prior distribution. Model 3 gains total advantage over model 1 and 2 after 7th population. Together with conclusions above, model 3 is considered to be the the best model to represent the target data so far.
+ 
+
+\begin{figure}
+    \begin{center}
+    \resizebox{1.0\hsize}{!}{\includegraphics{fig/cmp1.png}}
+    \end{center}
+    
+    \caption{Model comparison of model 1, 2 and 3}
+    \label{fig:cmp1}
+    
+\end{figure}
+
 [features that derive model 4 and 5]
+
+
 
 [further comparison of model 3, 4 and 5]
 
