@@ -169,7 +169,7 @@ further improvements.}
 
 [how to parameterise the model]
 
-[how the infer the parameter given data]
+[how to infer the parameter given data]
 
 [likelihood-free inference and information about ABC SMC]
 
@@ -179,19 +179,19 @@ further improvements.}
 
 [existing tools and software for this task]
 
-[workflow and developing]
+[workflow and developing process]
 
 \chapter{Mathematical modelling}
 
-Mathematical models can describe different kinds of dynamic system, and can be used as a guide to prediction and analysis. An ideal model in this case, can represent reasonable interactions/effects between cells and cytokines and recover the observed  trend against time. 
+Mathematical models can describe different kinds of dynamic systems, and thus can be used as a guide for prediction and analysis. An ideal model in our case, can represent reasonable interactions/effects between cells and cytokines and recover the observed  data features in different time point. 
 
-Models for the regeneration process is in the form of ordinary differential equations, specifically the time differential form. Terms in the ODE are mostly explainable and corresponds interaction paths. 
+Proposed models for the regeneration process are in the form of ordinary differential equations (ODE), specifically the time differential form. Terms in the ODE are mostly explainable and corresponds interaction paths. 
 
 \section{Observed data}
 
-Our models is built regarding the existing experiments data form Tsarouchas et al.\cite{ref:Tsarouchas}. The measurement includes the number of three kinds of cells (neutrophil $N$, macrophage $\Phi$ and microglia) and the relative concentration of four cytokines (il-1$\beta$, tnf-$\alpha$, tgf-$\beta$1a and tgf-$\beta$3). As proposed in \cite{ref:Tsarouchas}, neutrophil and macrophage play important roles in the promotion of spinal cord regeneration with il-1$\beta$ and tnf-$\alpha$ being the mediation. According to this, our current models focus on the changes of four variables $N$, $\Phi $, $\beta$ (il-1$\beta$) and $\alpha$ (tnf-$\alpha$). $N$ and $\Phi$ is of the unit `number of cells', $\beta$ and $\alpha$ is of the unit `relative concentration'.
+Our models is built on the basis of the existing experiments data form Tsarouchas et al.\cite{ref:Tsarouchas}. The measurement data include the number of three kinds of cells (neutrophil $N$, macrophage $\Phi$ and microglia) and the relative concentration of four cytokines (il-1$\beta$, tnf-$\alpha$, tgf-$\beta$1a and tgf-$\beta$3). As proposed in \cite{ref:Tsarouchas}, neutrophil and macrophage play important roles in the promotion of spinal cord regeneration with il-1$\beta$ and tnf-$\alpha$ being the mediation. According to this, our current models focus on the changes of four variables $N$, $\Phi $, $\beta$ (for il-1$\beta$) and $\alpha$ (for tnf-$\alpha$). $N$ and $\Phi$ is of the unit `number of cells', $\beta$ and $\alpha$ is of the unit `relative concentration' (compared to the value at first time point).
 
-It is noted that the variance of the measured data is relatively high. The summary statistic used for the parameter estimations is mean of measurement, assuming that measured data is Gaussian-like distributed. The distribution of the measured data points is plotted and examined to see if the measurement mean could represent the distribution. The result is that at most time points the measurement values are Gaussian-distributed, some distributions are skewed. One abnormal distribution is observed at time point 120 h post-lesion (hpl) for macrophage where there are two concentrations. Mean value can summarise most data measures and thus is still used as the target summarised observed data. A plot of the mean of the four variables is shown in Figure \ref{fig:obs_data}
+It is noted that the variance of the measured data is relatively high. The summary statistic used for the parameter estimations is mean of measurement data at each time point, assuming that measured data is Gaussian-like distributed. To validate this, the distribution of the measured data points is plotted and examined to see if the mean value can represent the distribution. The result is that at most time points the measurement values are Gaussian-distributed, although some distributions are skewed. One abnormal distribution is observed at time point 120 h post-lesion (hpl) for macrophage where there are two concentrations. Mean value can summarise most data and thus is still used as the target observed data. A plot of the mean of the four variables is shown in Figure \ref{fig:obs_data}.
 
 \begin{figure}
 \begin{center}
@@ -206,13 +206,13 @@ It is noted that the variance of the measured data is relatively high. The summa
 
 \section{Hypothesis and Models}
 
-5 models in total are proposed according to different hypothesis. At first our tests and implementations of ABC SMC for parameter estimations use only the basic model for developing propose. After the parameter estimation framework is built and tested, more models are proposed, in order to calibrate and adjust the basic model such that it can be more close to the true process, recover more features of the observed data or test our hypothesis. 
+5 models in total are proposed according to different hypothesis. At first our tests and implementations of ABC SMC for parameter estimations use only the basic model for developing propose. After the parameter estimation framework is built and tested, more models are proposed, in order to calibrate and adjust the basic model such that it can represent the observed regeneration process better or can be used to test our hypothesis. 
 
-All these models assumes the interactions is within two kinds of cells (neutrophil and macrophage) and two kinds of cytokines (il-1$\beta$ and tnf-$\alpha$) and use the data presented in Figure \ref{fig:obs_data} for parameter estimation. Interactions or effects from other cells or cytokines is not considered as there might not be corresponding data.
+All these models assume the involved interactions is within two kinds of cells (neutrophil and macrophage) and two kinds of cytokines (il-1$\beta$ and tnf-$\alpha$) and use the data presented in Figure \ref{fig:obs_data} for the inference task. Interactions or effects from other cells or cytokines is not considered as there might not be corresponding data available.
 
 \subsection{Basic model}
 
-A preliminary model is proposed according to \cite{ref:Tsarouchas} and used to build and test the code. A interaction map illustrate the model is shown in Figure \ref{fig:m1}. This model is a simplification a the process described in \cite{ref:Tsarouchas}. To describe the parameters' units, we denote the unit of $N$ and $\Phi$ i.e. number of cells as `cell', and denote the unit of $\beta$ and $\aleph$ i.e. relative mRNA expression as `unit' for simplicity.
+A preliminary model is proposed according to \cite{ref:Tsarouchas} and used to build and test the inference framework code. An interaction map of the model is shown in Figure \ref{fig:m1}. This model is a simplification a the process described in \cite{ref:Tsarouchas} with some minor interactions ignored. To describe the parameters' units, we denote the unit of $N$ and $\Phi$ i.e. number of cells as `cell', and denote the unit of $\beta$ and $\alpha$ i.e. relative mRNA expression as `unit' for simplicity.
 
 \begin{figure}
     \begin{center}
@@ -269,9 +269,9 @@ It is assumed that there are negative feedbacks for all the variables. MORE DESC
 
 \paragraph{Model 2 and model 3}
 
-As the observed data indicates, this dynamic system has a steady state where the  inflammation is resolved and immune cells should not be present at the injury site. Regarding this, the self-increase term $\lambda$ cannot be constant, thus a exponentially decay $\lambda$ term is introduced and model 2 is proposed as Eqn. \ref{eq:model2}. The inhibition of il-1$\beta$ being produced by neutrophil, i.e. $i_{\beta\Phi}$ is considered to be ignored, in which case the relative expression of il-1$\beta$ is only affected by the number of neutrophil and the negative feedback from itself. This case corresponds to model 3, written as Eqn. \ref{eq:model3}.
+As the observed data indicate, this dynamic system has a steady state where the  inflammation is resolved and immune cells should not be present at the injury site. Regarding this, the self-increase parameter $\lambda$ cannot be constant, thus a exponentially decaying $\lambda$ term is introduced and model 2 is proposed. (Eqn. \ref{eq:model2}). Also, the inhibition of il-1$\beta$ production, i.e. term $i_{\beta\Phi}\Phi$ is considered to be ignored for a more simple model, in which case the relative expression of il-1$\beta$ is only affected by the number of neutrophil and the negative feedback from itself. This case corresponds to model 3, written as Eqn. \ref{eq:model3}.
 
-Model 2 and model 3 has one extra parameter $a$ which is a coefficient in the exponentially decay determining the decay speed, with the unit $h^{-1}$.
+Model 2 and model 3 introduce one extra parameter $a$, which is a coefficient in the exponentially decaying $\lambda$, determining the decay speed, with the unit $h^{-1}$.
 
 \begin{align}
     \label{eq:model2}
@@ -293,11 +293,11 @@ Model 2 and model 3 has one extra parameter $a$ which is a coefficient in the ex
     \end{split}
 \end{align}
 
-Model 3 can be regarded as a simplification of model 2, as it can be regarded as model 2 with parameter $i_{\beta\Phi}=0$. For these three models, model 1 is a naive one that is proposed at very first time and used as a `template' to build and test parameter inference framework. As the implementation is successful, model 2 and 3 is proposed. After fitting model 2 is supposed to be better than model 1 as it corrects the problem that appears at the final time points which are close to steady states for neutrophil and macrophage. model 3 is a small simplification of model 2 and theoretically less general than model 2.
+Model 3 can be regarded as a simplification of model 2, as it can be treated as model 2 with parameter $i_{\beta\Phi}=0$. Among the proposed three models, model 1 is a naive one that was proposed at very first time and used as an ODE `template' to build and test parameter inference framework. As the implementation was successful, model 2 and 3 was proposed as we were trying to calibrate some terms and find a better model. After fitting, model 2 is supposed to be better than model 1 as it corrects the problem that appears at the final time points (which relate to the steady state). Model 3 makes a small simplification on model 2 and is theoretically less `general' than model 2.
 
 \paragraph{Model 4 and model 5}
 
-After the first model selection experiment, it is found that some significant features presented in the observed data is not recovered by any of the model. According to that, attempts are tried to introduce more interactions within the dynamic system considering the both biological and  mathematical context. Extra promoting effect to the expression of tnf-$\alpha$ is considered, by either add a phenomenological term (which means the same effect as directly promoting but the underlying mechanism is unclean) or add a term that represents a promoting effect to the production process of tnf-$\alpha$, namely model 4 (Eqn. \ref{eq:model4}) and model 5 (Eqn. \ref{eq:model5}).
+After the first model selection experiment, it was found that some significant features presented in the observed data were not recovered by any of the existing model. To resolve this, attempts were tried to introduce more interactions within the dynamic system considering the biological and  mathematical context. Extra promoting effect to the expression of tnf-$\alpha$ was considered, by either adding a phenomenological term (which means the same effect as directly promoting but the underlying mechanism is unclean) or adding a term that represents a promoting effect to the production process of tnf-$\alpha$, namely model 4 (Eqn. \ref{eq:model4}) and model 5 (Eqn. \ref{eq:model5}).
 
 \begin{align}
     \label{eq:model4}
@@ -328,7 +328,6 @@ After the first model selection experiment, it is found that some significant fe
      $d_{\beta\alpha}$ & Coefficient of promoting effect from $\beta$ & $h^{-1}$  \\ 
      \hline
      $f_{\beta\alpha}$ & Coefficient of promoting the production of $\alpha$ by $\beta$ & $cell^{-1}\cdotp h^{-1}$  \\ 
-    [1ex] 
      \hline
     \end{tabular}
     \caption{Parameters introduced in model 4 and 5}
@@ -339,7 +338,7 @@ After the first model selection experiment, it is found that some significant fe
 
 \subsection{Model evaluation and comparison}
 
-[feasible or not; goodness of fit; features of these models]
+[general topics on evaluating a model]
 
 [bayes factor for model selection]
 
@@ -384,13 +383,13 @@ After the first model selection experiment, it is found that some significant fe
 
 
 
+
+
 \chapter{Parameter estimation and model comparison}
 
-This chapter focuses on the implementation of the ABC SMC on the proposed models. Estimation of  parameters in the proposed models is the main task of this section. ABC SMC-based models selection is another task that can be easily implemented with the parameter estimation framework.
+Estimation of  parameters in the proposed models is the main task of this section, which involves the implementation of ABC SMC and several experiments. ABC SMC-based model selection is another task that can be easily conducted with the developed parameter inference framework.
 
-The build and test is under \verb|Python| environment with \verb|pyABC|\cite{ref:pyabc}. Some other code e.g. shell script and \verb|R| code are also used to perform the experiments and analyse the results. Tested software and system environment can be found at Appendix A. The build and test is performed on local computers and HPC clusters available within EPCC.
-
-
+The build and test of code were under \verb|Python| environment with \verb|pyABC|\cite{ref:pyabc}. Some other code e.g. shell script and \verb|R| code are also used to perform the experiments and analyse the results. Software and system environment used in our implementation can be found at Appendix A. The build and test were performed on local computers and HPC facilities available within EPCC.
 
 
 
@@ -401,21 +400,21 @@ The build and test is under \verb|Python| environment with \verb|pyABC|\cite{ref
 
 [ABC implementations details, e.g. distance, population, ODE related functions]
 
-According to our preliminary studies, ABC SMC framework implemented using \verb|pyABC| in \verb|Python| is adopted in this project. \verb|pyABC| is a popular SMC software packages \cite{ref:pyabc} that has been used form many SMC studies and applications \cite{ref:adpt_pop}. \verb|pyABC| provides an open-source framework for likelihood-free inference, which is an implementation of ABC SMC algorithm and a tool-box for inference and analysis tasks. Besides, it supports multi-core execution implemented using \verb|multiprocessing| package for scaling-up, which is of our interests and suitable for the followed performance experiments.
-
-The code for the project is developed and tested in local environment (macOS 10.15.6, see Table \ref{table:local_macine}) at first, then the functional version is deployed on compute node of ARCHER and Cirrus for parameter inference experiments and model selection task. The scaling-up experiment is performed on Cirrus, the profiling and its analysis are performed on local machine. Some development and debug are on the remote machines to ensure experiments run correctly on compute node.
-
-The ODE model-related code and utilities are firstly developed to enable reusable functions, variables and data calls. It includes the code for the ODE models, ODE solver, data structures, data format transform functions etc. By doing this in the implementation code file we can set options and activate ABC SMC easily, without creating definition and deplicated code for the models and parameter priors.
-
-Some modifications are made to the source code of \verb|pyABC|. For example, the laboratorial measured data are not considered `complete' for modeling and analysis purpose: there are different measurement time points for cells and cytokines, e.g. cell numbers is not measured at 0.25 hpl and cytokines' expression is not measured at time point 120 hpl. These missing values are treated as `ignored' when calculating the distance between observed data and simulated data. To cope with this built-in distance function code is modified.
-
-Analysis code is also wrapped up into functions which can be easily called after an ABC SMC run is finished. They includes multiple visualisations and summary statistic of the results. For different tasks there are also separated analysis code file. Other analysis tools used in the project include built-in database visualisation tool, R code and Microsoft Excel.
-
-The project code is managed via \verb|git| version-control and available as a GitHub repository\footnote{\url{https://github.com/chaolinhan/MSc_Project}}; it also make the cross machine synchronisation of code versions convenient.
-
-After several development iterations, the code files for ABC SMC implementation now mainly has two types: code file for infer-back experiments (synthetic data), code for parameter inference (experimental data). We can just add more models in these code files for a model comparison task.
-
 [how the code is developed and built]
+
+According to our preliminary studies, ABC SMC framework implemented using \verb|pyABC| in \verb|Python| was adopted in this project. \verb|pyABC| is a popular SMC software packages \cite{ref:pyabc} that has been used form many SMC studies and applications \cite{ref:adpt_pop}. \verb|pyABC| provides an open-source framework for likelihood-free inference, which is an implementation of ABC SMC algorithm and a tool-box for our own inference and analysis tasks. Besides, it supports multi-core execution implemented using \verb|multiprocessing| package for scaling-up, which is of our interests and suitable for the followed performance experiments.
+
+The inference framework code for the project was developed and tested in local environment (macOS 10.15.6, see Table \ref{table:local_macine}) at first, then the functional version was deployed on compute node of ARCHER and Cirrus for parameter inference experiments and model selection task. The scaling-up experiment was performed on Cirrus, and the profiling and its analysis were performed on local machine. Some development and debug were on the remote machines to ensure experiments run correctly on compute node.
+
+The ODE model-related code and utilities were firstly developed to enable reusable functions, variables and data calls. It includes the code for the ODE models, ODE solver, data structures, data format transform functions etc. By doing this in a separate code file, we can change options and activate ABC SMC easily in the implementation code file, without creating definition and duplicated code for the models and parameter priors.
+
+Some modifications were made to the source code of \verb|pyABC|. For example, the laboratorial measured data were not considered `complete' for modeling and analysis purpose: the available time points for cells and cytokines are different, e.g. cell number was not measured at 0.25 hpl and cytokines' expression was not measured at time point 120 hpl. These missing values were treated as `ignored' when calculating the distance between observed data and simulated data. To cope with this built-in distance function code is modified.
+
+Analysis code was also wrapped up into functions which can be easily called after an ABC SMC run is finished, which includes multiple visualisations and summary statistic of the results. For different tasks there are also separated analysis code file. Other analysis tools used in the project include built-in database visualisation tool, R code and Microsoft Excel.
+
+The project code was managed via \verb|git| version-control and available as a GitHub repository\footnote{\url{https://github.com/chaolinhan/MSc_Project}}; it also made the cross-hardware synchronisation of code versions convenient.
+
+After several development iterations, code files for ABC SMC implementation now mainly had two types: code files for infer-back experiments (udsing synthetic data), and code files for parameter inference (using experimental data). Model selection can be easily done by adding more model to the implementation code file.
 
 
 % \section{Parameter estimation}
@@ -430,7 +429,7 @@ After several development iterations, the code files for ABC SMC implementation 
 
 \section{ABC SMC and model hyperparameters experiments}
 
-As the key focus of this project is on the parameter estimations of dynamical system, the ability of inference on the proposed model is firstly examined before actual inference using the experimental observed data.
+As the key focus of this project is on the parameter estimations of dynamical system, the ability of inference on the proposed models was firstly examined before actual inference using the experimental observed data.
 
 In the first part, synthetic data is used with known true parameter values. The algorithm implementation is evaluated by the efficiency and goodness of resultant model under different implementation options and ABC SMC hyperparameters.
 
@@ -576,13 +575,13 @@ However considering the result after 20 generation (FIGURE), the resultant model
 \subsubsection{Conclusion} We noticed the significant efficiency improvement of these adaptive options; they can largely improve the acceptance rate in some cases. However, as the factors and weights are directly multiplied to $\Delta x$ and thus the metrics for distance are changed, a direct compare of the efficiency under the same threshold schedule is unfeasible; after the same number of generations they can reach a small $\epsilon_t$ but still the approximated posterior is not as accurate as the standard implementation. AS a result, our implementation of the parameter inference will only consider standard distance function and factors are only tested for improvements (FIGURE).
 
 
-\subsection{Data size, prior distribution range, population size and generations}
+\subsection{Data size, prior distribution and population}
 
 [experiments plan]
 
-Some other hyperparameters, e.g. feed-in data size, prior range, number of generations and number of particles in each generation is also of our interest. Experiments are designed to explore how these options affect the goodness of fit and efficiency of the implementation.
+Some other hyperparameters, e.g. feed-in data size, prior distribution, number of populations and number of particles in each population were also of our interest. Experiments were designed to explore how these options affect the goodness of fit and efficiency of the implementation.
 
-Regarding the present dynamic systems model, the SMC is implemented with two data size options, two prior distribution (standard and wider prior range). The iteration options i.e. population size and number of generaitions are also tried with different values. These experiments intends to give suggestions on the later SMC implementation on experimental data.
+Regarding the dynamic systems model, SMC was applied with two data size options, three prior distribution (uniform distribution, wider uniform distribution and log-uniform distribution). The population options i.e. population size and number of populations were also tried with different values. These experiments intended to give suggestions on the later SMC implementation on experimental data.
 
 \subsubsection{Experiments results}
 
@@ -734,7 +733,7 @@ Model 4 and 5 are base on model 3, so in this phase experiments of these three m
 
 Factors (Equation \ref{dis_f}) are also tried to find if we can force the inference framework to give more importance on the first few data points. All these runs are conducted on remote machines and the output database files are retrieved form analysis.
 
-Figure \ref{fig:resultCurve345} shows the simulated data from the inferred models, with population size 5000.
+Figure \ref{fig:resultCurve345} shows the simulated data from the inferred models, with population size 2000. It can be seen that 
 
 \begin{figure}
     \begin{center}
@@ -807,27 +806,27 @@ In this case, profile tools \verb|cProfile| and \verb|yappi| is used in PyCharm 
 
 
 
-\chapter{Results and Discussions}
+% \chapter{Results and Discussions}
 
-[WHAT results is outputted and WHAT topics are discussed]
+% [WHAT results is outputted and WHAT topics are discussed]
 
-\section{ABC SMC results}
+% \section{ABC SMC results}
 
-[inferred parameters: joint distribution, estimated values and simulated trajectory for each models; sensitivity; features of the inferred model]
+% [inferred parameters: joint distribution, estimated values and simulated trajectory for each models; sensitivity; features of the inferred model]
 
-[model selections result; bayes factor]
+% [model selections result; bayes factor]
 
 
 
-\section{Discussions}
+% \section{Discussions}
 
-[goodness of fit (evaluation); preferred models and effects of modification to basic model]
+% [goodness of fit (evaluation); preferred models and effects of modification to basic model]
 
-[efficiency and trade-offs in scaling-up]
+% [efficiency and trade-offs in scaling-up]
 
-[POSSIBLE: compare to exact inference; compared to other implementations]
+% [POSSIBLE: compare to exact inference; compared to other implementations]
 
-[limitations]
+% [limitations]
 
 
 
