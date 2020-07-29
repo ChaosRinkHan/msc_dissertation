@@ -20,18 +20,19 @@
 \BOOKMARK [1][-]{section.4.3}{Parameter estimation and model comparison}{chapter.4}% 20
 \BOOKMARK [2][-]{subsection.4.3.1}{Model 1, 2 and 3}{section.4.3}% 21
 \BOOKMARK [2][-]{subsection.4.3.2}{Model 4 and 5}{section.4.3}% 22
-\BOOKMARK [0][-]{chapter.5}{Performance experiments}{}% 23
-\BOOKMARK [1][-]{section.5.1}{Scaling-up}{chapter.5}% 24
-\BOOKMARK [1][-]{section.5.2}{Profiling}{chapter.5}% 25
-\BOOKMARK [0][-]{chapter.6}{Future works}{}% 26
-\BOOKMARK [0][-]{chapter.7}{Conclusions}{}% 27
-\BOOKMARK [0][-]{appendix.A}{System and software environment}{}% 28
-\BOOKMARK [1][-]{section.A.1}{ABC SMC implementation}{appendix.A}% 29
-\BOOKMARK [2][-]{subsection.A.1.1}{Local machine}{section.A.1}% 30
-\BOOKMARK [2][-]{subsection.A.1.2}{Remote machine}{section.A.1}% 31
-\BOOKMARK [1][-]{section.A.2}{Data analysis}{appendix.A}% 32
-\BOOKMARK [0][-]{appendix.B}{Data and settings}{}% 33
-\BOOKMARK [1][-]{section.B.1}{Infer-back experiments}{appendix.B}% 34
-\BOOKMARK [2][-]{subsection.B.1.1}{Parameter values used to generate synthetic data}{section.B.1}% 35
-\BOOKMARK [2][-]{subsection.B.1.2}{Kernel experiment: median epsilon schedule}{section.B.1}% 36
-\BOOKMARK [1][-]{section.B.2}{Parameter inference and model comparison results}{appendix.B}% 37
+\BOOKMARK [2][-]{subsection.4.3.3}{Sensitivity of parameters}{section.4.3}% 23
+\BOOKMARK [0][-]{chapter.5}{Performance experiments}{}% 24
+\BOOKMARK [1][-]{section.5.1}{Scaling-up}{chapter.5}% 25
+\BOOKMARK [1][-]{section.5.2}{Profiling}{chapter.5}% 26
+\BOOKMARK [0][-]{chapter.6}{Future works}{}% 27
+\BOOKMARK [0][-]{chapter.7}{Conclusions}{}% 28
+\BOOKMARK [0][-]{appendix.A}{System and software environment}{}% 29
+\BOOKMARK [1][-]{section.A.1}{ABC SMC implementation}{appendix.A}% 30
+\BOOKMARK [2][-]{subsection.A.1.1}{Local machine}{section.A.1}% 31
+\BOOKMARK [2][-]{subsection.A.1.2}{Remote machine}{section.A.1}% 32
+\BOOKMARK [1][-]{section.A.2}{Data analysis}{appendix.A}% 33
+\BOOKMARK [0][-]{appendix.B}{Data and settings}{}% 34
+\BOOKMARK [1][-]{section.B.1}{Infer-back experiments}{appendix.B}% 35
+\BOOKMARK [2][-]{subsection.B.1.1}{Parameter values used to generate synthetic data}{section.B.1}% 36
+\BOOKMARK [2][-]{subsection.B.1.2}{Kernel experiment: median epsilon schedule}{section.B.1}% 37
+\BOOKMARK [1][-]{section.B.2}{Parameter inference and model comparison results}{appendix.B}% 38

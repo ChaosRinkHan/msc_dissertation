@@ -30,20 +30,21 @@
 \contentsline {subsection}{\numberline {4.3.2}Model 4 and 5}{21}{subsection.4.3.2}% 
 \contentsline {paragraph}{Model 4}{22}{section*.13}% 
 \contentsline {paragraph}{Model 5}{22}{section*.14}% 
-\contentsline {chapter}{\numberline {5}Performance experiments}{24}{chapter.5}% 
-\contentsline {section}{\numberline {5.1}Scaling-up}{24}{section.5.1}% 
-\contentsline {subsubsection}{Results}{25}{section*.15}% 
-\contentsline {section}{\numberline {5.2}Profiling}{25}{section.5.2}% 
-\contentsline {subsubsection}{Results}{25}{section*.16}% 
-\contentsline {chapter}{\numberline {6}Future works}{26}{chapter.6}% 
-\contentsline {chapter}{\numberline {7}Conclusions}{27}{chapter.7}% 
-\contentsline {chapter}{\numberline {A}System and software environment}{28}{appendix.A}% 
-\contentsline {section}{\numberline {A.1}ABC SMC implementation}{28}{section.A.1}% 
-\contentsline {subsection}{\numberline {A.1.1}Local machine}{28}{subsection.A.1.1}% 
-\contentsline {subsection}{\numberline {A.1.2}Remote machine}{28}{subsection.A.1.2}% 
-\contentsline {section}{\numberline {A.2}Data analysis}{28}{section.A.2}% 
-\contentsline {chapter}{\numberline {B}Data and settings}{30}{appendix.B}% 
-\contentsline {section}{\numberline {B.1}Infer-back experiments}{30}{section.B.1}% 
-\contentsline {subsection}{\numberline {B.1.1}Parameter values used to generate synthetic data}{30}{subsection.B.1.1}% 
-\contentsline {subsection}{\numberline {B.1.2}Kernel experiment: median epsilon schedule}{32}{subsection.B.1.2}% 
-\contentsline {section}{\numberline {B.2}Parameter inference and model comparison results}{32}{section.B.2}% 
+\contentsline {subsection}{\numberline {4.3.3}Sensitivity of parameters}{24}{subsection.4.3.3}% 
+\contentsline {chapter}{\numberline {5}Performance experiments}{25}{chapter.5}% 
+\contentsline {section}{\numberline {5.1}Scaling-up}{25}{section.5.1}% 
+\contentsline {subsubsection}{Results}{26}{section*.15}% 
+\contentsline {section}{\numberline {5.2}Profiling}{26}{section.5.2}% 
+\contentsline {subsubsection}{Results}{26}{section*.16}% 
+\contentsline {chapter}{\numberline {6}Future works}{27}{chapter.6}% 
+\contentsline {chapter}{\numberline {7}Conclusions}{28}{chapter.7}% 
+\contentsline {chapter}{\numberline {A}System and software environment}{29}{appendix.A}% 
+\contentsline {section}{\numberline {A.1}ABC SMC implementation}{29}{section.A.1}% 
+\contentsline {subsection}{\numberline {A.1.1}Local machine}{29}{subsection.A.1.1}% 
+\contentsline {subsection}{\numberline {A.1.2}Remote machine}{29}{subsection.A.1.2}% 
+\contentsline {section}{\numberline {A.2}Data analysis}{29}{section.A.2}% 
+\contentsline {chapter}{\numberline {B}Data and settings}{31}{appendix.B}% 
+\contentsline {section}{\numberline {B.1}Infer-back experiments}{31}{section.B.1}% 
+\contentsline {subsection}{\numberline {B.1.1}Parameter values used to generate synthetic data}{31}{subsection.B.1.1}% 
+\contentsline {subsection}{\numberline {B.1.2}Kernel experiment: median epsilon schedule}{33}{subsection.B.1.2}% 
+\contentsline {section}{\numberline {B.2}Parameter inference and model comparison results}{33}{section.B.2}% 
