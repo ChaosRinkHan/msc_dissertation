@@ -731,9 +731,13 @@ Model 4 and 5 are base on model 3, so in this phase experiments of these three m
     \item perturbation kernel: multivariate normal kernel
 \end{itemize}
 
-Factors (Equation \ref{dis_f}) are also tried to find if we can force the inference framework to give more importance on the first few data points. All these runs are conducted on remote machines and the output database files are retrieved form analysis.
+Factors (Equation \ref{dis_f}) are also tried to find if we can force the inference framework to give more importance on the first few data points. In this experiment, for each trajectory first 8 data points are assigned higher factors (0.75), and the rest 4 data points are assigned with lower factors (0.25). All these runs are conducted on remote machines and the output database files are retrieved form analysis.
 
-Figure \ref{fig:resultCurve345} shows the simulated data from the inferred models, with population size 2000. It can be seen that 
+Figure \ref{fig:resultCurve345} shows the simulated data from the inferred models, with population size 2000. It can be seen that the addressed problem in the trajectory of tnf-$\alpha$ is partially relieved in model 4 and 5: compared to model 3, a peak appears around 4 hpl; it can represent more features in the observed data and consequently the final reached epsilon (after 30 populations) is smaller than that of model 3, which proves that our proposed modifications in model 4 and 5 are helpful in recovering more features in observed data.
+
+By intuition model 4 and 5 would be the best models sofar that can recover most of observed data features. Model 1, 2 and 3 con also converge to a low final epsilon value (~20), but a key feature observed in target data -- a peak at around 4 hpl -- is not fitted. Some features, e.g. fluctuations in il-1$\beta$ and tnf-$alpha$ trajectories at around 20 hpl are still not ideally fitted; all existing models give a steady or gradually decrease trends for all the four variables after 20 hpl, and fluctuations in the observed data are fitted by smooth and steady curves.
+
+After applying factors, the results were not largely different. As expected, applying factors made the data points at first half (where exists most of the fluctuations) more `focused', however the inferred models are close to one without factors, which could indicate that for model 4 and 5, applying factors will not largely affect the final convergency and the resultant posterior.
 
 \begin{figure}
     \begin{center}
