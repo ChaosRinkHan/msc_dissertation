@@ -753,7 +753,7 @@ When we are trying more populations, an `over-fitting' behaviour is observed at 
 
 Next, we performed a model selection on model 3, 4 and 5. FIGURE shows the model probabilities at different generations. From population 10 to population 20 model 4 gains advantage but after population 20 model 5 is preferred. Again, as DISCUSSED in the model comparison of model 1, 2 and 3, we considered the the violently changing model probability is related to the inference ability at certain epsilon threshold values (epsilon) and possibly the insufficient exploration of the parameter space. Given the present result, model 5 is regarded as the best model. Some further experiments tried larger population size (10,000 particles per population) and more populations (36 populations), but the resultant model did not have a significantly better fit of the observed data, although much more computation resources are used.
 
-A inferred parameter posterior distribution of model 5 is shown in FIGURE. SOME DESCRIPTION.
+A inferred parameter posterior distribution of model 5 is shown in FIGURE, the estimated mean values is shown in TABLE. SOME DESCRIPTION.
 
 
 \subsection{Sensitivity of parameters}
@@ -762,7 +762,16 @@ A inferred parameter posterior distribution of model 5 is shown in FIGURE. SOME 
 
 [which parameters are most sensitive]
 
+[compared to credible intervals plot]
+
 [what does that mean]
+
+A quick sensitivity analysis of the dynamical systems models can be quantified using principle component analysis (PCA) \cite{Toni}, where the first PCs corresponds to sloppy parameters while the last PCs corresponds to stiff parameters \cite{sensitivity}. PCA can only provide rough approximated sensitivity behaviour. As models 5 won in the model selection, a further interest is to explore the parameter-to-model sensitivity
+
+FIGURE shows the results of PCA on the last population of inferred model5. The last PC (PC12) is mostly consists of the linear combination of $a$ (from the equation of neutrophil) and $\mu_\Phi$ (from the equation of macrophage), to which the model is most sensitive. If we conclude the last 5 PCs (FIGURE), then $v_{N\Phi}$, $\mu_N)$ (from the equation of neutrophil) and $k_{\Phi\beta}$ (from the equation of macrophage) contribute most portions together with $a$ and $\mu_\Phi$. As a conclusion, model 5 is sensitive to changes in the above parameters, which all come from the equation of neutrophil and macrophage i.e. equations of the cells; it may suggests that given the observed data, the inferred model is more sensitive to cells' dynamic rather than cytokines' dynamics.
+
+Also, some visualisations of the last population agreed with conclusions from PCA. Approximated posteriors of the last population plotted in FIGURE and credible ranges of parameters across populations in FIGURE shows that the 5 parameters identified by PCA is indeed `stiff' parameters.
+
 
 
 
@@ -776,7 +785,7 @@ A inferred parameter posterior distribution of model 5 is shown in FIGURE. SOME 
 
 \chapter{Performance experiments}
 
-The performance experiments are designed to explore the parallel performance of ABC SMC implementations. Usually ABC SMC is a time-consuming and computation intensive task and usually is executed on large clusters. The scheduling strategy, implementation details and many other factors can affect the parallel efficiency.
+The performance experiments were designed to explore the parallel performance of ABC SMC inference framework which were used in the parameter estimation and model selection tasks. Usually ABC SMC is a time-consuming and computation intensive task and ideally executed on large clusters. The scheduling strategy, implementation details and many other factors can affect the parallel efficiency.
 
 [MORE meanings of the performance study]
 
@@ -795,7 +804,7 @@ First experiments are designed to illustrate the scaling-up performance. The pro
 
 For HPC systems like Cirrus, \verb|pyabc| uses \verb|multiprocessing| for multi-core parallel sampling. By default if the number of cores is not specified, it will automatically read the number of available cores and use them all. Cirrus has a 36-core CPU which support hyperthreading, such that the maximal number of cores available to \verb|multiprocessing| is 72.
 
-The program is executed on Cirrus, using 8, 12, 16, 24, 36, 54 and 72 cores respectively. Each run is repeated 5 times. The average execution time, required sampling numbers are recorded. Hyperthreading is enabled when using 54 and 72 cores. The access to the node that contains computation cores is exclusive, such that the execution would not be affected by other programs of operations.
+The program is executed on Cirrus, using 8, 16, 24, 36, 54 and 72 cores respectively. Each run is repeated 10 times. The average execution time, required sampling numbers are recorded. Hyperthreading is enabled when using 54 and 72 cores. The access to the node that contains computation cores is exclusive, such that the execution would not be affected by other programs of operations.
 
 The implementation of ABC SMC in \verb|pyabc| enables the parallelisation of sampling, which is the must time-consuming part. The rest part of the program is mostly not parallelised, e.g. database I/O and reductions operations. The sampling process involves sampling, perturbation and test of the acceptance criteria, all of which are computation-intensive. 
 
@@ -805,7 +814,15 @@ In practice, using ABC SMC to estimate the parameters of a given model could cos
 
 [scaling-up performance: speed-up and efficiency]
 
+[large variation in required sampling numbers]
+
 [possible reasons]
+
+The recorded execution time using different number of cores is shown in FIGURE. According to that, speed-up and efficiency can be calculated. Here 8 cores is regarded as the baseline for speed-up and efficiency, as the serial version (using only one core) can take quite a long time to finish 10 repeats. When increasing number of cores, the execution time drops fast at first but the decreasing rate (dropping speed, i.e. the derivative of the execution time against time) is gradually reduced to zero; 36, 54 and 72 cores gives nearly the same average execution time and consequently gains very close speedup values (FIGURE). 
+
+Denote the number of cores used in the ABC SMC runs as variable $p$. The speedup curve shows a linear trend when $p\leq 36$; when $p\geq 36$ the speedup stays nearly unchanged. $p=36$ is an inflection point, where 36 is the maximum numbers available physical cores in a compute node of Cirrus. A constant drop of efficiency is observed when increasing $p$; smaller $p$ ($p<36$) gives an efficiency higher than 65\% but greater $p$ e.g. $p=72$ results in a low efficiency (34\%).
+
+A high variance of total required samples was observed in the scaling-up experiments
 
 \section{Profiling}
 
@@ -1065,6 +1082,10 @@ Local development machine is a Mac laptop, running on macOS 10.15.6. The environ
 \bibitem{ref:adpt_dis} Prangle, D., 2017. Adapting the ABC distance function. Bayesian Analysis, 12(1), pp.289-309.
 
 \bibitem{ref:adpt_pop} Klinger, E. and Hasenauer, J., 2017, September. A scheme for adaptive selection of population sizes in approximate Bayesian computation-sequential Monte Carlo. In International Conference on Computational Methods in Systems Biology (pp. 128-144). Springer, Cham.
+
+\bibitem{Toni} Toni, T., Welch, D., Strelkowa, N., Ipsen, A. and Stumpf, M.P., 2009. Approximate Bayesian computation scheme for parameter inference and model selection in dynamical systems. Journal of the Royal Society Interface, 6(31), pp.187-202.
+
+\bibitem{sensitivity} Gutenkunst, R.N., Waterfall, J.J., Casey, F.P., Brown, K.S., Myers, C.R. and Sethna, J.P., 2007. Universally sloppy parameter sensitivities in systems biology models. PLoS Comput Biol, 3(10), p.e189.
 
 \end{thebibliography}
 

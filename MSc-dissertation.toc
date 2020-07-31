@@ -35,16 +35,16 @@
 \contentsline {section}{\numberline {5.1}Scaling-up}{25}{section.5.1}% 
 \contentsline {subsubsection}{Results}{26}{section*.15}% 
 \contentsline {section}{\numberline {5.2}Profiling}{26}{section.5.2}% 
-\contentsline {subsubsection}{Results}{26}{section*.16}% 
-\contentsline {chapter}{\numberline {6}Future works}{27}{chapter.6}% 
-\contentsline {chapter}{\numberline {7}Conclusions}{28}{chapter.7}% 
-\contentsline {chapter}{\numberline {A}System and software environment}{29}{appendix.A}% 
-\contentsline {section}{\numberline {A.1}ABC SMC implementation}{29}{section.A.1}% 
-\contentsline {subsection}{\numberline {A.1.1}Local machine}{29}{subsection.A.1.1}% 
-\contentsline {subsection}{\numberline {A.1.2}Remote machine}{29}{subsection.A.1.2}% 
-\contentsline {section}{\numberline {A.2}Data analysis}{29}{section.A.2}% 
-\contentsline {chapter}{\numberline {B}Data and settings}{31}{appendix.B}% 
-\contentsline {section}{\numberline {B.1}Infer-back experiments}{31}{section.B.1}% 
-\contentsline {subsection}{\numberline {B.1.1}Parameter values used to generate synthetic data}{31}{subsection.B.1.1}% 
-\contentsline {subsection}{\numberline {B.1.2}Kernel experiment: median epsilon schedule}{33}{subsection.B.1.2}% 
-\contentsline {section}{\numberline {B.2}Parameter inference and model comparison results}{33}{section.B.2}% 
+\contentsline {subsubsection}{Results}{27}{section*.16}% 
+\contentsline {chapter}{\numberline {6}Future works}{28}{chapter.6}% 
+\contentsline {chapter}{\numberline {7}Conclusions}{29}{chapter.7}% 
+\contentsline {chapter}{\numberline {A}System and software environment}{30}{appendix.A}% 
+\contentsline {section}{\numberline {A.1}ABC SMC implementation}{30}{section.A.1}% 
+\contentsline {subsection}{\numberline {A.1.1}Local machine}{30}{subsection.A.1.1}% 
+\contentsline {subsection}{\numberline {A.1.2}Remote machine}{30}{subsection.A.1.2}% 
+\contentsline {section}{\numberline {A.2}Data analysis}{30}{section.A.2}% 
+\contentsline {chapter}{\numberline {B}Data and settings}{32}{appendix.B}% 
+\contentsline {section}{\numberline {B.1}Infer-back experiments}{32}{section.B.1}% 
+\contentsline {subsection}{\numberline {B.1.1}Parameter values used to generate synthetic data}{32}{subsection.B.1.1}% 
+\contentsline {subsection}{\numberline {B.1.2}Kernel experiment: median epsilon schedule}{34}{subsection.B.1.2}% 
+\contentsline {section}{\numberline {B.2}Parameter inference and model comparison results}{34}{section.B.2}% 
