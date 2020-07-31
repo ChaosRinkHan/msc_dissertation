@@ -822,7 +822,9 @@ The recorded execution time using different number of cores is shown in FIGURE. 
 
 Denote the number of cores used in the ABC SMC runs as variable $p$. The speedup curve shows a linear trend when $p\leq 36$; when $p\geq 36$ the speedup stays nearly unchanged. $p=36$ is an inflection point, where 36 is the maximum numbers available physical cores in a compute node of Cirrus. A constant drop of efficiency is observed when increasing $p$; smaller $p$ ($p<36$) gives an efficiency higher than 65\% but greater $p$ e.g. $p=72$ results in a low efficiency (34\%).
 
-A high variance of total required samples was observed in the scaling-up experiments
+A high variance of total required samples was observed in the scaling-up experiments: some single runs required much more samples to finish 20 populations. Moreover, we found that the execution time is not ideally proportional to the total required samples (FIGURE). A possible explain to these phenomenons can be that the median epsilon schedule results in different threshold strategies due to the randomness in the sampling process, thus results in different approximate convergency paths for different runs. Some runs that are stuck in a local optimum and require smaller target epsilon will take huge amount of samples to move away from the local optimum. This have been observed when the distribution of posterior is plotted before and after jumping away from local modes (FIGURE and more explain). Also, time spent in each sample using sanme number of cores is not constant in our case, which might be a result of the parallel schedule; ideally a serial run using only one core will see a nearly constant time spent in every particle.
+
+Due to the unstable sampling numbers, our interests switched to the per-particle performance, where the average sampling numbers per second (FIGURE) and average time spent in one particle (FIGURE) under different of cores ($p$) are plotted. The log-like average time per particle curve shows that using more cores can improve the sampling efficiency, but when $p$ is at a high level (e.g. 36 in our case), the improvement will be less significant.
 
 \section{Profiling}
 

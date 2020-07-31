@@ -34,7 +34,7 @@
 \contentsline {chapter}{\numberline {5}Performance experiments}{25}{chapter.5}% 
 \contentsline {section}{\numberline {5.1}Scaling-up}{25}{section.5.1}% 
 \contentsline {subsubsection}{Results}{26}{section*.15}% 
-\contentsline {section}{\numberline {5.2}Profiling}{26}{section.5.2}% 
+\contentsline {section}{\numberline {5.2}Profiling}{27}{section.5.2}% 
 \contentsline {subsubsection}{Results}{27}{section*.16}% 
 \contentsline {chapter}{\numberline {6}Future works}{28}{chapter.6}% 
 \contentsline {chapter}{\numberline {7}Conclusions}{29}{chapter.7}% 
