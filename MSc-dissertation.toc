@@ -21,7 +21,7 @@
 \contentsline {subsubsection}{Conclusion}{14}{section*.8}% 
 \contentsline {subsection}{\numberline {4.2.2}Adaptive functions and factors}{14}{subsection.4.2.2}% 
 \contentsline {subsubsection}{Experiments results}{15}{section*.9}% 
-\contentsline {subsubsection}{Conclusion}{15}{section*.10}% 
+\contentsline {subsubsection}{Conclusion}{16}{section*.10}% 
 \contentsline {subsection}{\numberline {4.2.3}Data size, prior distribution and population}{16}{subsection.4.2.3}% 
 \contentsline {subsubsection}{Experiments results}{16}{section*.11}% 
 \contentsline {subsubsection}{Summary}{17}{section*.12}% 
