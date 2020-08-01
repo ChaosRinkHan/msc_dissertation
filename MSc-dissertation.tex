@@ -665,14 +665,16 @@ The acceptance rates is fluctuating and have a gradually increase trend for all 
     \resizebox{1.0\hsize}{!}{\includegraphics{fig/para1234.png}}
     \end{center}
     
-    \caption{Estimated posterior distribution of parameters in model 3}
+    \caption[Estimated posterior distribution of parameters in model 3]%
+    {Estimated posterior distribution of parameters in model 3. Shaded range indicates 25\%--75\% quantile of the population}
     \label{fig:para1}
 
     \begin{center}
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/cmp1.png}}
         \end{center}
         
-        \caption{Model comparison of model 1, 2 and 3}
+        \caption[Model comparison of model 1, 2 and 3]%
+        {Model comparison of model 1, 2 and 3. From population 8 to population 30, model3 always wins}
         \label{fig:cmp1}
     
 \end{figure}
@@ -692,23 +694,24 @@ Figure \ref{fig:cmp1} shows the model selection process, under log-uniform [0, 5
      Parameter & Estimated mean  & Estimated mean  \\ 
       & value (uniform) &value (log-uniform) \\[0.5ex] 
      \hline\hline
-     $\lambda_N$ & 14.156 & 13.296  \\ 
-     $a$ & 9.670 & 0.017  \\ 
-     $\kappa_{N\beta}$ & 18.001 & 0.259 \\
-     $\mu_N$ & 13.196 & 0.018 \\
+     $\lambda_N$ & 14.1 & 13.3 \\ 
+     $a$ & 9.67 & 0.0170  \\ 
+     $\kappa_{N\beta}$ & 18.0 & 0.259 \\
+     $\mu_N$ & 13.2 & 0.0180 \\
      $\nu_{N\Phi}$ & 0.742 & 0.131 \\
      \hline
      $\kappa_{\Phi\beta}$ & 0.239 & 0.156 \\
-     $\mu_\Phi$ & 0.154 & 0.035 \\
+     $\mu_\Phi$ & 0.154 & 0.0350 \\
      \hline
-     $s_{\beta N}$ & 6.752 & 1.213 \\
-     $\mu_\beta$ & 6.378 & 1.315 \\
+     $s_{\beta N}$ & 6.75 & 1.21 \\
+     $\mu_\beta$ & 6.38 & 1.32 \\
      \hline
-     $s_{\alpha\Phi}$ & 16.997 & 5.826 \\
-     $\mu_\alpha$ & 11.859 & 2.434\\
+     $s_{\alpha\Phi}$ & 17.0 & 5.83 \\
+     $\mu_\alpha$ & 11.9 & 2.43\\
      \hline
     \end{tabular}
-    \caption{Estimated parameter values of model 3}
+    \caption[Estimated parameter values of model 3]
+    {Estimated parameter values of model 3, using uniform prior distribution and log-uniform prior distribution respectively}
     \label{table:estimated1}
 \end{table}
 
@@ -1006,7 +1009,7 @@ Local development machine is a Mac laptop, running on macOS 10.15.6. The environ
      \hline
      Parameter & Value & Unit\\ [0.5ex] 
      \hline\hline
-     $\lambda_N$ & 2.1989 & $cell/h$  \\ 
+     $\lambda_N$ & 2.20 & $cell/h$  \\ 
      $\kappa_{N\beta}$ & 3.9627 & $cell/(unit\cdotp h)$\\
      $\mu_N$ & 1.7219 & $h^{-1}$\\
      $\nu_{N\Phi}$ & 0.2195 & $cell^{-1}\cdotp h^{-1}$ \\
