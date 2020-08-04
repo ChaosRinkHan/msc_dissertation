@@ -7,75 +7,15 @@
 \usepackage{amsmath}
 \usepackage{float}
 
-% This example file shows how a thesis can be laid out using Latex. It
-% does not use any special local features so should be portable to other
-% places.
-% 
-% When producing draft copies of a thesis you may want to print only
-% selected pages of the thesis. To do this use the command
-% 
-% dvips -f -p 4 -n 3 myfile.dvi | lpr
-% 
-% where -p 4 means start printing at page 4 (ie the page that will be
-% numbered 4, not necessarily the 4th page) and -n 3 means print 3 pages.
-% This example will print pages 4, 5 and 6.
-% 
-% If you want to print the thesis and also save paper you can print more
-% than one page on each sheet of paper. Use the command
-% 
-% dvips -f myfile.dvi | psnup -2 | lpr
-% 
-% to print 2 pages per sheet. psnup can take values 2, 4, 8, or 9.
-%
-% To produce a PDF version you can create a PostScript copy first
-%
-% dvips -f myfile.dvi > myfile.pdf
-%
-% and then convert it
-%
-% distill myfile.ps
-%
-% or you can go straight to PDF
-%
-% pdflatex myfile
-%
-% Note that pdflatex expects all included figures to be in PDF too. See
-% the includegraphics command below.
-
-
-% This document contains many cross-references and forward references,
-% eg in constructing a table of contents, so Latex may need to be run
-% twice to get all the references correct. If you need to run Latex twice
-% you may get the warning:
-% 
-% LaTeX Warning: Label(s) may have changed. Rerun to get cross-refSerences right.
-
-
-% the following 4 lines are the content of the smallmargins.sty file
-% but including them explicitly makes this more portable.
-%AC%\oddsidemargin=0.1in
-%AC%\topmargin=-0.5in
-%AC%\textheight=9in
-%AC%\textwidth=6.25in
-
-%AC%\parskip 10pt
-%AC%\parindent 0in
 
 \begin{document}
-
-%AC%\pagestyle{myheadings}
-%AC%\markright{D.~S.~Henty}
-
-%\title{A Latex thesis example}
-%\author{D.~S.~Henty}
-%\date{\today}
-
-%\maketitle
 
 \pagenumbering{roman}
 
 \title{Bayesian Inference Using Sequential Monte-Carlo Algorithm for Dynamic System Models}
+
 \author{Chaolin Han}
+
 \date{\today}
 
 \makeEPCCtitle
@@ -138,19 +78,26 @@ further improvements.}
 % here is the style favoured in this department.  Here is another
 % reference \cite{ref:bloggs} for good measure.
 
-% You will also want to make sure you have no spelling or grammatical
-% mistakes. To help idwentify spelling mistukes you caan use the commands
-% {\em ispell} or {\em spell}. See the appropriate manual pages. Remember
-% that spelling mistakes are not the only errors which can occur. Spelling
-% checkers will not find errors which are, in fact, valid words such as
-% {\em there} for {\em their}, nor will they find repeated words which
-% sometimes occur if your concentration is broken when typing. {\bf There
-% is no substitute for thorough proof reading!}
-
-
 [background and motivation]
 
 [what is done]
+
+While we are interested in the tissue regeneration among different species, mathematical models and techniques can help us to resolve complex interactions of cells and chemicals in a biological system. The objective process in this dissertation is an example of complex biology system found in tissue regeneration. Zebrafish has the ability to regenerate its spinal cord after injury; at the injury-site various immune cells are presented and complex interactions are found while they are regulating inflammation and repair.
+
+Our interest lies in the modeling of the regeneration process that happens in the injury-site, especially in the parameter estimation and comparison of different models. According to available researches \cite{ref:Tsarouchas}, a mathematical model is proposed but the addressed interactions remains to be precisely defined, and quantitatively examined in experiments. However, we would like to explore the the `best fit' if the model which comes with a set of parameter estimates given the observed data. Also, we wish to compare different it with different models and possibly find the best model to describe the data without losing biological and mathematical properties in the regeneration process.
+
+Fo the parameter estimation tasks, Bayesian inference techniques can help in the problems of over-fitting and local optima \cite{ref:abcsysbio}, compared to optimisation based methods. Moreover, approximate inference methods (Approximate Bayesian Computation, ABC) make likelihood-free inference possible, which is suitable for our task as writing down likelihood as a function expression can be hard.
+
+Such methods introduce computation-intensive sampling-rejection pattern, where massive number of samples are drawn, followed by computations. As the sampling process is independent from each other in a certain period, the parallel execution becomes feasible and is expected to accelerated the parameter inference in a large scale.
+
+This dissertation includes the implementations and experiments of parameter estimation using ABC SMC (sequential Monte-Carlo) method, and discussions on the results. Model comparison results are also included using the same method. Additionally, a performance test illustrates the strong-scaling performance of the algorithm.
+
+
+
+
+
+
+
 
 \chapter{Background}
 
