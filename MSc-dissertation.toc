@@ -1,7 +1,7 @@
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}% 
 \contentsline {chapter}{\numberline {2}Background}{3}{chapter.2}% 
 \contentsline {section}{\numberline {2.1}Zebrafish spinal cord regeneration}{3}{section.2.1}% 
-\contentsline {section}{\numberline {2.2}Mathematical modelling}{3}{section.2.2}% 
+\contentsline {section}{\numberline {2.2}Mathematical modelling}{4}{section.2.2}% 
 \contentsline {section}{\numberline {2.3}Bayesian inference}{4}{section.2.3}% 
 \contentsline {section}{\numberline {2.4}Software tools}{4}{section.2.4}% 
 \contentsline {chapter}{\numberline {3}Mathematical modelling}{5}{chapter.3}% 

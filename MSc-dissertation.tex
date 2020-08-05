@@ -103,17 +103,26 @@ This dissertation includes the implementations and experiments of parameter esti
 
 \section{Zebrafish spinal cord regeneration}
 
- [describe the process and how cells and cytokines are involved]
+[describe the process and how cells and cytokines are involved]
 
 Compared to mammals, zebrafish can regenerate spinal cord after injury, and possibly recover swimming function. They are widely used in regenerative ability researches. Experiments found that although being cut off, the axonal of nerve cells can regenerate and bridge across the lesion site, which critically determined whether zebrafish can regain the swimming function \cite{axonal}. Tsarouchas et al. \cite{ref:Tsarouchas} studied the the complex interactions happen at the lesion site. The inflammation affects the regeneration, as if it is promoted, it accelerates the axonal regeneration; if it is inhibited, it reduces the regeneration. Further experiments showed that two kinds of cytokines, il-1$\beta$ and tnf-$\alpha$, affect the inflammation, which are dynamically controlled by immunes cells, i.e. cytokines works as media to control the regeneration. Here cytokines are small proteins, work as messenger to pass signal across different cells, which are similar to hormones and neurotransmitter.
 
-An interaction map can be drawn, according to the evidences found in \cite{ref:Tsarouchas}. After injury, a massive immune response was observed, with the increasing numbers of several kinds of cells: macrophage, neutrophil and keratinocyte. The dynamical system consists of complex interactions between cells and cytokines, e.g. the increasing tnf-$\alpha$
+An interaction map can be drawn, according to the evidences found in \cite{ref:Tsarouchas}. After injury, a massive immune response was observed, with the increasing numbers of several kinds of cells: macrophage, neutrophil and keratinocyte. The dynamical system consists of complex interactions between cells and cytokines, e.g. il-1$\beta$ promotes macrophages' increase. and as a major source, more macrophages leads to more expression of tnf-$\alpha$ mRNA. Consequently, tnf-$\alpha$ and il-1$\beta$ plays determinative roles in the axonal regeneration. Generally, il-1$\beta$ promotes the regeneration at early stages, but later has an inhibition effect, and tnf-$\alpha$ promotes the regeneration all the time. The presence if the cytokines also affects the number of cell, while as sources number of cells also affects cytokines' expression. Interactions between different kinds of cells are also considered in the system.
+
+This is a dynamic system suitable for mathematical modelling, as a set of equations can be written to represent the dynamics as possible. Our interest lies in the modelling of the regeneration period of the dynamic system, and we wish to find that if we can quantitatively study the interactions iniside the system, based on the proposed hypothesis \cite{ref:Tsarouchas}, and our own hypothesis which may include different interactions.
+
+The biological background of works in this dissertation is mostly related the the experimental evidences, quantitative data and proposed hypothesis in \cite{ref:Tsarouchas}. The published data on the quantitative measurement of cells and cytokines make the modelling and further analysis possible. Some other interactions proposed in our modelling stages are enlightened from Anderson et al. \cite{Anderson}.
 
 \section{Mathematical modelling}
 
  [how this can be modelled as dynamic systems]
 
  [general topics of mathematical models: how to build model according to interactions; how to calibrate/ parameterise the model; how to solve the model; dynamics; how to evaluate the model]
+
+ Mathematical models can express real-life questions in mathematical forms, and provide qualitative or quantitative inside-look of the question through various mathematical tools and techniques. Mathematical models can be used for prediction, classification and other tasks and thus widely used to solve practical problems. However, for a model that describe the zebrafish spinal cord regeneration process, we were less interested to the model's predictive functionality; the main focus is on the explore of uncertainty in parameter estimates and comparison with alternative models.
+ 
+ According to 
+
 
 
 \section{Bayesian inference}
@@ -1033,6 +1042,8 @@ Local development machine is a Mac laptop, running on macOS 10.15.6. The environ
     \bibitem{axonal} Becker, T., Wullimann, M.F., Becker, C.G., Bernhardt, R.R. and Schachner, M., 1997. Axonal regrowth after spinal cord transection in adult zebrafish. Journal of Comparative Neurology, 377(4), pp.577-595.
 
     \bibitem{ref:Tsarouchas} Tsarouchas, T.M., Wehner, D., Cavone, L., Munir, T., Keatinge, M., Lambertus, M., Underhill, A., Barrett, T., Kassapis, E., Ogryzko, N. and Feng, Y., 2018. Dynamic control of proinflammatory cytokines Il-1$\beta$ and Tnf-$\alpha$ by macrophages in zebrafish spinal cord regeneration. Nature communications, 9(1), pp.1-17.
+
+    \bibitem{Anderson} Anderson, W.D., Makadia, H.K., Greenhalgh, A.D., Schwaber, J.S., David, S. and Vadigepalli, R., 2015. Computational modeling of cytokine signaling in microglia. Molecular BioSystems, 11(12), pp.3332-3346.
 
     \bibitem{ref:pyabc} Klinger, E., Rickert, D. and Hasenauer, J., 2018. pyABC: distributed, likelihood-free inference. Bioinformatics, 34(20), pp.3591-3593.
 
