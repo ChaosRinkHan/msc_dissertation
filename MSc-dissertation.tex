@@ -26,18 +26,18 @@
 
 \begin{center}
 
-\large{MSc in High Performance Computing}
+    \large{MSc in High Performance Computing}
 
-\large{The University of Edinburgh}
+    \large{The University of Edinburgh}
 
-\large{Year of Presentation: 2020}
+    \large{Year of Presentation: 2020}
 
 \end{center}
 
 \newpage
 
 \begin{abstract}
-This is the bit where you summarise what is in your thesis.
+    This is the bit where you summarise what is in your thesis.
 \end{abstract}
 
 \pagenumbering{roman}
@@ -47,19 +47,19 @@ This is the bit where you summarise what is in your thesis.
 \listoffigures
 
 \begin{titlepage}
-\vspace*{2in}
-% an acknowledgements section is completely optional but if you decide
-% not to include it you should still include an empty {titlepage}
-% environment as this initialises things like section and page numbering.
-\section*{Acknowledgements}
+    \vspace*{2in}
+    % an acknowledgements section is completely optional but if you decide
+    % not to include it you should still include an empty {titlepage}
+    % environment as this initialises things like section and page numbering.
+    \section*{Acknowledgements}
 
-This template is a slightly modified version of the one developed by
-Prof. Charles Duncan for MSc students in the Dept. of Meteorology. His
-acknowledgement follows:
+    This template is a slightly modified version of the one developed by
+    Prof. Charles Duncan for MSc students in the Dept. of Meteorology. His
+    acknowledgement follows:
 
-{\em This template has been produced with help from many former students who
-have shown different ways of doing things. Please make suggestions for
-further improvements.}
+    {\em This template has been produced with help from many former students who
+    have shown different ways of doing things. Please make suggestions for
+    further improvements.}
 
 \end{titlepage}
 
@@ -67,20 +67,20 @@ further improvements.}
 
 \chapter{Introduction}
 
-% This should contain a description of your project and the problem you
-% are trying to solve. Where appropriate you should also include
-% references to work which has already been done on your topic and
-% anything else which lets you set your work in context.
+ % This should contain a description of your project and the problem you
+ % are trying to solve. Where appropriate you should also include
+ % references to work which has already been done on your topic and
+ % anything else which lets you set your work in context.
 
-% One of the things you will need to do is to ensure that you have a
-% suitable list of references.  To do this you should see \cite{ref:lam}
-% or some other suitable reference.  Note the format of the citation used
-% here is the style favoured in this department.  Here is another
-% reference \cite{ref:bloggs} for good measure.
+ % One of the things you will need to do is to ensure that you have a
+ % suitable list of references.  To do this you should see \cite{ref:lam}
+ % or some other suitable reference.  Note the format of the citation used
+ % here is the style favoured in this department.  Here is another
+ % reference \cite{ref:bloggs} for good measure.
 
-[background and motivation]
+ [background and motivation]
 
-[what is done]
+ [what is done]
 
 While we are interested in the tissue regeneration among different species, mathematical models and techniques can help us to resolve complex interactions of cells and chemicals in a biological system. The objective process in this dissertation is an example of complex biology system found in tissue regeneration. Zebrafish has the ability to regenerate its spinal cord after injury; at the injury-site various immune cells are presented and complex interactions are found while they are regulating inflammation and repair.
 
@@ -103,36 +103,40 @@ This dissertation includes the implementations and experiments of parameter esti
 
 \section{Zebrafish spinal cord regeneration}
 
-[describe the process and how cells and cytokines are involved]
+ [describe the process and how cells and cytokines are involved]
+
+Compared to mammals, zebrafish can regenerate spinal cord after injury, and possibly recover swimming function. They are widely used in regenerative ability researches. Experiments found that although being cut off, the axonal of nerve cells can regenerate and bridge across the lesion site, which critically determined whether zebrafish can regain the swimming function \cite{axonal}. Tsarouchas et al. \cite{ref:Tsarouchas} studied the the complex interactions happen at the lesion site. The inflammation affects the regeneration, as if it is promoted, it accelerates the axonal regeneration; if it is inhibited, it reduces the regeneration. Further experiments showed that two kinds of cytokines, il-1$\beta$ and tnf-$\alpha$, affect the inflammation, which are dynamically controlled by immunes cells, i.e. cytokines works as media to control the regeneration. Here cytokines are small proteins, work as messenger to pass signal across different cells, which are similar to hormones and neurotransmitter.
+
+An interaction map can be drawn, according to the evidences found in \cite{ref:Tsarouchas}. After injury, a massive immune response was observed, with the increasing numbers of several kinds of cells: macrophage, neutrophil and keratinocyte. The dynamical system consists of complex interactions between cells and cytokines, e.g. the increasing tnf-$\alpha$
 
 \section{Mathematical modelling}
 
-[how this can be modelled as dynamic systems]
+ [how this can be modelled as dynamic systems]
 
-[general topics of mathematical models: how to build model according to interactions; how to calibrate/ parameterise the model; how to solve the model; dynamics; how to evaluate the model]
- 
+ [general topics of mathematical models: how to build model according to interactions; how to calibrate/ parameterise the model; how to solve the model; dynamics; how to evaluate the model]
+
 
 \section{Bayesian inference}
 
-[how to parameterise the model]
+ [how to parameterise the model]
 
-[how to infer the parameter given data]
+ [how to infer the parameter given data]
 
-[likelihood-free inference and information about ABC SMC]
+ [likelihood-free inference and information about ABC SMC]
 
-[model comparison, ABC SMC for model comparison]
+ [model comparison, ABC SMC for model comparison]
 
 \section{Software tools}
 
-[existing tools and software for this task]
+ [existing tools and software for this task]
 
-[workflow and developing process]
+ [workflow and developing process]
 
 \chapter{Mathematical modelling}
 
-Mathematical models can describe different kinds of dynamic systems, and thus can be used as a guide for prediction and analysis. An ideal model in our case, can represent reasonable interactions/effects between cells and cytokines and recover the observed  data features in different time point. 
+Mathematical models can describe different kinds of dynamic systems, and thus can be used as a guide for prediction and analysis. An ideal model in our case, can represent reasonable interactions/effects between cells and cytokines and recover the observed  data features in different time point.
 
-Proposed models for the regeneration process are in the form of ordinary differential equations (ODE), specifically the time differential form. Terms in the ODE are mostly explainable and corresponds interaction paths. 
+Proposed models for the regeneration process are in the form of ordinary differential equations (ODE), specifically the time differential form. Terms in the ODE are mostly explainable and corresponds interaction paths.
 
 \section{Observed data}
 
@@ -141,19 +145,19 @@ Our models is built on the basis of the existing experiments data form Tsaroucha
 It is noted that the variance of the measured data is relatively high. The summary statistic used for the parameter estimations is mean of measurement data at each time point, assuming that measured data is Gaussian-like distributed. To validate this, the distribution of the measured data points is plotted and examined to see if the mean value can represent the distribution. The result is that at most time points the measurement values are Gaussian-distributed, although some distributions are skewed. One abnormal distribution is observed at time point 120 h post-lesion (hpl) for macrophage where there are two concentrations. Mean value can summarise most data and thus is still used as the target observed data. A plot of the mean of the four variables is shown in Figure \ref{fig:obs_data}.
 
 \begin{figure}
-\begin{center}
-\resizebox{1.0\hsize}{!}{\includegraphics{fig/obs_curve.png}}
-\end{center}
+    \begin{center}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/obs_curve.png}}
+    \end{center}
 
-\caption[Mean of the observed data]%
-{Mean of the observed data for neutrophil ($N$), macrophage ($\Phi$), il-1$\beta$ and tnf-$\alpha$, from experiment results of \cite{ref:Tsarouchas}. Error bars indicate standard error of mean} 
-\label{fig:obs_data}
+    \caption[Mean of the observed data]%
+    {Mean of the observed data for neutrophil ($N$), macrophage ($\Phi$), il-1$\beta$ and tnf-$\alpha$, from experiment results of \cite{ref:Tsarouchas}. Error bars indicate standard error of mean}
+    \label{fig:obs_data}
 
 \end{figure}
 
 \section{Hypothesis and Models}
 
-5 models in total are proposed according to different hypothesis. At first our tests and implementations of ABC SMC for parameter estimations use only the basic model for developing propose. After the parameter estimation framework is built and tested, more models are proposed, in order to calibrate and adjust the basic model such that it can represent the observed regeneration process better or can be used to test our hypothesis. 
+5 models in total are proposed according to different hypothesis. At first our tests and implementations of ABC SMC for parameter estimations use only the basic model for developing propose. After the parameter estimation framework is built and tested, more models are proposed, in order to calibrate and adjust the basic model such that it can represent the observed regeneration process better or can be used to test our hypothesis.
 
 All these models assume the involved interactions is within two kinds of cells (neutrophil and macrophage) and two kinds of cytokines (il-1$\beta$ and tnf-$\alpha$) and use the data presented in Figure \ref{fig:obs_data} for the inference task. Interactions or effects from other cells or cytokines is not considered as there might not be corresponding data available.
 
@@ -163,13 +167,13 @@ A preliminary model is proposed according to \cite{ref:Tsarouchas} and used to b
 
 \begin{figure}
     \begin{center}
-    \resizebox{0.4\hsize}{!}{\includegraphics{fig/model1.png}}
+        \resizebox{0.4\hsize}{!}{\includegraphics{fig/model1.png}}
     \end{center}
-    
+
     \caption[Interactions modelled in the basic model]%
-    {Interactions modelled in the basic model (model 1) based on Tsarouchas et al.\cite{ref:Tsarouchas}. Lines ended with arrow represent promoting effect, lines ended with T-connectors represent inhibition} 
+    {Interactions modelled in the basic model (model 1) based on Tsarouchas et al.\cite{ref:Tsarouchas}. Lines ended with arrow represent promoting effect, lines ended with T-connectors represent inhibition}
     \label{fig:m1}
-    
+
 \end{figure}
 
 It is assumed that there are negative feedbacks for all the variables. MORE DESCRIBE.
@@ -185,30 +189,30 @@ It is assumed that there are negative feedbacks for all the variables. MORE DESC
 \end{align}
 
 \begin{table}[h!]
-\centering
-\begin{tabular}{|c c c|} 
- \hline
- Parameter & Definition & Units\\ [0.5ex] 
- \hline\hline
- $\lambda_N$ & Self-increase rate of neutrophil & $cell/h$  \\ 
- $\kappa_{N\beta}$ & Promoting effect coefficient by il-1$\beta$ & $cell/(unit\cdotp h)$\\
- $\mu_N$ & Coefficient of negative feedback of $N$ & $h^{-1}$ \\
- $\nu_{N\Phi}$ & Coefficient of inhibition of both $N$ and $\Phi$& $cell^{-1}\cdotp h^{-1}$ \\
- \hline
- $\lambda_\Phi$ & Self-increase rate of macrophage & $cell/h$ \\
- $\kappa_{\Phi\beta}$ & Promoting effect coefficient by il-1$\beta$ & $cell/(unit\cdotp h)$ \\
- $\mu_\Phi$ &  Coefficient of negative feedback of $\Phi$ & $h^{-1}$ \\
- \hline
- $s_{\beta N}$ & Production rate from $N$ & $unit/(cell\cdotp h)$ \\
- $i_{\beta\Phi}$ & Coefficient of inhibition to the production & $cell^{-1}$ \\
- $\mu_\beta$ & Coefficient of negative feedback of $\beta$ & $h^{-1}$ \\
- \hline
- $s_{\alpha\Phi}$ & Production rate from $\Phi$ & $unit/(cell\cdotp h)$ \\
- $\mu_\alpha$ & Coefficient of negative feedback of $\alpha$ & $h^{-1}$ \\
- \hline
-\end{tabular}
-\caption{Parameters introduced in the basic model (model 1) [REMOVE unit]}
-\label{table:m1}
+    \centering
+    \begin{tabular}{|c c c|}
+        \hline
+        Parameter            & Definition                                       & Units                    \\ [0.5ex]
+        \hline\hline
+        $\lambda_N$          & Self-increase rate of neutrophil                 & $cell/h$                 \\
+        $\kappa_{N\beta}$    & Promoting effect coefficient by il-1$\beta$      & $cell/(unit\cdotp h)$    \\
+        $\mu_N$              & Coefficient of negative feedback of $N$          & $h^{-1}$                 \\
+        $\nu_{N\Phi}$        & Coefficient of inhibition of both $N$ and $\Phi$ & $cell^{-1}\cdotp h^{-1}$ \\
+        \hline
+        $\lambda_\Phi$       & Self-increase rate of macrophage                 & $cell/h$                 \\
+        $\kappa_{\Phi\beta}$ & Promoting effect coefficient by il-1$\beta$      & $cell/(unit\cdotp h)$    \\
+        $\mu_\Phi$           & Coefficient of negative feedback of $\Phi$       & $h^{-1}$                 \\
+        \hline
+        $s_{\beta N}$        & Production rate from $N$                         & $unit/(cell\cdotp h)$    \\
+        $i_{\beta\Phi}$      & Coefficient of inhibition to the production      & $cell^{-1}$              \\
+        $\mu_\beta$          & Coefficient of negative feedback of $\beta$      & $h^{-1}$                 \\
+        \hline
+        $s_{\alpha\Phi}$     & Production rate from $\Phi$                      & $unit/(cell\cdotp h)$    \\
+        $\mu_\alpha$         & Coefficient of negative feedback of $\alpha$     & $h^{-1}$                 \\
+        \hline
+    \end{tabular}
+    \caption{Parameters introduced in the basic model (model 1) [REMOVE unit]}
+    \label{table:m1}
 \end{table}
 
 \subsection{Alternative models}
@@ -267,14 +271,14 @@ After the first model selection experiment, it was found that some significant f
 
 \begin{table}[h!]
     \centering
-    \begin{tabular}{|c c c|} 
-     \hline
-     Parameter & Definition & Units\\ [0.5ex] 
-     \hline\hline
-     $d_{\beta\alpha}$ & Coefficient of promoting effect from $\beta$ & $h^{-1}$  \\ 
-     \hline
-     $f_{\beta\alpha}$ & Coefficient of promoting the production of $\alpha$ by $\beta$ & $cell^{-1}\cdotp h^{-1}$  \\ 
-     \hline
+    \begin{tabular}{|c c c|}
+        \hline
+        Parameter         & Definition                                                     & Units                    \\ [0.5ex]
+        \hline\hline
+        $d_{\beta\alpha}$ & Coefficient of promoting effect from $\beta$                   & $h^{-1}$                 \\
+        \hline
+        $f_{\beta\alpha}$ & Coefficient of promoting the production of $\alpha$ by $\beta$ & $cell^{-1}\cdotp h^{-1}$ \\
+        \hline
     \end{tabular}
     \caption{Parameters introduced in model 4 and 5}
     \label{table:m45}
@@ -344,9 +348,9 @@ The build and test of code were under \verb|Python| environment with \verb|pyABC
 
 \section{Implementations and code}
 
-[ABC implementations details, e.g. distance, population, ODE related functions]
+ [ABC implementations details, e.g. distance, population, ODE related functions]
 
-[how the code is developed and built]
+ [how the code is developed and built]
 
 According to our preliminary studies, ABC SMC framework implemented using \verb|pyABC| in \verb|Python| was adopted in this project. \verb|pyABC| is a popular SMC software packages \cite{ref:pyabc} that has been used form many SMC studies and applications \cite{ref:adpt_pop}. \verb|pyABC| provides an open-source framework for likelihood-free inference, which is an implementation of ABC SMC algorithm and a tool-box for our own inference and analysis tasks. Besides, it supports multi-core execution implemented using \verb|multiprocessing| package for scaling-up, which is of our interests and suitable for the followed performance experiments.
 
@@ -381,23 +385,23 @@ In the first part, synthetic data is used with known true parameter values. The 
 
 Then according to findings in the first part, several options with good performance are tried in the inference using experimental observed data (Figure \ref{fig:obs_data}). To obtain a more accurate and general results, these experiments are repeated for 3 or more times.
 
-[including the options that are tested/ tried/ not adopted]
+    [including the options that are tested/ tried/ not adopted]
 
-[including experiments results and discussions]
+    [including experiments results and discussions]
 
-[how do these options correspond to biological model and how to set them accordingly for proposed model]
+    [how do these options correspond to biological model and how to set them accordingly for proposed model]
 
-The ABC SMC inference can have largely different performance when using different hyperparameters and implementation options. To firstly test the ability of inference and observe the results of different options, synthetic data with known true parameter values are used as target data. The true value of parameters that are used to generate synthetic data is listed in Appendix B.1. These true values are firstly obtained by fitting a least square fit of model 1 onto the experimental data (Figure \ref{fig:infer_back_data}), the target data is then generated using these parameter values via ODE solver in \verb|Python|. 
+The ABC SMC inference can have largely different performance when using different hyperparameters and implementation options. To firstly test the ability of inference and observe the results of different options, synthetic data with known true parameter values are used as target data. The true value of parameters that are used to generate synthetic data is listed in Appendix B.1. These true values are firstly obtained by fitting a least square fit of model 1 onto the experimental data (Figure \ref{fig:infer_back_data}), the target data is then generated using these parameter values via ODE solver in \verb|Python|.
 
 \begin{figure}[h!]
     \begin{center}
-    \resizebox{1.0\hsize}{!}{\includegraphics{fig/LS.png}}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/LS.png}}
     \end{center}
-    
+
     \caption[Synthetic data generated with known parameter values]%
-    {Synthetic data generated with known parameter values (line plot), compared to experimental data (scatter plot). Known parameter values are obtained from a least square fitting of the observed data} 
+    {Synthetic data generated with known parameter values (line plot), compared to experimental data (scatter plot). Known parameter values are obtained from a least square fitting of the observed data}
     \label{fig:infer_back_data}
-    
+
 \end{figure}
 
 [TABLE for known parameter values]
@@ -408,17 +412,17 @@ Among them the following topics are studied using the synthetic data.
 
 \subsection{Perturbation kernels}
 
-Perturbation kernels work in the sampling process. In each generation $t$, samples are firstly taken from the previous population $\{\theta_{t-1}\}$ with weights $\{w_{t-1}\}$, then perturbed using the perturbation kernel $K(\theta|\theta^*)$. We keep sampling until $N$ particles are accepted, where $N$ is the pre-set population size. After that the new weights are calculated and normalised. 
+Perturbation kernels work in the sampling process. In each generation $t$, samples are firstly taken from the previous population $\{\theta_{t-1}\}$ with weights $\{w_{t-1}\}$, then perturbed using the perturbation kernel $K(\theta|\theta^*)$. We keep sampling until $N$ particles are accepted, where $N$ is the pre-set population size. After that the new weights are calculated and normalised.
 
 \begin{figure}[t!]
     \begin{center}
-    \resizebox{1.0\hsize}{!}{\includegraphics{fig/smc.png}}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/smc.png}}
     \end{center}
-    
+
     \caption[ABC SMC sampling process]%
-    {ABC SMC sampling process. $\theta^*$ denotes a sample drawn from previous population, which is used to generate simulated data $D^*$. $d$ is a distance measurement, $d(D^*,D)$ represents the discrepancy between observed data and simulated data. for each population $t$, $\epsilon_t$ is a threshold criterion to determine whether to accept that drawn sample} 
+    {ABC SMC sampling process. $\theta^*$ denotes a sample drawn from previous population, which is used to generate simulated data $D^*$. $d$ is a distance measurement, $d(D^*,D)$ represents the discrepancy between observed data and simulated data. for each population $t$, $\epsilon_t$ is a threshold criterion to determine whether to accept that drawn sample}
     \label{fig:smc}
-    
+
 \end{figure}
 
 The perturbation kernel is called in the sampling of every particles and determines how the new perturbed particle is chosen, thus it is influential to both computation complexity and the resultant posterior distribution. Generally, a local perturbation kernel may face the risk of being stuck in local modes (e,g., local optimal), but it may need less computational operations, or could generate a population with a higher acceptance rate if the successive epsilon values are close; A kernel with wide variance, or spreading out in a large space could help in resolving the local optimal problem by a more thoroughly exploration of the parameter space, however it can be more computation-intensive and result in a lower acceptance rate. A desired optimal kernel should balance the trade-offs; their property and criteria is discussed in \cite{ref:kernel}.
@@ -431,31 +435,31 @@ The kernel experiments is designed to explore the efficiency of SMC on our dynam
 
 \subsubsection{Kernel experiment results}
 
-To compare kernels, a fixed schedule schedule is used with minimal epsilon i.e. $\epsilon_t$ set to 10.0. From the total required samples graph Figure \ref{fig:kernel1}, the efficiency can be compared. Among the tested kernels, the local M-NN with M=50 has the best performance: it requires the least number of samples and 
+To compare kernels, a fixed schedule schedule is used with minimal epsilon i.e. $\epsilon_t$ set to 10.0. From the total required samples graph Figure \ref{fig:kernel1}, the efficiency can be compared. Among the tested kernels, the local M-NN with M=50 has the best performance: it requires the least number of samples and
 has higher acceptance rates among almost all generations. Local M-NN with M=750 is the slowest kernel.
 
-For local M-NN kernels, generally a greater M will lead to lower acceptance rate and 
+For local M-NN kernels, generally a greater M will lead to lower acceptance rate and
 more required particles in each generation. As shown in Figure \ref{fig:acceptance1}, local M-NN with M=750 is the lowest curve. Consequently, if greater M is test, then it will have even lower acceptance rates; the maximum M=2000 (whole population is considered) will have the lowest acceptance rates.
 
 \begin{figure}
     \begin{center}
-    \resizebox{1.0\hsize}{!}{\includegraphics{fig/kernel1.png}}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/kernel1.png}}
     \end{center}
-    
+
     \caption[Total required samples of different kernels]%
-        {Total required samples of different kernels after 20 populations (2000 particles in each population). Different color represents different generations (bottom to top: population 1 to population 20)}
+    {Total required samples of different kernels after 20 populations (2000 particles in each population). Different color represents different generations (bottom to top: population 1 to population 20)}
     \label{fig:kernel1}
 
     \vspace*{\floatsep}
 
     \begin{center}
-    \resizebox{1.0\hsize}{!}{\includegraphics{fig/acceptance1.png}}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/acceptance1.png}}
     \end{center}
-    
+
     \caption[Acceptance rates of different kernels]%
     {Acceptance rates of different kernels in 20 populations. Each population has 2000 particles}
     \label{fig:acceptance1}
-    
+
 \end{figure}
 
 Multivariate normal kernel has a performance between local M-NN M=250 and M=100. It proves that rather than a trivial normal kernel, multivariate normal kernels is more efficient facing the concentrations of joint distributions among multiple parameters \cite{ref:kernel}. `Scaling' option can narrower the distribution calculated from the last population, thus making the kernel more `local' by sampling under a smaller variance. Similar to small M in local M-NN, small `scaling' is also more efficient in our experiment of the model 1. Besides the fixed threshold schedule, a median threshold schedule with the same final threshold $\epsilon_{20}=10.0$ is also tested and similar results are observed (Figure \ref{fig:kernel2} and \ref{fig:acceptance2}, Appendix B2).
@@ -469,10 +473,10 @@ It seems that a more `local' kernel can give better performance by efficiently s
 %     \begin{center}
 %     \resizebox{1.0\hsize}{!}{\includegraphics{fig/acceptance1.png}}
 %     \end{center}
-    
+
 %     \caption{Acceptance rates of different kernels}
 %     \label{fig:acceptance1}
-    
+
 % \end{figure}
 
 
@@ -491,16 +495,16 @@ The trivial distance function is set to Euclidean distance (2-norm distance)
 
 where $i$ is the index of data points and $\Delta x_i$ is the discrepancy between  observed data and simulated data at data point $i$, i.e. $\Delta x_i = x_{i, simulated}-x_{i, observed}$. In this case data points are 12 time points of four variables i.e. 48 data points in total.
 
-A weighted 2-norm distance can be written as 
+A weighted 2-norm distance can be written as
 
 \begin{align}
     \label{dis_w}
     D=\sqrt{\sum_i w_i \Delta x_i^2}
 \end{align}
 
-where a weight $w_i$ is assigned to every data point. If data point $i$ have a higher weight, then the data value is regeared to be more informative, i.e. giving more help in inferring the true posteriors; weights can be either pre-set according to prior knowledge of the problem, or using adaptive method to be dynamically calculated according to , known as adaptive distance. 
+where a weight $w_i$ is assigned to every data point. If data point $i$ have a higher weight, then the data value is regeared to be more informative, i.e. giving more help in inferring the true posteriors; weights can be either pre-set according to prior knowledge of the problem, or using adaptive method to be dynamically calculated according to , known as adaptive distance.
 
-Adaptive distance is changing the weights of all data points after each generation iteration, trying to assign informative data points higher weights. Additionally, implementation of adaptive in \verb|pyABC| also introduces additional factors $f_i$ multiplied to weights \cite{ref:adpt_dis} 
+Adaptive distance is changing the weights of all data points after each generation iteration, trying to assign informative data points higher weights. Additionally, implementation of adaptive in \verb|pyABC| also introduces additional factors $f_i$ multiplied to weights \cite{ref:adpt_dis}
 
 \begin{align}
     \label{dis_f}
@@ -511,9 +515,9 @@ Factor is helpful as an option for efficiency. When some data points are equally
 
 Adaptive population \cite{ref:adpt_pop} can adapt the population size of each generation according to the mean correlation of variation error of the previous population. In our early test the maximal population size that is allowed is set to 5,000 and the adaptive strategy always select the upper bound, as a results of wide parameter space or the wide posterior approximation shape.
 
-[what is factor]
+    [what is factor]
 
-[what is adaptive distance]
+    [what is adaptive distance]
 
 \subsubsection{Experiments results}
 
@@ -541,17 +545,17 @@ The results from data size and prior distribution range is shown in FIGURE. The 
 
 The prior range and distribution can largely affect the execution of SMC (FIGURE and FIGURE). Samples are taken from a high dimensional parameter space in each sampling process, wider prior distribution ranges will making each sampling explore more in the parameter vector space. It suggests that a narrower prior is preferred and we should make a more accurate and confident prior belief as possible for the efficiency concerns.
 
-[discuss uniform and log uniform when result ready]
+    [discuss uniform and log uniform when result ready]
 
 \begin{figure}
     \begin{center}
-    \resizebox{1.0\hsize}{!}{\includegraphics{fig/size1.png}}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/size1.png}}
     \end{center}
-    
+
     \caption[Data size and prior distribution range experiment]%
-        {Data size and prior distribution range experiment. (a) Total required samples, (b) Epsilon values under median epsilon schedule}
+    {Data size and prior distribution range experiment. (a) Total required samples, (b) Epsilon values under median epsilon schedule}
     \label{fig:size}
-    
+
 \end{figure}
 
 [FIGURE HERE]
@@ -574,9 +578,9 @@ The prior range and distribution can largely affect the execution of SMC (FIGURE
 
 Using the suggested options in the previous section, the target data (Figure \ref{fig:obs_data}) is prepared as input for the SMC inference framework. Regarding the result, the population size and number of generations are adjusted several times to obtain an general informative posterior which should be stable across repeated runs and avoid local optimal as much as possible.
 
-Parameter estimation of model 1, 2 and 3 was tried with different prior distribution setting: distribution range [0, 25] and [0, 75], amd distribution type uniform and log-uniform. All these ABC SMC runs uses 2,000 particles per population and 30 generations. 
+Parameter estimation of model 1, 2 and 3 was tried with different prior distribution setting: distribution range [0, 25] and [0, 75], amd distribution type uniform and log-uniform. All these ABC SMC runs uses 2,000 particles per population and 30 generations.
 
-Log-uniform-shaped prior seems to give a better fit of the model, and wider prior range [0, 75] does not give a more accurate result. Then distribution range [0, 25] was tried, in case some parameter have a true posterior laying between [25, 50]. 
+Log-uniform-shaped prior seems to give a better fit of the model, and wider prior range [0, 75] does not give a more accurate result. Then distribution range [0, 25] was tried, in case some parameter have a true posterior laying between [25, 50].
 
 The results of prior distribution log-uniform [0, 50] is shown in Figure \ref{fig:result123}. For model 3, the acceptance rates and epsilon path are presented in Figure \ref{fig:result123_2}. For model 3, the estimated parameters' posterior is shown in Figure \ref{fig:para1}. Figure \ref{fig:result123} plots the estimated curve of models, using the mean value of each parameter's approximated posterior; also 1000 particles (each particle is a parameter set) were sampled and used to generate simulated trajectories of the four variable, and the mean (blue) and 25th to 75th percentile range (grey) are calculated from the 1000 simulated data.
 
@@ -586,9 +590,9 @@ The acceptance rates is fluctuating and have a gradually increase trend for all 
 
 \begin{figure}
     \begin{center}
-    \resizebox{1.0\hsize}{!}{\includegraphics{fig/resultCurve123.png}}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/resultCurve123.png}}
     \end{center}
-    
+
     \caption[Simulated trajectory from the 20th population of model 1, 2 and 3]%
     {Simulated trajectory from the last population of model 1, 2 and 3. Error bar indicates SEM. 500 randomly chosen particles from last population are used to generate a sequence of trajectories where mean and inter-quartile range are calculated from}
     \label{fig:result123}
@@ -599,62 +603,62 @@ The acceptance rates is fluctuating and have a gradually increase trend for all 
 
     \begin{center}
         \resizebox{0.6\hsize}{!}{\includegraphics{fig/eps_acc123.png}}
-        \end{center}
-        
-        \caption{Epsilon trends and acceptance rates of model 1, 2 and 3}
-        \label{fig:result123_2}
-    
+    \end{center}
+
+    \caption{Epsilon trends and acceptance rates of model 1, 2 and 3}
+    \label{fig:result123_2}
+
 \end{figure}
 
 \begin{figure}
     \begin{center}
-    \resizebox{1.0\hsize}{!}{\includegraphics{fig/para1234.png}}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/para1234.png}}
     \end{center}
-    
+
     \caption[Estimated posterior distribution of parameters in model 3]%
     {Estimated posterior distribution of parameters in model 3. Shaded range indicates 25\%--75\% quantile of the population}
     \label{fig:para1}
 
     \begin{center}
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/cmp1.png}}
-        \end{center}
-        
-        \caption[Model comparison of model 1, 2 and 3]%
-        {Model comparison of model 1, 2 and 3. From population 8 to population 30, model3 always wins}
-        \label{fig:cmp1}
-    
+    \end{center}
+
+    \caption[Model comparison of model 1, 2 and 3]%
+    {Model comparison of model 1, 2 and 3. From population 8 to population 30, model3 always wins}
+    \label{fig:cmp1}
+
 \end{figure}
 
 [model comparison among model 1, 2, 3]
 
-Next a model selection experiment with different prior was conducted, using the same ABC-SMC framework. As in the parameter inference, two distributions (uniform and log-uniform) are tested with three different interval ([0, 25], [0, 50] and [0, 75]). The results show that model 3 wins with nearly 100\% model probability at most runs after 30 generations, except log-uniform [0, 75]. All the model probability results are of great discrepancy (e.g. 100\% model 3 and 0\% for model 1 and 2), so Bayesian factor is not calculated. 
+Next a model selection experiment with different prior was conducted, using the same ABC-SMC framework. As in the parameter inference, two distributions (uniform and log-uniform) are tested with three different interval ([0, 25], [0, 50] and [0, 75]). The results show that model 3 wins with nearly 100\% model probability at most runs after 30 generations, except log-uniform [0, 75]. All the model probability results are of great discrepancy (e.g. 100\% model 3 and 0\% for model 1 and 2), so Bayesian factor is not calculated.
 
 Figure \ref{fig:cmp1} shows the model selection process, under log-uniform [0, 50] prior distribution. Model 3 gains total advantage over model 1 and 2 after 7th population. Together with conclusions above, model 3 is considered to be the the best model to represent the target data so far.
- 
+
 
 
 \begin{table}[t!]
     \centering
-    \begin{tabular}{|c c c|} 
-     \hline
-     Parameter & Estimated mean  & Estimated mean  \\ 
-      & value (uniform) &value (log-uniform) \\[0.5ex] 
-     \hline\hline
-     $\lambda_N$ & 14.1 & 13.3 \\ 
-     $a$ & 9.67 & 0.0170  \\ 
-     $\kappa_{N\beta}$ & 18.0 & 0.259 \\
-     $\mu_N$ & 13.2 & 0.0180 \\
-     $\nu_{N\Phi}$ & 0.742 & 0.131 \\
-     \hline
-     $\kappa_{\Phi\beta}$ & 0.239 & 0.156 \\
-     $\mu_\Phi$ & 0.154 & 0.0350 \\
-     \hline
-     $s_{\beta N}$ & 6.75 & 1.21 \\
-     $\mu_\beta$ & 6.38 & 1.32 \\
-     \hline
-     $s_{\alpha\Phi}$ & 17.0 & 5.83 \\
-     $\mu_\alpha$ & 11.9 & 2.43\\
-     \hline
+    \begin{tabular}{|c c c|}
+        \hline
+        Parameter            & Estimated mean  & Estimated mean      \\
+                             & value (uniform) & value (log-uniform) \\[0.5ex]
+        \hline\hline
+        $\lambda_N$          & 14.1            & 13.3                \\
+        $a$                  & 9.67            & 0.0170              \\
+        $\kappa_{N\beta}$    & 18.0            & 0.259               \\
+        $\mu_N$              & 13.2            & 0.0180              \\
+        $\nu_{N\Phi}$        & 0.742           & 0.131               \\
+        \hline
+        $\kappa_{\Phi\beta}$ & 0.239           & 0.156               \\
+        $\mu_\Phi$           & 0.154           & 0.0350              \\
+        \hline
+        $s_{\beta N}$        & 6.75            & 1.21                \\
+        $\mu_\beta$          & 6.38            & 1.32                \\
+        \hline
+        $s_{\alpha\Phi}$     & 17.0            & 5.83                \\
+        $\mu_\alpha$         & 11.9            & 2.43                \\
+        \hline
     \end{tabular}
     \caption[Estimated parameter values of model 3]
     {Estimated parameter values of model 3, using uniform prior distribution and log-uniform prior distribution respectively}
@@ -693,19 +697,19 @@ Figure \ref{fig:resultCurve345} shows the simulated data from the inferred model
 
 \begin{figure}
     \begin{center}
-    \resizebox{1.0\hsize}{!}{\includegraphics{fig/resultCurve345.png}}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/resultCurve345.png}}
     \end{center}
-    
+
     \caption{Simulated data from the last population of model 3, 4 and 5}
     \label{fig:resultCurve345}
-    
+
 \end{figure}
 
 By intuition model 4 and 5 would be the best models sofar that can recover most of observed data features. Model 1, 2 and 3 con also converge to a low final epsilon value (~20), but a key feature observed in target data -- a peak at around 4 hpl -- is not fitted. Some features, e.g. fluctuations in il-1$\beta$ and tnf-$alpha$ trajectories at around 20 hpl are still not ideally fitted; all existing models give a steady or gradually decrease trends for all the four variables after 20 hpl, and fluctuations in the observed data are fitted by smooth and steady curves.
 
 After applying factors, the results were not largely different. As expected, applying factors made the data points at first half (where exists most of the fluctuations) more `focused', however the inferred models are close to one without factors, which could indicate that for model 4 and 5, applying factors will not largely affect the final convergency and the resultant posterior.
 
-When we are trying more populations, an `over-fitting' behaviour is observed at the trajectory of macrophage (FIGURE). In this case, the discrepancy of simulated data and observed data comes from the last 2 data point (72 hpl and 120 hpl). 
+When we are trying more populations, an `over-fitting' behaviour is observed at the trajectory of macrophage (FIGURE). In this case, the discrepancy of simulated data and observed data comes from the last 2 data point (72 hpl and 120 hpl).
 
 Next, we performed a model selection on model 3, 4 and 5. FIGURE shows the model probabilities at different generations. From population 10 to population 20 model 4 gains advantage but after population 20 model 5 is preferred. Again, as DISCUSSED in the model comparison of model 1, 2 and 3, we considered the the violently changing model probability is related to the inference ability at certain epsilon threshold values (epsilon) and possibly the insufficient exploration of the parameter space. Given the present result, model 5 is regarded as the best model. Some further experiments tried larger population size (10,000 particles per population) and more populations (36 populations), but the resultant model did not have a significantly better fit of the observed data, although much more computation resources are used.
 
@@ -743,7 +747,7 @@ Also, some visualisations of the last population agreed with conclusions from PC
 
 The performance experiments were designed to explore the parallel performance of ABC SMC inference framework which were used in the parameter estimation and model selection tasks. Usually ABC SMC is a time-consuming and computation intensive task and ideally executed on large clusters. The scheduling strategy, implementation details and many other factors can affect the parallel efficiency.
 
-[MORE meanings of the performance study]
+    [MORE meanings of the performance study]
 
 \section{Scaling-up}
 
@@ -762,7 +766,7 @@ For HPC systems like Cirrus, \verb|pyabc| uses \verb|multiprocessing| for multi-
 
 The program is executed on Cirrus, using 8, 16, 24, 36, 54 and 72 cores respectively. Each run is repeated 10 times. The average execution time, required sampling numbers are recorded. Hyperthreading is enabled when using 54 and 72 cores. The access to the node that contains computation cores is exclusive, such that the execution would not be affected by other programs of operations.
 
-The implementation of ABC SMC in \verb|pyabc| enables the parallelisation of sampling, which is the must time-consuming part. The rest part of the program is mostly not parallelised, e.g. database I/O and reductions operations. The sampling process involves sampling, perturbation and test of the acceptance criteria, all of which are computation-intensive. 
+The implementation of ABC SMC in \verb|pyabc| enables the parallelisation of sampling, which is the must time-consuming part. The rest part of the program is mostly not parallelised, e.g. database I/O and reductions operations. The sampling process involves sampling, perturbation and test of the acceptance criteria, all of which are computation-intensive.
 
 In practice, using ABC SMC to estimate the parameters of a given model could cost up to several hundred of hours if the computational resources is limited[REF]. The performance experiment result could provide a reference that illustrate that how the efficiency changes when scaling-up or the trade-offs in computational resources' cost and their benefit.
 
@@ -774,7 +778,7 @@ In practice, using ABC SMC to estimate the parameters of a given model could cos
 
 [possible reasons]
 
-The recorded execution time using different number of cores is shown in FIGURE. According to that, speed-up and efficiency can be calculated. Here 8 cores is regarded as the baseline for speed-up and efficiency, as the serial version (using only one core) can take quite a long time to finish 10 repeats. When increasing number of cores, the execution time drops fast at first but the decreasing rate (dropping speed, i.e. the derivative of the execution time against time) is gradually reduced to zero; 36, 54 and 72 cores gives nearly the same average execution time and consequently gains very close speedup values (FIGURE). 
+The recorded execution time using different number of cores is shown in FIGURE. According to that, speed-up and efficiency can be calculated. Here 8 cores is regarded as the baseline for speed-up and efficiency, as the serial version (using only one core) can take quite a long time to finish 10 repeats. When increasing number of cores, the execution time drops fast at first but the decreasing rate (dropping speed, i.e. the derivative of the execution time against time) is gradually reduced to zero; 36, 54 and 72 cores gives nearly the same average execution time and consequently gains very close speedup values (FIGURE).
 
 Denote the number of cores used in the ABC SMC runs as variable $p$. The speedup curve shows a linear trend when $p\leq 36$; when $p\geq 36$ the speedup stays nearly unchanged. $p=36$ is an inflection point, where 36 is the maximum numbers available physical cores in a compute node of Cirrus. A constant drop of efficiency is observed when increasing $p$; smaller $p$ ($p<36$) gives an efficiency higher than 65\% but greater $p$ e.g. $p=72$ results in a low efficiency (34\%).
 
@@ -784,11 +788,11 @@ Due to the unstable sampling numbers, our interests switched to the per-particle
 
 \section{Profiling}
 
-The performance could also be analysed given a profiling report. The second experiment profiles the program to reveal the detailed time consumption for each operation and the possible bottleneck, according to which we could find the hot-spot of program and given possible suggestions on improving the performance. 
+The performance could also be analysed given a profiling report. The second experiment profiles the program to reveal the detailed time consumption for each operation and the possible bottleneck, according to which we could find the hot-spot of program and given possible suggestions on improving the performance.
 
 In this case, profile tools \verb|cProfile| and \verb|yappi| is used in PyCharm IDE.
 
-\subsubsection{Results} 
+\subsubsection{Results}
 
 [profiling results: hot-spot and possible improvements]
 
@@ -834,11 +838,11 @@ In this case, profile tools \verb|cProfile| and \verb|yappi| is used in PyCharm 
 
 \chapter{Future works}
 
-[something not done as scheduled]
+ [something not done as scheduled]
 
-[interesting topics to look inside]
+ [interesting topics to look inside]
 
-[moving to generalisations]
+ [moving to generalisations]
 
 
 
@@ -850,15 +854,15 @@ In this case, profile tools \verb|cProfile| and \verb|yappi| is used in PyCharm 
 
 \chapter{Conclusions}
 
-[what is studied]
+ [what is studied]
 
-[to what extend]
+ [to what extend]
 
-[how good is the result]
+ [how good is the result]
 
-[summary of the findings and advise]
+ [summary of the findings and advise]
 
-[thanks]
+ [thanks]
 
 
 
@@ -880,27 +884,27 @@ Local development machine is a Mac laptop, running on macOS 10.15.6. The environ
 
 \begin{table}[h!]
     \centering
-    \begin{tabular}{|c c|} 
-     \hline
-     Environment & Version \\ [0.5ex] 
-     \hline\hline
-     $\lambda_N$ & 2.1989  \\ 
-     $\kappa_{N\beta}$ & 3.9627  \\
-     $\mu_N$ & 1.7219 \\
-     $\nu_{N\Phi}$  0.2195 & $cell^{-1}\cdotp h^{-1}$ \\
-     \hline
-     $\lambda_\Phi$ & 1.3146  $cell/h$ \\
-     $\kappa_{\Phi\beta}$ 0.1235 & $cell/(unit\cdotp h)$ \\
-     $\mu_\Phi$  0.1454 & $h^{-1}$ \\
-     \hline
-     $s_{\beta N}$ &6.5536  $unit/(cell\cdotp h)$ \\
-     $i_{\beta\Phi}$  1.7062 & $cell^{-1}$ \\
-     $\mu_\beta$ &0.5212  $h^{-1}$ \\
-     \hline
-     $s_{\alpha\Phi}$  10.2416 & $unit/(cell\cdotp h)$ \\
-     $\mu_\alpha$ 19.6642 & $h^{-1}$ \\
-    [1ex] 
-     \hline
+    \begin{tabular}{|c c|}
+        \hline
+        Environment                 & Version                       \\ [0.5ex]
+        \hline\hline
+        $\lambda_N$                 & 2.1989                        \\
+        $\kappa_{N\beta}$           & 3.9627                        \\
+        $\mu_N$                     & 1.7219                        \\
+        $\nu_{N\Phi}$  0.2195       & $cell^{-1}\cdotp h^{-1}$      \\
+        \hline
+        $\lambda_\Phi$              & 1.3146  $cell/h$              \\
+        $\kappa_{\Phi\beta}$ 0.1235 & $cell/(unit\cdotp h)$         \\
+        $\mu_\Phi$  0.1454          & $h^{-1}$                      \\
+        \hline
+        $s_{\beta N}$               & 6.5536  $unit/(cell\cdotp h)$ \\
+        $i_{\beta\Phi}$  1.7062     & $cell^{-1}$                   \\
+        $\mu_\beta$                 & 0.5212  $h^{-1}$              \\
+        \hline
+        $s_{\alpha\Phi}$  10.2416   & $unit/(cell\cdotp h)$         \\
+        $\mu_\alpha$ 19.6642        & $h^{-1}$                      \\
+        [1ex]
+        \hline
     \end{tabular}
     \caption{Environment on local machine}
     \label{table:local_macine}
@@ -910,27 +914,27 @@ Local development machine is a Mac laptop, running on macOS 10.15.6. The environ
 
 \begin{table}[h!]
     \centering
-    \begin{tabular}{|c c|} 
-     \hline
-     Environment & Version \\ [0.5ex] 
-     \hline\hline
-     $\lambda_N$ & 2.1989  \\ 
-     $\kappa_{N\beta}$ & 3.9627  \\
-     $\mu_N$ & 1.7219 \\
-     $\nu_{N\Phi}$  0.2195 & $cell^{-1}\cdotp h^{-1}$ \\
-     \hline
-     $\lambda_\Phi$ & 1.3146  $cell/h$ \\
-     $\kappa_{\Phi\beta}$ 0.1235 & $cell/(unit\cdotp h)$ \\
-     $\mu_\Phi$  0.1454 & $h^{-1}$ \\
-     \hline
-     $s_{\beta N}$ &6.5536  $unit/(cell\cdotp h)$ \\
-     $i_{\beta\Phi}$  1.7062 & $cell^{-1}$ \\
-     $\mu_\beta$ &0.5212  $h^{-1}$ \\
-     \hline
-     $s_{\alpha\Phi}$  10.2416 & $unit/(cell\cdotp h)$ \\
-     $\mu_\alpha$ 19.6642 & $h^{-1}$ \\
-    [1ex] 
-     \hline
+    \begin{tabular}{|c c|}
+        \hline
+        Environment                 & Version                       \\ [0.5ex]
+        \hline\hline
+        $\lambda_N$                 & 2.1989                        \\
+        $\kappa_{N\beta}$           & 3.9627                        \\
+        $\mu_N$                     & 1.7219                        \\
+        $\nu_{N\Phi}$  0.2195       & $cell^{-1}\cdotp h^{-1}$      \\
+        \hline
+        $\lambda_\Phi$              & 1.3146  $cell/h$              \\
+        $\kappa_{\Phi\beta}$ 0.1235 & $cell/(unit\cdotp h)$         \\
+        $\mu_\Phi$  0.1454          & $h^{-1}$                      \\
+        \hline
+        $s_{\beta N}$               & 6.5536  $unit/(cell\cdotp h)$ \\
+        $i_{\beta\Phi}$  1.7062     & $cell^{-1}$                   \\
+        $\mu_\beta$                 & 0.5212  $h^{-1}$              \\
+        \hline
+        $s_{\alpha\Phi}$  10.2416   & $unit/(cell\cdotp h)$         \\
+        $\mu_\alpha$ 19.6642        & $h^{-1}$                      \\
+        [1ex]
+        \hline
     \end{tabular}
     \caption{Environment on remote machine}
     \label{table:remote_macine}
@@ -951,26 +955,26 @@ Local development machine is a Mac laptop, running on macOS 10.15.6. The environ
 
 \begin{table}[h!]
     \centering
-    \begin{tabular}{|c c c|} 
-     \hline
-     Parameter & Value & Unit\\ [0.5ex] 
-     \hline\hline
-     $\lambda_N$ & 2.20 & $cell/h$  \\ 
-     $\kappa_{N\beta}$ & 3.96 & $cell/(unit\cdotp h)$\\
-     $\mu_N$ & 1.72 & $h^{-1}$\\
-     $\nu_{N\Phi}$ & 0.220 & $cell^{-1}\cdotp h^{-1}$ \\
-     \hline
-     $\lambda_\Phi$ & 1.31 & $cell/h$ \\
-     $\kappa_{\Phi\beta}$ & 0.124 & $cell/(unit\cdotp h)$ \\
-     $\mu_\Phi$ & 0.145 & $h^{-1}$ \\
-     \hline
-     $s_{\beta N}$ & 6.554 & $unit/(cell\cdotp h)$ \\
-     $i_{\beta\Phi}$ & 1.71 & $cell^{-1}$ \\
-     $\mu_\beta$ & 0.521 & $h^{-1}$ \\
-     \hline
-     $s_{\alpha\Phi}$ & 10.2 & $unit/(cell\cdotp h)$ \\
-     $\mu_\alpha$ & 19.1 & $h^{-1}$ \\
-     \hline
+    \begin{tabular}{|c c c|}
+        \hline
+        Parameter            & Value & Unit                     \\ [0.5ex]
+        \hline\hline
+        $\lambda_N$          & 2.20  & $cell/h$                 \\
+        $\kappa_{N\beta}$    & 3.96  & $cell/(unit\cdotp h)$    \\
+        $\mu_N$              & 1.72  & $h^{-1}$                 \\
+        $\nu_{N\Phi}$        & 0.220 & $cell^{-1}\cdotp h^{-1}$ \\
+        \hline
+        $\lambda_\Phi$       & 1.31  & $cell/h$                 \\
+        $\kappa_{\Phi\beta}$ & 0.124 & $cell/(unit\cdotp h)$    \\
+        $\mu_\Phi$           & 0.145 & $h^{-1}$                 \\
+        \hline
+        $s_{\beta N}$        & 6.554 & $unit/(cell\cdotp h)$    \\
+        $i_{\beta\Phi}$      & 1.71  & $cell^{-1}$              \\
+        $\mu_\beta$          & 0.521 & $h^{-1}$                 \\
+        \hline
+        $s_{\alpha\Phi}$     & 10.2  & $unit/(cell\cdotp h)$    \\
+        $\mu_\alpha$         & 19.1  & $h^{-1}$                 \\
+        \hline
     \end{tabular}
     \caption{Parameter values used for model 1}
     \label{table:m1}
@@ -981,21 +985,21 @@ Local development machine is a Mac laptop, running on macOS 10.15.6. The environ
 \begin{figure}[h!]
 
     \begin{center}
-    \resizebox{1.0\hsize}{!}{\includegraphics{fig/kernel2.png}}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/kernel2.png}}
     \end{center}
-    
+
     \caption[Total sampling size of different kernels, using median epsilon strategy]
     {Total sampling size of different kernels, using median epsilon strategy. Different color represents different generations (bottom to top: population 1 to population 20)}
     \label{fig:kernel2}
 
     \begin{center}
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/acceptance2.png}}
-        \end{center}
-        
-        \caption[Acceptance rates of different kernels, using median epsilon strategy]
-        {Acceptance rates of different kernels, using median epsilon strategy. Each population has 2000 particles} 
-        \label{fig:acceptance2}
-    
+    \end{center}
+
+    \caption[Acceptance rates of different kernels, using median epsilon strategy]
+    {Acceptance rates of different kernels, using median epsilon strategy. Each population has 2000 particles}
+    \label{fig:acceptance2}
+
 \end{figure}
 
 
@@ -1004,13 +1008,13 @@ Local development machine is a Mac laptop, running on macOS 10.15.6. The environ
 \begin{figure}[H]
 
     \begin{center}
-    \resizebox{1.0\hsize}{!}{\includegraphics{fig/resultCurve_uni.png}}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/resultCurve_uni.png}}
     \end{center}
-    
-    \caption{Total sampling size} 
+
+    \caption{Total sampling size}
     \label{fig:resultCurve_uni}
 
-    
+
 \end{figure}
 
 
@@ -1026,25 +1030,27 @@ Local development machine is a Mac laptop, running on macOS 10.15.6. The environ
 
 \begin{thebibliography}{100}
 
-\bibitem{ref:Tsarouchas} Tsarouchas, T.M., Wehner, D., Cavone, L., Munir, T., Keatinge, M., Lambertus, M., Underhill, A., Barrett, T., Kassapis, E., Ogryzko, N. and Feng, Y., 2018. Dynamic control of proinflammatory cytokines Il-1$\beta$ and Tnf-$\alpha$ by macrophages in zebrafish spinal cord regeneration. Nature communications, 9(1), pp.1-17.
+    \bibitem{axonal} Becker, T., Wullimann, M.F., Becker, C.G., Bernhardt, R.R. and Schachner, M., 1997. Axonal regrowth after spinal cord transection in adult zebrafish. Journal of Comparative Neurology, 377(4), pp.577-595.
 
-\bibitem{ref:pyabc} Klinger, E., Rickert, D. and Hasenauer, J., 2018. pyABC: distributed, likelihood-free inference. Bioinformatics, 34(20), pp.3591-3593.
+    \bibitem{ref:Tsarouchas} Tsarouchas, T.M., Wehner, D., Cavone, L., Munir, T., Keatinge, M., Lambertus, M., Underhill, A., Barrett, T., Kassapis, E., Ogryzko, N. and Feng, Y., 2018. Dynamic control of proinflammatory cytokines Il-1$\beta$ and Tnf-$\alpha$ by macrophages in zebrafish spinal cord regeneration. Nature communications, 9(1), pp.1-17.
 
-\bibitem{ref:kernel} Filippi, S., Barnes, C. P., Cornebise, J., and Stumpf, M..H. (2013). On optimality of kernels for approximate Bayesian computation using sequential Monte Carlo. Statistical Applications in Genetics and Molecular Biology 12, 1, 87-107.
+    \bibitem{ref:pyabc} Klinger, E., Rickert, D. and Hasenauer, J., 2018. pyABC: distributed, likelihood-free inference. Bioinformatics, 34(20), pp.3591-3593.
 
-\bibitem{ref:abcsysbio} Liepe, J., Kirk, P., Filippi, S., Toni, T., Barnes, C.P., and Stumpf, M.P.H., 2014. A framework for parameter estimation and model selection from experimental data in systems biology using approximate Bayesian computation. Nature Protocols. 9 (2) pp. 439–456. 
+    \bibitem{ref:kernel} Filippi, S., Barnes, C. P., Cornebise, J., and Stumpf, M..H. (2013). On optimality of kernels for approximate Bayesian computation using sequential Monte Carlo. Statistical Applications in Genetics and Molecular Biology 12, 1, 87-107.
 
-\bibitem{ref:compare} Daly AC, Cooper J, GavaghanDJ, Holmes C. 2017. Comparing two sequentialMonte Carlo samplers for exact andapproximate Bayesian inference on biologicalmodels.J. R. Soc. Interface14: 20170340.
+    \bibitem{ref:abcsysbio} Liepe, J., Kirk, P., Filippi, S., Toni, T., Barnes, C.P., and Stumpf, M.P.H., 2014. A framework for parameter estimation and model selection from experimental data in systems biology using approximate Bayesian computation. Nature Protocols. 9 (2) pp. 439–456.
 
-\bibitem{ref:disease} Minter, A. and Retkute, R., 2019. Approximate Bayesian Computation for infectious disease modelling. Epidemics, 29, p.100368.
+    \bibitem{ref:compare} Daly AC, Cooper J, GavaghanDJ, Holmes C. 2017. Comparing two sequentialMonte Carlo samplers for exact andapproximate Bayesian inference on biologicalmodels.J. R. Soc. Interface14: 20170340.
 
-\bibitem{ref:adpt_dis} Prangle, D., 2017. Adapting the ABC distance function. Bayesian Analysis, 12(1), pp.289-309.
+    \bibitem{ref:disease} Minter, A. and Retkute, R., 2019. Approximate Bayesian Computation for infectious disease modelling. Epidemics, 29, p.100368.
 
-\bibitem{ref:adpt_pop} Klinger, E. and Hasenauer, J., 2017, September. A scheme for adaptive selection of population sizes in approximate Bayesian computation-sequential Monte Carlo. In International Conference on Computational Methods in Systems Biology (pp. 128-144). Springer, Cham.
+    \bibitem{ref:adpt_dis} Prangle, D., 2017. Adapting the ABC distance function. Bayesian Analysis, 12(1), pp.289-309.
 
-\bibitem{Toni} Toni, T., Welch, D., Strelkowa, N., Ipsen, A. and Stumpf, M.P., 2009. Approximate Bayesian computation scheme for parameter inference and model selection in dynamical systems. Journal of the Royal Society Interface, 6(31), pp.187-202.
+    \bibitem{ref:adpt_pop} Klinger, E. and Hasenauer, J., 2017, September. A scheme for adaptive selection of population sizes in approximate Bayesian computation-sequential Monte Carlo. In International Conference on Computational Methods in Systems Biology (pp. 128-144). Springer, Cham.
 
-\bibitem{sensitivity} Gutenkunst, R.N., Waterfall, J.J., Casey, F.P., Brown, K.S., Myers, C.R. and Sethna, J.P., 2007. Universally sloppy parameter sensitivities in systems biology models. PLoS Comput Biol, 3(10), p.e189.
+    \bibitem{Toni} Toni, T., Welch, D., Strelkowa, N., Ipsen, A. and Stumpf, M.P., 2009. Approximate Bayesian computation scheme for parameter inference and model selection in dynamical systems. Journal of the Royal Society Interface, 6(31), pp.187-202.
+
+    \bibitem{sensitivity} Gutenkunst, R.N., Waterfall, J.J., Casey, F.P., Brown, K.S., Myers, C.R. and Sethna, J.P., 2007. Universally sloppy parameter sensitivities in systems biology models. PLoS Comput Biol, 3(10), p.e189.
 
 \end{thebibliography}
 
