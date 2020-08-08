@@ -177,8 +177,40 @@ In our study of the regeneration model, full trajectories of the dependent varia
 Instead of fixing the threshold value, the algorithm can be more adaptive by using a sequence of deceasing threshold values $\epsilon_t$, and derive a new population (called generation) of accepted sampled from the previous accepted samples (called particles). An example is ABC SMC \cite{Toni}, which can significantly reduce the required samples compared to ABC-rejection \cite{ref:disease}:
 
 \begin{enumerate}
-    \item 
+    \item Set a threshold schedule $\{\epsilon_1, \epsilon_2, ..., \epsilon_T\}$ where $T$ is the total number of populations and $\{\epsilon_1, \epsilon_2, ..., \epsilon_T\}$ is a descending sequence; set the number of particles in each population as $N$, set the population index $t=1$
+    \item if $t=1$, draw samples from prior distribution until $N$ particles are accepted under threshold $\epsilon_1$, i.e. each of $N$ particles s.t. $d(D,D^*)<\epsilon_1$
+    
+    Else ($t>1$), draw samples from previous population $\{\theta^*_{t-1}\}$ with weights $\{w_{t-1}\}$, perturb the particles using a perturbation kernel $K(\theta^*|\theta)$ and obtain $\theta^{**}\sim K(\theta^*|\theta)$
+    \item Repeat step 2 until $N$ particles are accept under threshold $\epsilon_t$
+    \item Calculate the weights of the accepted particles. For particle $i$ 
+    \begin{align}
+        \label{eq:weight}
+        w^i_t =\begin{cases}
+            1 & \text{if t=1} \\
+            \frac{p(\theta^i_t)}{\sum_{j=1}^{N} w^j_{t-1}K(\theta^j_t|\theta^j_{t-1})} & \text{if t $\neq$ 1} 
+        \end{cases}
+    \end{align}
+    
+    \item Normalise $\{w^i_t\}$, increase population index $t$ by 1
+    \item Repeat step 2, 3 and 4 until $t>N$
+    \item Output the accepted particles $\{\theta^*_{t}\}$ and their weights $\{w^i_t\}$ in each generation $t$
+
 \end{enumerate}
+
+An illustrative graph of the ABC SMC procedures can be found in Figure \ref{fig:smc}.
+
+\begin{figure}[t]
+    \begin{center}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/smc.png}}
+    \end{center}
+
+    \caption[ABC SMC sampling process]%
+    {ABC SMC sampling process. $\theta^*$ denotes a sample drawn from previous population, which is used to generate simulated data $D^*$. $d$ is a distance measurement, $d(D^*,D)$ represents the discrepancy between observed data and simulated data. for each population $t$, $\epsilon_t$ is a threshold criterion to determine whether to accept that drawn sample}
+    \label{fig:smc}
+
+\end{figure}
+
+
 
 \section{Software tools}
 
@@ -481,16 +513,16 @@ Among them the following topics are studied using the synthetic data.
 
 Perturbation kernels work in the sampling process. In each generation $t$, samples are firstly taken from the previous population $\{\theta_{t-1}\}$ with weights $\{w_{t-1}\}$, then perturbed using the perturbation kernel $K(\theta|\theta^*)$. We keep sampling until $N$ particles are accepted, where $N$ is the pre-set population size. After that the new weights are calculated and normalised.
 
-\begin{figure}[t!]
-    \begin{center}
-        \resizebox{1.0\hsize}{!}{\includegraphics{fig/smc.png}}
-    \end{center}
+% \begin{figure}[t!]
+%     \begin{center}
+%         \resizebox{1.0\hsize}{!}{\includegraphics{fig/smc.png}}
+%     \end{center}
 
-    \caption[ABC SMC sampling process]%
-    {ABC SMC sampling process. $\theta^*$ denotes a sample drawn from previous population, which is used to generate simulated data $D^*$. $d$ is a distance measurement, $d(D^*,D)$ represents the discrepancy between observed data and simulated data. for each population $t$, $\epsilon_t$ is a threshold criterion to determine whether to accept that drawn sample}
-    \label{fig:smc}
+%     \caption[ABC SMC sampling process]%
+%     {ABC SMC sampling process. $\theta^*$ denotes a sample drawn from previous population, which is used to generate simulated data $D^*$. $d$ is a distance measurement, $d(D^*,D)$ represents the discrepancy between observed data and simulated data. for each population $t$, $\epsilon_t$ is a threshold criterion to determine whether to accept that drawn sample}
+%     \label{fig:smc}
 
-\end{figure}
+% \end{figure}
 
 The perturbation kernel is called in the sampling of every particles and determines how the new perturbed particle is chosen, thus it is influential to both computation complexity and the resultant posterior distribution. Generally, a local perturbation kernel may face the risk of being stuck in local modes (e,g., local optimal), but it may need less computational operations, or could generate a population with a higher acceptance rate if the successive epsilon values are close; A kernel with wide variance, or spreading out in a large space could help in resolving the local optimal problem by a more thoroughly exploration of the parameter space, however it can be more computation-intensive and result in a lower acceptance rate. A desired optimal kernel should balance the trade-offs; their property and criteria is discussed in \cite{ref:kernel}.
 
