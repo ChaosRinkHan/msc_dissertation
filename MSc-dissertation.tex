@@ -103,7 +103,7 @@ This dissertation includes the implementations and experiments of parameter esti
 
 \section{Zebrafish spinal cord regeneration}
 
-[describe the process and how cells and cytokines are involved]
+ [describe the process and how cells and cytokines are involved]
 
 Compared to mammals, zebrafish can regenerate spinal cord after injury, and possibly recover swimming function. They are widely used in regenerative ability researches. Experiments found that although being cut off, the axonal of nerve cells can regenerate and bridge across the lesion site, which critically determined whether zebrafish can regain the swimming function \cite{axonal}. Tsarouchas et al. \cite{ref:Tsarouchas} studied the the complex interactions happen at the lesion site. The inflammation affects the regeneration, as if it is promoted, it accelerates the axonal regeneration; if it is inhibited, it reduces the regeneration. Further experiments showed that two kinds of cytokines, il-1$\beta$ and tnf-$\alpha$, affect the inflammation, which are dynamically controlled by immunes cells, i.e. cytokines works as media to control the regeneration. Here cytokines are small proteins, work as messenger to pass signal across different cells, which are similar to hormones and neurotransmitter.
 
@@ -119,9 +119,17 @@ The biological background of works in this dissertation is mostly related the th
 
  [general topics of mathematical models: how to build model according to interactions; how to calibrate/ parameterise the model; how to solve the model; dynamics; how to evaluate the model]
 
- Mathematical models can express real-life questions in mathematical forms, and provide qualitative or quantitative inside-look of the question through various mathematical tools and techniques. Mathematical models can be used for prediction, classification and other tasks and thus widely used to solve practical problems. However, for a model that describe the zebrafish spinal cord regeneration process, we were less interested to the model's predictive functionality; the main focus is on the explore of uncertainty in parameter estimates and comparison with alternative models.
- 
- According to 
+Mathematical models can express real-life questions in mathematical forms, and provide qualitative or quantitative inside-look of the question through various mathematical tools and techniques. Mathematical models can be used for prediction, classification, testing our understanding or hypothesis and many other tasks, thus they are widely used to solve practical problems. However, for a model that describe the zebrafish spinal cord regeneration process, we were less interested to the model's predictive functionality; the main focus is on the explore of uncertainty in parameter estimates and comparison with alternative models. In this case, we wish to use modelling techniques to test our inference method, our hypothesis and hopefully an well-fitted models can be found and compared.
+
+According to our understanding of the biological mechanism in the regeneration, hypothesis should firstly proposed, in a way which can represent the real  mechanism as much as possible. Usually a real-life problem, e.g. the spinal cord regeneration, consists of complex dynamics and interactions with many other environmental factors to be considered, An elaborate description of the real cases using a mathematical model sometimes can be impossible; assumptions and hypothesis are proposed to make necessary simplification and abstract for a final reasonably detailed model. Some qualitative models are simple but illustrative for the real-life observed patterns, e.g. Lotka-Volterra (L-V) equation for predator and prey models; they are usually analytically solvable and some properties are used to make predictions (e.g. steady states in ecosystem). If a more precise model is desired, usually more effects or interactions are considered and added as terms to a re-constructed model, e.g. environmental factors, a changing environmental capacity and predation from other species.
+
+Models like L-V equation are mostly analytically solvable when analysing properties of the model, however, analytical solution for many models are not feasible, because of more complex dynamics, or the model itself is not a deterministic model. In the areas that are not analytically feasible, usually computational techniques are applied for approximate solutions. Solvers for different models are used to simulate the system or find roots for some spacial points.
+
+For the regeneration process that we wanted to model, differential equations are our preference. Non-linear ordinary differential equations are used in this dissertation, where the only independent variable is time $t$ denoting the post-lesion time (hours), but further models can also consider other models e.g. stochastic models and partial differential equations. For ordinary differential equations (ODE) system, there are several available computational solvers using different algorithms, implemented in MATLAB\footnote[1] {\url{https://uk.mathworks.com/help/matlab/math/choose-an-ode-solver.html}}, Python\footnote[2]{\url{https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html}} and many other languages. These solvers help to simulate the trajectories of the dependent variables, given initial values and a set of fixed parameters. The goodness of `fit' then can be measured by compared the simulated data and observed real data.
+
+Often further researches on the modelled problems require the model to be deterministic on its parameters. Parameters in the dynamic system models usually have their practical significance, e.g. describing reaction speed, environmental capacity or the birth rate. There are many approaches to derive these parameters from data or experience. For a specific problem and a widely used models, the parameters' values can be read from previous literatures; however in many others cases, we need to find parameter's values specifically for our model and problem, where numerical values for parameters are more suitable for practical analysis using ODE solvers or other tasks.
+
+To find the best parameters' values given observed data, either optimisation-based approaches (e.g. least-square (LS) fit) or inference approaches can be used. Optimisation-based approaches may face two major drawbacks: over-fitting and local optima \cite{ref:abcsysbio}. Bayesian inference approaches gain popularity in recent years, which can relief the concerns in over-fitting and provide a measurement for the uncertainty in the inferred values. Local optima can still be a major concern, and many efforts have be proposed for a more through explore of the parameter space.
 
 
 
@@ -135,11 +143,61 @@ The biological background of works in this dissertation is mostly related the th
 
  [model comparison, ABC SMC for model comparison]
 
+ Bayesian inference approaches put Bayes Rule in the centre:
+
+ \begin{align}
+    \label{eq:bayes}
+    p(\theta|D) = \frac{p(D|\theta)p(\theta)}{P(D)}
+\end{align}
+
+where $p$ is the probability density function, $\theta$ denotes the parameter set, $D$ is the given observed data.
+
+Alternatively, as $p(D)$ is fixed once the observed data is given, the rule can be rewritten as 
+
+\begin{align}
+    \label{eq:bayes2}
+    p(\theta|D) \propto l(D|\theta)p(\theta)
+\end{align}
+
+where $l$ represents the likelihood function. In words, Eqn \ref{eq:bayes2} can be described as `posterior is proportional to the product of likelihood and prior', and here posterior of parameters is our target. Prior $p(\theta)$ should express our initial believes or estimates on the parameter valeus before observing the data and conducting experiments, and likelihood function $l(D|\theta)$ is used to describe how well the parameter set $\theta$ explains the data $D$, in probability numbers. Once the data is given, $\theta$ is the only parameter in the likelihood function. Some optimisation-based methods try to find an estimation of parameter set $\theta$ s.t. maximise the likelihood, such methods will struggle when facing a problem where it is hard to specify an analytical expression of likelihood function, let alone the derivative.
+
+Based on Eqn \ref{eq:bayes2}, to find the posterior of parameter set, prior can be set according to the problem context and our understanding and cover a reasonable ranges; computational methods can be used to approximate likelihood function, e.g. Markov Chain Monte Carlo (MCMC) \cite{ref:MCMC}. As another alterative solution, Approximate Bayesian computation (ABC) approaches do not focus on the evaluation of likelihood, but focused on simulating the data from the given model and observed data, then used the simulated data to approximate the desired posterior. ABC-rejection \cite{ABC_rejection} is a simple example of the ABC process, and further algorithms e.g. sequential Monte-Carlo (ABC SMC)\cite{Toni} are proposed to improve the efficiency.
+
+General steps for ABC algorithm includes the following (ABC-rejection):
+
+\begin{enumerate}
+    \item Draw a sample $\theta^*$ from parameters' prior distribution. $\theta^*$ is a vector that consists values for each parameter
+    \item Plug $\theta^*$ into the model, and use the model to generate simulated data $D^*$, where $D^*$ is of the same form as the observed data $D$, e.g. includes same summary statistics
+    \item The discrepancy between the simulated data and observed data is measured by a distance function $d(D^*, D)$. For a pre-fixed threshold value $\epsilon$, if $d(D^*, D)<\epsilon$ then the sample $\theta^*$ is accepted
+    \item Repeat 1, 2 and 3 until enough numbers of samples are accepted. The posterior distribution can be approximated by these samples
+\end{enumerate}
+
+In our study of the regeneration model, full trajectories of the dependent variables are used as the data to be compared, as our goal is to find a model and a parameter set that can intuitively recover the real process as much as possible. The mean values at each time point for each dependent variable is calculated to form $D$, and for each sample, the ODE is accumulatively solved at the same time points and generate the simulated trajectories $D^*$. Using other statistics to summary the raw data are also possible bur care must be taken as the choice of summary statistics can largely affect the resultant posterior \cite{summaryD, summaryD2}.
+
+Instead of fixing the threshold value, the algorithm can be more adaptive by using a sequence of deceasing threshold values $\epsilon_t$, and derive a new population (called generation) of accepted sampled from the previous accepted samples (called particles). An example is ABC SMC \cite{Toni}, which can significantly reduce the required samples compared to ABC-rejection \cite{ref:disease}:
+
+\begin{enumerate}
+    \item 
+\end{enumerate}
+
 \section{Software tools}
 
  [existing tools and software for this task]
 
  [workflow and developing process]
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \chapter{Mathematical modelling}
 
@@ -1050,6 +1108,14 @@ Local development machine is a Mac laptop, running on macOS 10.15.6. The environ
     \bibitem{ref:kernel} Filippi, S., Barnes, C. P., Cornebise, J., and Stumpf, M..H. (2013). On optimality of kernels for approximate Bayesian computation using sequential Monte Carlo. Statistical Applications in Genetics and Molecular Biology 12, 1, 87-107.
 
     \bibitem{ref:abcsysbio} Liepe, J., Kirk, P., Filippi, S., Toni, T., Barnes, C.P., and Stumpf, M.P.H., 2014. A framework for parameter estimation and model selection from experimental data in systems biology using approximate Bayesian computation. Nature Protocols. 9 (2) pp. 439–456.
+
+    \bibitem{ref:MCMC} Gilks, W.R., Richardson, S. and Spiegelhalter, D.J., 1996. Markov Chain Monte Carlo in Practice Chapman \& Hall: London. Markov Chain Monte Carlo in practice. Chapman and Hall, London.
+
+    \bibitem{ABC_rejection} Tavaré, S., Balding, D.J., Griffiths, R.C. and Donnelly, P., 1997. Inferring coalescence times from DNA sequence data. Genetics, 145(2), pp.505-518.
+
+    \bibitem{summaryD} Joyce, P. and Marjoram, P., 2008. Approximately sufficient statistics and Bayesian computation. Statistical applications in genetics and molecular biology, 7(1).
+
+    \bibitem{summaryD2} Nunes, M.A. and Balding, D.J., 2010. On optimal selection of summary statistics for approximate Bayesian computation. Statistical applications in genetics and molecular biology, 9(1).
 
     \bibitem{ref:compare} Daly AC, Cooper J, GavaghanDJ, Holmes C. 2017. Comparing two sequentialMonte Carlo samplers for exact andapproximate Bayesian inference on biologicalmodels.J. R. Soc. Interface14: 20170340.
 
