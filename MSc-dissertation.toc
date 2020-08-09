@@ -41,10 +41,10 @@
 \contentsline {chapter}{\numberline {A}System and software environment}{38}{appendix.A}% 
 \contentsline {section}{\numberline {A.1}ABC SMC implementation}{38}{section.A.1}% 
 \contentsline {subsection}{\numberline {A.1.1}Local machine}{38}{subsection.A.1.1}% 
-\contentsline {subsection}{\numberline {A.1.2}Remote machine}{38}{subsection.A.1.2}% 
-\contentsline {section}{\numberline {A.2}Data analysis}{38}{section.A.2}% 
+\contentsline {subsection}{\numberline {A.1.2}Remote machine}{39}{subsection.A.1.2}% 
+\contentsline {section}{\numberline {A.2}Data analysis}{39}{section.A.2}% 
 \contentsline {chapter}{\numberline {B}Data and settings}{40}{appendix.B}% 
 \contentsline {section}{\numberline {B.1}Infer-back experiments}{40}{section.B.1}% 
 \contentsline {subsection}{\numberline {B.1.1}Parameter values used to generate synthetic data}{40}{subsection.B.1.1}% 
-\contentsline {subsection}{\numberline {B.1.2}Kernel experiment: median epsilon schedule}{42}{subsection.B.1.2}% 
+\contentsline {subsection}{\numberline {B.1.2}Kernel experiment: median epsilon schedule}{41}{subsection.B.1.2}% 
 \contentsline {section}{\numberline {B.2}Parameter inference and model comparison results}{42}{section.B.2}% 
