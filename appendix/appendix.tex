@@ -13,29 +13,60 @@ Local development machine is a Mac laptop, running on macOS 10.15.6. The environ
     \centering
     \begin{tabular}{|c c|}
         \hline
-        Environment                 & Version                       \\ [0.5ex]
+        Environment        & Version                \\ [0.5ex]
         \hline\hline
-        $\lambda_N$                 & 2.1989                        \\
-        $\kappa_{N\beta}$           & 3.9627                        \\
-        $\mu_N$                     & 1.7219                        \\
-        $\nu_{N\Phi}$  0.2195       & $cell^{-1}\cdotp h^{-1}$      \\
-        \hline
-        $\lambda_\Phi$              & 1.3146  $cell/h$              \\
-        $\kappa_{\Phi\beta}$ 0.1235 & $cell/(unit\cdotp h)$         \\
-        $\mu_\Phi$  0.1454          & $h^{-1}$                      \\
-        \hline
-        $s_{\beta N}$               & 6.5536  $unit/(cell\cdotp h)$ \\
-        $i_{\beta\Phi}$  1.7062     & $cell^{-1}$                   \\
-        $\mu_\beta$                 & 0.5212  $h^{-1}$              \\
-        \hline
-        $s_{\alpha\Phi}$  10.2416   & $unit/(cell\cdotp h)$         \\
-        $\mu_\alpha$ 19.6642        & $h^{-1}$                      \\
-        [1ex]
+        Operating system   & macOS Catalina 10.15.6 \\
+        PyCharm (IDE)      & Professional 202.2     \\
+        Python interpretor & 3.7.0                  \\
+        IPython            & 7.12.0                 \\
+        Clang              & 6.0 (clang-600.0.57)   \\
         \hline
     \end{tabular}
     \caption{Environment on local machine}
     \label{table:local_macine}
 \end{table}
+
+Version requirements for some critical site packages (\verb|Python|) used in the code are listed in Table \ref{table:local_package}.
+
+\begin{table}
+    \centering
+    \begin{tabular}{|c c|}
+        \hline
+        Environment & Version         \\ [0.5ex]
+        \hline\hline
+        pyABC       & $\simeq$ 0.10.3 \\
+        NumPy       & $\simeq$ 1.18.4 \\
+        SciPy       & $\simeq$ 1.4.1  \\
+        pandas      & $\simeq$ 1.1.0  \\
+        matplotlib  & $\simeq$ 3.0.1  \\
+        bokeh       & $=$ 1.4.0       \\
+        \hline
+    \end{tabular}
+    \caption{Site packages on local machine}
+    \label{table:local_package}
+\end{table}
+
+Local development and some runs of small size were done under the hardware listed in Table \ref{table:local_hardware}. When running ABC SMC, the program can make used of 8 python process (Hyper-Threading enabled) and run under 3.8GHz (maximal) for a long time under proper cooling, proved that the program could efficiently use the computation resources for a local personal computer. It is noted that the program took no advantage of graphics card, as \verb|multiprocessing| along can out exploit the resources inside CPU. The execution time and other performance data presented in Chapter 5 were obtained using remote machines but not local machine.
+
+\begin{table}
+    \centering
+    \begin{tabular}{|c c|}
+        \hline
+        Hardware        & Detail                                \\ [0.5ex]
+        \hline\hline
+        CPU             & Quad-Core Intel Core i5 8259U 2.3 GHz \\
+        Architecture    & 64 Bit                                \\
+        Hyper-Threading & Supported                             \\
+        Turbo Boost     & Max 3.8 GHz                           \\
+        Memory          & 16 GB                                  \\
+        Graphics card   & Iris Plus Graphics 655                \\
+        \hline
+    \end{tabular}
+    \caption{Hardwares on local machine}
+    \label{table:local_hardware}
+\end{table}
+
+
 
 \subsection{Remote machine}
 
@@ -45,22 +76,7 @@ Local development machine is a Mac laptop, running on macOS 10.15.6. The environ
         \hline
         Environment                 & Version                       \\ [0.5ex]
         \hline\hline
-        $\lambda_N$                 & 2.1989                        \\
-        $\kappa_{N\beta}$           & 3.9627                        \\
-        $\mu_N$                     & 1.7219                        \\
-        $\nu_{N\Phi}$  0.2195       & $cell^{-1}\cdotp h^{-1}$      \\
-        \hline
-        $\lambda_\Phi$              & 1.3146  $cell/h$              \\
-        $\kappa_{\Phi\beta}$ 0.1235 & $cell/(unit\cdotp h)$         \\
-        $\mu_\Phi$  0.1454          & $h^{-1}$                      \\
-        \hline
-        $s_{\beta N}$               & 6.5536  $unit/(cell\cdotp h)$ \\
-        $i_{\beta\Phi}$  1.7062     & $cell^{-1}$                   \\
-        $\mu_\beta$                 & 0.5212  $h^{-1}$              \\
-        \hline
-        $s_{\alpha\Phi}$  10.2416   & $unit/(cell\cdotp h)$         \\
-        $\mu_\alpha$ 19.6642        & $h^{-1}$                      \\
-        [1ex]
+        Placeholder                 & 2\\
         \hline
     \end{tabular}
     \caption{Environment on remote machine}

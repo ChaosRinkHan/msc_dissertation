@@ -125,4 +125,8 @@ The feature that ABC algorithm can perform likelihood-free inference makes it wi
 
  A software packages that integrally implement ABC SMC is preferred, and more options in the settings of the algorithm, more customisable features can make it better. Moreover, as the ABC SMC itself is a computationally intensive task that consists of massive parallel potentials, an ideal software is expected to support as least one kind of parallel options e.g. multi-core, GPU accelerating and clusters. Otherwise, a modification or rewrite of the software package are expected to produce a reliable input-output framework for our parameter estimation and model selection experiments.
 
- Preliminarily \verb|pyABC| \cite{ref:pyabc} in \verb|Python| was chosen for our first implementations. 
+ Preliminarily \verb|pyABC| \cite{ref:pyabc} in \verb|Python| was chosen for implementations. \verb|pyABC| supports multiple types of parallelisation, e.g., multicore processing and distributed cluster, and supports resume stored runs, which made our experiments easier. It is well documented and flexible in customisations of the algorithm.
+
+ Some other ABC SMC related packages were also examined and considered as backups, include ELFI \footnote{\url{https://elfi.readthedocs.io/en/latest/}}, ABC-SysBio \cite{ref:abcsysbio}, EasyABC\footnote{\url{https://cran.r-project.org/web/packages/EasyABC/index.html}}, GpABC \footnote{\url{https://github.com/tanhevg/GpABC.jl}}, etc. These packages may have their advantages (e.g. ABC-SysBio supports CUDA acceleration) and considered as alternative implementation methods, or can be used to compare performance difference.
+
+ Additionally, some other softwares were also need for solving ODE, results analysis and visualisations. Some software and hardware environments are listed in Appendix A.
