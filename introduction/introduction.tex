@@ -1,0 +1,27 @@
+\chapter{Introduction}
+
+ % This should contain a description of your project and the problem you
+ % are trying to solve. Where appropriate you should also include
+ % references to work which has already been done on your topic and
+ % anything else which lets you set your work in context.
+
+ % One of the things you will need to do is to ensure that you have a
+ % suitable list of references.  To do this you should see \cite{ref:lam}
+ % or some other suitable reference.  Note the format of the citation used
+ % here is the style favoured in this department.  Here is another
+ % reference \cite{ref:bloggs} for good measure.
+
+ [background and motivation]
+
+ [what is done]
+
+While we are interested in the tissue regeneration among different species, mathematical models and techniques can help us to resolve complex interactions of cells and chemicals in a biological system. The objective process in this dissertation is an example of complex biology system found in tissue regeneration. Zebrafish has the ability to regenerate its spinal cord after injury; at the injury-site various immune cells are presented and complex interactions are found while they are regulating inflammation and repair.
+
+Our interest lies in the modeling of the regeneration process that happens in the injury-site, especially in the parameter estimation and comparison of different models. According to available researches \cite{ref:Tsarouchas}, a mathematical model is proposed but the addressed interactions remains to be precisely defined, and quantitatively examined in experiments. However, we would like to explore the the `best fit' if the model which comes with a set of parameter estimates given the observed data. Also, we wish to compare different it with different models and possibly find the best model to describe the data without losing biological and mathematical properties in the regeneration process.
+
+Fo the parameter estimation tasks, Bayesian inference techniques can help in the problems of over-fitting and local optima \cite{ref:abcsysbio}, compared to optimisation based methods. Moreover, approximate inference methods (Approximate Bayesian Computation, ABC) make likelihood-free inference possible, which is suitable for our task as writing down likelihood as a function expression can be hard.
+
+Such methods introduce computation-intensive sampling-rejection pattern, where massive number of samples are drawn, followed by computations. As the sampling process is independent from each other in a certain period, the parallel execution becomes feasible and is expected to accelerated the parameter inference in a large scale.
+
+This dissertation includes the implementations and experiments of parameter estimation using ABC SMC (sequential Monte-Carlo) method, and discussions on the results. Model comparison results are also included using the same method. Additionally, a performance test illustrates the strong-scaling performance of the algorithm.
+

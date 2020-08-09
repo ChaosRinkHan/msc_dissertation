@@ -1,50 +1,50 @@
-\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}% 
-\contentsline {chapter}{\numberline {2}Background}{3}{chapter.2}% 
-\contentsline {section}{\numberline {2.1}Zebrafish spinal cord regeneration}{3}{section.2.1}% 
-\contentsline {section}{\numberline {2.2}Mathematical modelling}{4}{section.2.2}% 
-\contentsline {section}{\numberline {2.3}Bayesian inference}{5}{section.2.3}% 
-\contentsline {section}{\numberline {2.4}Software tools}{8}{section.2.4}% 
-\contentsline {chapter}{\numberline {3}Mathematical modelling}{10}{chapter.3}% 
-\contentsline {section}{\numberline {3.1}Observed data}{10}{section.3.1}% 
-\contentsline {section}{\numberline {3.2}Hypothesis and Models}{11}{section.3.2}% 
-\contentsline {subsection}{\numberline {3.2.1}Basic model}{11}{subsection.3.2.1}% 
-\contentsline {subsection}{\numberline {3.2.2}Alternative models}{13}{subsection.3.2.2}% 
-\contentsline {paragraph}{Model 2 and model 3}{13}{section*.5}% 
-\contentsline {paragraph}{Model 4 and model 5}{13}{section*.6}% 
-\contentsline {subsection}{\numberline {3.2.3}Model evaluation and comparison}{14}{subsection.3.2.3}% 
-\contentsline {subsection}{\numberline {3.2.4}Limitations}{14}{subsection.3.2.4}% 
-\contentsline {chapter}{\numberline {4}Parameter estimation and model comparison}{15}{chapter.4}% 
-\contentsline {section}{\numberline {4.1}Implementations and code}{15}{section.4.1}% 
-\contentsline {section}{\numberline {4.2}ABC SMC and model hyperparameters experiments}{16}{section.4.2}% 
-\contentsline {subsection}{\numberline {4.2.1}Perturbation kernels}{17}{subsection.4.2.1}% 
-\contentsline {subsubsection}{Kernel experiment results}{18}{section*.7}% 
-\contentsline {subsubsection}{Conclusion}{19}{section*.8}% 
-\contentsline {subsection}{\numberline {4.2.2}Adaptive functions and factors}{19}{subsection.4.2.2}% 
-\contentsline {subsubsection}{Experiments results}{22}{section*.9}% 
-\contentsline {subsubsection}{Conclusion}{22}{section*.10}% 
-\contentsline {subsection}{\numberline {4.2.3}Data size, prior distribution and population}{22}{subsection.4.2.3}% 
-\contentsline {subsubsection}{Experiments results}{23}{section*.11}% 
-\contentsline {subsubsection}{Summary}{24}{section*.12}% 
-\contentsline {section}{\numberline {4.3}Parameter estimation and model comparison}{24}{section.4.3}% 
-\contentsline {subsection}{\numberline {4.3.1}Model 1, 2 and 3}{24}{subsection.4.3.1}% 
-\contentsline {subsection}{\numberline {4.3.2}Model 4 and 5}{28}{subsection.4.3.2}% 
-\contentsline {paragraph}{Model 4}{28}{section*.13}% 
-\contentsline {paragraph}{Model 5}{28}{section*.14}% 
-\contentsline {subsection}{\numberline {4.3.3}Sensitivity of parameters}{30}{subsection.4.3.3}% 
-\contentsline {chapter}{\numberline {5}Performance experiments}{32}{chapter.5}% 
-\contentsline {section}{\numberline {5.1}Scaling-up}{32}{section.5.1}% 
-\contentsline {subsubsection}{Results}{33}{section*.15}% 
-\contentsline {section}{\numberline {5.2}Profiling}{34}{section.5.2}% 
-\contentsline {subsubsection}{Results}{34}{section*.16}% 
-\contentsline {chapter}{\numberline {6}Future works}{35}{chapter.6}% 
-\contentsline {chapter}{\numberline {7}Conclusions}{36}{chapter.7}% 
-\contentsline {chapter}{\numberline {A}System and software environment}{37}{appendix.A}% 
-\contentsline {section}{\numberline {A.1}ABC SMC implementation}{37}{section.A.1}% 
-\contentsline {subsection}{\numberline {A.1.1}Local machine}{37}{subsection.A.1.1}% 
-\contentsline {subsection}{\numberline {A.1.2}Remote machine}{37}{subsection.A.1.2}% 
-\contentsline {section}{\numberline {A.2}Data analysis}{37}{section.A.2}% 
-\contentsline {chapter}{\numberline {B}Data and settings}{39}{appendix.B}% 
-\contentsline {section}{\numberline {B.1}Infer-back experiments}{39}{section.B.1}% 
-\contentsline {subsection}{\numberline {B.1.1}Parameter values used to generate synthetic data}{39}{subsection.B.1.1}% 
-\contentsline {subsection}{\numberline {B.1.2}Kernel experiment: median epsilon schedule}{41}{subsection.B.1.2}% 
-\contentsline {section}{\numberline {B.2}Parameter inference and model comparison results}{41}{section.B.2}% 
+\contentsline {chapter}{\numberline {1}Introduction}{2}{chapter.1}% 
+\contentsline {chapter}{\numberline {2}Background}{4}{chapter.2}% 
+\contentsline {section}{\numberline {2.1}Zebrafish spinal cord regeneration}{4}{section.2.1}% 
+\contentsline {section}{\numberline {2.2}Mathematical modelling}{5}{section.2.2}% 
+\contentsline {section}{\numberline {2.3}Bayesian inference}{6}{section.2.3}% 
+\contentsline {section}{\numberline {2.4}Software tools}{9}{section.2.4}% 
+\contentsline {chapter}{\numberline {3}Mathematical modelling}{11}{chapter.3}% 
+\contentsline {section}{\numberline {3.1}Observed data}{11}{section.3.1}% 
+\contentsline {section}{\numberline {3.2}Hypothesis and Models}{12}{section.3.2}% 
+\contentsline {subsection}{\numberline {3.2.1}Basic model}{12}{subsection.3.2.1}% 
+\contentsline {subsection}{\numberline {3.2.2}Alternative models}{14}{subsection.3.2.2}% 
+\contentsline {paragraph}{Model 2 and model 3}{14}{section*.4}% 
+\contentsline {paragraph}{Model 4 and model 5}{14}{section*.5}% 
+\contentsline {subsection}{\numberline {3.2.3}Model evaluation and comparison}{15}{subsection.3.2.3}% 
+\contentsline {subsection}{\numberline {3.2.4}Limitations}{15}{subsection.3.2.4}% 
+\contentsline {chapter}{\numberline {4}Parameter estimation and model comparison}{16}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}Implementations and code}{16}{section.4.1}% 
+\contentsline {section}{\numberline {4.2}ABC SMC and model hyperparameters experiments}{17}{section.4.2}% 
+\contentsline {subsection}{\numberline {4.2.1}Perturbation kernels}{18}{subsection.4.2.1}% 
+\contentsline {subsubsection}{Kernel experiment results}{19}{section*.6}% 
+\contentsline {subsubsection}{Conclusion}{20}{section*.7}% 
+\contentsline {subsection}{\numberline {4.2.2}Adaptive functions and factors}{20}{subsection.4.2.2}% 
+\contentsline {subsubsection}{Experiments results}{23}{section*.8}% 
+\contentsline {subsubsection}{Conclusion}{23}{section*.9}% 
+\contentsline {subsection}{\numberline {4.2.3}Data size, prior distribution and population}{23}{subsection.4.2.3}% 
+\contentsline {subsubsection}{Experiments results}{24}{section*.10}% 
+\contentsline {subsubsection}{Summary}{25}{section*.11}% 
+\contentsline {section}{\numberline {4.3}Parameter estimation and model comparison}{25}{section.4.3}% 
+\contentsline {subsection}{\numberline {4.3.1}Model 1, 2 and 3}{25}{subsection.4.3.1}% 
+\contentsline {subsection}{\numberline {4.3.2}Model 4 and 5}{29}{subsection.4.3.2}% 
+\contentsline {paragraph}{Model 4}{29}{section*.12}% 
+\contentsline {paragraph}{Model 5}{29}{section*.13}% 
+\contentsline {subsection}{\numberline {4.3.3}Sensitivity of parameters}{31}{subsection.4.3.3}% 
+\contentsline {chapter}{\numberline {5}Performance experiments}{33}{chapter.5}% 
+\contentsline {section}{\numberline {5.1}Scaling-up}{33}{section.5.1}% 
+\contentsline {subsubsection}{Results}{34}{section*.14}% 
+\contentsline {section}{\numberline {5.2}Profiling}{35}{section.5.2}% 
+\contentsline {subsubsection}{Results}{35}{section*.15}% 
+\contentsline {chapter}{\numberline {6}Future works}{36}{chapter.6}% 
+\contentsline {chapter}{\numberline {7}Conclusions}{37}{chapter.7}% 
+\contentsline {chapter}{\numberline {A}System and software environment}{38}{appendix.A}% 
+\contentsline {section}{\numberline {A.1}ABC SMC implementation}{38}{section.A.1}% 
+\contentsline {subsection}{\numberline {A.1.1}Local machine}{38}{subsection.A.1.1}% 
+\contentsline {subsection}{\numberline {A.1.2}Remote machine}{38}{subsection.A.1.2}% 
+\contentsline {section}{\numberline {A.2}Data analysis}{38}{section.A.2}% 
+\contentsline {chapter}{\numberline {B}Data and settings}{40}{appendix.B}% 
+\contentsline {section}{\numberline {B.1}Infer-back experiments}{40}{section.B.1}% 
+\contentsline {subsection}{\numberline {B.1.1}Parameter values used to generate synthetic data}{40}{subsection.B.1.1}% 
+\contentsline {subsection}{\numberline {B.1.2}Kernel experiment: median epsilon schedule}{42}{subsection.B.1.2}% 
+\contentsline {section}{\numberline {B.2}Parameter inference and model comparison results}{42}{section.B.2}% 
