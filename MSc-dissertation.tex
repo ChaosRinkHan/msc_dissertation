@@ -197,7 +197,7 @@ Instead of fixing the threshold value, the algorithm can be more adaptive by usi
 
 \end{enumerate}
 
-An illustrative graph of the ABC SMC procedures can be found in Figure \ref{fig:smc}.
+An illustrative graph of the ABC SMC procedures can be found in Figure \ref{fig:smc}. In implementations, many factors can affect the efficiency and goodness of fit, some of them are discussed in the Chapter 4. Rather than a pre-fixed threshold schedule, median or quantile based epsilon schedule can be save total sampling size and thus improve acceptance rates of particles \cite{threshold}. Some other improvements include using adaptive population size for each generation \cite{population}, using adaptive distance function \cite{ref:adpt_dis} and switching kernels \cite{ref:kernel}, etc. In our implementations these options were tried when applicable and suitable to compare the behaviours of the algorithm.
 
 \begin{figure}[t]
     \begin{center}
@@ -210,6 +210,10 @@ An illustrative graph of the ABC SMC procedures can be found in Figure \ref{fig:
 
 \end{figure}
 
+In addition, ABC SMC is also capable of model selection tasks \cite{model_compare}. Instead of draw samples from prior of a single model, we can draw samples from multiple models $m_i$ and approximate $p(m_i, \theta|D)$, which is the joint probability distribution of model $m_i$ and its accepted particles $\theta$. In each generation the marginal distribution $p(m_i|D)$ can be calculated as the accepted ${\theta}$ have been obtained, thus models can be ranked according to their probabilities.
+
+The feature that ABC algorithm can perform likelihood-free inference makes it widely used in many dynamic modeling problems, especially in the area of biology \cite{ref:abcsysbio, ref:compare, ref:disease}. But ABC is not limited to these areas, as it can be generally used in inference tasks to give parameter estimates or model rankings. E.g., it has been successfully applied in cosmology studies \cite{cosmology}.
+
 
 
 \section{Software tools}
@@ -218,6 +222,11 @@ An illustrative graph of the ABC SMC procedures can be found in Figure \ref{fig:
 
  [workflow and developing process]
 
+ As we decided to apply ABC SMC on our regeneration models for its high-dimensional parameter estimation and possibly comparison of different models, a code development and experiments workflow was expected to be built. The ABC SMC algorithm needs a whole set of mathematical environments (e.g. class of distributions, models and particles) and closely linked sampling and fitting algorithms (e.g. KDE fitting and Gaussian sampling), thus suitable platforms with related packages are preferred. Regarding this, several packages in \verb|R| and \verb|Python| were studied.
+
+ A software packages that integrally implement ABC SMC is preferred, and more options in the settings of the algorithm, more customisable features can make it better. Moreover, as the ABC SMC itself is a computationally intensive task that consists of massive parallel potentials, an ideal software is expected to support as least one kind of parallel options e.g. multi-core, GPU accelerating and clusters. Otherwise, a modification or rewrite of the software package are expected to produce a reliable input-output framework for our parameter estimation and model selection experiments.
+
+ Preliminarily \verb|pyABC| \cite{ref:pyabc} in \verb|Python| was chosen for our first implementations. 
 
 
 
@@ -1148,6 +1157,14 @@ Local development machine is a Mac laptop, running on macOS 10.15.6. The environ
     \bibitem{summaryD} Joyce, P. and Marjoram, P., 2008. Approximately sufficient statistics and Bayesian computation. Statistical applications in genetics and molecular biology, 7(1).
 
     \bibitem{summaryD2} Nunes, M.A. and Balding, D.J., 2010. On optimal selection of summary statistics for approximate Bayesian computation. Statistical applications in genetics and molecular biology, 9(1).
+
+    \bibitem{threshold} Silk, D., Filippi, S. and Stumpf, M.P., 2012. Optimizing threshold-schedules for approximate Bayesian computation sequential Monte Carlo samplers: applications to molecular systems. arXiv preprint arXiv:1210.3296.
+
+    \bibitem{population} Klinger, E. and Hasenauer, J., 2017, September. A scheme for adaptive selection of population sizes in approximate Bayesian computation-sequential Monte Carlo. In International Conference on Computational Methods in Systems Biology (pp. 128-144). Springer, Cham.
+
+    \bibitem{model_compare} Toni, T. and Stumpf, M.P., 2010. Simulation-based model selection for dynamical systems in systems and population biology. Bioinformatics, 26(1), pp.104-110.
+
+    \bibitem{cosmology} Weyant, A., Schafer, C. and Wood-Vasey, W.M., 2013. Likelihood-free cosmological inference with type Ia supernovae: approximate Bayesian computation for a complete treatment of uncertainty. The Astrophysical Journal, 764(2), p.116.
 
     \bibitem{ref:compare} Daly AC, Cooper J, GavaghanDJ, Holmes C. 2017. Comparing two sequentialMonte Carlo samplers for exact andapproximate Bayesian inference on biologicalmodels.J. R. Soc. Interface14: 20170340.
 
