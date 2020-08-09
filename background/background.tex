@@ -111,7 +111,7 @@ An illustrative graph of the ABC SMC procedures can be found in Figure \ref{fig:
 
 In addition, ABC SMC is also capable of model selection tasks \cite{model_compare}. Instead of draw samples from prior of a single model, we can draw samples from multiple models $m_i$ and approximate $p(m_i, \theta|D)$, which is the joint probability distribution of model $m_i$ and its accepted particles $\theta$. In each generation the marginal distribution $p(m_i|D)$ can be calculated as the accepted ${\theta}$ have been obtained, thus models can be ranked according to their probabilities.
 
-The feature that ABC algorithm can perform likelihood-free inference makes it widely used in many dynamic modeling problems, especially in the area of biology \cite{ref:abcsysbio, ref:compare, ref:disease}. But ABC is not limited to these areas, as it can be generally used in inference tasks to give parameter estimates or model rankings. E.g., it has been successfully applied in cosmology studies \cite{cosmology}.
+The feature that ABC algorithm can perform likelihood-free inference makes it widely used in many dynamic modeling problems, especially in the area of biology \cite{ref:abcsysbio, ref:disease, ref:compare}. But ABC is not limited to these areas, as it can be generally used in inference tasks to give parameter estimates or model rankings. E.g., it has been successfully applied in cosmology studies \cite{cosmology}.
 
 
 
