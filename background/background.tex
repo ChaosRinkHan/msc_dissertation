@@ -26,9 +26,9 @@ Models like L-V equation are mostly analytically solvable when analysing propert
 
 For the regeneration process that we wanted to model, differential equations are our preference. Non-linear ordinary differential equations are used in this dissertation, where the only independent variable is time $t$, denoting the post-lesion time (hours). Further models can also consider other models in other forms, e.g. stochastic models and partial differential equations. For ordinary differential equations (ODE) system, there are several available computational solvers using different algorithms, implemented in MATLAB\footnote[1] {\url{https://uk.mathworks.com/help/matlab/math/choose-an-ode-solver.html}}, Python\footnote[2]{\url{https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html}} and many other languages. These solvers help to simulate the trajectories of the dependent variables, given initial values and a set of fixed parameters. The goodness of `fit' then can be measured by compared the simulated data and observed real data.
 
-Often further researches on the modelled problems require the model to be deterministic on its parameters. Parameters in a dynamic system models usually have their practical significance, e.g. describing reaction speed, environmental capacity or the birth rate. There are many approaches to derive these parameters from data or experience. For a popular topic and a widely used models, the parameters' values can be read from previous literatures; however in many others cases, we need to find parameter's values specifically for our model, and numerical values for parameters are mostly preferred, as they suitable for practical analysis and comparison.
+Often further researches on the modelled problems require the model to be deterministic on its parameters. Parameters in dynamic system models usually have their practical significance, e.g. describing reaction speed, environmental capacity or the birth rate. There are many approaches to derive these parameters from data or experience. For a popular topic and a widely used models, the parameters' values can be read from previous literatures; however in many others cases, we need to find parameter's values specifically for our model, and numerical values for parameters are mostly preferred, as they suitable for practical analysis and comparison.
 
-To find the best parameters' values given observed data, either optimisation-based approaches (e.g. least-square (LS) fit) or inference approaches can be used. Optimisation-based approaches may face two major drawbacks: over-fitting and local optima \cite{ref:abcsysbio}. Bayesian inference approaches gain popularity in recent years, which can relief the concerns in over-fitting and provide a measurement for the uncertainty in the inferred values. Local optima can still be a concern, and many efforts have be proposed for a more through explore of the parameter space to avoid this.
+To find the best parameters' values given observed data, either optimisation-based approaches (e.g. least-square fit (LS), maximal likelihood estimation (MLE)) or inference-based approaches can be used. Optimisation-based approaches may face two major drawbacks: over-fitting and local optima \cite{ref:abcsysbio}. Bayesian inference approaches gain popularity in recent years, as it can relief the concerns in over-fitting and provide a measurement for the uncertainty in the inferred values. Local optima can still be a concern, and many efforts have be proposed for a more through explore of the parameter space to avoid local modes.
 
 
 
@@ -43,22 +43,18 @@ To find the best parameters' values given observed data, either optimisation-bas
 %  [model comparison, ABC SMC for model comparison]
 
  Bayesian inference approaches for parameter estimation put Bayes Rule in the centre:
-
  \begin{align}
     \label{eq:bayes}
     p(\theta|D) = \frac{p(D|\theta)p(\theta)}{p(D)}
 \end{align}
-
 where $p$ is the probability density function, $\theta$ denotes the parameter set, $D$ is the given observed data.
 
 Alternatively, as $p(D)$ is fixed once the observed data is given, the rule can be rewritten as 
-
 \begin{align}
     \label{eq:bayes2}
     p(\theta|D) \propto l(D|\theta)p(\theta)
 \end{align}
-
-where $l$ represents the likelihood function. In other words, Eqn \ref{eq:bayes2} can be described as `posterior is proportional to the product of likelihood and prior', and here posterior of parameters is our target in parameter estimation task. Prior $p(\theta)$ should express our initial believes or estimates on the parameter values before observing the data and conducting experiments; likelihood function $l(D|\theta)$ is used to describe how well the parameter set $\theta$ explains the data $D$, in probability values. Once the data is given, $\theta$ is the only parameter in the likelihood function. Some optimisation-based methods try to find estimates of parameter set $\theta$ s.t. maximise the likelihood, however, such methods will struggle when facing a problem where it is hard to specify an analytical expression of likelihood function, let alone the derivative of it.
+where $l$ represents the likelihood function. In other words, Eqn \ref{eq:bayes2} can be described as `posterior is proportional to the product of likelihood and prior', and here posterior of parameters is our target in parameter estimation task. Prior $p(\theta)$ should express our initial believes or estimates on the parameter values before observing the data and conducting experiments; likelihood function $l(D|\theta)$ is used to describe how well the parameter set $\theta$ explains the data $D$, in probability values. Once the data is given, $\theta$ is the only parameter in the likelihood function. Some optimisation-based methods try to find estimates of parameter set $\theta$ s.t. maximise the likelihood, however, such methods will struggle when facing a problem where it is hard to specify an analytical expression of likelihood function, let alone calculating and comparing values of it.
 
 Based on Eqn \ref{eq:bayes2}, to find the posterior of parameter set, prior can be set according to the problem context and our understanding and cover a reasonable ranges; computational methods can be used to approximate likelihood function, e.g. Markov Chain Monte Carlo (MCMC) \cite{ref:MCMC}. As an alterative solution, Approximate Bayesian computation (ABC) approaches do not focus on the evaluation of likelihood function, but focused on simulating the data from the given model and observed data, then used the simulated data to approximate the desired posterior. ABC-rejection \cite{ABC_rejection} is a simple example of the ABC process, and further algorithms e.g. sequential Monte-Carlo (ABC SMC)\cite{Toni} were proposed to improve the efficiency.
 
@@ -68,7 +64,7 @@ General steps for ABC algorithm includes the following (ABC-rejection):
     \item Draw a sample $\theta^*$ from parameters' prior distribution. $\theta^*$ is a vector that consists values for each parameter
     \item Plug $\theta^*$ into the model, and use the model to generate simulated data $D^*$, where $D^*$ is of the same form as the observed data $D$, e.g. includes same summary statistics
     \item The discrepancy between the simulated data and observed data is measured by a distance function $d(D^*, D)$. For a pre-fixed threshold value $\epsilon$, if $d(D^*, D)<\epsilon$ then the sample $\theta^*$ is accepted
-    \item Repeat 1, 2 and 3 until enough numbers of samples are accepted. The posterior distribution can be approximated by these samples
+    \item Repeat 1, 2 and 3 until enough numbers of samples are accepted. The posterior distribution then can be approximated by these samples
 \end{enumerate}
 
 In our study of the regeneration model, full trajectories of the dependent variables are used as the data to be compared, as our goal is to find a model with a parameter set that can intuitively recover the real process as much as possible. The mean values at each time point for each dependent variable is calculated to form $D$, and for each sample, the ODE is accumulatively solved at the same time points and generate the simulated trajectories $D^*$. Using other statistics to summary the raw data are also possible but care must be taken as the choice of summary statistics can largely affect the resultant posterior \cite{summaryD, summaryD2}.
@@ -77,11 +73,11 @@ Instead of fixing the threshold value, the algorithm can be more adaptive by usi
 
 \begin{enumerate}
     \item Set a threshold schedule $\{\epsilon_1, \epsilon_2, ..., \epsilon_T\}$ where $T$ is the total number of populations and $\{\epsilon_1, \epsilon_2, ..., \epsilon_T\}$ is a descending sequence; set the number of particles in each population as $N$, set the population index $t=1$
-    \item if $t=1$, draw samples from prior distribution until $N$ particles are accepted under threshold $\epsilon_1$, i.e. each of $N$ particles s.t. $d(D,D^*)<\epsilon_1$
+    \item if $t=1$, draw samples from prior distribution until $N$ particles are accepted under threshold $\epsilon_1$, i.e. each of $N$ particles generates data $D^*$ s.t. $d(D,D^*)<\epsilon_1$
     
-    Else ($t>1$), draw samples from previous population $\{\theta^*_{t-1}\}$ with weights $\{w_{t-1}\}$, perturb the particles using a perturbation kernel $K(\theta^*|\theta)$ and obtain $\theta^{**}\sim K(\theta^*|\theta)$
+    If $t>1$, draw samples from previous population $\{\theta^*_{t-1}\}$ with weights $\{w_{t-1}\}$, perturb the particles using a perturbation kernel $K(\theta^*|\theta)$ and obtain $\theta^{**}\sim K(\theta^*|\theta)$
     \item Repeat step 2 until $N$ particles are accept under threshold $\epsilon_t$
-    \item Calculate the weights of the accepted particles. For particle $i$ 
+    \item Calculate the weights of the accepted particles. For particle $i$, the weight is 
     \begin{align}
         \label{eq:weight}
         w^i_t =\begin{cases}
