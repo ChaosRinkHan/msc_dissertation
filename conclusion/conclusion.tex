@@ -4,6 +4,12 @@
 
  [to what extend]
 
+ To conclude, ABC SMC was successfully applied on the models of zebrafish spinal cord regeneration. These models were all ODE equations that described the interactions and effects between cells and proteins in the lesion site. These equations contains four dependent variable and more than 10 model parameters.  Parameter estimation for high-dimensional parameter space is a challenging work for many dynamic system models, as insufficient explore of parameter space can easily lead to local optimal. Using a large population size in ABC SMC in our models could partially relief the concerns in local modes, and give considerable parameter estimates (FIGURE). Also ABC SMC successfully helped in the model comparison and thus can be used for suggestions of possibly best model, although there were uncertainties remained in the process and a large number of population size was need.
+
+ ABC SMC implementation is a complex process with respect to both algorithm settings and code development. The ability of parameter inference and robustness of algorithm were firstly studied using synthetic data where the true parameter value was known, and experiments were performed to find proper hyperparameter and implementation settings of ABC SMC. Later inference on the observed data followed the suggestions from the synthetic data experiments and acceptable results were produced.
+
+ The inference program was mostly run on multi-core machines, and additional performance 
+
  [how good is the result]
 
  [summary of the findings and advise]
