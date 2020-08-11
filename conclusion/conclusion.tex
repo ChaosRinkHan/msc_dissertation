@@ -1,10 +1,10 @@
-\chapter{Conclusion}
+\chapter{Conclusion and future works}
 
- [what is studied]
+%  [what is studied]
 
- [to what extend]
+%  [to what extend]
 
- [how good is the result]
+%  [how good is the result]
 
  To conclude, ABC SMC was successfully applied on the models of zebrafish spinal cord regeneration. These models were all ODE equations that described the interactions and effects between cells and proteins in the lesion site. These equations contains four dependent variable and more than 10 model parameters.  Parameter estimation for high-dimensional parameter space is a challenging work for many dynamic system models, as insufficient explore of parameter space can easily lead to local optimal. Using a large population size in ABC SMC in our models could partially relief the concerns in local modes, and give considerable parameter estimates (FIGURE). Also ABC SMC successfully helped in the model comparison and thus can be used for suggestions of possibly best model, although there were uncertainties remained in the process and a large number of population size was need.
 
@@ -12,8 +12,12 @@
 
  The inference program was mostly run on multi-core machines, and additional scaling-up performance test illustrated the scaling behaviour. When the number of running \verb|Python| process exceeds the number of physical cores, hyperthreading would be enabled but gains not significant improvements with respect to execution time, while increase of average sampling size per second was still observed.
 
- [summary of the findings and advise]
+%  [summary of the findings and advise]
 
- From this application, some suggestions on ABC SMC implementation could be drawn.
+ From this application, some suggestions on ABC SMC implementation could be drawn. How to set the prior could be the most tricky decision for a high dimensional parameter inference. The distribution and the interval of each parameter can affect the inference results significantly and improper prior cold lead to poor fit. The epsilon trajectory and joint distribution of parameters can be used to identity possible local modes; if stuck, it takes much more samples than usual to jump out out local optimal. To avoid this a large population size and a proper epsilon schedule may help.for the uncertainties observed in model selection and some duplicated runs with high variance, a longer run with more generation could help to identify whether the convergency is consistent such that a reproducible inferred results can be obtained.
 
- [thanks]
+%  [thanks]
+
+In terms of the future works, some more comparison with other algorisms could be of our interest. Least square fitting using MCMC \cite{ref:MCMC} and some other exact inference approaches could be performed on the same model and observed data, as the standard deviation at each measurement point is known. By comparing to these methods, differences in the inference results, algorithm robustness and required computational resources could be revealed and possibly help us in choosing an inference algorism that can balance the trade-off between efficiency and a reasonable good `fit'. Also there other implementation options of ABC SMC worth trying, e.g. CUDA acceleration and \verb|Julia| implementations\footnote[1]{\url{https://github.com/tanhevg/GpABC.jl}} \footnote[2]{\url{https://github.com/marcjwilliams1/ApproxBayes.jl}}.
+
+In the aspect of models, some further models can be studied. If there were some more experimental evidence on the proposed interaction map, we could proposed more precise models, or calibrate some terms in our existing models. Also, models of other forms, e.g. PDE and stochastic models, could also be studied if a more complex model is needed for the dynamic system. Simplification is also possible of existing models
