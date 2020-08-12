@@ -7,9 +7,9 @@ Proposed models for the regeneration process are in the form of non-linear ordin
 
 \section{Observed data}
 
-Our models were built on the basis of the existing experimental findings from Tsarouchas et al.\cite{ref:Tsarouchas}. The measurement data included the numbers of three kinds of cells (neutrophil $N$, macrophage $\Phi$ and microglia) and the relative mRNA expression of four cytokines (il-1$\beta$, tnf-$\alpha$, tgf-$\beta$1a and tgf-$\beta$3). As proposed by Tsarouchas et al., neutrophil and macrophage play important roles in the spinal cord regeneration with il-1$\beta$ and tnf-$\alpha$ being the media. According to this, our initial models focused on the changes of four dependent variables $N$, $\Phi $, $\beta$ (for il-1$\beta$) and $\alpha$ (for tnf-$\alpha$) that are most important in the regeneration. $N$ and $\Phi$ is of the unit `number of cells', $\beta$ and $\alpha$ is of the unit `relative mRNA expression' (compared to the value at the initla time point i.e. 0 hpl).
+Our models were built on the basis of the existing experimental findings from Tsarouchas et al.\cite{ref:Tsarouchas}. The available measurement data included the numbers of three kinds of cells (neutrophil $N$, macrophage $\Phi$ and microglia) and the relative mRNA expression of four kinds of cytokines (il-1$\beta$, tnf-$\alpha$, tgf-$\beta$1a and tgf-$\beta$3). As proposed by Tsarouchas et al., neutrophil and macrophage play important roles in the spinal cord regeneration with il-1$\beta$ and tnf-$\alpha$ being the media. According to this, our initial models focused on the changes of four dependent variables $N$, $\Phi $, $\beta$ (for il-1$\beta$) and $\alpha$ (for tnf-$\alpha$) that are most important and determinative in the regeneration. $N$ and $\Phi$ is of the unit `number of cells', $\beta$ and $\alpha$ was recorded as `relative mRNA expression' (compared to the value at the initla time point i.e. 0 hpl) and considered unitless.
 
-It is noted that the variance of the measured data is relatively high. The summary statistic used for the parameter estimations is mean of measurement data at each time point, assuming that measured data is Gaussian-like distributed. To validate this, the distribution of the measured data points is plotted and examined to see if the mean value can represent the distribution. The result is that at most time points the measurement values are Gaussian-distributed, although some distributions are skewed. One abnormal distribution is observed at time point 120 h post-lesion (hpl) for macrophage where there are two concentrations. Mean value can summarise most data and thus is still used as the target observed data. A plot of the mean of the four variables is shown in Figure \ref{fig:obs_data}.
+It was noted that the variance of the measured data is relatively high. The summary statistic used for the parameter estimations was mean of measurement data at each time point, assuming that measured data was Gaussian-like distributed. To validate this, the distribution of the measured data points was plotted and examined to see if the mean value can represent the distribution. The result was that at most time points the measurement values are Gaussian-distributed, although some distributions were skewed. One abnormal distribution was observed at time point 120 hpl for macrophage where there are two concentrations. Despite this, mean value could summarise most data and thus was still used as the target observed data. A plot of the mean of the four variables is shown in Figure \ref{fig:obs_data}, which is our target trajectories for the models to fit.
 
 \begin{figure}
     \begin{center}
@@ -22,7 +22,7 @@ It is noted that the variance of the measured data is relatively high. The summa
 
 \end{figure}
 
-\section{Hypothesis and Models}
+\section{Hypothesis and models}
 
 5 models in total are proposed according to different hypothesis. At first our tests and implementations of ABC SMC for parameter estimations use only the basic model for developing propose. After the parameter estimation framework is built and tested, more models are proposed, in order to calibrate and adjust the basic model such that it can represent the observed regeneration process better or can be used to test our hypothesis.
 
@@ -30,7 +30,7 @@ All these models assume the involved interactions is within two kinds of cells (
 
 \subsection{Basic model}
 
-A preliminary model is proposed according to \cite{ref:Tsarouchas} and used to build and test the inference framework code. An interaction map of the model is shown in Figure \ref{fig:m1}. This model is a simplification a the process described in \cite{ref:Tsarouchas} with some minor interactions ignored. To describe the parameters' units, we denote the unit of $N$ and $\Phi$ i.e. number of cells as `cell', and denote the unit of $\beta$ and $\alpha$ i.e. relative mRNA expression as `unit' for simplicity.
+A preliminary model (Eqn. \ref{eq:model1}) was proposed according to \cite{ref:Tsarouchas} and then mainly used to build and test the code of inference framework. An interaction map of the model is shown in Figure \ref{fig:m1}. This model is a simplification a the process described in \cite{ref:Tsarouchas} with some minor interactions ignored. To describe the parameters' units, we denote the unit of $N$ and $\Phi$ i.e. number of cells as `cell', and denote $\beta$ and $\alpha$'s relative mRNA expression as unitless for simplicity. This model included 12 parameters, all of which should be positive real number. A description of these parameters can be found in Table \ref{table:m1}.
 
 \begin{figure}
     \begin{center}
@@ -43,7 +43,9 @@ A preliminary model is proposed according to \cite{ref:Tsarouchas} and used to b
 
 \end{figure}
 
-It is assumed that there are negative feedbacks for all the variables. MORE DESCRIBE.
+It was assumed that there were negative feedbacks the cells and cytokines, i.e. overcrowding inhibits the increasing rates. 
+
+MORE DESCRIBE.
 
 \begin{align}
     \label{eq:model1}
