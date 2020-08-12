@@ -43,10 +43,6 @@ A preliminary model (Eqn. \ref{eq:model1}) was proposed according to \cite{ref:T
 
 \end{figure}
 
-It was assumed that there were negative feedbacks the cells and cytokines, i.e. overcrowding inhibits the increasing rates. 
-
-MORE DESCRIBE.
-
 \begin{align}
     \label{eq:model1}
     \begin{split}
@@ -57,26 +53,28 @@ MORE DESCRIBE.
     \end{split}
 \end{align}
 
-\begin{table}[h!]
+It was assumed that there are negative feedbacks the cells and cytokines, i.e. overcrowding inhibits the increasing rates. As sources, macrophage produces tnf-$\alpha$ and neutrophil produces il-1$\beta$, however, macrophage was assumed to have negative effect on the il-1$\beta$, term $1+i_{\beta\Phi}\Phi$ in Eqn. \ref{eq:model1} was used to represent this. Despite of self-driven increase of immune cells, il-1$\beta$ was assumed to promote the increase of both cells. Neutrophil was also assumed to be inhibited by the total immune cells presented in the lesion site, term $\nu_{N\Phi}N\Phi$ was used to denote this.
+
+\begin{table}[t]
     \centering
     \begin{tabular}{|c c c|}
         \hline
         Parameter            & Definition                                       & Units                    \\ [0.5ex]
         \hline\hline
         $\lambda_N$          & Self-increase rate of neutrophil                 & $cell/h$                 \\
-        $\kappa_{N\beta}$    & Promoting effect coefficient by il-1$\beta$      & $cell/(unit\cdotp h)$    \\
+        $\kappa_{N\beta}$    & Promoting effect coefficient by il-1$\beta$      & $cell/h$                 \\
         $\mu_N$              & Coefficient of negative feedback of $N$          & $h^{-1}$                 \\
         $\nu_{N\Phi}$        & Coefficient of inhibition of both $N$ and $\Phi$ & $cell^{-1}\cdotp h^{-1}$ \\
         \hline
         $\lambda_\Phi$       & Self-increase rate of macrophage                 & $cell/h$                 \\
-        $\kappa_{\Phi\beta}$ & Promoting effect coefficient by il-1$\beta$      & $cell/(unit\cdotp h)$    \\
+        $\kappa_{\Phi\beta}$ & Promoting effect coefficient by il-1$\beta$      & $cell/h$                 \\
         $\mu_\Phi$           & Coefficient of negative feedback of $\Phi$       & $h^{-1}$                 \\
         \hline
-        $s_{\beta N}$        & Production rate from $N$                         & $unit/(cell\cdotp h)$    \\
+        $s_{\beta N}$        & Production rate from $N$                         & $cell^{-1}\cdotp h^{-1}$ \\
         $i_{\beta\Phi}$      & Coefficient of inhibition to the production      & $cell^{-1}$              \\
         $\mu_\beta$          & Coefficient of negative feedback of $\beta$      & $h^{-1}$                 \\
         \hline
-        $s_{\alpha\Phi}$     & Production rate from $\Phi$                      & $unit/(cell\cdotp h)$    \\
+        $s_{\alpha\Phi}$     & Production rate from $\Phi$                      & $cell^{-1}\cdotp h^{-1}$ \\
         $\mu_\alpha$         & Coefficient of negative feedback of $\alpha$     & $h^{-1}$                 \\
         \hline
     \end{tabular}
@@ -88,9 +86,9 @@ MORE DESCRIBE.
 
 \paragraph{Model 2 and model 3}
 
-As the observed data indicate, this dynamic system has a steady state where the  inflammation is resolved and immune cells should not be present at the injury site. Regarding this, the self-increase parameter $\lambda$ cannot be constant, thus a exponentially decaying $\lambda$ term is introduced and model 2 is proposed. (Eqn. \ref{eq:model2}). Also, the inhibition of il-1$\beta$ production, i.e. term $i_{\beta\Phi}\Phi$ is considered to be ignored for a more simple model, in which case the relative expression of il-1$\beta$ is only affected by the number of neutrophil and the negative feedback from itself. This case corresponds to model 3, written as Eqn. \ref{eq:model3}.
+As the observed data indicated, this dynamic system has a steady state where after a long time ($\geq 120$ hpl), the  inflammation is resolved and immune cells should not be present at the injury site any more. Regarding this, the parameter for self-increase rate for the macrophage and neutrophil i.e. $\lambda_\Phi$ and $\lambda_N$  cannot be constant. An exponentially decaying $\lambda$ term is introduced in the new model (model 2, Eqn. \ref{eq:model2}). Also, the inhibition of il-1$\beta$ production, i.e. term $i_{\beta\Phi}\Phi$ is considered to be ignored for a more simple model, in which case the relative expression of il-1$\beta$ is only affected by the number of neutrophil and the negative feedback from itself. This case corresponds to model 3, written as Eqn. \ref{eq:model3}.
 
-Model 2 and model 3 introduce one extra parameter $a$, which is a coefficient in the exponentially decaying $\lambda$, determining the decay speed, with the unit $h^{-1}$.
+Model 2 and model 3 introduced one extra parameter $a$ and removed $\lambda_\Phi$, which is a coefficient in the exponentially decaying $\lambda_N$, determining the decay speed, with the unit $h^{-1}$.
 
 \begin{align}
     \label{eq:model2}
@@ -112,11 +110,11 @@ Model 2 and model 3 introduce one extra parameter $a$, which is a coefficient in
     \end{split}
 \end{align}
 
-Model 3 can be regarded as a simplification of model 2, as it can be treated as model 2 with parameter $i_{\beta\Phi}=0$. Among the proposed three models, model 1 is a naive one that was proposed at very first time and used as an ODE `template' to build and test parameter inference framework. As the implementation was successful, model 2 and 3 was proposed as we were trying to calibrate some terms and find a better model. After fitting, model 2 is supposed to be better than model 1 as it corrects the problem that appears at the final time points (which relate to the steady state). Model 3 makes a small simplification on model 2 and is theoretically less `general' than model 2.
+Model 3 can be regarded as a simplification of model 2, as it can be treated as model 2 with parameter $i_{\beta\Phi}=0$. Among the proposed three models, model 1 is a naive one that was proposed at very first time and used as an ODE `template' to build and test our parameter inference framework. As the implementation was successful, model 2 and 3 was proposed, as we were trying to calibrate some terms and find better models. After fitting, model 2 is supposed to be better than model 1 as it corrects the problem that appears at the final time points (which were related to the steady states of immune cells). Model 3 made a small simplification based on model 2 and thus it was theoretically less `general' than model 2.
 
 \paragraph{Model 4 and model 5}
 
-After the first model selection experiment, it was found that some significant features presented in the observed data were not recovered by any of the existing model. To resolve this, attempts were tried to introduce more interactions within the dynamic system considering the biological and  mathematical context. Extra promoting effect to the expression of tnf-$\alpha$ was considered, by either adding a phenomenological term (which means the same effect as directly promoting but the underlying mechanism is unclean) or adding a term that represents a promoting effect to the production process of tnf-$\alpha$, namely model 4 (Eqn. \ref{eq:model4}) and model 5 (Eqn. \ref{eq:model5}).
+After the first model selection experiment among the exiting 3 models, it was found that some significant features presented in the observed data were not recovered by any of the model. To resolve this, attempts were tried to introduce additional reasonable interactions within the dynamic system, considering the biological and  mathematical context. Extra promoting effect to the expression of tnf-$\alpha$ was considered, by either adding a phenomenological term $d_{\beta\alpha}\beta$ (which means the same effect as directly promoting but the underlying mechanism is unclean), or adding a term $f_{\beta\alpha}$ that represents a promoting effect to the production process of tnf-$\alpha$, namely model 4 (Eqn. \ref{eq:model4}) and model 5 (Eqn. \ref{eq:model5}).
 
 \begin{align}
     \label{eq:model4}
