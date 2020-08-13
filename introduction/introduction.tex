@@ -15,11 +15,24 @@
 
 %  [what is done]
 
-While we are interested in the tissue regeneration among different species, mathematical models and techniques can help us to resolve complex interactions and effects of cells and chemicals in a biological system. The objective in this dissertation is an example of complex biology system found in tissue regeneration: zebrafish spinal cord regeneration. Zebrafish has the ability to regenerate its spinal cord after injury; at the lesion site various immune cells are presented and complex interactions are found while they are regulating inflammation and repair.
+% While we are interested in the tissue regeneration among different species, mathematical models and techniques can help us to resolve complex interactions and effects of cells and chemicals in a biological system. 
 
-Our interest lies in the modeling of the regeneration process that happens around the lesion site, especially in the model parameter and comparison of different models. According to available researches \cite{ref:Tsarouchas}, a mathematical model was firstly proposed but the addressed interactions remains to be precisely defined, and quantitatively examined in experiments. However, we would like to explore the the `best fit' of the model which comes with a set of parameter estimates, given the observed data. Also, we wish to compare different it with other alternative models and possibly find the best model to describe the observed data. In these steps, models are expected to retain mathematical and biological significance, where differential equations are suitable to describe this system.
+% The objective in this dissertation is an example of complex biology system found in tissue regeneration: zebrafish spinal cord regeneration. 
 
-Fo the parameter estimation tasks, Bayesian inference techniques can help in the problems of over-fitting and local optima \cite{ref:abcsysbio}, compared to optimisation-based methods. Moreover, approximate inference methods (Approximate Bayesian Computation, ABC) make likelihood-free inference possible, which is suitable for our task as writing down likelihood as a function expression for the dynamic system can be hard.
+Zebrafish has the ability to regenerate its spinal cord after injury; tissue regeneration observed at the injury site is a complex biological process with interacting parts and dynamical feedback between different types of cells and molecules. These cells and molecules are involved in the inflammation and repair in a dynamical way and a complex interacting network can be drawn according to it.
+
+% at the lesion site various immune cells are presented and complex interactions are found while they are regulating inflammation and repair.
+
+% [think about what the appropriate context is to start the introduction with. You could for example talk about regeneration of tissues being a complex biological process with many interacting parts and dynamical feedback between different cell types and signalling molecules. Mathematical models can help to resolve this complexity. An important problem is how to parameterise such models from available data.
+
+% or you could talk about mathematical models being useful in biology in general, then transition to the example of tissue regeneration.]
+
+
+Mathematical models and techniques can help us to resolve the complexity in this dynamic system, however, how to derive the parameter estimates of the models remains a challenging work. In this dissertation, our interest lies in the modeling of the regeneration process that happens around the lesion site, especially in the parameter estimates and comparison of possible models. According to available researches \cite{ref:Tsarouchas}, a mathematical model was firstly proposed but the addressed interactions remains to be precisely defined, and quantitatively examined in experiments. We would like to find the best parameter sets of the model using the published data, and ranking models under certain metrics and possibly find the best-fit model. In these steps, models are expected to retain mathematical and biological significance regarding the complex interactions and differential equations are suitable for this.
+
+% Also, we wish to compare different it with other alternative models and possibly find the best model to describe the observed data. 
+
+Fo the parameter estimation tasks, optimisation-based methods usually have trouble in determining global optima from local optimal, and noise in the observed data may lead to over-fitting. Compared to optimisation-based methods, Bayesian inference techniques can help to relief these two concerns\cite{ref:abcsysbio}. Moreover, approximate inference methods (Approximate Bayesian Computation, ABC) make likelihood-free inference possible, which is suitable for our task as writing down likelihood as a function expression for the dynamic system can be hard.
 
 Such methods introduce computation-intensive sampling-and-test patterns, where massive number of samples are drawn and followed by complex computations. As the sampling is independent from each other in a certain period, the parallel implementation of the algorithm becomes feasible and is expected to accelerate the parameter inference in a large scale when using HPC resources.
 

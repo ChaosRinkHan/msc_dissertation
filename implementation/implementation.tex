@@ -178,17 +178,37 @@ Factor is helpful as an option for efficiency. When some data points are equally
 
 Adaptive population \cite{population} can adapt the population size of each generation according to the mean correlation of variation error of the previous population. In our early test the maximal population size that is allowed is set to 5,000 and the adaptive strategy always select the upper bound, as a results of wide parameter space or the wide posterior approximation shape.
 
-    [what is factor]
+    % [what is factor]
 
-    [what is adaptive distance]
+    % [what is adaptive distance]
 
 \subsubsection{Experiments results}
 
-[FIGURE here]
+% [FIGURE here]
+
+\begin{figure}[ht]
+    \begin{center}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/ib.png}}
+    \end{center}
+
+    \caption[Factors and adaptive distance experiments]%
+    {Factors and adaptive distance experiments. Left: Total required samples. Right: acceptance rates in each generation}
+    \label{fig:factor}
+
+    \begin{center}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/ib_factor.png}}
+    \end{center}
+
+    \caption[CAPTION]%
+    {DESCRIBE}
+    \label{fig:factor_sim}
+
+\end{figure}
 
 Two types of factors and adaptive distance function are tested by running the same number of generations (20 generation, 2000 particles per generation). From FIGURE, by applying factors the total required samples are less, and the adaptive distance requires much less samples; their acceptance rates are also higher than the standard one. It seems that adaptive function and factors could help to converge more quickly.
 
-However considering the result after 20 generation (FIGURE), the resultant model gives the contrary preference. Applying factors and using adaptive distance can lead the resultant model less accurate (after the same generation iterations): they have wider inter-quantile range and may requires more generations to converge.
+
+However considering the result after 20 generation (FIGURE), the resultant model gives the contrary preference. Applying factors and using adaptive distance can lead the resultant model less accurate (after the same generation iterations): they have wider inter-quantile range and may requires more generations to converge. TODO
 
 
 \subsubsection{Conclusion} We noticed the significant efficiency improvement of these adaptive options; they can largely improve the acceptance rate in some cases. However, as the factors and weights are directly multiplied to $\Delta x$ and thus the metrics for distance are changed, a direct compare of the efficiency under the same threshold schedule is unfeasible; after the same number of generations they can reach a small $\epsilon_t$ but still the approximated posterior is not as accurate as the standard implementation. AS a result, our implementation of the parameter inference will only consider standard distance function and factors are only tested for improvements (FIGURE).
