@@ -33,6 +33,15 @@ In practice, using ABC SMC to estimate the parameters of a given model could cos
 
 [possible reasons]
 
+\begin{figure}[h]
+    \begin{center}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/speedup.png}}
+    \end{center}
+
+    \caption[TODO]{Speedup. MORE DESCRIPTION}
+    \label{fig:pc}
+\end{figure}
+
 The recorded execution time using different number of cores is shown in FIGURE. According to that, speed-up and efficiency can be calculated. Here 8 cores is regarded as the baseline for speed-up and efficiency, as the serial version (using only one core) can take quite a long time to finish 10 repeats. When increasing number of cores, the execution time drops fast at first but the decreasing rate (dropping speed, i.e. the derivative of the execution time against time) is gradually reduced to zero; 36, 54 and 72 cores gives nearly the same average execution time and consequently gains very close speedup values (FIGURE).
 
 Denote the number of cores used in the ABC SMC runs as variable $p$. The speedup curve shows a linear trend when $p\leq 36$; when $p\geq 36$ the speedup stays nearly unchanged. $p=36$ is an inflection point, where 36 is the maximum numbers available physical cores in a compute node of Cirrus. A constant drop of efficiency is observed when increasing $p$; smaller $p$ ($p<36$) gives an efficiency higher than 65\% but greater $p$ e.g. $p=72$ results in a low efficiency (34\%).

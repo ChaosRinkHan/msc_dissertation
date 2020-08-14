@@ -433,14 +433,23 @@ By intuition model 4 and 5 would be the best models sofar that can recover most 
         $f_{\beta\alpha}$    & 0.577      & [0.361, 0.738]          \\
         \hline
     \end{tabular}
-    \caption[Estimated parameter values of model 3]
-    {Estimated parameter values of model 3, using uniform prior distribution and log-uniform prior distribution respectively}
+    \caption[Inferred parameter values of model 5]
+    {Inferred parameter values of model 5. MORE DETAIL(SUPER maxt-5)}
     \label{table:estimated5}
 \end{table}
 
 After applying factors, the results were not largely different. As expected, applying factors made the data points at first half (where exists most of the fluctuations) more `focused', however the inferred models are close to one without factors, which could indicate that for model 4 and 5, applying factors will not largely affect the final convergency and the resultant posterior.
 
 When we are trying more populations, an `over-fitting' behaviour is observed at the trajectory of macrophage (FIGURE). In this case, the discrepancy of simulated data and observed data comes from the last 2 data point (72 hpl and 120 hpl).
+
+\begin{figure}[h]
+    \begin{center}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/overfit.png}}
+    \end{center}
+
+    \caption[Simulated trajectory from the last population of model 5, with factors applied]{Simulated trajectory from the last population of model 5, with factors applied. MORE DETAIL}
+    \label{fig:overfit}
+\end{figure}
 
 Next, we performed a model selection on model 3, 4 and 5. FIGURE shows the model probabilities at different generations. From population 10 to population 20 model 4 gains advantage but after population 20 model 5 is preferred. Again, as DISCUSSED in the model comparison of model 1, 2 and 3, we considered the the violently changing model probability is related to the inference ability at certain epsilon threshold values (epsilon) and possibly the insufficient exploration of the parameter space. Given the present result, model 5 is regarded as the best model. Some further experiments tried larger population size (10,000 particles per population) and more populations (36 populations), but the resultant model did not have a significantly better fit of the observed data, although much more computation resources are used.
 
@@ -458,8 +467,28 @@ A inferred parameter posterior distribution of model 5 is shown in FIGURE, the e
 
 [what does that mean]
 
-A quick sensitivity analysis of the dynamical systems models can be quantified using principle component analysis (PCA) \cite{Toni}, where the first PCs corresponds to sloppy parameters while the last PCs corresponds to stiff parameters \cite{sensitivity}. PCA can only provide rough approximated sensitivity behaviour. As models 5 won in the model selection, a further interest is to explore the parameter-to-model sensitivity
+A quick sensitivity analysis of the dynamical systems models can be quantified using principle component analysis (PCA) \cite{Toni}, where the first PCs corresponds to sloppy parameters while the last PCs corresponds to stiff parameters \cite{sensitivity}. PCA can only provide rough approximated sensitivity behaviour. As models 5 won in the model selection, a further interest is to explore the parameter-to-model sensitivity.
 
-FIGURE shows the results of PCA on the last population of inferred model5. The last PC (PC12) is mostly consists of the linear combination of $a$ (from the equation of neutrophil) and $\mu_\Phi$ (from the equation of macrophage), to which the model is most sensitive. If we conclude the last 5 PCs (FIGURE), then $v_{N\Phi}$, $\mu_N)$ (from the equation of neutrophil) and $k_{\Phi\beta}$ (from the equation of macrophage) contribute most portions together with $a$ and $\mu_\Phi$. As a conclusion, model 5 is sensitive to changes in the above parameters, which all come from the equation of neutrophil and macrophage i.e. equations of the cells; it may suggests that given the observed data, the inferred model is more sensitive to cells' dynamic rather than cytokines' dynamics.
+\begin{figure}[t]
+    \begin{center}
+        \resizebox{0.8\hsize}{!}{\includegraphics{fig/pc_pie_all.png}}
+    \end{center}
+
+    \caption[TODO]{PCA results of the last population of model 5. MORE DESCRIPTION}
+    \label{fig:pc}
+\end{figure}
+
+\begin{figure}[h]
+    \begin{center}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/pc.png}}
+    \end{center}
+
+    \caption[PCA results of the last population of model 5]{PCA results of the last population of model 5. MORE DESCRIPTION}
+    \label{fig:pc}
+\end{figure}
+
+
+
+FIGURE shows the results of PCA on the last population of inferred model 5. The last PC (PC12) is mostly consists of the linear combination of $a$ (from the equation of neutrophil) and $\mu_\Phi$ (from the equation of macrophage), to which the model is most sensitive. If we conclude the last 5 PCs (FIGURE), then $v_{N\Phi}$, $\mu_N)$ (from the equation of neutrophil) and $k_{\Phi\beta}$ (from the equation of macrophage) contribute most portions together with $a$ and $\mu_\Phi$. As a conclusion, model 5 is sensitive to changes in the above parameters, which all come from the equation of neutrophil and macrophage i.e. equations of the cells; it may suggests that given the observed data, the inferred model is more sensitive to cells' dynamic rather than cytokines' dynamics.
 
 Also, some visualisations of the last population agreed with conclusions from PCA. Approximated posteriors of the last population plotted in FIGURE and credible ranges of parameters across populations in FIGURE shows that the 5 parameters identified by PCA is indeed `stiff' parameters.
