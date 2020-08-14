@@ -178,9 +178,9 @@ Factor is helpful as an option for efficiency. When some data points are equally
 
 Adaptive population \cite{population} can adapt the population size of each generation according to the mean correlation of variation error of the previous population. In our early test the maximal population size that is allowed is set to 5,000 and the adaptive strategy always select the upper bound, as a results of wide parameter space or the wide posterior approximation shape.
 
-    % [what is factor]
+% [what is factor]
 
-    % [what is adaptive distance]
+% [what is adaptive distance]
 
 \subsubsection{Experiments results}
 
@@ -388,13 +388,62 @@ Figure \ref{fig:resultCurve345} shows the simulated data from the inferred model
 
 \end{figure}
 
+\begin{figure}[ht]
+    \begin{center}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/model5_para.png}}
+    \end{center}
+
+    \caption[Estimated posterior distribution of parameters in model 5]%
+    {Estimated posterior distribution of parameters in model 5. Shaded range indicates 25\%--75\% quantile of the population}
+    \label{fig:model5_para}
+
+\end{figure}
+
+\begin{figure}[ht]
+    \begin{center}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/inferno5.png}}
+    \end{center}
+    \caption[Joint density distribution of each parameter pair]%
+    {Joint distribution of each parameter pair. MORE DESCRIPTION}
+    \label{fig:model5_para_joint}
+\end{figure}
+
 By intuition model 4 and 5 would be the best models sofar that can recover most of observed data features. Model 1, 2 and 3 con also converge to a low final epsilon value (~20), but a key feature observed in target data -- a peak at around 4 hpl -- is not fitted. Some features, e.g. fluctuations in il-1$\beta$ and tnf-$alpha$ trajectories at around 20 hpl are still not ideally fitted; all existing models give a steady or gradually decrease trends for all the four variables after 20 hpl, and fluctuations in the observed data are fitted by smooth and steady curves.
+
+\begin{table}[t!]
+    \centering
+    \begin{tabular}{|c c c|}
+        \hline
+        Parameter            & Mean value & Inter-quartile interval \\[0.5ex]
+        \hline\hline
+        $\lambda_N$          & 13.5       & [12.9, 14.2]            \\
+        $a$                  & 0.0175     & [0.0145, 0.0207]        \\
+        $\kappa_{N\beta}$    & 0.176      & [0.109, 0.234]          \\
+        $\mu_N$              & 0.0239     & [0.0113, 0.0332]        \\
+        $\nu_{N\Phi}$        & 0.125      & [0.115, 0.134]          \\
+        \hline
+        $\kappa_{\Phi\beta}$ & 0.123      & [0.115, 0.131]          \\
+        $\mu_\Phi$           & 0.0234     & [0.0199, 0.0267]        \\
+        \hline
+        $s_{\beta N}$        & 2.38       & [2.02, 2.73]            \\
+        $\mu_\beta$          & 2.67       & [2.24, 3.10]            \\
+        \hline
+        $s_{\alpha\Phi}$     & 0.574      & [0.295, 0.786]          \\
+        $\mu_\alpha$         & 8.91       & [6.07, 11.1]            \\
+        $f_{\beta\alpha}$    & 0.577      & [0.361, 0.738]          \\
+        \hline
+    \end{tabular}
+    \caption[Estimated parameter values of model 3]
+    {Estimated parameter values of model 3, using uniform prior distribution and log-uniform prior distribution respectively}
+    \label{table:estimated5}
+\end{table}
 
 After applying factors, the results were not largely different. As expected, applying factors made the data points at first half (where exists most of the fluctuations) more `focused', however the inferred models are close to one without factors, which could indicate that for model 4 and 5, applying factors will not largely affect the final convergency and the resultant posterior.
 
 When we are trying more populations, an `over-fitting' behaviour is observed at the trajectory of macrophage (FIGURE). In this case, the discrepancy of simulated data and observed data comes from the last 2 data point (72 hpl and 120 hpl).
 
 Next, we performed a model selection on model 3, 4 and 5. FIGURE shows the model probabilities at different generations. From population 10 to population 20 model 4 gains advantage but after population 20 model 5 is preferred. Again, as DISCUSSED in the model comparison of model 1, 2 and 3, we considered the the violently changing model probability is related to the inference ability at certain epsilon threshold values (epsilon) and possibly the insufficient exploration of the parameter space. Given the present result, model 5 is regarded as the best model. Some further experiments tried larger population size (10,000 particles per population) and more populations (36 populations), but the resultant model did not have a significantly better fit of the observed data, although much more computation resources are used.
+
 
 A inferred parameter posterior distribution of model 5 is shown in FIGURE, the estimated mean values is shown in TABLE. SOME DESCRIPTION.
 
