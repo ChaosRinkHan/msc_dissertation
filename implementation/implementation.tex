@@ -1,29 +1,28 @@
 \chapter{Parameter estimation and model comparison}
 
-Estimation of  parameters in the proposed models is the main task of this section, which involves the implementation of ABC SMC and several experiments. ABC SMC-based model selection is another task that can be easily conducted with the developed parameter inference framework.
+For the proposed models, exploration of the uncertainties in the parameter estimations is our main task in this chapter, which involved the application of ABC SMC and several experiments. After that, the parameter inference framework was also used for model selection.
 
-The build and test of code were under \verb|Python| environment with \verb|pyABC|\cite{ref:pyabc}. Some other code e.g. shell script and \verb|R| code are also used to perform the experiments and analyse the results. Software and system environment used in our implementation can be found at Appendix A. The build and test were performed on local computers and HPC facilities available within EPCC.
+The build and test of the code were under \verb|Python| environment with \verb|pyABC|\cite{ref:pyabc}. Some other code, e.g. shell scripts and \verb|R| code were also used to perform the experiments and result analysis. Software and system environment used in our implementation can be found in Appendix A. The build and test were performed on local computers and HPC facilities available within EPCC.
 
+\section{Code and implementations}
 
+%  [ABC implementations details, e.g. distance, population, ODE related functions]
 
+%  [how the code is developed and built]
 
+According to our preliminary studies, a ABC SMC framework implemented using \verb|pyABC| in \verb|Python| was adopted in this project. \verb|pyABC| is a popular SMC software packages\cite{ref:pyabc} which has been used form many ABC SMC inference applications\cite{population}. \verb|pyABC| provides an open-source framework for likelihood-free inference, which is a \verb|NumPy| implementation of ABC SMC algorithm and a useful tool-box for our own inference and analysis tasks. Besides, it supports multi-core execution implemented using \verb|multiprocessing| built-in package, and it made our further studies in the scaling-up performance possible.
 
+%  which is of our interests and suitable for the followed performance experiments.
 
-\section{Implementations and code}
+The inference framework code for the project was developed and tested in local environment (macOS 10.15.6, see Table \ref{table:local_macine}) at first using a small input, then the functional version was deployed on compute node of ARCHER and Cirrus for parameter inference experiments and model selection tasks. The scaling-up experiment was performed on Cirrus. The profiling and its analysis were performed on local machine. Some necessary development and debug were performed on the remote machines to ensure that experiments run correctly on compute node.
 
- [ABC implementations details, e.g. distance, population, ODE related functions]
+The ODE model-related code and utilities were firstly developed to enable reusable functions, variables and data calls. It included the code for the ODE equations, ODE solver, data structures and data format transform functions, etc. By doing this in separate code files, we could change implementation options and activate ABC SMC easily in another `trigger' file, without creating definition and duplicated code for the models, observed data and parameter priors.
 
- [how the code is developed and built]
+Some missing features were found when using \verb|pyABC|, therefore some modifications were made to the source code of \verb|pyABC|.
 
-According to our preliminary studies, ABC SMC framework implemented using \verb|pyABC| in \verb|Python| was adopted in this project. \verb|pyABC| is a popular SMC software packages \cite{ref:pyabc} that has been used form many SMC studies and applications \cite{population}. \verb|pyABC| provides an open-source framework for likelihood-free inference, which is an implementation of ABC SMC algorithm and a tool-box for our own inference and analysis tasks. Besides, it supports multi-core execution implemented using \verb|multiprocessing| package for scaling-up, which is of our interests and suitable for the followed performance experiments.
+For example, the laboratorial measured data were not considered `complete' or `tidy' for modeling and analysis purpose: the available time points for cells and cytokines were different, e.g. cell number was not measured at 0.25 hpl and cytokines' expression was not measured at time point 120 hpl. These missing values were treated as `ignored' when calculating the distance between observed data and simulated data, and represented by \verb|NaN|s. However, in some distance calculations \verb|NaN| was not acceptable; to cope with this, built-in distance function was modified. Other modified code include some visualisation and result representation enhancements
 
-The inference framework code for the project was developed and tested in local environment (macOS 10.15.6, see Table \ref{table:local_macine}) at first, then the functional version was deployed on compute node of ARCHER and Cirrus for parameter inference experiments and model selection task. The scaling-up experiment was performed on Cirrus, and the profiling and its analysis were performed on local machine. Some development and debug were on the remote machines to ensure experiments run correctly on compute node.
-
-The ODE model-related code and utilities were firstly developed to enable reusable functions, variables and data calls. It includes the code for the ODE models, ODE solver, data structures, data format transform functions etc. By doing this in a separate code file, we can change options and activate ABC SMC easily in the implementation code file, without creating definition and duplicated code for the models and parameter priors.
-
-Some modifications were made to the source code of \verb|pyABC|. For example, the laboratorial measured data were not considered `complete' for modeling and analysis purpose: the available time points for cells and cytokines are different, e.g. cell number was not measured at 0.25 hpl and cytokines' expression was not measured at time point 120 hpl. These missing values were treated as `ignored' when calculating the distance between observed data and simulated data. To cope with this built-in distance function code is modified.
-
-Analysis code was also wrapped up into functions which can be easily called after an ABC SMC run is finished, which includes multiple visualisations and summary statistic of the results. For different tasks there are also separated analysis code file. Other analysis tools used in the project include built-in database visualisation tool, R code and Microsoft Excel.
+Analysis of the program output was also wrapped up into functions which can be easily called after an ABC SMC run is finished, which includes multiple visualisations and summary statistic of the results. For different tasks there are also separated analysis code file. Other analysis tools used in the project include built-in database visualisation tool, R code and Microsoft Excel.
 
 The project code was managed via \verb|git| version-control and available as a GitHub repository\footnote{\url{https://github.com/chaolinhan/MSc_Project}}; it also made the cross-hardware synchronisation of code versions convenient.
 
@@ -38,25 +37,28 @@ After several development iterations, code files for ABC SMC implementation now 
 
 
 
+\section{Hyperparameters and implementation options experiments}
 
-
-\section{ABC SMC and model hyperparameters experiments}
-
-As the key focus of this project is on the parameter estimations of dynamical system, the ability of inference on the proposed models was firstly examined before actual inference using the experimental observed data.
+As the key focus of this project was on the parameter estimations of dynamical system, the ability of inference on the proposed models was firstly examined before actual inference using the experimental observed data.
 
 In the first part, synthetic data is used with known true parameter values. The algorithm implementation is evaluated by the efficiency and goodness of resultant model under different implementation options and ABC SMC hyperparameters.
 
 Then according to findings in the first part, several options with good performance are tried in the inference using experimental observed data (Figure \ref{fig:obs_data}). To obtain a more accurate and general results, these experiments are repeated for 3 or more times.
 
-    [including the options that are tested/ tried/ not adopted]
+    % [including the options that are tested/ tried/ not adopted]
 
-    [including experiments results and discussions]
+    % [including experiments results and discussions]
 
-    [how do these options correspond to biological model and how to set them accordingly for proposed model]
+    % [how do these options correspond to biological model and how to set them accordingly for proposed model]
 
-The ABC SMC inference can have largely different performance when using different hyperparameters and implementation options. To firstly test the ability of inference and observe the results of different options, synthetic data with known true parameter values are used as target data. The true value of parameters that are used to generate synthetic data is listed in Appendix B.1. These true values are firstly obtained by fitting a least square fit of model 1 onto the experimental data (Figure \ref{fig:infer_back_data}), the target data is then generated using these parameter values via ODE solver in \verb|Python|.
+    % [why use synthetic data]
 
-\begin{figure}[h!]
+The ABC SMC inference can have largely different performance when using different hyperparameters and implementation options. To firstly test the ability of inference and observe the results of different options, synthetic data with known true parameter values are used as target data. by doing this, we could directly compare the inferred parameters to the true value, and compare the simulated trajectories to the true trajectories and then observe the result to see whether the inference is successful and how well the model fit the data. Also, by setting the same final threshold value, the efficiency under different options can be compared and help us to choose proper options when applying ABC SMC on the observed data. The true value of parameters that were used to generate synthetic data is listed in Table \ref{table:known_values}. 
+
+The true values were obtained by fitting model 1 onto the experimental data (Figure \ref{fig:infer_back_data}) using least-square optimisation method. Available least-square fit tools in \verb|SciPy| were used. The fit algorithm was Trust Region Reflective\footnote{\url{https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.least_squares.html}}. Target data was then generated using these parameter values via ODE integrate solver\footnote{\url{https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.odeint.html}}.
+
+
+\begin{figure}[ht]
     \begin{center}
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/LS.png}}
     \end{center}
@@ -67,9 +69,6 @@ The ABC SMC inference can have largely different performance when using differen
 
 \end{figure}
 
-[TABLE for known parameter values]
-
-[why use synthetic data]
 
 Among them the following topics are studied using the synthetic data.
 
@@ -145,7 +144,7 @@ It seems that a more `local' kernel can give better performance by efficiently s
 
 \subsection{Adaptive functions and factors}
 
-[how adaptive distance work]
+% [how adaptive distance work]
 
 SMC can be more adaptive by introducing adaptive distance function and adaptive population; besides, factors can be applied to manually `normalise' the data.
 
@@ -182,11 +181,15 @@ Adaptive population \cite{population} can adapt the population size of each gene
 
 % [what is adaptive distance]
 
-\subsubsection{Experiments results}
+\subsubsection{Experiment results}
 
 % [FIGURE here]
 
-\begin{figure}[ht]
+Two types of factor and adaptive distance function were tested by running the same number of generations (20 generation, 2000 particles per generation). The first type of factor is 25:75  factor, where first half of the trajectory data was assigned higher factor (75), and second half of the data was assigned lower factor (25); this could make the first half if the data more `important' in the inference. The second factor was range factor, which tried to normalise the trajectory of each dependent variable according to its data range.
+
+From Figure \ref{fig:factor}, different types of factor gave different performance. 25:75 factor required much more samples in the first generation (orange bar in the left of Figure \ref{fig:factor}) and also did not improve much in later generations, thus it is the slowest one. The first half of observed data contained more features and information, assigning it with higher factor would make the algorithm think that it is more important to fit the first half and thus focus on the hard part, and consequently more particles were needed in the inference process. The acceptance rates of 25:75 factor among different generations were also generally slightly lower than the standard. By contrast, range factor required less total samples and gave generally higher acceptance rates than standard, which made it considerably faster. Adaptive distance gave the best efficiency, as it significantly improved the acceptance rates and resulted in even less required samples (right, Figure \ref{fig:factor}).
+
+\begin{figure}[t!]
     \begin{center}
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/ib.png}}
     \end{center}
@@ -205,13 +208,17 @@ Adaptive population \cite{population} can adapt the population size of each gene
 
 \end{figure}
 
-Two types of factors and adaptive distance function are tested by running the same number of generations (20 generation, 2000 particles per generation). From FIGURE, by applying factors the total required samples are less, and the adaptive distance requires much less samples; their acceptance rates are also higher than the standard one. It seems that adaptive function and factors could help to converge more quickly.
+However, the result of factors adaptive distance could not be directly compared to standard run, because it changed the distance measurement by adapting weights or manually setting factors. Factors were normalise to make it more close the standard distance measurement. As a result, the same final threshold value did not guarantee that adaptive distance can reach the same level of fit as others. After 20 populations, adaptive distance had a poor fit (Figure \ref{fig:factor_sim}), while the standard run and two types of factors had similar tight fits of the data, which all converge to the true posterior. Additional in our implementations, variance factor (which tries to normalise the data according to the dependent variables' variance) was also tries and gave very similar performance as range factor.
+
+To conclude, because the factors and weights are directly multiplied to $\Delta x$ and thus the metrics for distance are changed, the direct compare of the efficiency under the same threshold schedule was unfeasible; we could only compare the results after the same number of generations. Factors gave nearly the same inferred results but required different number of samples, hence cares must betaken when choosing factor schemes. Adaptive distance did not result in a accurate result as others. As a result, our further implementations used standard distance function, and factors were tried for possible improvements.
 
 
-However considering the result after 20 generation (FIGURE), the resultant model gives the contrary preference. Applying factors and using adaptive distance can lead the resultant model less accurate (after the same generation iterations): they have wider inter-quantile range and may requires more generations to converge. TODO
+% by applying factors the total required samples are less, and the adaptive distance requires much less samples; their acceptance rates are also higher than the standard one. It seems that adaptive function and factors could help to converge more quickly.
 
 
-\subsubsection{Conclusion} We noticed the significant efficiency improvement of these adaptive options; they can largely improve the acceptance rate in some cases. However, as the factors and weights are directly multiplied to $\Delta x$ and thus the metrics for distance are changed, a direct compare of the efficiency under the same threshold schedule is unfeasible; after the same number of generations they can reach a small $\epsilon_t$ but still the approximated posterior is not as accurate as the standard implementation. AS a result, our implementation of the parameter inference will only consider standard distance function and factors are only tested for improvements (FIGURE).
+% However considering the result after 20 generation (Figure \ref{fig:factor_sim}), the resultant model gives the contrary preference. Applying factors and using adaptive distance can lead the resultant model less accurate (after the same generation iterations): they have wider inter-quantile range and may requires more generations to converge. TODO
+
+% \subsubsection{Conclusion} We noticed the significant efficiency improvement of these adaptive options; they can largely improve the acceptance rate in some cases. However, as the factors and weights are directly multiplied to $\Delta x$ and thus the metrics for distance are changed, a direct compare of the efficiency under the same threshold schedule is unfeasible; after the same number of generations they can reach a small $\epsilon_t$ but still the approximated posterior is not as accurate as the standard implementation. AS a result, our implementation of the parameter inference will only consider standard distance function and factors are only tested for improvements (FIGURE).
 
 
 \subsection{Data size, prior distribution and population}
@@ -220,17 +227,13 @@ However considering the result after 20 generation (FIGURE), the resultant model
 
 Some other hyperparameters, e.g. feed-in data size, prior distribution, number of populations and number of particles in each population were also of our interest. Experiments were designed to explore how these options affect the goodness of fit and efficiency of the implementation.
 
-Regarding the dynamic systems model, SMC was applied with two data size options, three prior distribution (uniform distribution, wider uniform distribution and log-uniform distribution). The population options i.e. population size and number of populations were also tried with different values. These experiments intended to give suggestions on the later SMC implementation on experimental data.
+Regarding the existing dynamic systems model, SMC was applied with two data size options, three prior distribution (uniform distribution, wider uniform distribution and log-uniform distribution). The population options i.e. population size and number of populations were also tried with different values. These experiments intended to give suggestions on the later SMC implementation on experimental data.
 
 \subsubsection{Experiments results}
 
 The results from data size and prior distribution range is shown in FIGURE. The standard implementation is fed with 120 data points (30 data points for each of the four variables), the `less data' is fed with 48 data points, which is the case of the real experimental measurement. Although much less (60\%) data is used, the total required sampling numbers is not much less (XX\%). Although the data size does not affect the sampling process much and the inferred model are all considered acceptable when compared to the synthetic data (FIGURE), cares should be taken when using less data point, or using other more summative statistics, e.g. mean, standard deviation, peak values, starting and ending values etc. As shown in \cite{ref:disease}, less data can lead to a model with more variance, under-fitting or missing some local features e.g. local peak.
 
-The prior range and distribution can largely affect the execution of SMC (FIGURE and FIGURE). Samples are taken from a high dimensional parameter space in each sampling process, wider prior distribution ranges will making each sampling explore more in the parameter vector space. It suggests that a narrower prior is preferred and we should make a more accurate and confident prior belief as possible for the efficiency concerns.
-
-    [discuss uniform and log uniform when result ready]
-
-\begin{figure}
+\begin{figure}[t!]
     \begin{center}
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/size1.png}}
     \end{center}
@@ -241,7 +244,11 @@ The prior range and distribution can largely affect the execution of SMC (FIGURE
 
 \end{figure}
 
-[FIGURE HERE]
+The prior range and distribution can largely affect the execution of SMC (FIGURE and FIGURE). Samples are taken from a high dimensional parameter space in each sampling process, wider prior distribution ranges will making each sampling explore more in the parameter vector space. It suggests that a narrower prior is preferred and we should make a more accurate and confident prior belief as possible for the efficiency concerns.
+
+%     [discuss uniform and log uniform when result ready]
+
+% [FIGURE HERE]
 
 
 \subsubsection{Summary} This subsection aims to preliminarily explore ABC SMC settings using synthetic data with known true parameter values, thus the efficiency and the goodness of the resultant model can be compared across these options. Conclusion can be drawn to choose efficient and proper options of ABC SMC to be applied on the target models with experimental data. It also provides reference for a general inference task using SMC with high dimensional parameter space.
@@ -306,8 +313,8 @@ The acceptance rates is fluctuating and have a gradually increase trend for all 
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/cmp1.png}}
     \end{center}
 
-    \caption[Model comparison of model 1, 2 and 3]%
-    {Model comparison of model 1, 2 and 3. From population 8 to population 30, model3 always wins}
+    \caption[ABC SMC based model comparison of model 1, 2 and 3]%
+    {ABC SMC based model comparison of model 1, 2 and 3. From population 8 to population 30, model3 always wins}
     \label{fig:cmp1}
 
 \end{figure}
@@ -399,15 +406,6 @@ Figure \ref{fig:resultCurve345} shows the simulated data from the inferred model
 
 \end{figure}
 
-\begin{figure}[ht]
-    \begin{center}
-        \resizebox{1.0\hsize}{!}{\includegraphics{fig/inferno5.png}}
-    \end{center}
-    \caption[Joint density distribution of each parameter pair]%
-    {Joint distribution of each parameter pair. MORE DESCRIPTION}
-    \label{fig:model5_para_joint}
-\end{figure}
-
 By intuition model 4 and 5 would be the best models sofar that can recover most of observed data features. Model 1, 2 and 3 con also converge to a low final epsilon value (~20), but a key feature observed in target data -- a peak at around 4 hpl -- is not fitted. Some features, e.g. fluctuations in il-1$\beta$ and tnf-$alpha$ trajectories at around 20 hpl are still not ideally fitted; all existing models give a steady or gradually decrease trends for all the four variables after 20 hpl, and fluctuations in the observed data are fitted by smooth and steady curves.
 
 \begin{table}[t!]
@@ -451,6 +449,16 @@ When we are trying more populations, an `over-fitting' behaviour is observed at 
     \label{fig:overfit}
 \end{figure}
 
+\begin{figure}[H]
+    \begin{center}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/model345cmp.png}}
+    \end{center}
+
+    \caption[ABC SMC based model comparison of model 3, 4 and 5]{ABC SMC based model comparison of model 3, 4 and 5. MORE DETAIL}
+    \label{fig:overfit}
+\end{figure}
+
+
 Next, we performed a model selection on model 3, 4 and 5. FIGURE shows the model probabilities at different generations. From population 10 to population 20 model 4 gains advantage but after population 20 model 5 is preferred. Again, as DISCUSSED in the model comparison of model 1, 2 and 3, we considered the the violently changing model probability is related to the inference ability at certain epsilon threshold values (epsilon) and possibly the insufficient exploration of the parameter space. Given the present result, model 5 is regarded as the best model. Some further experiments tried larger population size (10,000 particles per population) and more populations (36 populations), but the resultant model did not have a significantly better fit of the observed data, although much more computation resources are used.
 
 
@@ -469,7 +477,7 @@ A inferred parameter posterior distribution of model 5 is shown in FIGURE, the e
 
 A quick sensitivity analysis of the dynamical systems models can be quantified using principle component analysis (PCA) \cite{Toni}, where the first PCs corresponds to sloppy parameters while the last PCs corresponds to stiff parameters \cite{sensitivity}. PCA can only provide rough approximated sensitivity behaviour. As models 5 won in the model selection, a further interest is to explore the parameter-to-model sensitivity.
 
-\begin{figure}[t]
+\begin{figure}[H]
     \begin{center}
         \resizebox{0.8\hsize}{!}{\includegraphics{fig/pc_pie_all.png}}
     \end{center}
@@ -478,15 +486,14 @@ A quick sensitivity analysis of the dynamical systems models can be quantified u
     \label{fig:pc}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
     \begin{center}
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/pc.png}}
     \end{center}
 
     \caption[PCA results of the last population of model 5]{PCA results of the last population of model 5. MORE DESCRIPTION}
-    \label{fig:pc}
+    \label{fig:pc_pie}
 \end{figure}
-
 
 
 FIGURE shows the results of PCA on the last population of inferred model 5. The last PC (PC12) is mostly consists of the linear combination of $a$ (from the equation of neutrophil) and $\mu_\Phi$ (from the equation of macrophage), to which the model is most sensitive. If we conclude the last 5 PCs (FIGURE), then $v_{N\Phi}$, $\mu_N)$ (from the equation of neutrophil) and $k_{\Phi\beta}$ (from the equation of macrophage) contribute most portions together with $a$ and $\mu_\Phi$. As a conclusion, model 5 is sensitive to changes in the above parameters, which all come from the equation of neutrophil and macrophage i.e. equations of the cells; it may suggests that given the observed data, the inferred model is more sensitive to cells' dynamic rather than cytokines' dynamics.
