@@ -26,7 +26,7 @@ Analysis of the program output was also wrapped up into functions which can be e
 
 The project code was managed via \verb|git| version-control and available as a GitHub repository\footnote{\url{https://github.com/chaolinhan/MSc_Project}}; it also made the cross-hardware synchronisation of code versions convenient.
 
-After several development iterations, code files for ABC SMC implementation now mainly had two types: code files for infer-back experiments (udsing synthetic data), and code files for parameter inference (using experimental data). Model selection can be easily done by adding more model to the implementation code file.
+After several development iterations, code files for ABC SMC implementation now mainly had two types: code files for infer-back experiments (using synthetic data), and code files for parameter inference (using experimental data). Model selection can be easily done by adding more model to the implementation code file.
 
 
 % \section{Parameter estimation}
@@ -70,11 +70,11 @@ The true values were obtained by fitting model 1 onto the experimental data (Fig
 \end{figure}
 
 
-Among them the following topics are studied using the synthetic data.
+The following topics were studied using the synthetic data and ABC SMC inference framework.
 
 \subsection{Perturbation kernels}
 
-Perturbation kernels work in the sampling process. In each generation $t$, samples are firstly taken from the previous population $\{\theta_{t-1}\}$ with weights $\{w_{t-1}\}$, then perturbed using the perturbation kernel $K(\theta|\theta^*)$. We keep sampling until $N$ particles are accepted, where $N$ is the pre-set population size. After that the new weights are calculated and normalised.
+Perturbation kernels work in the sampling process. In each generation $t$, samples are firstly taken from the previous population $\{\theta_{t-1}\}$ with weights $\{w_{t-1}\}$, then perturbed using the perturbation kernel $K(\theta|\theta^*)$. We keep sampling until $N$ particles are accepted, where $N$ is the pre-set population size. After that the new weights are calculated and normalised. Figure \ref{fig:smc} illustrates the process.
 
 % \begin{figure}[t!]
 %     \begin{center}
@@ -126,9 +126,9 @@ more required particles in each generation. As shown in Figure \ref{fig:acceptan
 
 Multivariate normal kernel has a performance between local M-NN M=250 and M=100. It proves that rather than a trivial normal kernel, multivariate normal kernels is more efficient facing the concentrations of joint distributions among multiple parameters \cite{ref:kernel}. `Scaling' option can narrower the distribution calculated from the last population, thus making the kernel more `local' by sampling under a smaller variance. Similar to small M in local M-NN, small `scaling' is also more efficient in our experiment of the model 1. Besides the fixed threshold schedule, a median threshold schedule with the same final threshold $\epsilon_{20}=10.0$ is also tested and similar results are observed (Figure \ref{fig:kernel2} and \ref{fig:acceptance2}, Appendix B2).
 
-It seems that a more `local' kernel can give better performance by efficiently sampling around concentrations in parameters' distribution and approximate the posterior distribution. This holds in most cases under a given target final threshold value $\epsilon_t$, however may not produce the proper result want: a more local kernel, e.g. local M-NN with small M and multivariate normal with `scaling' is more likely to be stuck in local optimality, as the kernel is less likely to sample particles that are far from local concentrations, although these local optimal are still accepted under given threshold. In other words, using local kernels the epsilon may quickly converge to to local optimal; if a even smaller epsilon is desired, the local kernel can hardly generate enough particles to find another matched local modes. Also, the shapes of posterior distribution will affect the performance of local kernels \cite{ref:kernel}. One obvious example is presented in Figure \ref{fig:kernel1}, where local M-NN with M=50 suffered from a local optimal: the last generation takes much more samples to meet the required threshold.
+A more `local' kernel was more likely to give better performance by efficiently sampling around concentrations in parameters' distribution and approximate the posterior distribution. This holds in most cases under a given target final threshold value $\epsilon_t$, however may not produce the proper result want: a more local kernel, e.g. local M-NN with small M and multivariate normal with `scaling' is more likely to be stuck in local optimality, as the kernel is less likely to sample particles that are far from local concentrations, although these local optimal are still accepted under given threshold. In other words, using local kernels the epsilon may quickly converge to to local optimal; if a even smaller epsilon is desired, the local kernel can hardly generate enough particles to find another matched local modes. Also, the shapes of posterior distribution will affect the performance of local kernels \cite{ref:kernel}. One obvious example is presented in Figure \ref{fig:kernel1}, where local M-NN with M=50 suffered from a local optimal: the last generation takes much more samples to meet the required threshold.
 
-\subsubsection{Conclusion} Local kernels can be fast bur unstable in some case; for a general parameter inference of our models, multivariate kernels are preferred, as a good fit is our prior target; some local kernels are also worth trying after the multivariate normal kernel, e.g. local M-NN with M$\leq 250$ (for population size of 2000, i.e. 12.5\% of the population) and multivariate normal with scaling. Also multivariate M-NN is worth trying, although it is not built in \verb|pyABC| and requires additional implementations.
+\subsubsection{Conclusion} Local kernels can be fast bur unstable in some case; for a general parameter inference of our models, multivariate kernels are preferred, as a good fit is our prior target; some local kernels are also worth trying after the multivariate normal kernel, e.g. local M-NN with M$\leq 250$ (for population size of 2000, i.e. 12.5\% of the population) and multivariate normal with scaling. Also, multivariate M-NN is worth trying, although it was not built in \verb|pyABC| and requires additional implementations.
 
 
 % \begin{figure}
@@ -223,7 +223,7 @@ To conclude, because the factors and weights are directly multiplied to $\Delta 
 
 \subsection{Data size, prior distribution and population}
 
-[experiments plan]
+% [experiments plan]
 
 Some other hyperparameters, e.g. feed-in data size, prior distribution, number of populations and number of particles in each population were also of our interest. Experiments were designed to explore how these options affect the goodness of fit and efficiency of the implementation.
 
@@ -231,9 +231,7 @@ Regarding the existing dynamic systems model, SMC was applied with two data size
 
 \subsubsection{Experiments results}
 
-The results from data size and prior distribution range is shown in FIGURE. The standard implementation is fed with 120 data points (30 data points for each of the four variables), the `less data' is fed with 48 data points, which is the case of the real experimental measurement. Although much less (60\%) data is used, the total required sampling numbers is not much less (XX\%). Although the data size does not affect the sampling process much and the inferred model are all considered acceptable when compared to the synthetic data (FIGURE), cares should be taken when using less data point, or using other more summative statistics, e.g. mean, standard deviation, peak values, starting and ending values etc. As shown in \cite{ref:disease}, less data can lead to a model with more variance, under-fitting or missing some local features e.g. local peak.
-
-\begin{figure}[t!]
+\begin{figure}[H]
     \begin{center}
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/size1.png}}
     \end{center}
@@ -244,14 +242,27 @@ The results from data size and prior distribution range is shown in FIGURE. The 
 
 \end{figure}
 
-The prior range and distribution can largely affect the execution of SMC (FIGURE and FIGURE). Samples are taken from a high dimensional parameter space in each sampling process, wider prior distribution ranges will making each sampling explore more in the parameter vector space. It suggests that a narrower prior is preferred and we should make a more accurate and confident prior belief as possible for the efficiency concerns.
+The results from data size and prior distribution range is shown in Figure \ref{fig:size}. The standard implementation is fed with 120 data points (30 data points for each of the four variables), the `less data' is fed with 48 data points, which is the case of the real experimental measurement. Although much less (60\%) data was used, the total required sampling numbers was only 4.47\% less. This indicated that the data size does not affect the sampling process much and the inferred model are all considered acceptable when compared to the synthetic data, as they finally reached a similar epsilon threshold ((b), Figure \ref{fig:size}), but cares should still be taken when using less data point, or using other more summative statistics (e.g. mean, standard deviation, peak values, starting and ending values etc.) as the target data: as shown in \cite{ref:disease}, less data can lead to a model with more variance, under-fitting or missing some local features such as local peaks.
+
+The prior range and distribution can largely affect the inference progress (Figure \ref{fig:size}. (a)). Samples were drawn from a high dimensional parameter space in each sampling process, a wider parameter prior interval in only one dimension can cause the parameter space to be much bigger, and consequently the exploration and sampling of parameter vectors would take much more efforts. Figure \ref{fig:size}. (b) also indicates that the convergency is slower for wider prior ranges. As a result, a proper prior interval based on our experience and belief with seeing the data should be set as narrow as possible, as inference are largely affected by the prior interval and its length; improper prior could even make the algorithm miss the true posterior \cite{ref:abcsysbio}.
+
+How to specify prior can be tricky from problem to problem. For our task in the parameter inference of regeneration model, biologically motivated priors were used, which were general reflection of biological constrains. Also the units of the parameters help us in identify the possible scale of the parameters.
+
+
+% taken from a high dimensional parameter space in each sampling process, wider prior distribution ranges will making each sampling explore more in the parameter vector space. It suggests that a narrower prior is preferred and we should make a more accurate and confident prior belief as possible for the efficiency concerns.
 
 %     [discuss uniform and log uniform when result ready]
 
 % [FIGURE HERE]
 
 
-\subsubsection{Summary} This subsection aims to preliminarily explore ABC SMC settings using synthetic data with known true parameter values, thus the efficiency and the goodness of the resultant model can be compared across these options. Conclusion can be drawn to choose efficient and proper options of ABC SMC to be applied on the target models with experimental data. It also provides reference for a general inference task using SMC with high dimensional parameter space.
+\subsubsection{Choise of options} 
+
+This subsection aims to preliminarily explore options in ABC SMC implementations. From the above results, we adopted multivariate normal kernel as the kernel for our real inference on observed data; Local M-NN kernels were also planned to be tested. In the real inference, 25:75 factors were also tried to see if it could help in recovering more features and resulting a better fit. because the improvement by using less data was inapparent, we did not try to change the target summary data size. Prior intervals were explored explicitly and gradually shrunk for our models.
+
+Some other hyperparameter, e.g. number of generations, population size (i.e. number of particles per generation) were not addressed in this subsection. In the real inference, population size was set to be greater than 2000 to avoid insufficient exploration of the previous population; in some case than high variance or uncertainties in the results were observed, population size as large as 20,000 were used. If the epsilon did not show a convergency trend, the run could be extended to more generations until a stable result was observed.
+
+% using synthetic data with known true parameter values, thus the efficiency and the goodness of the resultant model can be compared across these options. Conclusion can be drawn to choose efficient and proper options of ABC SMC to be applied on the target models with experimental data. It also provides reference for a general inference task using SMC with high dimensional parameter space.
 
 
 
@@ -455,12 +466,18 @@ When we are trying more populations, an `over-fitting' behaviour is observed at 
     \end{center}
 
     \caption[ABC SMC based model comparison of model 3, 4 and 5]{ABC SMC based model comparison of model 3, 4 and 5. MORE DETAIL}
-    \label{fig:overfit}
+    \label{fig:model345cmp}
 \end{figure}
 
 
-Next, we performed a model selection on model 3, 4 and 5. FIGURE shows the model probabilities at different generations. From population 10 to population 20 model 4 gains advantage but after population 20 model 5 is preferred. Again, as DISCUSSED in the model comparison of model 1, 2 and 3, we considered the the violently changing model probability is related to the inference ability at certain epsilon threshold values (epsilon) and possibly the insufficient exploration of the parameter space. Given the present result, model 5 is regarded as the best model. Some further experiments tried larger population size (10,000 particles per population) and more populations (36 populations), but the resultant model did not have a significantly better fit of the observed data, although much more computation resources are used.
+Next, we performed a model comparison on model 3, 4 and 5, using the same ABC SMC inference framework. Figure \ref{fig:model345cmp} shows the model probabilities at different generations.
 
+Model 4 did not overweight other models across all the generations; model 3 gained advantage before generation 15 except generation 5. After generation 18 ($\epsilon_{18} = 16.98$), model 5 gained absolute advantage and won in further generations. Also, repeated runs showed similar trends: although uncertainties were present before generation 20, model 5 won with nearly 100\% probability in later generations where epsilon values were considerably low, i.e. $\epsilon_t<16$.
+
+Based on the model comparison results, we could conclude that model 5 was the best model among the tested models. Uncertainties were observed in early generations, 
+
+
+From population 10 to population 20 model 4 gains advantage but after population 20 model 5 is preferred. Again, as DISCUSSED in the model comparison of model 1, 2 and 3, we considered the the violently changing model probability is related to the inference ability at certain epsilon threshold values (epsilon) and possibly the insufficient exploration of the parameter space. Given the present result, model 5 is regarded as the best model. Some further experiments tried larger population size (10,000 particles per population) and more populations (36 populations), but the resultant model did not have a significantly better fit of the observed data, although much more computation resources are used. 
 
 A inferred parameter posterior distribution of model 5 is shown in FIGURE, the estimated mean values is shown in TABLE. SOME DESCRIPTION.
 
