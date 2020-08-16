@@ -258,7 +258,7 @@ How to specify prior can be tricky from problem to problem. For our task in the 
 
 \subsubsection{Choise of options} 
 
-This subsection aims to preliminarily explore options in ABC SMC implementations. From the above results, we adopted multivariate normal kernel as the kernel for our real inference on observed data; Local M-NN kernels were also planned to be tested. In the real inference, 25:75 factors were also tried to see if it could help in recovering more features and resulting a better fit. because the improvement by using less data was inapparent, we did not try to change the target summary data size. Prior intervals were explored explicitly and gradually shrunk for our models.
+This subsection aims to preliminarily explore options in ABC SMC implementations. From the above results, we adopted multivariate normal kernel as the kernel for our real inference on observed data; Local M-NN kernels were also planned to be tested. In the real inference, 25:75 factor were also tried to see if it could help in recovering more features and resulting a better fit. because the improvement by using less data was inapparent, we did not try to change the target summary data size. Prior intervals were explored explicitly and gradually shrunk for our models.
 
 Some other hyperparameter, e.g. number of generations, population size (i.e. number of particles per generation) were not addressed in this subsection. In the real inference, population size was set to be greater than 2000 to avoid insufficient exploration of the previous population; in some case than high variance or uncertainties in the results were observed, population size as large as 20,000 were used. If the epsilon did not show a convergency trend, the run could be extended to more generations until a stable result was observed.
 
@@ -275,7 +275,7 @@ Some other hyperparameter, e.g. number of generations, population size (i.e. num
 
 \subsection{Model 1, 2 and 3}
 
-[separated ABC run on model 1, 2 and 3]
+% [separated ABC run on model 1, 2 and 3]
 
 Using the suggested options in the previous section, the target data (Figure \ref{fig:obs_data}) is prepared as input for the SMC inference framework. Regarding the result, the population size and number of generations are adjusted several times to obtain an general informative posterior which should be stable across repeated runs and avoid local optimal as much as possible.
 
@@ -406,6 +406,43 @@ Figure \ref{fig:resultCurve345} shows the simulated data from the inferred model
 
 \end{figure}
 
+By intuition model 4 and 5 would be the best models sofar that can recover most of observed data features. Model 1, 2 and 3 con also converge to a low final epsilon value (~20), but a key feature observed in target data -- a peak at around 4 hpl -- is not fitted. Some features, e.g. fluctuations in il-1$\beta$ and tnf-$alpha$ trajectories at around 20 hpl are still not ideally fitted; all existing models give a steady or gradually decrease trends for all the four variables after 20 hpl, and fluctuations in the observed data are fitted by smooth and steady curves.
+
+After applying factors, the results were not largely different. As expected, applying factors made the data points at first half (where exists most of the fluctuations) more `focused', however the inferred models are close to one without factors, which could indicate that for model 4 and 5, applying factors will not largely affect the final convergency and the resultant posterior.
+
+When we are trying more generations with factors, an `over-fitting' behaviour was observed at the trajectory of macrophage (Figure \ref{fig:overfit}). In this case, the discrepancy of simulated data and observed data comes from the last 2 data point (72 hpl and 120 hpl). MORE
+
+\begin{figure}[H]
+    \begin{center}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/overfit.png}}
+    \end{center}
+
+    \caption[Simulated trajectory from the last population of model 5, with factors applied]{Simulated trajectory from the last population of model 5, with factors applied. MORE DETAIL}
+    \label{fig:overfit}
+
+    \begin{center}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/model345cmp.png}}
+    \end{center}
+
+    \caption[ABC SMC based model comparison of model 3, 4 and 5]{ABC SMC based model comparison of model 3, 4 and 5. MORE DETAIL}
+    \label{fig:model345cmp}
+\end{figure}
+
+
+
+Next, we performed a model comparison on model 3, 4 and 5, using the same ABC SMC inference framework. Figure \ref{fig:model345cmp} shows the model probabilities at different generations.
+
+Model 4 did not overweight other models across all the generations; model 3 gained advantage before generation 15 except generation 5. After generation 18 ($\epsilon_{18} = 16.98$), model 5 gained absolute advantage and won in further generations. Also, repeated runs showed similar trends: although uncertainties were present before generation 20, model 5 won with nearly 100\% probability in later generations where epsilon values were considerably low, i.e. $\epsilon_t<16$.
+
+Based on the model comparison results, we could conclude that model 5 was the best model among the tested models. Uncertainties were observed in early generations, where similar patterns were also observed in the model comparison of model 1, 2 and 3. We considered the the violently changing model probability in early generations is related to the inference ability at high epsilon threshold values (epsilon) and possibly the insufficient exploration of the parameter space. However as we only focused on the best model with small final threshold $\epsilon_T$, the easiest way is to extended the number of generation until epsilon converges, or increase the population size for a more statistically confident probability.
+
+
+% From population 10 to population 20 model 4 gains advantage but after population 20 model 5 is preferred. Again, as DISCUSSED in the model comparison of model 1, 2 and 3, Given the present result, model 5 is regarded as the best model. 
+
+% Some further experiments tried larger population size (10,000 particles per population) and more populations (36 populations), but the resultant model did not have a significantly better fit of the observed data, although much more computation resources are used. 
+
+For the best model (model 5), the inferred parameter posterior distribution of model 5 is shown in Figure \ref{fig:model5_para}, the estimated mean values is shown in Table \ref{table:estimated5}. The (pair-wise) joint density distribution is shown in Figure \ref{fig:model5_para_joint}. SOME DETAIL.
+
 \begin{figure}[ht]
     \begin{center}
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/model5_para.png}}
@@ -417,9 +454,7 @@ Figure \ref{fig:resultCurve345} shows the simulated data from the inferred model
 
 \end{figure}
 
-By intuition model 4 and 5 would be the best models sofar that can recover most of observed data features. Model 1, 2 and 3 con also converge to a low final epsilon value (~20), but a key feature observed in target data -- a peak at around 4 hpl -- is not fitted. Some features, e.g. fluctuations in il-1$\beta$ and tnf-$alpha$ trajectories at around 20 hpl are still not ideally fitted; all existing models give a steady or gradually decrease trends for all the four variables after 20 hpl, and fluctuations in the observed data are fitted by smooth and steady curves.
-
-\begin{table}[t!]
+\begin{table}[H]
     \centering
     \begin{tabular}{|c c c|}
         \hline
@@ -447,61 +482,18 @@ By intuition model 4 and 5 would be the best models sofar that can recover most 
     \label{table:estimated5}
 \end{table}
 
-After applying factors, the results were not largely different. As expected, applying factors made the data points at first half (where exists most of the fluctuations) more `focused', however the inferred models are close to one without factors, which could indicate that for model 4 and 5, applying factors will not largely affect the final convergency and the resultant posterior.
-
-When we are trying more populations, an `over-fitting' behaviour is observed at the trajectory of macrophage (FIGURE). In this case, the discrepancy of simulated data and observed data comes from the last 2 data point (72 hpl and 120 hpl).
-
-\begin{figure}[h]
-    \begin{center}
-        \resizebox{1.0\hsize}{!}{\includegraphics{fig/overfit.png}}
-    \end{center}
-
-    \caption[Simulated trajectory from the last population of model 5, with factors applied]{Simulated trajectory from the last population of model 5, with factors applied. MORE DETAIL}
-    \label{fig:overfit}
-\end{figure}
-
-\begin{figure}[H]
-    \begin{center}
-        \resizebox{1.0\hsize}{!}{\includegraphics{fig/model345cmp.png}}
-    \end{center}
-
-    \caption[ABC SMC based model comparison of model 3, 4 and 5]{ABC SMC based model comparison of model 3, 4 and 5. MORE DETAIL}
-    \label{fig:model345cmp}
-\end{figure}
-
-
-Next, we performed a model comparison on model 3, 4 and 5, using the same ABC SMC inference framework. Figure \ref{fig:model345cmp} shows the model probabilities at different generations.
-
-Model 4 did not overweight other models across all the generations; model 3 gained advantage before generation 15 except generation 5. After generation 18 ($\epsilon_{18} = 16.98$), model 5 gained absolute advantage and won in further generations. Also, repeated runs showed similar trends: although uncertainties were present before generation 20, model 5 won with nearly 100\% probability in later generations where epsilon values were considerably low, i.e. $\epsilon_t<16$.
-
-Based on the model comparison results, we could conclude that model 5 was the best model among the tested models. Uncertainties were observed in early generations, 
-
-
-From population 10 to population 20 model 4 gains advantage but after population 20 model 5 is preferred. Again, as DISCUSSED in the model comparison of model 1, 2 and 3, we considered the the violently changing model probability is related to the inference ability at certain epsilon threshold values (epsilon) and possibly the insufficient exploration of the parameter space. Given the present result, model 5 is regarded as the best model. Some further experiments tried larger population size (10,000 particles per population) and more populations (36 populations), but the resultant model did not have a significantly better fit of the observed data, although much more computation resources are used. 
-
-A inferred parameter posterior distribution of model 5 is shown in FIGURE, the estimated mean values is shown in TABLE. SOME DESCRIPTION.
-
 
 \subsection{Sensitivity of parameters}
 
-[why last PCs]
+% [why last PCs]
 
-[which parameters are most sensitive]
+% [which parameters are most sensitive]
 
-[compared to credible intervals plot]
+% [compared to credible intervals plot]
 
-[what does that mean]
+% [what does that mean]
 
-A quick sensitivity analysis of the dynamical systems models can be quantified using principle component analysis (PCA) \cite{Toni}, where the first PCs corresponds to sloppy parameters while the last PCs corresponds to stiff parameters \cite{sensitivity}. PCA can only provide rough approximated sensitivity behaviour. As models 5 won in the model selection, a further interest is to explore the parameter-to-model sensitivity.
-
-\begin{figure}[H]
-    \begin{center}
-        \resizebox{0.8\hsize}{!}{\includegraphics{fig/pc_pie_all.png}}
-    \end{center}
-
-    \caption[TODO]{PCA results of the last population of model 5. MORE DESCRIPTION}
-    \label{fig:pc}
-\end{figure}
+A quick sensitivity analysis of the dynamical systems models can be quantified using principle component analysis (PCA) \cite{Toni}, where the first PCs corresponds to sloppy parameters while the last PCs corresponds to stiff parameters \cite{sensitivity}. PCA can only provide rough approximated sensitivity behaviour. By identifying the component loadings, the PCs can be visualised in pie charts and used to indicate the sensitivity. 
 
 \begin{figure}[H]
     \begin{center}
@@ -509,10 +501,24 @@ A quick sensitivity analysis of the dynamical systems models can be quantified u
     \end{center}
 
     \caption[PCA results of the last population of model 5]{PCA results of the last population of model 5. MORE DESCRIPTION}
+    \label{fig:pc}
+\end{figure}
+
+\begin{figure}
+    \begin{center}
+        \resizebox{0.8\hsize}{!}{\includegraphics{fig/pc_pie_all.png}}
+    \end{center}
+
+    \caption[TODO]{PCA results of the last population of model 5. MORE DESCRIPTION}
     \label{fig:pc_pie}
 \end{figure}
 
+As models 5 won in the model selection, a further interest was to explore the parameter-to-model sensitivity of the resultant model. PCA was performed on the last generation of inferred model 5, Figure \ref{fig:pc} shows the total explained variance by each PC. The first PC explained a major part of the variance (91.5\%), and the rest PCs explained less less than 5\% of the variance each. PC 5 to PC 12 explained much less variance (less than 0.1\% of the total variance) than the first four PCs, thus they were consider to extend much narrower regions on the posterior distributions and could be used to identify parameter that the model is sensitive to.
 
-FIGURE shows the results of PCA on the last population of inferred model 5. The last PC (PC12) is mostly consists of the linear combination of $a$ (from the equation of neutrophil) and $\mu_\Phi$ (from the equation of macrophage), to which the model is most sensitive. If we conclude the last 5 PCs (FIGURE), then $v_{N\Phi}$, $\mu_N)$ (from the equation of neutrophil) and $k_{\Phi\beta}$ (from the equation of macrophage) contribute most portions together with $a$ and $\mu_\Phi$. As a conclusion, model 5 is sensitive to changes in the above parameters, which all come from the equation of neutrophil and macrophage i.e. equations of the cells; it may suggests that given the observed data, the inferred model is more sensitive to cells' dynamic rather than cytokines' dynamics.
+Figure \ref{fig:pc_pie} shows the fractions of the PCs explained by individual parameters, and a sum of the fractions in the last 8 PCs, i.e. PC 5 to PC 12. The last PC (PC12) is mostly the linear combination of $a$ (from the equation of neutrophil) and $\mu_\Phi$ (from the equation of macrophage), to which the model is most sensitive. If we conclude the last 8 PCs, it can be found that the biggest portions ($v_{N\Phi}$, $a$, $\kappa_{N\beta}$, $\kappa_{\Phi\beta}$, $\mu_N$, $\mu_\Phi$, $\nu_{N\Phi}$) mostly come from the equation of neutrophil and macrophage i.e. equations of the cells (the un-exploded portion in Figure \ref{fig:pc_pie} a); if we look at the last 8 PCs individually, the same pattern can be observed. This might suggest that the model is more sensitive to cells' dynamic rather than cytokines' dynamics.
 
-Also, some visualisations of the last population agreed with conclusions from PCA. Approximated posteriors of the last population plotted in FIGURE and credible ranges of parameters across populations in FIGURE shows that the 5 parameters identified by PCA is indeed `stiff' parameters.
+The credible intervals (Figure \ref{fig:credible}) of each parameter across generations also agreed with the above conclusion from PCA. The stiff parameters, e.g. $a$ and $\mu_N$, extend narrow credible intervals, while sloppy parameters, e.g. $\mu_\alpha$ and $s_{\alpha\Phi}$, have wider credible intervals across the last few generations.
+
+% then $v_{N\Phi}$, $\mu_N)$ (from the equation of neutrophil) and $k_{\Phi\beta}$ (from the equation of macrophage) contribute most portions together with $a$ and $\mu_\Phi$. As a conclusion, model 5 is sensitive to changes in the above parameters, which all come from the equation of neutrophil and macrophage i.e. equations of the cells; it may suggests that given the observed data, the inferred model is more sensitive to cells' dynamic rather than cytokines' dynamics.
+
+% Also, some visualisations of the last population agreed with conclusions from PCA. Approximated posteriors of the last population plotted in FIGURE and credible ranges of parameters across populations in FIGURE shows that the 5 parameters identified by PCA is indeed `stiff' parameters.

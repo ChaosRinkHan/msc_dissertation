@@ -2,7 +2,7 @@
 
 The performance experiments were designed to explore the parallel performance of ABC SMC inference framework which were used in the parameter estimation and model selection tasks. Usually ABC SMC is a time-consuming and computation intensive task and ideally executed on large clusters. The scheduling strategy, implementation details and many other factors can affect the parallel efficiency.
 
-    [MORE meanings of the performance study]
+% [MORE meanings of the performance study]
 
 \section{Scaling-up}
 
@@ -15,7 +15,7 @@ First experiments are designed to illustrate the scaling-up performance. The pro
     \item Population size is 2000, with 20 generations
 \end{itemize}
 
-[HOW PYABC parallelise the sampling]
+% [HOW PYABC parallelise the sampling]
 
 For HPC systems like Cirrus, \verb|pyabc| uses \verb|multiprocessing| for multi-core parallel sampling. By default if the number of cores is not specified, it will automatically read the number of available cores and use them all. Cirrus has a 36-core CPU which support hyperthreading, such that the maximal number of cores available to \verb|multiprocessing| is 72.
 
@@ -27,11 +27,11 @@ In practice, using ABC SMC to estimate the parameters of a given model could cos
 
 \subsubsection{Results}
 
-[scaling-up performance: speed-up and efficiency]
+% [scaling-up performance: speed-up and efficiency]
 
-[large variation in required sampling numbers]
+% [large variation in required sampling numbers]
 
-[possible reasons]
+% [possible reasons]
 
 \begin{figure}[h]
     \begin{center}
@@ -42,7 +42,25 @@ In practice, using ABC SMC to estimate the parameters of a given model could cos
     \label{fig:speedup}
 \end{figure}
 
-The recorded execution time using different number of cores is shown in FIGURE. According to that, speed-up and efficiency can be calculated. Here 8 cores is regarded as the baseline for speed-up and efficiency, as the serial version (using only one core) can take quite a long time to finish 10 repeats. When increasing number of cores, the execution time drops fast at first but the decreasing rate (dropping speed, i.e. the derivative of the execution time against time) is gradually reduced to zero; 36, 54 and 72 cores gives nearly the same average execution time and consequently gains very close speedup values (FIGURE).
+The recorded execution time using different number of cores were used to calculate the speedup of the program (Figure \ref{fig:speedup}). Here 8 cores is regarded as the baseline for speed-up and efficiency, as the serial version (using only one core) can take quite a long time to finish 10 repeats. When increasing number of cores, the execution time drops fast at first but the decreasing rate (dropping speed, i.e. the derivative of the execution time against time) is gradually reduced to zero; 36, 54 and 72 cores gives nearly the same average execution time and consequently gains very close speedup values (Table \ref{table:performance}).
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c c c c c|}
+        \hline
+        Number of cores & Time (second) & Avg. required samples & Speedup & Efficiency \\ [0.5ex]
+        \hline\hline
+        8               & 6617          & 445406.8              & 1       & 1          \\
+        16              & 3926          & 590221.0              & 1.61    & 0.807      \\
+        24              & 2921          & 573339.8              & 2.17    & 0.723      \\
+        36              & 2096          & 446948.7              & 3.02    & 0.672      \\
+        54              & 2076          & 640404.9              & 3.05    & 0.452      \\
+        72              & 2071          & 768096.0              & 3.06    & 0.340      \\
+        \hline
+    \end{tabular}
+    \caption{Performance data}
+    \label{table:performance}
+\end{table}
 
 Denote the number of cores used in the ABC SMC runs as variable $p$. The speedup curve shows a linear trend when $p\leq 36$; when $p\geq 36$ the speedup stays nearly unchanged. $p=36$ is an inflection point, where 36 is the maximum numbers available physical cores in a compute node of Cirrus. A constant drop of efficiency is observed when increasing $p$; smaller $p$ ($p<36$) gives an efficiency higher than 65\% but greater $p$ e.g. $p=72$ results in a low efficiency (34\%).
 
@@ -55,16 +73,27 @@ Denote the number of cores used in the ABC SMC runs as variable $p$. The speedup
     \label{fig:sample_per_sec}
 \end{figure}
 
-A high variance of total required samples was observed in the scaling-up experiments: some single runs required much more samples to finish 20 populations. Moreover, we found that the execution time is not ideally proportional to the total required samples (FIGURE). A possible explain to these phenomenons can be that the median epsilon schedule results in different threshold strategies due to the randomness in the sampling process, thus results in different approximate convergency paths for different runs. Some runs that are stuck in a local optimum and require smaller target epsilon will take huge amount of samples to move away from the local optimum. This have been observed when the distribution of posterior is plotted before and after jumping away from local modes (FIGURE and more explain). Also, time spent in each sample using sanme number of cores is not constant in our case, which might be a result of the parallel schedule; ideally a serial run using only one core will see a nearly constant time spent in every particle.
+A high variance of total required samples was observed in the scaling-up experiments: some single runs required much more samples to finish 20 populations, where they were supposed to have relatively similar average required samples such that we can compare the performance directly via speedup or efficiency.
 
-Due to the unstable sampling numbers, our interests switched to the per-particle performance, where the average sampling numbers per second (FIGURE) and average time spent in one particle (FIGURE) under different of cores ($p$) are plotted. The log-like average time per particle curve shows that using more cores can improve the sampling efficiency, but when $p$ is at a high level (e.g. 36 in our case), the improvement will be less significant.
+Due to the variant required samples, our interests switched to the per-second performance, where the average sampling numbers per second under different of number of cores ($p$) are plotted (Figure \ref{fig:sample_per_sec}). The plot shows that even theoretical speedup stops growing when $p>36$, the average sampling numbers per second performance still get improved when using more than 36 cores. It proves that the implementation used here scales reasonably well without encountering bottleneck when using multi-core parallelisation inside one physical node.
 
-\section{Profiling}
+The variant total required samples for different runs under the same setting was most likely the result of different threshold evolve path. Median epsilon schedule and randomness in the sampling process resulted in different sequences of threshold for different runs, which means different repeated runs may have different convergency path \cite{threshold}. For example, Some runs temporarily converges to a local optimum, while the target epsilon in the next generation cannot possibly be reached if the new particles are still concentrated 
 
-The performance could also be analysed given a profiling report. The second experiment profiles the program to reveal the detailed time consumption for each operation and the possible bottleneck, according to which we could find the hot-spot of program and given possible suggestions on improving the performance.
+will take huge amount of samples to move away from the local optimum
 
-In this case, profile tools \verb|cProfile| and \verb|yappi| is used in PyCharm IDE.
+Moreover, we found that the execution time was not ideally proportional to the sampling tires in that period of time, for both different repeated runs and different generations in a single run. To illustrate this, a single run from $p=24$ was selected and visualised.
 
-\subsubsection{Results}
 
-[profiling results: hot-spot and possible improvements]
+A possible explain to these phenomenons can be that the median epsilon schedule results in different threshold strategies due to the randomness in the sampling process, thus results in different approximate convergency paths for different runs. Some runs that are stuck in a local optimum and require smaller target epsilon will take huge amount of samples to move away from the local optimum. This have been observed when the distribution of posterior is plotted before and after jumping away from local modes (FIGURE and more explain). Also, time spent in each sample using sanme number of cores is not constant in our case, which might be a result of the parallel schedule; ideally a serial run using only one core will see a nearly constant time spent in every particle.
+
+
+
+% \section{Profiling}
+
+% The performance could also be analysed given a profiling report. The second experiment profiles the program to reveal the detailed time consumption for each operation and the possible bottleneck, according to which we could find the hot-spot of program and given possible suggestions on improving the performance.
+
+% In this case, profile tools \verb|cProfile| and \verb|yappi| is used in PyCharm IDE.
+
+% \subsubsection{Results}
+
+% [profiling results: hot-spot and possible improvements]
