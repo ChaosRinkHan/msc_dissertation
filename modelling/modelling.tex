@@ -1,36 +1,36 @@
 \chapter{Mathematical modelling}
 
-Mathematical models can describe different kinds of dynamic systems, and thus can be used in prediction, analysis abd other tasks. An ideal model in our case, can represent reasonable interactions or effects between immune cells and cytokines and reproduce features and characteristics that were observed in experimental data.
+Mathematical models can describe different kinds of dynamic systems, and thus can be used in prediction, analysis and other tasks. An ideal model in our case, can represent reasonable interactions or effects between immune cells and cytokines and reproduce features and characteristics that were observed in experimental data.
 
-Proposed models for the regeneration process are in the form of non-linear ordinary differential equations (ODE). The only independent variable is post-lesion time $t$, and the equations consists of derivatives of dependent variables (number of cells, mRNA expression of cytokines) with respect to $t$. The equations were mostly an interpretation of the proposed interaction maps, with terms correspond to interaction paths.
+Proposed models for the regeneration process were in the form of non-linear ordinary differential equations (ODE). The only independent variable is post-lesion time $t$. The equations consist of four derivatives of dependent variables (number of cells, mRNA expression of cytokines) with respect to $t$. The equations were mostly an interpretation of the proposed interaction maps, with terms correspond to interaction paths.
 
 
 \section{Observed data}
 
-Our models were built on the basis of the existing experimental findings from Tsarouchas et al.\cite{ref:Tsarouchas}. The available measurement data included the numbers of three kinds of cells (neutrophil $N$, macrophage $\Phi$ and microglia) and the relative mRNA expression of four kinds of cytokines (il-1$\beta$, tnf-$\alpha$, tgf-$\beta$1a and tgf-$\beta$3). As proposed by Tsarouchas et al., neutrophil and macrophage play important roles in the spinal cord regeneration with il-1$\beta$ and tnf-$\alpha$ being the media. According to this, our initial models focused on the changes of four dependent variables $N$, $\Phi $, $\beta$ (for il-1$\beta$) and $\alpha$ (for tnf-$\alpha$) that are most important and determinative in the regeneration. $N$ and $\Phi$ is of the unit `number of cells', $\beta$ and $\alpha$ was recorded as `relative mRNA expression' (compared to the value at the initla time point i.e. 0 hpl) and considered unitless.
+Our models were built based on the existing experimental findings from Tsarouchas et al. \cite{ref:Tsarouchas}. The available measurement data included the numbers of three kinds of cells (neutrophil $N$, macrophage $\Phi$ and microglia) and the relative mRNA expression of four kinds of cytokines (il-1$\beta$, tnf-$\alpha$, tgf-$\beta$1a and tgf-$\beta$3). As proposed by Tsarouchas et al., neutrophil and macrophage play essential roles in controlling the il-1$\beta$ and tnf-$\alpha$ mediated inflammation. Our initial models focused on the changes of four dependent variables $N$, $\Phi $, $\beta$ (for il-1$\beta$) and $\alpha$ (for tnf-$\alpha$) that are most important and determinative in the regeneration. $N$ and $\Phi$ is of the unit `number of cells', $\beta$ and $\alpha$ is recorded as `relative mRNA expression' (compared to the value at the initial time point, i.e. 0 hpl) and considered unitless.
 
-It was noted that the variance of the measured data is relatively high. The summary statistic used for the parameter estimations was mean of measurement data at each time point, assuming that measured data was Gaussian-like distributed. To validate this, the distribution of the measured data points was plotted and examined to see if the mean value can represent the distribution. The result was that at most time points the measurement values are Gaussian-distributed, although some distributions were skewed. One abnormal distribution was observed at time point 120 hpl for macrophage where there are two concentrations. Despite this, mean value could summarise most data and thus was still used as the target observed data. A plot of the mean of the four variables is shown in Figure \ref{fig:obs_data}, which is our target trajectories for the models to fit.
+It was noted that the variance of the measured data is relatively high. The summary statistic was the mean of measurement data at each time point, assuming that measured data was Gaussian-like distributed. To validate this, the distribution of the measured data points was plotted. The result was that at most time points the measurement values are Gaussian-distributed, although some distributions were skewed. One abnormal distribution was observed at time point 120 hpl for macrophage where there are two concentrations. Despite this, the mean value could summarise most data and thus was still used as the target summary data. The mean value at each time point is shown in Figure \ref{fig:obs_data}, which is our target trajectories for the models to fit.
 
 \begin{figure}
     \begin{center}
-        \resizebox{1.0\hsize}{!}{\includegraphics{fig/obs_curve.png}}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/observed.png}}
     \end{center}
 
     \caption[Mean of the observed data]%
-    {Mean of the observed data for neutrophil ($N$), macrophage ($\Phi$), il-1$\beta$ and tnf-$\alpha$, from experiment results of \cite{ref:Tsarouchas}. Error bars indicate standard error of mean}
+    {Mean of the observed data for neutrophil ($N$), macrophage ($\Phi$), il-1$\beta$ and tnf-$\alpha$, from experiment results of \cite{ref:Tsarouchas}. Error bars indicate standard error of mean (SEM). For $N$ and $\Phi$ the SEM is relatively small}
     \label{fig:obs_data}
 
 \end{figure}
 
-\section{Hypothesis and models}
+\section{Hypotheses and models}
 
-5 models in total are proposed according to different hypothesis. At first our tests and implementations of ABC SMC for parameter estimations use only the basic model for developing propose. After the parameter estimation framework is built and tested, more models are proposed, in order to calibrate and adjust the basic model such that it can represent the observed regeneration process better or can be used to test our hypothesis.
+Five models in total are proposed according to different hypotheses. At first, our tests and implementations of ABC SMC for parameter estimations used only the basic model for developing propose. After the parameter inference framework was built and tested, more models were proposed in order to calibrate and improve the basic model such that the observed regeneration process can be better represented.
 
-All these models assume the involved interactions is within two kinds of cells (neutrophil and macrophage) and two kinds of cytokines (il-1$\beta$ and tnf-$\alpha$) and use the data presented in Figure \ref{fig:obs_data} for the inference task. Interactions or effects from other cells or cytokines is not considered as there might not be corresponding data available.
+All these models assumed that the involved interactions are within two kinds of cells (neutrophil and macrophage) and two kinds of cytokines (il-1$\beta$ and tnf-$\alpha$), and used the data presented in Figure \ref{fig:obs_data} for the inference task. Interactions or influences from other cells or cytokines are not considered as there might not be corresponding data available. If such data or experimental findings are available in the future, we can consider them by then as long as these interactions are indeed necessary for our model.
 
 \subsection{Basic model}
 
-A preliminary model (Eqn. \ref{eq:model1}) was proposed according to \cite{ref:Tsarouchas} and then mainly used to build and test the code of inference framework. An interaction map of the model is shown in Figure \ref{fig:m1}. This model is a simplification a the process described in \cite{ref:Tsarouchas} with some minor interactions ignored. To describe the parameters' units, we denote the unit of $N$ and $\Phi$ i.e. number of cells as `cell', and denote $\beta$ and $\alpha$'s relative mRNA expression as unitless for simplicity. This model included 12 parameters, all of which should be positive real number. A description of these parameters can be found in Table \ref{table:m1}.
+A preliminary model (Eqn. \ref{eq:model1}) was proposed according to \cite{ref:Tsarouchas} and then mainly used to build and test the code of inference framework. An interaction map of the model is shown in Figure \ref{fig:m1}. This model is a simplification of the process described in \cite{ref:Tsarouchas} (Figure \ref{fig:map}) with some minor interactions ignored. This model included 12 parameters, all of which should be positive real numbers. A description of these parameters can be found in Table \ref{table:m1}.
 
 \begin{figure}
     \begin{center}
@@ -53,7 +53,7 @@ A preliminary model (Eqn. \ref{eq:model1}) was proposed according to \cite{ref:T
     \end{split}
 \end{align}
 
-It was assumed that there are negative feedbacks the cells and cytokines, i.e. overcrowding inhibits the increasing rates. As sources, macrophage produces tnf-$\alpha$ and neutrophil produces il-1$\beta$, however, macrophage was assumed to have negative effect on the il-1$\beta$, term $1+i_{\beta\Phi}\Phi$ in Eqn. \ref{eq:model1} was used to represent this. Despite of self-driven increase of immune cells, il-1$\beta$ was assumed to promote the increase of both cells. Neutrophil was also assumed to be inhibited by the total immune cells presented in the lesion site, term $\nu_{N\Phi}N\Phi$ was used to denote this.
+It was assumed that there are negative feedbacks the cells and cytokines, i.e. overcrowding inhibits the increasing rates. As sources, macrophage produces tnf-$\alpha$ and neutrophil produces il-1$\beta$; however, macrophage was assumed to have a negative effect on the il-1$\beta$, term $1+i_{\beta\Phi}\Phi$ in Eqn. \ref{eq:model1} was used to represent this. Despite the self-driven increase of immune cells, il-1$\beta$ was assumed to promote the increase of both cells. Neutrophil was also assumed to be inhibited by the total immune cells presented in the lesion site, the term $\nu_{N\Phi}N\Phi$ was used to denote this.
 
 \begin{table}[t]
     \centering
@@ -86,7 +86,7 @@ It was assumed that there are negative feedbacks the cells and cytokines, i.e. o
 
 \paragraph{Model 2 and model 3}
 
-As the observed data indicated, this dynamic system has a steady state where after a long time ($\geq 120$ hpl), the  inflammation is resolved and immune cells should not be present at the injury site any more. Regarding this, the parameter for self-increase rate for the macrophage and neutrophil i.e. $\lambda_\Phi$ and $\lambda_N$  cannot be constant. An exponentially decaying $\lambda$ term is introduced in the new model (model 2, Eqn. \ref{eq:model2}). Also, the inhibition of il-1$\beta$ production, i.e. term $i_{\beta\Phi}\Phi$ is considered to be ignored for a more simple model, in which case the relative expression of il-1$\beta$ is only affected by the number of neutrophil and the negative feedback from itself. This case corresponds to model 3, written as Eqn. \ref{eq:model3}.
+As the observed data indicated, this dynamic system has a steady-state where after a long time ($\geq 120$ hpl), the inflammation is resolved, and immune cells should not be present at the injury site any more. Regarding this, the parameter for self-increase rate for the macrophage and neutrophil, i.e. $\lambda_\Phi$ and $\lambda_N$  cannot be constant. An exponentially decaying $\lambda$ term is introduced in the new model (model 2, Eqn. \ref{eq:model2}). Also, the inhibition of il-1$\beta$ production, i.e. the term $i_{\beta\Phi}\Phi$ is considered to be ignored for a more simple model, in which case the relative expression of il-1$\beta$ is only affected by the number of neutrophils and the negative feedback from itself. This case corresponds to model 3, written as Eqn. \ref{eq:model3}.
 
 Model 2 and model 3 introduced one extra parameter $a$ and removed $\lambda_\Phi$, which is a coefficient in the exponentially decaying $\lambda_N$, determining the decay speed, with the unit $h^{-1}$.
 
@@ -110,11 +110,11 @@ Model 2 and model 3 introduced one extra parameter $a$ and removed $\lambda_\Phi
     \end{split}
 \end{align}
 
-Model 3 can be regarded as a simplification of model 2, as it can be treated as model 2 with parameter $i_{\beta\Phi}=0$. Among the proposed three models, model 1 is a naive one that was proposed at very first time and used as an ODE `template' to build and test our parameter inference framework. As the implementation was successful, model 2 and 3 was proposed, as we were trying to calibrate some terms and find better models. After fitting, model 2 is supposed to be better than model 1 as it corrects the problem that appears at the final time points (which were related to the steady states of immune cells). Model 3 made a small simplification based on model 2 and thus it was theoretically less `general' than model 2.
+Model 3 can be regarded as a simplification of model 2, as it can be treated as model 2 with parameter $i_{\beta\Phi}=0$. Among the proposed three models, model 1 is a naive one that was proposed at the very first time and used as an ODE `template' to build and test our parameter inference framework. As the implementation was successful, model 2 and 3 was proposed, as we were trying to calibrate some terms and find better models. After fitting, model 2 is supposed to be better than model 1 as it corrects the problem that appears at the final time points (which were related to the steady states of immune cells). Model 3 made a small simplification based on model 2, and thus it was theoretically less `general' than model 2.
 
 \paragraph{Model 4 and model 5}
 
-After the first model selection experiment among the exiting 3 models, it was found that some significant features presented in the observed data were not recovered by any of the model. To resolve this, attempts were tried to introduce additional reasonable interactions within the dynamic system, considering the biological and  mathematical context. Extra promoting effect to the expression of tnf-$\alpha$ was considered, by either adding a phenomenological term $d_{\beta\alpha}\beta$ (which means the same effect as directly promoting but the underlying mechanism is unclean), or adding a term $f_{\beta\alpha}$ that represents a promoting effect to the production process of tnf-$\alpha$, namely model 4 (Eqn. \ref{eq:model4}) and model 5 (Eqn. \ref{eq:model5}).
+After the first model selection experiment among the exiting three models, it was found that any of the models did not recover some significant features presented in the observed data. To resolve this, attempts were tried to introduce additional reasonable interactions within the dynamic system, considering the biological and mathematical context. Extra promoting effect to the expression of tnf-$\alpha$ was considered, by either adding a phenomenological term $d_{\beta\alpha}\beta$ (which means the same effect as directly promoting but the underlying mechanism is unclear), or adding a term $f_{\beta\alpha}$ that represents a promoting effect to the production process of tnf-$\alpha$, namely model 4 (Eqn. \ref{eq:model4}) and model 5 (Eqn. \ref{eq:model5}).
 
 \begin{align}
     \label{eq:model4}
