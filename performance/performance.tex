@@ -38,7 +38,7 @@ In practice, using ABC SMC to estimate the parameters of a given model could cos
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/speedup.png}}
     \end{center}
 
-    \caption[TODO]{Speedup. MORE DESCRIPTION}
+    \caption[Speedup of the program]{Speedup of the program}
     \label{fig:speedup}
 \end{figure}
 
@@ -69,7 +69,7 @@ Denote the number of cores used in the ABC SMC runs as variable $p$. The speedup
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/sample_per_time.png}}
     \end{center}
 
-    \caption[TODO]{Samples per second. MORE DESCRIPTION}
+    \caption[Average samples in a second, under different number of cores]{Average samples in one second, under different number of cores}
     \label{fig:sample_per_sec}
 \end{figure}
 
@@ -79,26 +79,26 @@ A high variance of total required samples was observed in the scaling-up experim
 
 Due to the variant required samples, our interests switched to the per-second performance, where the average sampling numbers per second under different of number of cores ($p$) are plotted (Figure \ref{fig:sample_per_sec}). The plot shows that even theoretical speedup stops growing when $p>36$, the average sampling numbers per second performance still get improved when using more than 36 cores. It proves that the implementation used here scales reasonably well without encountering bottleneck when using multi-core parallelisation inside one physical node.
 
+The variant total required samples for different runs under the same setting was most likely the result of different threshold evolve path. Median epsilon schedule and randomness in the sampling process resulted in different sequences of threshold for different runs, which means different repeated runs may have different convergency path \cite{threshold}. For example, Some runs temporarily converges to a local optimum, while the target epsilon in the next generation cannot possibly be reached if the new particles are still concentrated in the local optimum. In this case, huge amount of sample will be drawn to find enough accepted particles, and new generation will be able to jump out of the local optimum and have different concentrations. 
+
 \begin{figure}[ht]
     \begin{center}
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/local_modes.png}}
     \end{center}
 
-    \caption[TODO]{Local modes. MORE DESCRIPTION}
+    \caption[Local optimum and abnormal pattern]{(a) Required sampling size for two example runs. Different colour represents different generation (from bottom to top: generation 1 to generation 20). Run A took huge amount of time in population 11. (b) Required sample in each generation of Run A. (c) Time-consumption in each generation of Run A}
     \label{fig:local_modes}
 \end{figure}
 
-The variant total required samples for different runs under the same setting was most likely the result of different threshold evolve path. Median epsilon schedule and randomness in the sampling process resulted in different sequences of threshold for different runs, which means different repeated runs may have different convergency path \cite{threshold}. For example, Some runs temporarily converges to a local optimum, while the target epsilon in the next generation cannot possibly be reached if the new particles are still concentrated in the local optimum. In this case, huge amount of sample will be drawn to find enough accepted particles, and new generation will be able to jump out of the local optimum and have different concentrations. 
 
 To illustrate this, Two independent run, namely Run A and Run B, were chosen from the experiment of $p=24$ and visualised in Figure \ref{fig:local_modes} and Figure \ref{fig:local_para}. Thess two run used identical options of the algorithm. Figure \ref{fig:local_modes} (a) shows the comparison of the required samples, where Run A converged to a local mode, and in population 11 took much more sample tires to move away from the local optimum (Figure \ref{fig:local_modes} (b)). Figure \ref{fig:local_para} compares the posterior density distribution before (t=9, cyan) and after (t=13, red) the jumping away: significant movement of concentrations in posterior density distributions are observed, especially in parameters from ODE 1, 2 and 4. An interning movement is that there are two concentrations in $\kappa_{\Phi\beta}$ and $\mu_\Phi$ when t=9, and the majority of particles are concentrated in the second concentration with high parameter values; when t=13, the second concentration distribution disappears and all particles are concentrated near zero.
-
 
 \begin{figure}[t]
     \begin{center}
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/local_para.png}}
     \end{center}
 
-    \caption[TODO]{Parameter density distribution. MORE DESCRIPTION}
+    \caption[Parameter density distribution before and after the concentration movement in generation 11]{Parameter density distribution before (generation 9, cyan) and after (generation 13, red) the concentration movement in generation 11}
     \label{fig:local_para}
 \end{figure}
 

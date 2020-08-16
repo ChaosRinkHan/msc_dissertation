@@ -58,7 +58,7 @@ Local development and some runs of small size were done under the hardware liste
         Architecture    & 64 Bit                                \\
         Hyper-Threading & Supported                             \\
         Turbo Boost     & Max 3.8 GHz                           \\
-        Memory          & 16 GB                                  \\
+        Memory          & 16 GB                                 \\
         Graphics card   & Iris Plus Graphics 655                \\
         \hline
     \end{tabular}
@@ -70,22 +70,27 @@ Local development and some runs of small size were done under the hardware liste
 
 \subsection{Remote machine}
 
+Cirrus hardware can be found in \url{https://www.cirrus.ac.uk/about/hardware.html}. The software environment used in the development and experiments are listed in Table \ref{table:cirrus_soft}. Requirement of site packages is the sanme as that on local macine (Table \ref{table:local_package})  
+
 \begin{table}[H]
     \centering
     \begin{tabular}{|c c|}
         \hline
-        Environment                 & Version                       \\ [0.5ex]
+        Environment           & Version                      \\ [0.5ex]
         \hline\hline
-        Placeholder                 & 2\\
+        Operating system      & Red Hat Enterprise Linux 8.1 \\
+        miniconda environment & 4.8.3                        \\
+        Python interpreter    & 3.7.7                        \\
+        gcc                   & 6.3.0                        \\
         \hline
     \end{tabular}
-    \caption{Environment on remote machine}
-    \label{table:remote_macine}
+    \caption{Environment on local machine}
+    \label{table:cirrus_soft}
 \end{table}
 
-\section{Data analysis}
+% \section{Data analysis}
 
-\chapter{Data and settings}
+\chapter{Data and supplementary figures}
 
 
 
@@ -107,20 +112,20 @@ Local development and some runs of small size were done under the hardware liste
         $\mu_N$              & 1.72  \\
         $\nu_{N\Phi}$        & 0.219 \\
         \hline
-        $\lambda_\Phi$       & 1.31 \\
+        $\lambda_\Phi$       & 1.31  \\
         $\kappa_{\Phi\beta}$ & 0.124 \\
         $\mu_\Phi$           & 0.145 \\
         \hline
         $s_{\beta N}$        & 6.55  \\
-        $i_{\beta\Phi}$ & 1.71 \\
-        $\mu_\beta$          & 0.521  \\
+        $i_{\beta\Phi}$      & 1.71  \\
+        $\mu_\beta$          & 0.521 \\
         \hline
-        $s_{\alpha\Phi}$     & 10.2 \\
+        $s_{\alpha\Phi}$     & 10.2  \\
         $\mu_\alpha$         & 19.7  \\
         \hline
     \end{tabular}
-    \caption[TODO]
-    {Known values TODO}
+    \caption[Parameter values used to generate synthetic data for model 1]
+    {Parameter values used to generate synthetic data for model 1. They were obtained from a preliminarily least-square fitting}
     \label{table:known_values}
 \end{table}
 
@@ -141,7 +146,7 @@ Local development and some runs of small size were done under the hardware liste
     \end{center}
 
     \caption[Acceptance rates of different kernels, using median epsilon strategy]
-    {Acceptance rates of different kernels, using median epsilon strategy. Each population has 2000 particles}
+    {Acceptance rates of different kernels, using median epsilon strategy. Each population has 2000 particles. The total length of populations is different because some runs reached the final $\epsilon_T$ earlier than others}
     \label{fig:acceptance2}
 
 \end{figure}
@@ -155,7 +160,7 @@ Local development and some runs of small size were done under the hardware liste
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/resultCurve_uni.png}}
     \end{center}
 
-    \caption{Total sampling size}
+    \caption{Simulated data from the last population of model 1, 2 and 3, using uniform prior.  Error bar indicates SEM (for $N$ and $\Phi$ the SEM is relatively small)}
     \label{fig:resultCurve_uni}
 
 
@@ -166,7 +171,7 @@ Local development and some runs of small size were done under the hardware liste
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/inferno5.png}}
     \end{center}
     \caption[Joint density distribution of each parameter pair]%
-    {Joint distribution of each parameter pair. MORE DESCRIPTION}
+    {Joint distribution of each parameter pair. The diagonal is KDE fit of each individual parameter, the upper triangle contains scatter plot of the particles and the lower triangle is the joint density distribution for each parameter pair}
     \label{fig:model5_para_joint}
 \end{figure}
 
@@ -175,7 +180,7 @@ Local development and some runs of small size were done under the hardware liste
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/credible.png}}
     \end{center}
     \caption[Credible intervals of parameters in model 5]%
-    {Credible intervals of parameters in model 5. MORE DESCRIPTION}
+    {Credible intervals of parameters in model 5 across all generations}
     \label{fig:credible}
 \end{figure}
 
