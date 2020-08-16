@@ -195,15 +195,16 @@ From Figure \ref{fig:factor}, different types of factor gave different performan
     \end{center}
 
     \caption[Factors and adaptive distance experiments]%
-    {Factors and adaptive distance experiments. Left: Total required samples. Right: acceptance rates in each generation}
+    {Factors and adaptive distance experiments. Left: total required samples. Different color represents different generations (bottom totop: population 1 to population 20). Right: acceptance rates in each generation. }
     \label{fig:factor}
 
     \begin{center}
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/ib_factor.png}}
     \end{center}
 
-    \caption[CAPTION]%
-    {DESCRIBE}
+    \caption[Simulated trajectories ]%
+    {Simulated trajectories from the last population in the factor and adaptive distance experiment. 500 randomly chosen particles from last population are used to generate a sequence of trajectories where mean and inter-quartile range are calculated from. 25:75 factor showed very similar curve as the range factor.  
+    }
     \label{fig:factor_sim}
 
 \end{figure}
@@ -237,7 +238,7 @@ Regarding the existing dynamic systems model, SMC was applied with two data size
     \end{center}
 
     \caption[Data size and prior distribution range experiment]%
-    {Data size and prior distribution range experiment. (a) Total required samples, (b) Epsilon values under median epsilon schedule}
+    {Data size and prior distribution range experiment. Left: total required samples. Right: epsilon values under median epsilon schedule}
     \label{fig:size}
 
 \end{figure}
@@ -401,7 +402,7 @@ Figure \ref{fig:resultCurve345} shows the simulated data from the inferred model
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/resultCurve345.png}}
     \end{center}
 
-    \caption{Simulated data from the last population of model 3, 4 and 5}
+    \caption{Simulated data from the last population of model 3, 4 and 5. Error bar indicates SEM (for $N$ and $\Phi$ the SEM is relatively small)}
     \label{fig:resultCurve345}
 
 \end{figure}
@@ -410,27 +411,28 @@ By intuition model 4 and 5 would be the best models sofar that can recover most 
 
 After applying factors, the results were not largely different. As expected, applying factors made the data points at first half (where exists most of the fluctuations) more `focused', however the inferred models are close to one without factors, which could indicate that for model 4 and 5, applying factors will not largely affect the final convergency and the resultant posterior.
 
-When we are trying more generations with factors, an `over-fitting' behaviour was observed at the trajectory of macrophage (Figure \ref{fig:overfit}). In this case, the discrepancy of simulated data and observed data comes from the last 2 data point (72 hpl and 120 hpl). MORE
+When we are trying more generations with factors, an `over-fitting' behaviour was observed at the trajectory of macrophage (Figure \ref{fig:overfit}). In this case, the discrepancy of simulated data and observed data mainly comes from the last 2 data point (72 hpl and 120 hpl) of macrophage. As additional importance was assigned the the first few data points of each trajectory, the inference algorithm tended to preferentially fit first data points and thus relative large discrepancy at the tails were acceptable.
 
 \begin{figure}[H]
     \begin{center}
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/overfit.png}}
     \end{center}
 
-    \caption[Simulated trajectory from the last population of model 5, with factors applied]{Simulated trajectory from the last population of model 5, with factors applied. MORE DETAIL}
+    \caption[Simulated trajectory from the 30th population of model 5, with 25:75 factor applied]{Simulated trajectory from the 30th population of model 5, with 25:75 factor applied. Error bar indicates SEM (for $N$ and $\Phi$ the SEM is relatively small).}
     \label{fig:overfit}
+\end{figure}
 
+
+Next, we performed a model comparison on model 3, 4 and 5, using the same ABC SMC inference framework. Figure \ref{fig:model345cmp} shows the model probabilities at different generations.
+
+\begin{figure}[H]
     \begin{center}
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/model345cmp.png}}
     \end{center}
 
-    \caption[ABC SMC based model comparison of model 3, 4 and 5]{ABC SMC based model comparison of model 3, 4 and 5. MORE DETAIL}
+    \caption[Model probabilities of model 3, 4 and 5 in ABC SMC based model comparison]{Model probabilities of model 3, 4 and 5 in ABC SMC based model comparison. Model 5 also wins in further populations (population 25 to 30)}
     \label{fig:model345cmp}
 \end{figure}
-
-
-
-Next, we performed a model comparison on model 3, 4 and 5, using the same ABC SMC inference framework. Figure \ref{fig:model345cmp} shows the model probabilities at different generations.
 
 Model 4 did not overweight other models across all the generations; model 3 gained advantage before generation 15 except generation 5. After generation 18 ($\epsilon_{18} = 16.98$), model 5 gained absolute advantage and won in further generations. Also, repeated runs showed similar trends: although uncertainties were present before generation 20, model 5 won with nearly 100\% probability in later generations where epsilon values were considerably low, i.e. $\epsilon_t<16$.
 
@@ -441,15 +443,17 @@ Based on the model comparison results, we could conclude that model 5 was the be
 
 % Some further experiments tried larger population size (10,000 particles per population) and more populations (36 populations), but the resultant model did not have a significantly better fit of the observed data, although much more computation resources are used. 
 
-For the best model (model 5), the inferred parameter posterior distribution of model 5 is shown in Figure \ref{fig:model5_para}, the estimated mean values is shown in Table \ref{table:estimated5}. The (pair-wise) joint density distribution is shown in Figure \ref{fig:model5_para_joint}. SOME DETAIL.
+For the best model (model 5), the inferred parameter posterior distribution of model 5 is shown in Figure \ref{fig:model5_para}, the estimated mean values is shown in Table \ref{table:estimated5}. The pair-wise joint density distribution is shown in Figure \ref{fig:model5_para_joint}. Most of inferred posteriors show a bell-shaped density distribution, indicating that they are gaussian distributed. A thin and concentrated shape indicate a well inferred parameter, e.g. $\mu{\Phi}$ and $\kappa_{\Phi\beta}$. Some distributions, however, are skewed to zero, e.g. $\mu_N$ ans $s_{\alpha\Phi}$.
+
+By looking at the joint density plot (Figure \ref{fig:model5_para_joint}), some correlated patterns are observed. For example, an obvious linear relationship on the distributions of $\mu_\beta$ and $s_{\beta\Phi}$. This leads us to consider that reducing the number of parameters in the model is possible. Highly correlated parameters can be reduced, e.g. $s_{\beta\Phi}$ can be expressed as $A\mu_\beta+B$ where $A$ and $B$ can be calculated from the joint distribution by fitting a linear regression.
 
 \begin{figure}[ht]
     \begin{center}
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/model5_para.png}}
     \end{center}
 
-    \caption[Estimated posterior distribution of parameters in model 5]%
-    {Estimated posterior distribution of parameters in model 5. Shaded range indicates 25\%--75\% quantile of the population}
+    \caption[Inferred posterior distribution of parameters in model 5]%
+    {Inferred posterior distribution of parameters in model 5. Shaded range indicates 25\%--75\% quantile of the population}
     \label{fig:model5_para}
 
 \end{figure}
@@ -478,7 +482,7 @@ For the best model (model 5), the inferred parameter posterior distribution of m
         \hline
     \end{tabular}
     \caption[Inferred parameter values of model 5]
-    {Inferred parameter values of model 5. MORE DETAIL(SUPER maxt-5)}
+    {Inferred parameter values of model 5}
     \label{table:estimated5}
 \end{table}
 
@@ -500,7 +504,7 @@ A quick sensitivity analysis of the dynamical systems models can be quantified u
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/pc.png}}
     \end{center}
 
-    \caption[PCA results of the last population of model 5]{PCA results of the last population of model 5. MORE DESCRIPTION}
+    \caption[Explained total variance in original parameters by each PC]{Explained total variance in original parameters by each PC. From PC 5 on. little variance is explained by each PC, which is enlarged in Right}
     \label{fig:pc}
 \end{figure}
 
@@ -509,7 +513,7 @@ A quick sensitivity analysis of the dynamical systems models can be quantified u
         \resizebox{0.8\hsize}{!}{\includegraphics{fig/pc_pie_all.png}}
     \end{center}
 
-    \caption[TODO]{PCA results of the last population of model 5. MORE DESCRIPTION}
+    \caption[TODO]{Fraction of the length of PCs explained by parameters}
     \label{fig:pc_pie}
 \end{figure}
 
