@@ -1,12 +1,12 @@
 \chapter{Performance experiments}
 
-The performance experiments were designed to explore the parallel performance of ABC SMC inference framework which were used in the parameter estimation and model selection tasks. Usually ABC SMC is a time-consuming and computation intensive task and ideally executed on large clusters. The scheduling strategy, implementation details and many other factors can affect the parallel efficiency.
+The performance experiments were designed to explore the parallel performance of ABC SMC inference framework that was used in our parameter estimation and model selection tasks. Generally, ABC SMC is a time-consuming and computation-intensive task and ideally executed on large clusters. The scheduling strategy, implementation details, randomness in the algorithm and many other factors can affect the parallel efficiency. Thus, we designed a scaling-up experiment and studied a case where abnormal performance was observed.
 
 % [MORE meanings of the performance study]
 
 \section{Scaling-up}
 
-First experiments are designed to illustrate the scaling-up performance. The program used here is an implementation of ABc SMC on model 5. The details of the ABC SMC settings is listed below
+First experiments are designed to illustrate the scaling-up performance. The program used here is an implementation of ABC SMC on model 5. The details of the ABC SMC settings are listed below
 
 \begin{itemize}
     \item Prior distribution: default to log-uniform distribution [$1\times 10^{-6}$, 50] for all the 12 parameters
@@ -17,13 +17,13 @@ First experiments are designed to illustrate the scaling-up performance. The pro
 
 % [HOW PYABC parallelise the sampling]
 
-For HPC systems like Cirrus, \verb|pyabc| uses \verb|multiprocessing| for multi-core parallel sampling. By default if the number of cores is not specified, it will automatically read the number of available cores and use them all. Cirrus has a 36-core CPU which support hyperthreading, such that the maximal number of cores available to \verb|multiprocessing| is 72.
+For HPC systems like Cirrus, \verb|pyabc| uses \verb|multiprocessing| for multi-core parallel sampling. By default, if the number of cores is not specified, it will automatically read the number of available cores and use them all. Cirrus has a 36-core CPU which support hyperthreading, such that the maximal number of cores available to \verb|multiprocessing| is 72.
 
-The program is executed on Cirrus, using 8, 16, 24, 36, 54 and 72 cores respectively. Each run is repeated 10 times. The average execution time, required sampling numbers are recorded. Hyperthreading is enabled when using 54 and 72 cores. The access to the node that contains computation cores is exclusive, such that the execution would not be affected by other programs of operations.
+The experiment was executed on Cirrus, using 8, 16, 24, 36, 54 and 72 cores respectively. Each run was repeated ten times and the average execution time, required sampling numbers are recorded. Hyperthreading was enabled when using 54 and 72 cores. The access to the node that contains computation cores is exclusive, such that the execution would not be affected by other programs of operations.
 
-The implementation of ABC SMC in \verb|pyabc| enables the parallelisation of sampling, which is the must time-consuming part. The rest part of the program is mostly not parallelised, e.g. database I/O and reductions operations. The sampling process involves sampling, perturbation and test of the acceptance criteria, all of which are computation-intensive.
+The implementation of ABC SMC in \verb|pyabc| enables the parallelisation of sampling, which is the most time-consuming part. The rest part of the program is mostly not parallelised, e.g. database I/O and reductions operations. The sampling process involves sampling, perturbation and test of the acceptance criteria, which are computation-intensive.
 
-In practice, using ABC SMC to estimate the parameters of a given model could cost up to several hundred of hours if the computational resources is limited[REF]. The performance experiment result could provide a reference that illustrate that how the efficiency changes when scaling-up or the trade-offs in computational resources' cost and their benefit.
+In practice, using ABC SMC to estimate the parameters of a given model could cost up to several hundred of hours if the computational resources are limited \cite{ref:compare}. The performance experiment result could provide a reference that illustrates how the efficiency changes when scaling-up or the trade-offs in computational resources' cost and their benefit.
 
 \subsubsection{Results}
 
@@ -42,7 +42,7 @@ In practice, using ABC SMC to estimate the parameters of a given model could cos
     \label{fig:speedup}
 \end{figure}
 
-The recorded execution time using different number of cores were used to calculate the speedup of the program (Figure \ref{fig:speedup}). Here 8 cores is regarded as the baseline for speed-up and efficiency, as the serial version (using only one core) can take quite a long time to finish 10 repeats. When increasing number of cores, the execution time drops fast at first but the decreasing rate (dropping speed, i.e. the derivative of the execution time against time) is gradually reduced to zero; 36, 54 and 72 cores gives nearly the same average execution time and consequently gains very close speedup values (Table \ref{table:performance}).
+The recorded execution time under different numbers of cores was used to calculate the speedup of the program (Figure \ref{fig:speedup}). Here 8-core run is regarded as the baseline for speedup and efficiency, as the serial version (using only one core) can take quite a long time to finish 10 repeats. When increasing number of cores, the execution time drops fast at first, but the decreasing trend became slower for large numbers of cores; 36, 54 and 72 cores gives nearly the same average execution time and consequently gains very close speedup values (Table \ref{table:performance}).
 
 \begin{table}[H]
     \centering
@@ -62,7 +62,7 @@ The recorded execution time using different number of cores were used to calcula
     \label{table:performance}
 \end{table}
 
-Denote the number of cores used in the ABC SMC runs as variable $p$. The speedup curve shows a linear trend when $p\leq 36$; when $p\geq 36$ the speedup stays nearly unchanged. $p=36$ is an inflection point, where 36 is the maximum numbers available physical cores in a compute node of Cirrus. A constant drop of efficiency is observed when increasing $p$; smaller $p$ ($p<36$) gives an efficiency higher than 65\% but greater $p$ e.g. $p=72$ results in a low efficiency (34\%).
+Denote the number of cores used in the ABC SMC runs as variable $p$. The speedup curve shows a linear trend when $p\leq 36$; when $p\geq 36$ the speedup stays nearly unchanged. $p=36$ is an inflexion point, where 36 is the maximum numbers available physical cores in a compute node of Cirrus. A constant drop of efficiency is observed when increasing $p$; smaller $p$ ($p<36$) gives an efficiency higher than 65\% but greater $p$ e.g. $p=72$ results in a low efficiency (34\%).
 
 \begin{figure}[h]
     \begin{center}
@@ -77,9 +77,9 @@ Denote the number of cores used in the ABC SMC runs as variable $p$. The speedup
 
 A high variance of total required samples was observed in the scaling-up experiments: some single runs required much more samples to finish 20 populations, where they were supposed to have relatively similar average required samples such that we can compare the performance directly via speedup or efficiency.
 
-Due to the variant required samples, our interests switched to the per-second performance, where the average sampling numbers per second under different of number of cores ($p$) are plotted (Figure \ref{fig:sample_per_sec}). The plot shows that even theoretical speedup stops growing when $p>36$, the average sampling numbers per second performance still get improved when using more than 36 cores. It proves that the implementation used here scales reasonably well without encountering bottleneck when using multi-core parallelisation inside one physical node.
+Due to the variant required samples, our interests switched to the per-second performance, where the average sampling numbers per second under different of numbers of cores ($p$) are plotted (Figure \ref{fig:sample_per_sec}). The plot shows that even theoretical speedup stops growing when $p>36$, the average sampling numbers per second performance still get improved when using more than 36 cores. It proves that the implementation used here scales reasonably well without encountering bottleneck when using multi-core parallelisation inside one physical node.
 
-The variant total required samples for different runs under the same setting was most likely the result of different threshold evolve path. Median epsilon schedule and randomness in the sampling process resulted in different sequences of threshold for different runs, which means different repeated runs may have different convergency path \cite{threshold}. For example, Some runs temporarily converges to a local optimum, while the target epsilon in the next generation cannot possibly be reached if the new particles are still concentrated in the local optimum. In this case, huge amount of sample will be drawn to find enough accepted particles, and new generation will be able to jump out of the local optimum and have different concentrations. 
+The variant total required samples for different runs under the same setting was most likely the result of different threshold evolve path. Median epsilon schedule and randomness in the sampling process resulted in different sequences of thresholds for different runs, which means different repeated runs may have different convergency path \cite{threshold}. For example, Some runs temporarily converge to a local optimum, while the target epsilon in the next generation cannot possibly be reached if the new particles are still concentrated in the local optimum. In this case, a huge amount of sample will be drawn to find enough accepted particles, and the new generation will be able to jump out of the local optimum and have different concentrations. 
 
 \begin{figure}[ht]
     \begin{center}
@@ -90,8 +90,7 @@ The variant total required samples for different runs under the same setting was
     \label{fig:local_modes}
 \end{figure}
 
-
-To illustrate this, Two independent run, namely Run A and Run B, were chosen from the experiment of $p=24$ and visualised in Figure \ref{fig:local_modes} and Figure \ref{fig:local_para}. Thess two run used identical options of the algorithm. Figure \ref{fig:local_modes} (a) shows the comparison of the required samples, where Run A converged to a local mode, and in population 11 took much more sample tires to move away from the local optimum (Figure \ref{fig:local_modes} (b)). Figure \ref{fig:local_para} compares the posterior density distribution before (t=9, cyan) and after (t=13, red) the jumping away: significant movement of concentrations in posterior density distributions are observed, especially in parameters from ODE 1, 2 and 4. An interning movement is that there are two concentrations in $\kappa_{\Phi\beta}$ and $\mu_\Phi$ when t=9, and the majority of particles are concentrated in the second concentration with high parameter values; when t=13, the second concentration distribution disappears and all particles are concentrated near zero.
+To illustrate this, Two independent run, namely Run A and Run B, were chosen from the experiment of $p=24$ and visualised in Figure \ref{fig:local_modes} and Figure \ref{fig:local_para}. These two runs used identical options of the algorithm. Figure \ref{fig:local_modes} (a) shows the comparison of the required samples, where Run A converged to a local mode, and in population 11 took much more sample tires to move away from the local optimum (Figure \ref{fig:local_modes} (b)). Figure \ref{fig:local_para} compares the posterior density distribution before (t=9, cyan) and after (t=13, red) the jumping away: significant movement of concentrations in posterior density distributions are observed, especially in parameters from ODE 1, 2 and 4. An interning movement is that there are two concentrations in $\kappa_{\Phi\beta}$ and $\mu_\Phi$ when t=9, and the majority of particles are concentrated in the second concentration with high parameter values; when t=13, the second concentration distribution disappears and all particles are concentrated near zero.
 
 \begin{figure}[t]
     \begin{center}
@@ -102,9 +101,9 @@ To illustrate this, Two independent run, namely Run A and Run B, were chosen fro
     \label{fig:local_para}
 \end{figure}
 
-Moreover, we found that the execution time was not ideally proportional to the sampling tires in that period of time, for both different repeated runs and different generations in a single run. From the same example, Figure \ref{fig:local_modes} (b) and (c) show the non-linear relationship between execution time and sample tries in different generations. Apart from 1st and 2nd generation, generation 3 to 20 show a general linear relationship i.e. $T_t\propto n_t$, where $t$ is the population index, $T_t$ is the execution time of generation $t$ and $n_t$ is the required samples in generation $t$. However, this relationship does not hold for the first two generation. Generation 1 is to draw sample from prior, but it is done with high efficiency as only small amount of time are taken; generation 2 takes unusual large amount of the, but it does not require much more samples. The abnormal execution time of generation 1 and two are observed in all other runs, where for $p=24$ generation 1 usually takes c. 16s and generation 2 takes c. 1600s. This is believed to be related to the initialisation of the algorithm. 
+Moreover, we found that the execution time was not ideally proportional to the sampling tires in that period of time, for both different repeated runs and different generations in a single run. From the same example, Figure \ref{fig:local_modes} (b) and (c) show the non-linear relationship between execution time and sample tries in different generations. Apart from 1st and 2nd generation, generation 3 to 20 show a general linear relationship i.e. $T_t\propto n_t$, where $t$ is the population index, $T_t$ is the execution time of generation $t$ and $n_t$ is the required samples in generation $t$. However, this relationship does not hold for the first two generations. Generation 1 is to draw samples from prior, but it is done with high efficiency as only a small amount of time are taken; generation 2 takes an unusually large amount of the, but it does not require much more samples. The abnormal execution time of generation 1 and two are observed in all other runs, where for $p=24$ generation 1 usually takes c. 16s and generation 2 takes c. 1600s. This is believed to be related to the initialisation of the algorithm. 
 
-Additionally, by observing CPU frequency and load curve in-time while running the program, we found that the parallelised part is limited the the sampling, calculation and criterion test process; some reduction calculations and preparation work for the next generation (e.g. calculation of the new epsilon values, normalisation of data, fit of multivariate kernel) are serial. Database I/O is also serial.
+Additionally, by observing CPU frequency and load curve in-time while running the program, we found that the parallelised part is limited to the sampling, calculation and criterion test process. Some reduction calculations and preparation work for the next generation (e.g. calculation of the new epsilon values, normalisation of data, fit of multivariate kernel) are serial. The database I/O is also serial.
 
 % A possible explain to these phenomenons can be that the median epsilon schedule results in different threshold strategies due to the randomness in the sampling process, thus results in different approximate convergency paths for different runs. Some runs that are stuck in a local optimum and require smaller target epsilon will take huge amount of samples to move away from the local optimum. This have been observed when the distribution of posterior is plotted before and after jumping away from local modes (FIGURE and more explain). Also, time spent in each sample using sanme number of cores is not constant in our case, which might be a result of the parallel schedule; ideally a serial run using only one core will see a nearly constant time spent in every particle.
 
