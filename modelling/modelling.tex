@@ -42,7 +42,6 @@ A preliminary model (Eqn. \ref{eq:model1}) was proposed according to \cite{ref:T
     \label{fig:m1}
 
 \end{figure}
-
 \begin{align}
     \label{eq:model1}
     \begin{split}
@@ -52,7 +51,6 @@ A preliminary model (Eqn. \ref{eq:model1}) was proposed according to \cite{ref:T
         &\frac{\mathrm{d} \alpha}{\mathrm{d} t}=s_{\alpha\Phi}\Phi-\mu_\alpha\alpha
     \end{split}
 \end{align}
-
 It was assumed that there are negative feedbacks the cells and cytokines, i.e. overcrowding inhibits the increasing rates. As sources, macrophage produces tnf-$\alpha$ and neutrophil produces il-1$\beta$; however, macrophage was assumed to have a negative effect on the il-1$\beta$, term $1+i_{\beta\Phi}\Phi$ in Eqn. \ref{eq:model1} was used to represent this. Despite the self-driven increase of immune cells, il-1$\beta$ was assumed to promote the increase of both cells. Neutrophil was also assumed to be inhibited by the total immune cells presented in the lesion site, the term $\nu_{N\Phi}N\Phi$ was used to denote this.
 
 \begin{table}[t]
@@ -89,7 +87,6 @@ It was assumed that there are negative feedbacks the cells and cytokines, i.e. o
 As the observed data indicated, this dynamic system has a steady-state where after a long time ($\geq 120$ hpl), the inflammation is resolved, and immune cells should not be present at the injury site any more. Regarding this, the parameter for self-increase rate for the macrophage and neutrophil, i.e. $\lambda_\Phi$ and $\lambda_N$  cannot be constant. An exponentially decaying $\lambda$ term is introduced in the new model (model 2, Eqn. \ref{eq:model2}). Also, the inhibition of il-1$\beta$ production, i.e. the term $i_{\beta\Phi}\Phi$ is considered to be ignored for a more simple model, in which case the relative expression of il-1$\beta$ is only affected by the number of neutrophils and the negative feedback from itself. This case corresponds to model 3, written as Eqn. \ref{eq:model3}.
 
 Model 2 and model 3 introduced one extra parameter $a$ and removed $\lambda_\Phi$, which is a coefficient in the exponentially decaying $\lambda_N$, determining the decay speed, with the unit $h^{-1}$.
-
 \begin{align}
     \label{eq:model2}
     \begin{split}
@@ -109,13 +106,11 @@ Model 2 and model 3 introduced one extra parameter $a$ and removed $\lambda_\Phi
         &\frac{\mathrm{d} \alpha}{\mathrm{d} t}=s_{\alpha\Phi}\Phi-\mu_\alpha\alpha
     \end{split}
 \end{align}
-
 Model 3 can be regarded as a simplification of model 2, as it can be treated as model 2 with parameter $i_{\beta\Phi}=0$. Among the proposed three models, model 1 is a naive one that was proposed at the very first time and used as an ODE `template' to build and test our parameter inference framework. As the implementation was successful, model 2 and 3 was proposed, as we were trying to calibrate some terms and find better models. After fitting, model 2 is supposed to be better than model 1 as it corrects the problem that appears at the final time points (which were related to the steady states of immune cells). Model 3 made a small simplification based on model 2, and thus it was theoretically less `general' than model 2.
 
 \paragraph{Model 4 and model 5}
 
 After the first model selection experiment among the exiting three models, it was found that any of the models did not recover some significant features presented in the observed data. To resolve this, attempts were tried to introduce additional reasonable interactions within the dynamic system, considering the biological and mathematical context. Extra promoting effect to the expression of tnf-$\alpha$ was considered, by either adding a phenomenological term $d_{\beta\alpha}\beta$ (which means the same effect as directly promoting but the underlying mechanism is unclear), or adding a term $f_{\beta\alpha}$ that represents a promoting effect to the production process of tnf-$\alpha$, namely model 4 (Eqn. \ref{eq:model4}) and model 5 (Eqn. \ref{eq:model5}).
-
 \begin{align}
     \label{eq:model4}
     \begin{split}
@@ -135,7 +130,6 @@ After the first model selection experiment among the exiting three models, it wa
         &\frac{\mathrm{d} \alpha}{\mathrm{d} t}=(s_{\alpha\Phi}+f_{\beta\alpha}\beta)\Phi-\mu_\alpha\alpha
     \end{split}
 \end{align}
-
 \begin{table}[h!]
     \centering
     \begin{tabular}{|c c c|}

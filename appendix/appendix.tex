@@ -16,7 +16,7 @@ Local development machine is a Mac laptop, running on macOS 10.15.6. The environ
         Environment        & Version                \\ [0.5ex]
         \hline\hline
         Operating system   & macOS Catalina 10.15.6 \\
-        PyCharm (IDE)      & Professional 202.2     \\
+        PyCharm (IDE)      & Professional 2020.2    \\
         Python interpretor & 3.7.0                  \\
         IPython            & 7.12.0                 \\
         Clang              & 6.0 (clang-600.0.57)   \\
@@ -26,27 +26,27 @@ Local development machine is a Mac laptop, running on macOS 10.15.6. The environ
     \label{table:local_macine}
 \end{table}
 
-Version requirements for some critical site packages (\verb|Python|) used in the code are listed in Table \ref{table:local_package}.
+Version requirements for some critical site packages (\verb|Python|) used in the code are listed in Table \ref{table:local_package}. When replicating the experiments, higher version of these packages are acceptable, except \verb|bokeh|.
 
 \begin{table}
     \centering
     \begin{tabular}{|c c|}
         \hline
-        Environment & Version         \\ [0.5ex]
+        Environment & Version \\ [0.5ex]
         \hline\hline
-        pyABC       & $\simeq$ 0.10.3 \\
-        NumPy       & $\simeq$ 1.18.4 \\
-        SciPy       & $\simeq$ 1.4.1  \\
-        pandas      & $\simeq$ 1.1.0  \\
-        matplotlib  & $\simeq$ 3.0.1  \\
-        bokeh       & $=$ 1.4.0       \\
+        pyABC       & 0.10.3  \\
+        NumPy       & 1.18.4  \\
+        SciPy       & 1.4.1   \\
+        pandas      & 1.1.0   \\
+        matplotlib  & 3.0.1   \\
+        bokeh       & 1.4.0   \\
         \hline
     \end{tabular}
     \caption{Site packages on local machine}
     \label{table:local_package}
 \end{table}
 
-Local development and some runs of small size were done under the hardware listed in Table \ref{table:local_hardware}. When running ABC SMC, the program can make used of 8 python process (Hyper-Threading enabled) and run under 3.8GHz (maximal) for a long time under proper cooling, proved that the program could efficiently use the computation resources for a local personal computer. It is noted that the program took no advantage of graphics card, as \verb|multiprocessing| along can only exploit the resources inside CPU. The execution time and other performance data presented in Chapter 5 were obtained using remote machines but not local machine.
+Local development and some runs of small size were done under the hardware listed in Table \ref{table:local_hardware}. When running ABC SMC, the program can make used of 8 python process (Hyper-Threading enabled) and run under 3.8GHz (maximal) for a long time under proper cooling, proved that the program could efficiently use the computation resources for a local personal computer. The execution time and other performance data presented in Chapter 5 were obtained using remote machines but not local machine.
 
 \begin{table}
     \centering
@@ -70,7 +70,23 @@ Local development and some runs of small size were done under the hardware liste
 
 \subsection{Remote machine}
 
-Cirrus hardware can be found in \url{https://www.cirrus.ac.uk/about/hardware.html}. The software environment used in the development and experiments are listed in Table \ref{table:cirrus_soft}. Requirement of site packages is the sanme as that on local macine (Table \ref{table:local_package})  
+Most experiments were performaed on Cirrus, its hardware can be found in Table \ref{table:remote_hardware}. The program can run in sigle compute-node which contains two processors\footnote{\url{https://www.cirrus.ac.uk/about/hardware.html}}. The software environment used in the development and experiments are listed in Table \ref{table:cirrus_soft}. Requirement of site packages is the same as that on local macine (Table \ref{table:local_package})
+
+\begin{table}
+    \centering
+    \begin{tabular}{|c c|}
+        \hline
+        Hardware        & Detail                                          \\ [0.5ex]
+        \hline\hline
+        Processors      & 2.1 GHz, 18-core Intel Xeon E5-2695 (Broadwell) \\
+        Architecture    & x86-64                                          \\
+        Hyper-Threading & Supported                                       \\
+        Memory          & 256 GB NUMA, shared between two processors         \\
+        \hline
+    \end{tabular}
+    \caption{Cirrus hardware (compute node)}
+    \label{table:remote_hardware}
+\end{table}
 
 \begin{table}[H]
     \centering
@@ -90,16 +106,16 @@ Cirrus hardware can be found in \url{https://www.cirrus.ac.uk/about/hardware.htm
 
 % \section{Data analysis}
 
-\chapter{Data and supplementary figures}
+\chapter{Supplementary figures and data}
 
 
 
 
 
 
-\section{Infer-back experiments}
+% \section{Infer-back experiments}
 
-\subsection{Parameter values used to generate synthetic data}
+% \subsection{Parameter values used to generate synthetic data}
 
 \begin{table}[H]
     \centering
@@ -129,7 +145,7 @@ Cirrus hardware can be found in \url{https://www.cirrus.ac.uk/about/hardware.htm
     \label{table:known_values}
 \end{table}
 
-\subsection{Kernel experiment: median epsilon schedule}
+% \subsection{Kernel experiment: median epsilon schedule}
 
 \begin{figure}[H]
 
@@ -152,30 +168,9 @@ Cirrus hardware can be found in \url{https://www.cirrus.ac.uk/about/hardware.htm
 \end{figure}
 
 
-\section{Parameter inference and model comparison results}
+% \section{Parameter inference and model comparison results}
 
 \begin{figure}[H]
-
-    \begin{center}
-        \resizebox{1.0\hsize}{!}{\includegraphics{fig/resultCurve_uni.png}}
-    \end{center}
-
-    \caption[Simulated data from the last population of model 1, 2 and 3, using uniform prior]{Simulated data from the last population of model 1, 2 and 3, using uniform prior.  Error bar indicates SEM (for $N$ and $\Phi$ the SEM is relatively small)}
-    \label{fig:resultCurve_uni}
-
-
-\end{figure}
-
-\begin{figure}[ht]
-    \begin{center}
-        \resizebox{1.0\hsize}{!}{\includegraphics{fig/inferno5.png}}
-    \end{center}
-    \caption[Joint density distribution of each parameter pair]%
-    {Joint distribution of each parameter pair. The diagonal is KDE fit of each individual parameter, the upper triangle contains scatter plot of the particles and the lower triangle is the joint density distribution for each parameter pair}
-    \label{fig:model5_para_joint}
-\end{figure}
-
-\begin{figure}[ht]
     \begin{center}
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/credible.png}}
     \end{center}

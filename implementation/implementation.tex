@@ -96,7 +96,7 @@ For local M-NN kernels, generally, a higher M leads to lower acceptance rates an
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/kernel1.png}}
     \end{center}
 
-    \caption[Total required samples of different kernels]%
+    \caption[Total required number of sample for different kernels]%
     {Total required samples of different kernels after 20 populations (2000 particles in each population). Different color represents different generations (bottom to top: population 1 to population 20)}
     \label{fig:kernel1}
 
@@ -179,9 +179,9 @@ Adaptive population \cite{population} can adapt the population size of each gene
 
 % [FIGURE here]
 
-Two types of factor and adaptive distance function were tested by running the same number of generations (20 generations, 2000 particles per generation). The first type of factor is 25:75  factor, where the first half of the trajectory data were assigned higher factor (75), and the second half of the data was assigned lower factor (25); this could make the first half of the data more `important' in the inference. The second factor was `range' factor, which tried to normalise the trajectory of each dependent variable according to its data range.
+Two types of factor and adaptive distance function were tested by running the same number of generations (20 generations, 2000 particles per generation). The first type of factor is 75:25 factor, where the first half of the trajectory data were assigned higher factor (75), and the second half of the data was assigned lower factor (25); this could make the first half of the data more `important' in the inference. The second factor was `range' factor, which tried to normalise the trajectory of each dependent variable according to its data range.
 
-From Figure \ref{fig:factor}, different types of factor gave different performance. 25:75 factor required much more samples in the first generation (orange bar in the left of Figure \ref{fig:factor}) and also did not improve much in later generations; thus, it is the slowest one. The first half of observed data contained more features and information, assigning it with higher factor would make the algorithm think that it is more important to fit the first half and thus focus on the hard part, and consequently more particles were needed in the inference process. The acceptance rates of 25:75 factor among different generations were also generally slightly lower than the standard. By contrast, range factor required less total samples and gave generally higher acceptance rates than standard, which made it considerably faster. The adaptive distance gave the best efficiency, as it significantly improved the acceptance rates and resulted in even less required samples (right, Figure \ref{fig:factor}).
+From Figure \ref{fig:factor}, different types of factor gave different performance. 75:25 factor required much more samples in the first generation (orange bar in the left of Figure \ref{fig:factor}) and also did not improve much in later generations; thus, it is the slowest one. The first half of observed data contained more features and information, assigning it with higher factor would make the algorithm think that it is more important to fit the first half and thus focus on the hard part, and consequently more particles were needed in the inference process. The acceptance rates of 75:25 factor among different generations were also generally slightly lower than the standard. By contrast, range factor required less total samples and gave generally higher acceptance rates than standard, which made it considerably faster. The adaptive distance gave the best efficiency, as it significantly improved the acceptance rates and resulted in even less required samples (right, Figure \ref{fig:factor}).
 
 \begin{figure}[t!]
     \begin{center}
@@ -189,7 +189,7 @@ From Figure \ref{fig:factor}, different types of factor gave different performan
     \end{center}
 
     \caption[Factors and adaptive distance experiments]%
-    {Factors and adaptive distance experiments. Left: total required samples. Different color represents different generations (bottom totop: population 1 to population 20). Right: acceptance rates in each generation. }
+    {Factors and adaptive distance experiments. Left: total required number of samples. Different color represents different generations (bottom to top: population 1 to population 20). Right: acceptance rates in each generation. }
     \label{fig:factor}
 
     \begin{center}
@@ -197,7 +197,7 @@ From Figure \ref{fig:factor}, different types of factor gave different performan
     \end{center}
 
     \caption[Simulated trajectories ]%
-    {Simulated trajectories from the last population in the factor and adaptive distance experiment. 500 randomly chosen particles from last population are used to generate a sequence of trajectories where mean and inter-quartile range are calculated from. 25:75 factor showed very similar curve as the range factor.  
+    {Simulated trajectories from the last population in the factor and adaptive distance experiment. 500 randomly chosen particles from last population are used to generate a sequence of trajectories where mean and inter-quartile range are calculated from. 75:25 factor showed very similar curve as the range factor.  
     }
     \label{fig:factor_sim}
 
@@ -231,7 +231,7 @@ Regarding the existing dynamic systems model, SMC was applied with two data size
     \end{center}
 
     \caption[Data size and prior distribution range experiment]%
-    {Data size and prior distribution range experiment. Left: total required samples. Right: epsilon values under median epsilon schedule}
+    {Data size and prior distribution range experiment. Left: total required number of samples. Right: epsilon values under median epsilon schedule}
     \label{fig:size}
 
 \end{figure}
@@ -252,7 +252,9 @@ How to specify prior can be tricky from problem to problem. For our task in the 
 
 \subsubsection{Choise of options} 
 
-This subsection aims to explore options in ABC SMC implementations preliminarily. From the above results, we adopted multivariate normal kernel as the kernel for our real inference on observed data; Local M-NN kernels were also planned to be tested. In the real inference, 25:75 factor were also tried to see if it could help in recovering more features and resulting in a better fit. Because the improvement by using less data was inapparent, we did not try to change the target summary data size. Prior intervals were explored explicitly and gradually shrunk for our models.
+This section aims to explore options in ABC SMC implementations preliminarily. From the above results, we adopted multivariate normal kernel as the kernel for our real inference on observed data; Local M-NN kernels were also planned to be tested. In the real inference, 75:25 factor were also tried to see if it could help in recovering more features and resulting in a better fit. Prior intervals were explored explicitly and gradually shrunk for our models.
+
+% Because the improvement by using less data was inapparent, we did not try to change the target summary data size. 
 
 Some other hyperparameters, e.g. the number of generations, population size (i.e. the number of particles per generation) were not addressed in this subsection. In the real inference, population size was set to be greater than 2000 to avoid insufficient exploration of the previous population; in some case than high variance or uncertainties in the results were observed, population size as large as 20,000 were used. If the epsilon did not show a convergency trend, the run could be extended to more generations until a stable result was observed.
 
@@ -273,7 +275,7 @@ Some other hyperparameters, e.g. the number of generations, population size (i.e
 
 Using the suggested options in the previous section, the target data (Figure \ref{fig:obs_data}) was prepared as input for the SMC inference framework. Regarding the result, the population size and number of generations were adjusted several times to obtain a general informative posterior which should be stable across repeated runs and avoid local optima as much as possible.
 
-Two prior intervals ([0, 25] and [0, 75]) and two distribution shape (uniform and log-uniform) were tried in the parameter estimation of the first three models. All these ABC SMC runs used 2,000 particles per population and 30 generations.
+Two prior intervals ([0, 25] and [0, 75]) and two distribution shape (uniform and log-uniform) were tried in the parameter estimation of the first three models. All these ABC SMC runs used 2,000 particles per population and 30 generations. The population size should be set at a high level (e.g. $\geq 1000$ in our case) when having models with many parameters to ensure a statistically adequate exploration. The convergency were usually observed around generation 20 in our previous experiments; the length of generation is set to 30 to ensure that most runs converge in the end. 
 
 In practice, we found that log-uniform-shaped prior gave a better fit of the model than uniform-shaped prior, and wider prior range [0, 75] does not give a more accurate result than [0, 25]. Then prior interval [0, 50] was tried, in case some parameters have a true posterior laying between [25, 50].
 
@@ -283,7 +285,7 @@ Before applying model comparison methods, some features of the three model can s
 
 The acceptance rates are fluctuating and have a gradually increasing trend for all the three models, as the acceptance rate becomes higher when the true posteriors are gradually approximated. Compared to model 1, model 2 gives a better fit for the decreasing trend in the second half of the observed data. This proves that using an exponentially decaying self-increase rate $\lambda_N$ instead of a constant term indeed help to improve the model.
 
-The resultant simulated data from model 2 and 3 have similar trends, while the most obvious difference is that for model 3, the simulated data of $\Phi$ and $\alpha$ are more `flat'. We expected model 3 to be the best as it reached a lower threshold value, and intuitively gives a better fit. However, the fit of all these models could not be considered as a generally good representation of the biological process that we want to approximate: for tnf-$\alpha$, the simulated data were significantly biased from the observed data. A sharp peak at 4 hpl was observed in the experimental data, but none of the three models represents similar features.
+The resultant simulated data from model 2 and 3 have similar trends, while the most obvious difference is that for model 3, the simulated data of $\Phi$ and $\alpha$ are more `flat'. We expected model 3 to be the best as it reached a lower threshold value, and intuitively gives a better fit. However, the fit of all these models could not be considered as a generally good representation of the biological process that we want to approximate: for tnf-$\alpha$, the simulated data and the observed data show largely different trends. A sharp peak at 4 hpl was observed in the experimental data, but none of the three models represents similar features (Figure \ref{fig:result123}).
 
 \begin{figure}
     \begin{center}
@@ -313,7 +315,7 @@ The resultant simulated data from model 2 and 3 have similar trends, while the m
     \end{center}
 
     \caption[Estimated posterior distribution of parameters in model 3]%
-    {Estimated posterior distribution of parameters in model 3. Shaded range indicates 25\%--75\% quantile of the population}
+    {Estimated posterior distribution of parameters in model 3. Shaded range indicates inter-quartile interval}
     \label{fig:para1}
 
     \begin{center}
@@ -360,14 +362,25 @@ Figure \ref{fig:cmp1} shows the model selection process, under log-uniform [0, 5
     \label{table:estimated1}
 \end{table}
 
-Compared to uniform-distributed prior, we found that log-uniform distributed prior is more suitable in our parameter inference. Log-uniform resulted in an obviously better fit and narrower inter-quantile interval (Figure \ref{fig:result123} and \ref{fig:resultCurve_uni}), and the final epsilon value was also smaller. Log-uniform tends to assign values that are close to the left boundary (i.e. zero in our case) with higher density, i.e. they are more likely to be sampled in the first population. As a result, the parameter estimates are expected to have smaller mean values or skewed to the left of the x-axis. The estimated values proved this ( \ref{table:estimated1}). This was also observed in other models and prior interval experiments. It indicated that some of the parameters tend to have small true values that are close to zero, and using log-uniform prior could result in a faster and more satisfying inference. Regarding this, further experiments all used log-uniform prior only.
+Compared to uniform-distributed prior, we found that log-uniform distributed prior is more suitable in our parameter inference. Log-uniform resulted in an obviously better fit and narrower inter-quantile interval (Figure \ref{fig:result123} and \ref{fig:resultCurve_uni}), and the final epsilon value was also smaller. Log-uniform tends to assign values that are close to the left boundary (i.e. zero in our case) with higher density. As a result, the parameter estimates from log-uniform prior are highly likely to have smaller mean values than that from uniform prior, and the inferred parameter values proved this (Table \ref{table:estimated1}). This was also observed in other models and prior interval experiments. It indicated that some of the parameters tend to have small true values that are close to zero, and using log-uniform prior could result in a faster and more satisfying inference. Regarding this, further experiments all used log-uniform prior only.
 
 
 \subsection{Model 4 and 5}
 
 % [features that derive model 4 and 5]
 
-We observed that the existing models could not well represent the trajectory of relative expression of tnf-$\alpha$. From experimental data, a rapid increase of tnf-$\alpha$ expression was observed in 0--4 hpl, followed by a rapid drop. All the models cannot well recover this feature, and most results saw a less-rapid increase followed by a gradual decrease, while the observed peak value was not reached (Figure \ref{fig:result123}). Also, in some other case, e.g. uniform runs (Figure \ref{fig:resultCurve_uni}), tnf-$\alpha$ trajectories was well fitted; however, at the cost of under-fitting $\Phi$ curve. Hence efforts had been spent to propose more alternative models that can potentially solve this problem.
+We observed that the existing models could not well represent the trajectory of relative expression of tnf-$\alpha$. From experimental data, a rapid increase of tnf-$\alpha$ expression was observed in 0--4 hpl, followed by a rapid drop. All the models cannot well recover this feature, and most results saw a less-rapid increase followed by a gradual decrease, while the observed peak value was not reached (Figure \ref{fig:result123}). 
+
+Also, in some other experiment results, e.g. uniform runs (Figure \ref{fig:resultCurve_uni}), tnf-$\alpha$ trajectories was well fitted; however, at the cost of under-fitting $\Phi$ curve. Hence efforts had been spent to propose more alternative models that can potentially solve this problem.
+
+\begin{figure}[h]
+    \begin{center}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/resultCurve_uni.png}}
+    \end{center}
+
+    \caption[Simulated data from the last population of model 1, 2 and 3, using uniform prior]{Simulated data from the last population of model 1, 2 and 3, using uniform prior.  Error bar indicates SEM (for $N$ and $\Phi$ the SEM is relatively small)}
+    \label{fig:resultCurve_uni}
+\end{figure}
 
 The two proposed alternative models are based on model 3 and try to add extra term in the tnf-$\alpha$ equation $\mathrm{d} \alpha/\mathrm{d} t$. As macrophage is the main source of tnf-$\alpha$ production, and a similar sharp increase-and-drop trend is observed in the il-1$\beta$ trajectory, two hypotheses and corresponding terms are propose as follows.
 
@@ -413,7 +426,7 @@ After we tried more generations with factors, an `over-fitting' behaviour was ob
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/overfit.png}}
     \end{center}
 
-    \caption[Simulated trajectory from the 30th population of model 5, with 25:75 factor applied]{Simulated trajectory from the 30th population of model 5, with 25:75 factor applied. Error bar indicates SEM (for $N$ and $\Phi$ the SEM is relatively small).}
+    \caption[Simulated trajectory from the 30th population of model 5, with 75:25 factor applied]{Simulated trajectory from the 30th population of model 5, with 75:25 factor applied. Error bar indicates SEM (for $N$ and $\Phi$ the SEM is relatively small).}
     \label{fig:overfit}
 \end{figure}
 
@@ -429,18 +442,21 @@ Next, we performed a model comparison on model 3, 4 and 5, using the same ABC SM
     \label{fig:model345cmp}
 \end{figure}
 
-Model 4 did not overweight other models across all the generations; model 3 gained an advantage before generation 15 except generation 5. After generation 18 ($\epsilon_{18} = 16.98$), model 5 gained absolute advantage and won in further generations. Also, repeated runs showed similar trends: although uncertainties (e.g. violently changes mode probabilities) were present before generation 20, model 5 won with nearly 100\% probability in later generations where epsilon values were considerably low, i.e. $\epsilon_t<16$.
+From the model probability plot (Figure \ref{fig:model345cmp}), we found that model 4 did not overweight other models across all the generations. Model 3 was comitative and gained advantages at most early generation. From generation 14 and onwards, model 5 saw a gradually increasing probability and gained 100\% model probability after generation 18 ($\epsilon_{18} = 16.98$) and won in further generations. Also, repeated runs showed similar trends, although uncertainties (e.g. drastically model probability changes) were present before generation 20, model 5 won with nearly 100\% probability in later generations where epsilon values were considerably low, i.e. $\epsilon_t<16$.
 
-Based on the model comparison results, we could conclude that model 5 was the best model among the tested models. Uncertainties were observed in early generations, where similar patterns were also observed in the model comparison of model 1, 2 and 3. We considered the violently changing model probability in early generations is related to the inference ability at high epsilon threshold values (epsilon) and possibly the insufficient exploration of the parameter space. However as we only focused on the best model with small final threshold $\epsilon_T$, the easiest way is to extend the number of generation until epsilon converges, or increase the population size for a more statistically confident probability.
+Based on the model comparison results, we could conclude that model 5 was the best model among the tested models. Uncertainties were observed in early generations, where similar patterns were also observed in the model comparison of model 1, 2 and 3. We considered the drastically changing model probability in early generations is related to the inference ability at high epsilon threshold values (epsilon) and possibly the insufficient exploration of the parameter space. However as we only focused on the best model with small final threshold $\epsilon_T$, the easiest way is to extend the number of generation until epsilon converges, or increase the population size for a more statistically confident probability.
 
 
 % From population 10 to population 20 model 4 gains advantage but after population 20 model 5 is preferred. Again, as DISCUSSED in the model comparison of model 1, 2 and 3, Given the present result, model 5 is regarded as the best model. 
 
 % Some further experiments tried larger population size (10,000 particles per population) and more populations (36 populations), but the resultant model did not have a significantly better fit of the observed data, although much more computation resources are used. 
 
-For the best model (model 5), the inferred parameter posterior distribution of model 5 is shown in Figure \ref{fig:model5_para}, the estimated mean values is shown in Table \ref{table:estimated5}. The pair-wise joint density distribution is shown in Figure \ref{fig:model5_para_joint}. Most of the inferred posteriors show a bell-shaped density distribution, indicating that they are Gaussian distributed. A thin and concentrated shape indicates a well-inferred parameter, e.g. $\mu{\Phi}$ and $\kappa_{\Phi\beta}$. Some distributions, however, are skewed to zero, e.g. $\mu_N$ and $s_{\alpha\Phi}$.
+For the best model (model 5), the inferred parameter posterior distribution of model 5 is shown in Figure \ref{fig:model5_para}, the estimated mean values is shown in Table \ref{table:estimated5}. The pair-wise joint density distribution is shown in Figure \ref{fig:model5_para_joint}. Most of the inferred posteriors show a bell-shaped density distribution with a single peak.. A thin and concentrated shape indicates a well-inferred parameter, e.g. $\mu{\Phi}$ and $\kappa_{\Phi\beta}$. Some distributions, however, are skewed to zero, e.g. $\mu_N$ and $s_{\alpha\Phi}$. Concentrations in the posteriors were presented, and using inter-quartiles (shaded interval in Figure \ref{fig:model5_para}) or mean values to summarise the posteriors is feasible in practice uses, e.g. simulating data (Figure \ref{fig:overfit}).
 
-By looking at the joint density plot (Figure \ref{fig:model5_para_joint}), some correlated patterns are observed. For example, an obvious linear relationship on the distributions of $\mu_\beta$ and $s_{\beta\Phi}$. This leads us to consider that reducing the number of parameters in the model is possible. Highly correlated parameters can be reduced, e.g. $s_{\beta\Phi}$ can be expressed as $A\mu_\beta+B$ where $A$ and $B$ can be calculated from the joint distribution by fitting a linear regression.
+
+
+By looking at the joint density plot (Figure \ref{fig:model5_para_joint}), some correlated patterns are observed. For example, an obvious linear relationship is presented in the joint distribution of $\mu_\beta$ and $s_{\beta\Phi}$. This leads us to consider that we could possibly reduce the number of parameters, e.g. replace $s_{\beta\Phi}$ by $A\mu_\beta+B$ where $A$ and $B$ can be calculated from the joint distribution by fitting a linear regression. The reason for the highly correlated pattern, or `fat' distribution shapes could be that the provided data are lees informative about the parameters.
+
 
 \begin{figure}[ht]
     \begin{center}
@@ -448,9 +464,18 @@ By looking at the joint density plot (Figure \ref{fig:model5_para_joint}), some 
     \end{center}
 
     \caption[Inferred posterior distribution of parameters in model 5]%
-    {Inferred posterior distribution of parameters in model 5. Shaded range indicates 25\%--75\% quantile of the population}
+    {Inferred posterior distribution of parameters in model 5. Shaded range indicates inter-quartile  interval of the population}
     \label{fig:model5_para}
 
+\end{figure}
+
+\begin{figure}[h]
+    \begin{center}
+        \resizebox{1.0\hsize}{!}{\includegraphics{fig/inferno5.png}}
+    \end{center}
+    \caption[Joint density distribution of each parameter pair]%
+    {Joint distribution of each parameter pair. The diagonal is KDE fit of each individual parameter, the upper triangle contains scatter plot of the particles and the lower triangle is the joint density distribution for each parameter pair}
+    \label{fig:model5_para_joint}
 \end{figure}
 
 \begin{table}[H]
@@ -494,7 +519,7 @@ By looking at the joint density plot (Figure \ref{fig:model5_para_joint}), some 
 
 A quick sensitivity analysis of the dynamical systems models can be quantified using principal component analysis (PCA) \cite{Toni}, where the first PCs corresponds to sloppy parameters while the last PCs corresponds to stiff parameters \cite{sensitivity}. PCA can only provide rough approximated sensitivity behaviour. By identifying the component loadings, the PCs can be visualised in pie charts and used to indicate the sensitivity. 
 
-\begin{figure}[h]
+\begin{figure}[H]
     \begin{center}
         \resizebox{1.0\hsize}{!}{\includegraphics{fig/pc.png}}
     \end{center}
@@ -503,20 +528,22 @@ A quick sensitivity analysis of the dynamical systems models can be quantified u
     \label{fig:pc}
 \end{figure}
 
-\begin{figure}[h]
+As models 5 won in the model selection, further interest was to explore the parameter-to-model sensitivity of the resultant model. PCA was performed on the last generation of inferred model 5, Figure \ref{fig:pc} shows the total explained variance by each PC. The first PC explained a major part of the variance (91.5\%), and the rest PCs explained less than 5\% of the variance each. PC 5 to PC 12 explained much less variance (less than 0.1\% of the total variance) than the first four PCs. Thus, they were considered to extend much narrower regions on the posterior distributions and could be used to identify the parameters that the model is sensitive to.
+
+\begin{figure}[ht!]
     \begin{center}
-        \resizebox{0.8\hsize}{!}{\includegraphics{fig/pc_pie.png}}
+        \resizebox{0.7\hsize}{!}{\includegraphics{fig/pc_pie.png}}
     \end{center}
 
     \caption[Fraction of the length of PCs explained by parameters]{Fraction of the length of PCs explained by parameters. Portions less than 2\% are not labelled}
     \label{fig:pc_pie}
 \end{figure}
 
-As models 5 won in the model selection, further interest was to explore the parameter-to-model sensitivity of the resultant model. PCA was performed on the last generation of inferred model 5, Figure \ref{fig:pc} shows the total explained variance by each PC. The first PC explained a major part of the variance (91.5\%), and the rest PCs explained less than 5\% of the variance each. PC 5 to PC 12 explained much less variance (less than 0.1\% of the total variance) than the first four PCs. Thus, they were considered to extend much narrower regions on the posterior distributions and could be used to identify the parameters that the model is sensitive to.
-
 Figure \ref{fig:pc_pie} shows the fractions of the PCs explained by individual parameters, and a sum of the fractions in the last 8 PCs, i.e. PC 5 to PC 12. The last PC (PC12) is mostly the linear combination of $a$ (from the equation of neutrophil) and $\mu_\Phi$ (from the equation of macrophage), to which the model is most sensitive. If we conclude the last 8 PCs, it can be found that the biggest portions ($v_{N\Phi}$, $a$, $\kappa_{N\beta}$, $\kappa_{\Phi\beta}$, $\mu_N$, $\mu_\Phi$, $\nu_{N\Phi}$) mostly come from the equation of neutrophil and macrophage i.e. equations of the cells (the un-exploded portion in Figure \ref{fig:pc_pie} a); if we look at the last 8 PCs individually, the same pattern can be observed. This might suggest that the model is more sensitive to cells' dynamic rather than cytokines' dynamics.
 
 The credible intervals (Figure \ref{fig:credible}) of each parameter across generations also agreed with the above conclusion from PCA. The stiff parameters, e.g. $a$ and $\mu_N$, extend narrow credible intervals, while sloppy parameters, e.g. $\mu_\alpha$ and $s_{\alpha\Phi}$, have wider credible intervals across the last few generations.
+
+To conclude, model 5 is most sensitive to the parameters in the equations for cells' dynamics (i.e. first two equations in Eqn.\ref{eq:model5}), especially to $a$ and $\mu_\Phi$.
 
 % then $v_{N\Phi}$, $\mu_N)$ (from the equation of neutrophil) and $k_{\Phi\beta}$ (from the equation of macrophage) contribute most portions together with $a$ and $\mu_\Phi$. As a conclusion, model 5 is sensitive to changes in the above parameters, which all come from the equation of neutrophil and macrophage i.e. equations of the cells; it may suggests that given the observed data, the inferred model is more sensitive to cells' dynamic rather than cytokines' dynamics.
 
