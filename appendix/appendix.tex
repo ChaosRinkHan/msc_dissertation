@@ -3,9 +3,7 @@
 
 \chapter{System and software environment}
 
-\section{ABC SMC implementation}
-
-\subsection{Local machine}
+\section{Local machine}
 
 Local development machine is a Mac laptop, running on macOS 10.15.6. The environment of the development is listed in Table \ref{table:local_macine}.
 
@@ -46,7 +44,9 @@ Version requirements for some critical site packages (\verb|Python|) used in the
     \label{table:local_package}
 \end{table}
 
-Local development and some runs of small size were done under the hardware listed in Table \ref{table:local_hardware}. When running ABC SMC, the program can make used of 8 python process (Hyper-Threading enabled) and run under 3.8GHz (maximal) for a long time under proper cooling, proved that the program could efficiently use the computation resources for a local personal computer. The execution time and other performance data presented in Chapter 5 were obtained using remote machines but not local machine.
+Local development and some runs of small size were done under the hardware listed in Table \ref{table:local_hardware}. When running ABC SMC, the program can make used of 8 python process (Hyper-Threading enabled) and run under 3.8GHz (maximal) for a long time under proper cooling, proved that the program could efficiently use the computation resources for a local personal computer. The execution time and other performance data presented in Chapter 5 were obtained using remote machines but not local machine. 
+
+Some figures were aligned and labelled in Adobe Photoshop. \verb|R| and Microsoft Excel were used for data processing and analysis. 
 
 \begin{table}
     \centering
@@ -68,11 +68,11 @@ Local development and some runs of small size were done under the hardware liste
 
 
 
-\subsection{Remote machine}
+\section{Remote machine}
 
-Most experiments were performaed on Cirrus, its hardware can be found in Table \ref{table:remote_hardware}. The program can run in sigle compute-node which contains two processors\footnote{\url{https://www.cirrus.ac.uk/about/hardware.html}}. The software environment used in the development and experiments are listed in Table \ref{table:cirrus_soft}. Requirement of site packages is the same as that on local macine (Table \ref{table:local_package})
+Most experiments were performed on Cirrus, whose hardware can be found in Table \ref{table:remote_hardware}. The program can run in single compute-node which contains two processors\footnote{\url{https://www.cirrus.ac.uk/about/hardware.html}}. The software environment used in the development and experiments are listed in Table \ref{table:cirrus_soft}. Requirement of site packages is the same as that on local macine (Table \ref{table:local_package})
 
-\begin{table}
+\begin{table}[ht]
     \centering
     \begin{tabular}{|c c|}
         \hline
@@ -88,7 +88,7 @@ Most experiments were performaed on Cirrus, its hardware can be found in Table \
     \label{table:remote_hardware}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[h]
     \centering
     \begin{tabular}{|c c|}
         \hline
@@ -100,7 +100,7 @@ Most experiments were performaed on Cirrus, its hardware can be found in Table \
         gcc                   & 6.3.0                        \\
         \hline
     \end{tabular}
-    \caption{Environment on local machine}
+    \caption{Environment on Cirrus}
     \label{table:cirrus_soft}
 \end{table}
 
